@@ -71,6 +71,15 @@ li { margin-bottom: 0.35em; }
 .app-item strong { display: block; }
 .app-item span { color: var(--muted); font-size: 0.95em; }
 
+.lang-block {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.lang-block:last-of-type {
+  border-bottom: none;
+}
+
 footer {
   margin-top: 2.5rem;
   padding-top: 1rem;
