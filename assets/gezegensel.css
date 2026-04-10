@@ -40,15 +40,17 @@ html {
   padding: 8px 12px 24px;
   float: none;
   box-sizing: border-box;
+  /* Gövde: ~12–13 pt ekran okuması (~16–17px); kökten küçük em zincirinden bağımsız */
+  font-size: 17px;
 }
-/* Tüm gövde metni aynı font (Lato, tema ile uyumlu) ve aynı punto — H2'ye dokunulmaz */
+/* Tüm gövde metni aynı font, aynı standart boyut — H2 (Hakkında) aynı */
 .gc-about-prose p {
   font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 1.125rem;
-  line-height: 1.75;
+  font-size: 1em;
+  line-height: 1.7;
   margin-bottom: 1.15rem;
   font-weight: 400;
-  color: #1e3a4d;
+  color: #152d3d;
   text-align: center;
   max-width: 40rem;
   margin-left: auto;
@@ -60,13 +62,18 @@ html {
 .gc-about-prose h3 {
   margin-top: 2rem;
   margin-bottom: 1.1rem;
-  font-size: 1.125rem;
+  font-size: 1em;
   font-weight: 700;
-  line-height: 1.75;
+  line-height: 1.7;
   text-transform: none;
   font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #0d2137;
   text-align: center;
+}
+@media (min-width: 992px) {
+  .gc-about-prose {
+    font-size: 18px; /* geniş ekranda ~13+ pt, paragraf okuması */
+  }
 }
 
 /* Ana sayfa — Uygulamalar zemin + dikey yığın */
