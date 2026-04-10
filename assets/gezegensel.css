@@ -26,28 +26,64 @@ html {
   }
 }
 
-/* Ana sayfa Hakkında */
+/* Ana sayfa — Hakkında (okunabilirlik + zemin) */
+.index .gc-section-about {
+  background: linear-gradient(180deg, #f2fafc 0%, #e2f2f7 45%, #d7ebf2 100%);
+  color: #0d2137;
+}
 .gc-about-prose {
-  text-align: left;
+  text-align: center;
+  max-width: 44rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 8px 12px 24px;
 }
 .gc-about-prose .lead {
-  font-size: 1.2rem;
-  line-height: 1.65;
-  margin-bottom: 1.5rem;
+  font-size: 1.35rem;
+  line-height: 1.75;
+  margin-bottom: 1.75rem;
+  font-weight: 400;
+  color: #0d2137;
 }
 .gc-about-prose h3 {
-  margin-top: 1.75rem;
-  margin-bottom: 1rem;
-  font-size: 1.35rem;
+  margin-top: 2rem;
+  margin-bottom: 1.1rem;
+  font-size: 1.55rem;
   font-weight: 700;
   text-transform: none;
   font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #0d2137;
+  text-align: center;
 }
-.gc-about-prose p {
-  font-size: 17px;
-  line-height: 1.6;
-  margin-bottom: 1rem;
+.gc-about-prose p:not(.lead) {
+  font-size: 1.125rem;
+  line-height: 1.75;
+  margin-bottom: 1.15rem;
+  color: #1e3a4d;
+  text-align: center;
+  max-width: 40rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Ana sayfa — Uygulamalar zemin + dikey yığın */
+.index .gc-section-apps {
+  background: linear-gradient(180deg, #d7ebf2 0%, #cce5ef 50%, #c2dfea 100%);
+  color: #0d2137;
+}
+.gc-app-stack-wrap {
+  max-width: 520px;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  float: none !important;
+}
+.gc-app-stack .gc-app-col {
+  width: 100%;
+  float: none !important;
+  display: block;
+}
+.gc-app-stack .gc-app-card {
+  max-width: 100%;
 }
 
 /* Footer: alan adı tek parça, satır kırılmasın */
@@ -266,11 +302,34 @@ header .gc-hero-icon {
 .gc-app-card {
   text-align: center;
   padding: 28px 22px 32px;
-  margin-bottom: 24px;
-  background: #f8fafc;
-  border-radius: 12px;
-  border: 1px solid rgba(13, 33, 55, 0.08);
-  min-height: 280px;
+  margin-bottom: 28px;
+  background: #b0d9e8;
+  border-radius: 14px;
+  border: 1px solid rgba(13, 33, 55, 0.14);
+  box-shadow: 0 6px 28px rgba(13, 33, 55, 0.1);
+  min-height: 0;
+}
+.gc-app-card p {
+  color: #0d2137;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  margin-bottom: 1.1rem;
+}
+
+/* Google Play / indir — koyu dolgu, beyaz üzerinde kaybolmasın */
+.btn.gc-btn-solid,
+.btn.gc-btn-solid:focus {
+  background-color: #0d2137 !important;
+  border-color: #081525 !important;
+  color: #fff !important;
+  text-decoration: none !important;
+  font-weight: 700;
+  margin-top: 6px;
+}
+.btn.gc-btn-solid:hover {
+  background-color: #1a3552 !important;
+  border-color: #0d2137 !important;
+  color: #fff !important;
 }
 .gc-app-card h3 {
   margin-top: 0;
@@ -313,17 +372,20 @@ section.success code {
 .gc-policies-grid {
   margin-bottom: 8px;
 }
+.gc-policies-stack .gc-policy-card + .gc-policy-card {
+  margin-top: 28px;
+}
 .gc-policy-card {
-  border: none !important;
-  border-radius: 12px !important;
-  box-shadow: 0 10px 32px rgba(13, 33, 55, 0.14) !important;
-  background: #fff !important;
+  border: 1px solid rgba(13, 33, 55, 0.16) !important;
+  border-radius: 14px !important;
+  box-shadow: 0 8px 28px rgba(13, 33, 55, 0.12) !important;
+  background: #9fd4e5 !important;
   overflow: hidden;
-  margin-bottom: 24px;
+  margin-bottom: 0;
 }
 .gc-policy-card .panel-heading {
-  background: #f1f5f9 !important;
-  border-bottom: 1px solid rgba(13, 33, 55, 0.08) !important;
+  background: #7fc4da !important;
+  border-bottom: 1px solid rgba(13, 33, 55, 0.12) !important;
 }
 .gc-policy-card-head {
   display: flex;
@@ -353,8 +415,9 @@ section.success code {
   line-height: 1.35 !important;
 }
 .gc-policy-card .list-group-item {
-  border-color: rgba(13, 33, 55, 0.07) !important;
+  border-color: rgba(13, 33, 55, 0.1) !important;
   padding: 14px 20px !important;
+  background: #b8e6f0 !important;
 }
 .gc-policy-card .list-group-item a {
   font-weight: 600;
@@ -367,8 +430,8 @@ section.success code {
   color: #00a8b8 !important;
 }
 .gc-policy-card .panel-footer {
-  background: #fff !important;
-  border-top: 1px solid rgba(13, 33, 55, 0.08) !important;
+  background: #8cc9de !important;
+  border-top: 1px solid rgba(13, 33, 55, 0.12) !important;
   text-align: center !important;
 }
 .gc-policy-card .panel-footer .btn {

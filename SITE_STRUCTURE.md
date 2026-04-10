@@ -8,7 +8,7 @@
 
 | Dosya / klasör | Açıklama |
 |----------------|----------|
-| `index.html` | Ana sayfa (`#about` stüdyo metni, `#apps`, `#policies`) |
+| `index.html` | Ana sayfa (`#about`, `#apps`, `#policies` — uygulama/politika kartları dikey ortalı; `assets/gezegensel.css` tema zeminleri) |
 | `privacy.html`, `support.html` | Site gizlilik / destek |
 | `assets/freelancer/` | Freelancer zip’ten kopyalanan CSS/JS/img/FA |
 | `assets/icons/` | `Theme/icons` kaynaklı uygulama ve marka görselleri (deploy için burada tutulur) |
