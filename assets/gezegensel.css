@@ -38,32 +38,32 @@ html {
   margin-right: auto;
   padding: 8px 12px 24px;
 }
-.gc-about-prose .lead {
-  font-size: 1.35rem;
-  line-height: 1.75;
-  margin-bottom: 1.75rem;
-  font-weight: 400;
-  color: #0d2137;
-}
-.gc-about-prose h3 {
-  margin-top: 2rem;
-  margin-bottom: 1.1rem;
-  font-size: 1.55rem;
-  font-weight: 700;
-  text-transform: none;
+/* Tüm gövde metni aynı font (Lato, tema ile uyumlu) ve aynı punto — H2'ye dokunulmaz */
+.gc-about-prose p {
   font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: #0d2137;
-  text-align: center;
-}
-.gc-about-prose p:not(.lead) {
   font-size: 1.125rem;
   line-height: 1.75;
   margin-bottom: 1.15rem;
+  font-weight: 400;
   color: #1e3a4d;
   text-align: center;
   max-width: 40rem;
   margin-left: auto;
   margin-right: auto;
+}
+.gc-about-prose p:first-of-type {
+  margin-bottom: 1.25rem;
+}
+.gc-about-prose h3 {
+  margin-top: 2rem;
+  margin-bottom: 1.1rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.75;
+  text-transform: none;
+  font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #0d2137;
+  text-align: center;
 }
 
 /* Ana sayfa — Uygulamalar zemin + dikey yığın */
