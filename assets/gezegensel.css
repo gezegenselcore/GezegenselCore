@@ -164,3 +164,136 @@ section.first {
   border-color: rgba(13, 33, 55, 0.45) !important;
   color: #0d2137 !important;
 }
+
+/* Ana sayfa kahraman görseli (Theme/icons) */
+header .gc-hero-icon {
+  max-width: 220px;
+  max-height: 220px;
+  width: 42vmin;
+  height: 42vmin;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid rgba(13, 33, 55, 0.18);
+  box-shadow: 0 14px 40px rgba(13, 33, 55, 0.22);
+}
+
+/* Uygulama kartları (#apps) */
+.gc-app-row {
+  margin-top: 8px;
+}
+.gc-app-card {
+  text-align: center;
+  padding: 28px 22px 32px;
+  margin-bottom: 24px;
+  background: #f8fafc;
+  border-radius: 12px;
+  border: 1px solid rgba(13, 33, 55, 0.08);
+  min-height: 280px;
+}
+.gc-app-card h3 {
+  margin-top: 0;
+  text-transform: none;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0d2137;
+}
+.gc-app-icon {
+  display: block;
+  width: 112px;
+  height: 112px;
+  margin: 0 auto 18px;
+  border-radius: 22px;
+  object-fit: cover;
+  box-shadow: 0 6px 20px rgba(13, 33, 55, 0.12);
+}
+.gc-play-btn .fa-google-play {
+  margin-right: 6px;
+}
+.gc-play-btn-sm .fa-google-play {
+  margin-right: 4px;
+}
+
+/* Politikalar: cyan bant üzerinde kartlar */
+section.success code {
+  background: rgba(13, 33, 55, 0.08);
+  color: #0d2137;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+.gc-policies-lead {
+  text-align: center;
+  max-width: 40rem;
+  margin: 0 auto 28px;
+  font-size: 16px;
+  line-height: 1.55;
+}
+.gc-policies-grid {
+  margin-bottom: 8px;
+}
+.gc-policy-card {
+  border: none !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 32px rgba(13, 33, 55, 0.14) !important;
+  background: #fff !important;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.gc-policy-card .panel-heading {
+  background: #f1f5f9 !important;
+  border-bottom: 1px solid rgba(13, 33, 55, 0.08) !important;
+}
+.gc-policy-card-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 20px !important;
+}
+.gc-policy-card-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  object-fit: cover;
+  flex-shrink: 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+.gc-policy-card .panel-title {
+  margin: 0 !important;
+  font-size: 1.35rem !important;
+  font-weight: 700 !important;
+  text-transform: none !important;
+  color: #0d2137 !important;
+}
+.gc-policy-card-tagline {
+  margin: 4px 0 0 !important;
+  font-size: 13px !important;
+  color: #64748b !important;
+  line-height: 1.35 !important;
+}
+.gc-policy-card .list-group-item {
+  border-color: rgba(13, 33, 55, 0.07) !important;
+  padding: 14px 20px !important;
+}
+.gc-policy-card .list-group-item a {
+  font-weight: 600;
+  color: #0c4a6e !important;
+  text-decoration: none !important;
+}
+.gc-policy-card .list-group-item a:hover,
+.gc-policy-card .list-group-item a:focus {
+  text-decoration: underline !important;
+  color: #00a8b8 !important;
+}
+.gc-policy-card .panel-footer {
+  background: #fff !important;
+  border-top: 1px solid rgba(13, 33, 55, 0.08) !important;
+}
+.gc-policies-email {
+  text-align: center;
+  margin: 28px 0 8px;
+  font-size: 16px;
+}
+
+.gc-refollow-play-cta {
+  margin-bottom: 1.75rem;
+}

@@ -11,6 +11,7 @@
 | `index.html` | Ana sayfa |
 | `privacy.html`, `support.html` | Site gizlilik / destek |
 | `assets/freelancer/` | Freelancer zip’ten kopyalanan CSS/JS/img/FA |
+| `assets/icons/` | `Theme/icons` kaynaklı uygulama ve marka görselleri (deploy için burada tutulur) |
 | `assets/gezegensel.css` | Dil / `#content-tr`·`#content-en` / iç sayfa ince ayar |
 | `assets/gezegensel.js` | Dil seçici + başlık senkronu |
 | `assets/lang-boot.js` | Erken `html[lang]` |
@@ -20,7 +21,7 @@
 
 ## `pages/aura/` · `pages/refollow/`
 
-Uygulama HTML’leri; **Bootstrap 3** üst çubuk (`navbar`), Freelancer bölümleri + footer. Derinliğe göre `../../../assets/freelancer/…` ve `../../../assets/gezegensel.css` (`pages/*/policies/`); `pages/aura/support.html` için `../../assets/…`.
+Uygulama HTML’leri; **Bootstrap 3** üst çubuk (`navbar`), sol üst marka metni her zaman **GezegenselCore** → kök `index.html`. Freelancer bölümleri + footer. Varlıklar: `../../../assets/freelancer/…`, `../../../assets/icons/…`, `../../../assets/gezegensel.css` (`pages/*/policies/`); `pages/aura/support.html` için `../../assets/…`.
 
 ## Yayın (GitHub Pages)
 
