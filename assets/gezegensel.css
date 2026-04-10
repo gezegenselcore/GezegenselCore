@@ -1,0 +1,307 @@
+/*!
+ * GezegenselCore site — Freelancer-teması renk paleti (gezegensel-core-site _config.yml)
+ * primary #00f2fe · secondary #0d2137
+ */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap");
+
+:root {
+  --gc-primary: #00f2fe;
+  --gc-primary-rgb: 0, 242, 254;
+  --gc-secondary: #0d2137;
+  --gc-secondary-dark: #061018;
+  --gc-text: #1a1a2e;
+  --gc-muted: #5c6b7a;
+  --gc-bg: #f0f4f8;
+  --gc-card: #ffffff;
+  --gc-border: rgba(13, 33, 55, 0.12);
+  --gc-max: 44rem;
+  --gc-nav-h: auto;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+[hidden] {
+  display: none !important;
+}
+
+/* AURA privacy-policy: iki tam makale — html lang ile göster (lang-boot ile anında) */
+#content-tr,
+#content-en {
+  display: none;
+}
+html[lang="tr"] #content-tr {
+  display: block;
+}
+html[lang="en"] #content-en {
+  display: block;
+}
+
+body {
+  margin: 0;
+  font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--gc-text);
+  background: var(--gc-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* —— Dil: tarayıcı / seçim —— */
+html[lang="tr"] .l10n-en,
+html[lang="tr"] .policy-locale-en { display: none !important; }
+html[lang="en"] .l10n-tr,
+html[lang="en"] .policy-locale-tr { display: none !important; }
+
+/* —— Nav (Freelancer tarzı koyu şerit) —— */
+.gc-nav {
+  background: linear-gradient(135deg, var(--gc-secondary) 0%, var(--gc-secondary-dark) 100%);
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+}
+
+.gc-nav-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0.85rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.25rem;
+}
+
+.gc-brand {
+  font-family: Montserrat, sans-serif;
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: #fff !important;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  margin-right: auto;
+}
+
+.gc-brand:hover {
+  color: var(--gc-primary) !important;
+}
+
+.gc-nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  align-items: center;
+}
+
+.gc-nav-links a {
+  color: rgba(255, 255, 255, 0.92);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.gc-nav-links a:hover {
+  color: var(--gc-primary);
+}
+
+.gc-lang {
+  display: flex;
+  gap: 0.35rem;
+  margin-left: 0.25rem;
+}
+
+.gc-lang-btn {
+  font-family: Montserrat, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 0.4rem 0.65rem;
+  border-radius: 4px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.gc-lang-btn:hover {
+  border-color: var(--gc-primary);
+  color: var(--gc-primary);
+}
+
+.gc-lang-btn[aria-pressed="true"] {
+  background: var(--gc-primary);
+  border-color: var(--gc-primary);
+  color: var(--gc-secondary);
+}
+
+/* —— Hero (yalnız ana sayfa) —— */
+.gc-hero {
+  background: linear-gradient(160deg, var(--gc-secondary) 0%, #122a42 50%, var(--gc-secondary-dark) 100%);
+  color: #fff;
+  text-align: center;
+  padding: 2.5rem 1.25rem 2.75rem;
+}
+
+.gc-hero-inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.gc-hero h1 {
+  font-family: Montserrat, sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.75rem, 5vw, 2.35rem);
+  margin: 0 0 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.gc-hero .gc-hero-sub {
+  font-size: 1.05rem;
+  opacity: 0.92;
+  margin: 0;
+  font-weight: 400;
+}
+
+.gc-star-line {
+  border: 0;
+  height: 0;
+  max-width: 240px;
+  margin: 1.25rem auto 0;
+  border-top: 4px solid rgba(255, 255, 255, 0.35);
+  text-align: center;
+}
+
+.gc-star-line::after {
+  content: "★";
+  display: inline-block;
+  position: relative;
+  top: -0.65rem;
+  padding: 0 0.4rem;
+  font-size: 1.25rem;
+  color: var(--gc-primary);
+  background: var(--gc-secondary);
+}
+
+/* —— İçerik alanı —— */
+.gc-main,
+.container {
+  max-width: var(--gc-max);
+  margin: 0 auto;
+  padding: 1.75rem 1.25rem 3rem;
+}
+
+.gc-main h1,
+.container > h1 {
+  font-family: Montserrat, sans-serif;
+  font-weight: 700;
+  color: var(--gc-secondary);
+  font-size: 1.5rem;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.gc-main h2,
+.container h2 {
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  color: var(--gc-secondary);
+  font-size: 1.15rem;
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.gc-main h3,
+.container h3 {
+  font-size: 1rem;
+  margin-top: 1.1rem;
+  color: #2d3e50;
+}
+
+.subtitle {
+  color: var(--gc-muted);
+  font-size: 0.98rem;
+  margin-bottom: 1.5rem;
+}
+
+p { margin: 0 0 1em; }
+ul, ol { margin: 0 0 1em; padding-left: 1.35rem; }
+li { margin-bottom: 0.35em; }
+
+.app-item { margin-bottom: 0.85em; }
+.app-item strong { display: block; font-family: Montserrat, sans-serif; color: var(--gc-secondary); }
+.app-item span { color: var(--gc-muted); font-size: 0.95em; }
+
+.lang-block {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--gc-border);
+}
+.lang-block:last-of-type { border-bottom: none; }
+
+a[href]:not(.gc-brand):not(.gc-nav-links a) {
+  color: #0b6bcb;
+  text-decoration: none;
+}
+a[href]:not(.gc-brand):not(.gc-nav-links a):hover {
+  text-decoration: underline;
+}
+
+footer,
+.gc-footer {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 2px solid var(--gc-border);
+  font-size: 0.88rem;
+  color: var(--gc-muted);
+}
+
+/* —— AURA tam gizlilik (privacy-policy) —— */
+.gc-legal {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 1rem 1.25rem 3rem;
+}
+
+.gc-legal h1 { font-size: 1.4rem; }
+.gc-legal .meta { color: var(--gc-muted); font-size: 0.9rem; margin-bottom: 1.25rem; }
+.gc-legal h2 {
+  font-size: 1.08rem;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--gc-border);
+}
+.gc-legal h3 { font-size: 0.98rem; margin-top: 0.85rem; }
+.gc-legal .highlight {
+  background: #fff9e6;
+  border: 1px solid #e6b800;
+  border-radius: 8px;
+  padding: 1rem 1.1rem;
+  margin: 1.1rem 0;
+}
+.gc-legal .highlight strong { display: block; margin-bottom: 0.35rem; }
+.gc-legal .callout {
+  background: rgba(var(--gc-primary-rgb), 0.12);
+  border-left: 4px solid #0099aa;
+  padding: 0.85rem 1rem;
+  margin: 1rem 0;
+  font-size: 0.95rem;
+}
+
+/* —— Eski .brand uyumu —— */
+nav .brand { /* kullanılmıyorsa sorun yok */ }
+
+code {
+  font-size: 0.88em;
+  background: rgba(13, 33, 55, 0.06);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+}
+
+@media (max-width: 640px) {
+  body { font-size: 15px; }
+  .gc-nav-inner { padding: 0.75rem 1rem; }
+}

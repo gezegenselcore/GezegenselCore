@@ -1,24 +1,33 @@
-# GezegenselCore
+# GezegenselCore — marka sitesi
 
-Developer site for GezegenselCore (Play Console). Served at **https://gezegenselcore.github.io/** when this repo is enabled for GitHub Pages.
+**Canlı:** [https://gezegenselcore.com](https://gezegenselcore.com)  
+Statik HTML, GitHub Pages (`CNAME` → özel alan). Dosya haritası: **`SITE_STRUCTURE.md`**.
 
-## One-time setup
+## Tema ve dil
 
-1. On GitHub: [Create new repository](https://github.com/new)  
-   - **Owner:** gezegenselcore  
-   - **Repository name:** `gezegenselcore.github.io` (exactly — this enables the root URL)  
-   - **Public**, no README / .gitignore  
-2. Locally (this folder):
-   ```bash
-   git remote add origin https://github.com/gezegenselcore/gezegenselcore.github.io.git
-   git push -u origin main
-   ```
-3. GitHub Pages: with repo name `gezegenselcore.github.io`, the site is automatically published from the `main` branch (root). No extra Settings → Pages change needed for default.
+- **Tema:** Jekyll vitrin projesindeki Freelancer-türevi palet — elektrik mavisi **#00f2fe** + lacivert **#0d2137** (`gezegensel-core-site` içindeki `_config.yml` `color` ile uyumlu).
+- **CSS / JS:** `assets/gezegensel.css`, `assets/lang-boot.js`, `assets/gezegensel.js`.
+- **TR | EN:** Varsayılan dil = tarayıcı (`navigator.languages`, `tr` önekli → Türkçe). Kullanıcı TR/EN butonuna bastığında tercih `localStorage` (`gezegensel-lang`) ile saklanır.
 
-## Pages
+## GitHub repo ve deploy
 
-- **Home:** https://gezegenselcore.github.io/
-- **Policies:** https://gezegenselcore.github.io/privacy.html
-- **Support:** https://gezegenselcore.github.io/support.html
+1. Örnek remote: `https://github.com/gezegenselcore/gezegenselcore.github.io.git`
+2. `main` dalını kökten yayınla (GitHub Pages **Deploy from branch** → `main` / root).
+3. Repo ayarlarında **Custom domain** = `gezegenselcore.com`, DNS’te GitHub Pages kayıtları tanımlı olmalı.
 
-Last updated: 2025-02-26
+```bash
+git add -A && git commit -m "site: …" && git push origin main
+```
+
+Push’tan sonra CDN önbelleği nedeniyle tema/dil değişikliği **birkaç dakika** gecikebilir; sabit sürüm görmek için gizli pencere veya `?v=2` gibi önbellek kırıcı kullanın.
+
+## URL özeti
+
+| Sayfa | URL |
+|--------|-----|
+| Hub | `/` |
+| Site gizlilik / destek | `/privacy.html`, `/support.html` |
+| AURA | `/pages/aura/…` |
+| ReFollow | `/pages/refollow/…` |
+
+Son güncelleme: 2026-04-10

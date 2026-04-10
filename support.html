@@ -3,35 +3,54 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="assets/lang-boot.js"></script>
   <title>Support — GezegenselCore</title>
-  <link rel="stylesheet" href="assets/style.css">
+  <link rel="canonical" href="https://gezegenselcore.com/support.html" />
+  <link rel="stylesheet" href="assets/gezegensel.css">
 </head>
-<body>
-  <nav>
-    <div class="container">
-      <a href="index.html" class="brand">GezegenselCore</a>
-      <a href="index.html">Home</a>
-      <a href="privacy.html">Policies</a>
-      <a href="support.html">Support</a>
+<body
+  data-title-tr="Destek — GezegenselCore"
+  data-title-en="Support — GezegenselCore"
+>
+  <nav class="gc-nav" role="navigation">
+    <div class="gc-nav-inner">
+      <a href="index.html" class="gc-brand">GezegenselCore</a>
+      <div class="gc-nav-links">
+        <a href="index.html"><span class="l10n-tr">Ana sayfa</span><span class="l10n-en">Home</span></a>
+        <a href="privacy.html"><span class="l10n-tr">Gizlilik</span><span class="l10n-en">Privacy</span></a>
+        <a href="support.html"><span class="l10n-tr">Destek</span><span class="l10n-en">Support</span></a>
+      </div>
+      <div class="gc-lang" role="group" aria-label="Dil / Language">
+        <button type="button" class="gc-lang-btn" data-lang="tr" aria-pressed="false">TR</button>
+        <button type="button" class="gc-lang-btn" data-lang="en" aria-pressed="false">EN</button>
+      </div>
     </div>
   </nav>
-  <main class="container">
-    <h1>Support</h1>
 
-    <p>For app-related questions or issues, please contact us from within the app or by e-mail. We’ll respond as soon as we can.</p>
+  <main class="gc-main container">
+    <h1><span class="l10n-tr">Destek</span><span class="l10n-en">Support</span></h1>
+
+    <p class="policy-locale-tr">Uygulamalarla ilgili sorularınız için uygulama içinden veya e-posta ile bize ulaşın. En kısa sürede yanıtlamaya çalışırız.</p>
+    <p class="policy-locale-en">For app-related questions or issues, please contact us from within the app or by e-mail. We’ll respond as soon as we can.</p>
 
     <p><strong>E-mail:</strong> <a href="mailto:support@gezegenselcore.com">support@gezegenselcore.com</a></p>
 
-    <h2>ReFollow — Export steps</h2>
-    <p>For step-by-step instructions on how to export your Instagram data (JSON/ZIP) and use it in ReFollow, see the ReFollow Support page:</p>
-    <p><a href="https://gezegenselcore.github.io/refollow-policies/support.html" target="_blank" rel="noopener">ReFollow Support (export guide &amp; FAQ)</a></p>
+    <h2>ReFollow</h2>
+    <p class="policy-locale-tr">Instagram verilerinizi (JSON/ZIP) nasıl dışa aktaracağınız ve ReFollow’da kullanacağınız adımlar için ReFollow destek sayfasına bakın:</p>
+    <p class="policy-locale-en">For step-by-step instructions on exporting your Instagram data (JSON/ZIP) and using it in ReFollow, see the ReFollow support page:</p>
+    <p><a href="pages/refollow/policies/support.html">ReFollow <span class="l10n-tr">destek</span><span class="l10n-en">support</span></a></p>
 
-    <h2>AURA — Support</h2>
-    <p>For AURA (wellness companion app): FAQ, health data notes, privacy requests, and contact — see the dedicated support page:</p>
-    <p><a href="aura-support.html">AURA Support (TR / EN)</a></p>
-    <p>Legal documents: <a href="https://gezegenselcore.github.io/aura-policies/privacy.html" target="_blank" rel="noopener">Privacy Policy</a> · <a href="https://gezegenselcore.github.io/aura-policies/terms.html" target="_blank" rel="noopener">Terms of Use</a></p>
+    <h2>AURA</h2>
+    <p class="policy-locale-tr">AURA (wellness uygulaması): SSS, sağlık verisi notları, gizlilik talepleri ve iletişim için AURA destek sayfası:</p>
+    <p class="policy-locale-en">For AURA (wellness companion): FAQ, health data notes, privacy requests, and contact — see the dedicated support page:</p>
+    <p><a href="pages/aura/support.html">AURA <span class="l10n-tr">destek</span><span class="l10n-en">support</span></a></p>
+    <p class="policy-locale-tr">Yasal metinler: <a href="pages/aura/policies/privacy-policy.html">Gizlilik Politikası</a> · <a href="pages/aura/policies/terms.html">Kullanım Koşulları</a></p>
+    <p class="policy-locale-en">Legal documents: <a href="pages/aura/policies/privacy-policy.html">Privacy Policy</a> · <a href="pages/aura/policies/terms.html">Terms of Use</a></p>
 
-    <footer>Last updated: 2026-04-05</footer>
+    <footer>
+      <span class="l10n-tr">Son güncelleme: 2026-04-10</span><span class="l10n-en">Last updated: 2026-04-10</span>
+    </footer>
   </main>
+  <script src="assets/gezegensel.js" defer></script>
 </body>
 </html>

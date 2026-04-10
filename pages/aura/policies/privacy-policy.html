@@ -3,86 +3,32 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="../../../assets/lang-boot.js"></script>
   <title>AURA — Privacy Policy | GezegenselCore</title>
   <meta name="description" content="AURA app privacy policy — English and Türkçe. GezegenselCore." />
-  <style>
-    :root {
-      --bg: #fafafa;
-      --text: #0f172a;
-      --muted: #64748b;
-      --accent: #5b21b6;
-      --highlight-bg: #fef3c7;
-      --highlight-border: #f59e0b;
-      --card-bg: #f5f3ff;
-      --card-border: #7c3aed;
-    }
-    * { box-sizing: border-box; }
-    body {
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-      max-width: 42rem;
-      margin: 0 auto;
-      padding: 1.25rem 1.25rem 3rem;
-      line-height: 1.65;
-      color: var(--text);
-      background: var(--bg);
-    }
-    .switcher {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-      margin-bottom: 1.5rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid #e2e8f0;
-    }
-    .switcher button {
-      font: inherit;
-      cursor: pointer;
-      padding: 0.5rem 0.85rem;
-      border-radius: 0.5rem;
-      border: 2px solid #e2e8f0;
-      background: #fff;
-      color: var(--text);
-    }
-    .switcher button:hover {
-      border-color: #cbd5e1;
-    }
-    .switcher button[aria-pressed="true"] {
-      border-color: var(--accent);
-      background: #f5f3ff;
-      color: var(--accent);
-      font-weight: 600;
-    }
-    h1 { font-size: 1.45rem; margin-bottom: 0.25rem; }
-    .meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
-    h2 { font-size: 1.15rem; margin-top: 1.75rem; border-top: 1px solid #e2e8f0; padding-top: 1.25rem; }
-    h3 { font-size: 1rem; margin-top: 1rem; color: #334155; }
-    a { color: var(--accent); }
-    ul { padding-left: 1.25rem; }
-    .highlight {
-      background: var(--highlight-bg);
-      border: 1px solid var(--highlight-border);
-      border-radius: 0.5rem;
-      padding: 1rem 1.1rem;
-      margin: 1.25rem 0;
-    }
-    .highlight strong { display: block; margin-bottom: 0.35rem; font-size: 1.05rem; }
-    .callout {
-      background: var(--card-bg);
-      border-left: 4px solid var(--card-border);
-      padding: 0.85rem 1rem;
-      margin: 1rem 0;
-      font-size: 0.95rem;
-    }
-    [hidden] { display: none !important; }
-  </style>
+  <link rel="canonical" href="https://gezegenselcore.com/pages/aura/policies/privacy-policy.html" />
+  <link rel="stylesheet" href="../../../assets/gezegensel.css" />
 </head>
-<body>
-  <div class="switcher" role="group" aria-label="Language">
-    <button type="button" id="btn-tr" aria-pressed="false">🇹🇷 Türkçe</button>
-    <button type="button" id="btn-en" aria-pressed="true">🇬🇧 English</button>
-  </div>
+<body
+  data-title-tr="AURA — Gizlilik Politikası | GezegenselCore"
+  data-title-en="AURA — Privacy Policy | GezegenselCore"
+>
+  <nav class="gc-nav" role="navigation">
+    <div class="gc-nav-inner">
+      <a href="../../../index.html" class="gc-brand">AURA</a>
+      <div class="gc-nav-links">
+        <a href="../../../index.html"><span class="l10n-tr">GezegenselCore</span><span class="l10n-en">GezegenselCore</span></a>
+        <a href="../support.html"><span class="l10n-tr">Destek</span><span class="l10n-en">Support</span></a>
+      </div>
+      <div class="gc-lang" role="group" aria-label="Dil / Language">
+        <button type="button" class="gc-lang-btn" data-lang="tr" aria-pressed="false">TR</button>
+        <button type="button" class="gc-lang-btn" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+    </div>
+  </nav>
 
-  <article id="content-tr" lang="tr" hidden>
+  <main class="gc-legal">
+  <article id="content-tr" lang="tr">
     <h1>AURA — Gizlilik Politikası</h1>
     <p class="meta"><strong>Son güncelleme:</strong> 5 Nisan 2026 · <strong>Geliştirici:</strong> GezegenselCore · <a href="mailto:support@gezegenselcore.com">support@gezegenselcore.com</a> · iOS ve Android</p>
 
@@ -251,45 +197,8 @@
     <h2>12. Contact</h2>
     <p><strong>GezegenselCore</strong> — <a href="mailto:support@gezegenselcore.com">support@gezegenselcore.com</a></p>
   </article>
+  </main>
 
-  <script>
-    (function () {
-      var tr = document.getElementById("content-tr");
-      var en = document.getElementById("content-en");
-      var btnTr = document.getElementById("btn-tr");
-      var btnEn = document.getElementById("btn-en");
-
-      var storageKey = "aura-privacy-lang";
-
-      function setLang(lang) {
-        var isTr = lang === "tr";
-        tr.hidden = !isTr;
-        en.hidden = isTr;
-        btnTr.setAttribute("aria-pressed", isTr ? "true" : "false");
-        btnEn.setAttribute("aria-pressed", isTr ? "false" : "true");
-        document.documentElement.lang = isTr ? "tr" : "en";
-        document.title = isTr
-          ? "AURA — Gizlilik Politikası | GezegenselCore"
-          : "AURA — Privacy Policy | GezegenselCore";
-        try {
-          localStorage.setItem(storageKey, lang);
-        } catch (e) {}
-      }
-
-      function initialLang() {
-        try {
-          var saved = localStorage.getItem(storageKey);
-          if (saved === "tr" || saved === "en") return saved;
-        } catch (e) {}
-        var nav = (navigator.language || navigator.userLanguage || "").toLowerCase();
-        if (nav.indexOf("tr") === 0) return "tr";
-        return "en";
-      }
-
-      btnTr.addEventListener("click", function () { setLang("tr"); });
-      btnEn.addEventListener("click", function () { setLang("en"); });
-      setLang(initialLang());
-    })();
-  </script>
+  <script src="../../../assets/gezegensel.js" defer></script>
 </body>
 </html>

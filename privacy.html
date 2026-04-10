@@ -3,31 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="assets/lang-boot.js"></script>
   <title>Privacy — GezegenselCore</title>
-  <link rel="stylesheet" href="assets/style.css">
+  <link rel="canonical" href="https://gezegenselcore.com/privacy.html" />
+  <link rel="stylesheet" href="assets/gezegensel.css">
 </head>
-<body>
-  <nav>
-    <div class="container">
-      <a href="index.html" class="brand">GezegenselCore</a>
-      <a href="index.html">Home</a>
-      <a href="privacy.html">Policies</a>
-      <a href="support.html">Support</a>
+<body
+  data-title-tr="Gizlilik — GezegenselCore"
+  data-title-en="Privacy — GezegenselCore"
+>
+  <nav class="gc-nav" role="navigation">
+    <div class="gc-nav-inner">
+      <a href="index.html" class="gc-brand">GezegenselCore</a>
+      <div class="gc-nav-links">
+        <a href="index.html"><span class="l10n-tr">Ana sayfa</span><span class="l10n-en">Home</span></a>
+        <a href="privacy.html"><span class="l10n-tr">Gizlilik</span><span class="l10n-en">Privacy</span></a>
+        <a href="support.html"><span class="l10n-tr">Destek</span><span class="l10n-en">Support</span></a>
+      </div>
+      <div class="gc-lang" role="group" aria-label="Dil / Language">
+        <button type="button" class="gc-lang-btn" data-lang="tr" aria-pressed="false">TR</button>
+        <button type="button" class="gc-lang-btn" data-lang="en" aria-pressed="false">EN</button>
+      </div>
     </div>
   </nav>
-  <main class="container">
-    <h1>Site privacy notice</h1>
 
-    <p>This website (gezegenselcore.github.io) does not collect personal data. It consists of static pages only. We do not use cookies or tracking for this site.</p>
+  <main class="gc-main container">
+    <h1><span class="l10n-tr">Site gizlilik notu</span><span class="l10n-en">Site privacy notice</span></h1>
 
-    <h2>App-specific privacy policies</h2>
-    <p>For how our apps handle data, see each app’s policy:</p>
+    <p class="policy-locale-tr">Bu web sitesi (gezegenselcore.com) kişisel veri toplamaz. Yalnızca statik sayfalardan oluşur. Bu site için çerez veya izleme kullanmıyoruz.</p>
+    <p class="policy-locale-en">This website (gezegenselcore.com) does not collect personal data. It consists of static pages only. We do not use cookies or tracking for this site.</p>
+
+    <h2><span class="l10n-tr">Uygulama gizlilik politikaları</span><span class="l10n-en">App-specific privacy policies</span></h2>
+    <p class="policy-locale-tr">Uygulamalarımızın veriyi nasıl işlediğini her uygulamanın politikasından inceleyin:</p>
+    <p class="policy-locale-en">For how our apps handle data, see each app’s policy:</p>
     <ul>
-      <li><a href="https://gezegenselcore.github.io/refollow-policies/privacy.html" target="_blank" rel="noopener">ReFollow — Privacy Policy</a></li>
-      <li><a href="https://gezegenselcore.github.io/aura-policies/privacy.html" target="_blank" rel="noopener">AURA — Privacy Policy</a></li>
+      <li><a href="pages/refollow/policies/privacy.html">ReFollow — <span class="l10n-tr">Gizlilik Politikası</span><span class="l10n-en">Privacy Policy</span></a></li>
+      <li><a href="pages/aura/policies/privacy-policy.html">AURA — <span class="l10n-tr">Gizlilik Politikası</span><span class="l10n-en">Privacy Policy</span></a></li>
     </ul>
 
-    <footer>Last updated: 2026-04-05</footer>
+    <footer>
+      <span class="l10n-tr">Son güncelleme: 2026-04-10</span><span class="l10n-en">Last updated: 2026-04-10</span>
+    </footer>
   </main>
+  <script src="assets/gezegensel.js" defer></script>
 </body>
 </html>

@@ -3,49 +3,77 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="assets/lang-boot.js"></script>
   <title>GezegenselCore — Mobile apps &amp; tools</title>
-  <link rel="stylesheet" href="assets/style.css">
+  <meta name="description" content="GezegenselCore — mobile apps: AURA, ReFollow. gezegenselcore.com" />
+  <link rel="stylesheet" href="assets/gezegensel.css">
 </head>
-<body>
-  <nav>
-    <div class="container">
-      <a href="index.html" class="brand">GezegenselCore</a>
-      <a href="index.html">Home</a>
-      <a href="privacy.html">Policies</a>
-      <a href="support.html">Support</a>
+<body
+  data-title-tr="GezegenselCore — Mobil uygulamalar ve araçlar"
+  data-title-en="GezegenselCore — Mobile apps &amp; tools"
+>
+  <nav class="gc-nav" role="navigation">
+    <div class="gc-nav-inner">
+      <a href="index.html" class="gc-brand">GezegenselCore</a>
+      <div class="gc-nav-links">
+        <a href="index.html"><span class="l10n-tr">Ana sayfa</span><span class="l10n-en">Home</span></a>
+        <a href="privacy.html"><span class="l10n-tr">Gizlilik</span><span class="l10n-en">Privacy</span></a>
+        <a href="support.html"><span class="l10n-tr">Destek</span><span class="l10n-en">Support</span></a>
+      </div>
+      <div class="gc-lang" role="group" aria-label="Dil / Language">
+        <button type="button" class="gc-lang-btn" data-lang="tr" aria-pressed="false">TR</button>
+        <button type="button" class="gc-lang-btn" data-lang="en" aria-pressed="false">EN</button>
+      </div>
     </div>
   </nav>
-  <main class="container">
-    <h1>GezegenselCore</h1>
-    <p class="subtitle">Mobile apps &amp; tools</p>
 
-    <h2>Apps</h2>
+  <header class="gc-hero">
+    <div class="gc-hero-inner">
+      <h1>GezegenselCore</h1>
+      <p class="gc-hero-sub"><span class="l10n-tr">Mobil uygulamalar ve araçlar</span><span class="l10n-en">Mobile apps &amp; tools</span></p>
+      <hr class="gc-star-line" aria-hidden="true" />
+    </div>
+  </header>
+
+  <main class="gc-main container">
+    <h2><span class="l10n-tr">Uygulamalar</span><span class="l10n-en">Apps</span></h2>
     <ul class="app-list">
       <li class="app-item">
         <strong>ReFollow</strong>
-        <span>Instagram export analyzer — analyze followers, following, mutuals and more from your Instagram data export.</span>
+        <span class="l10n-tr">Instagram dışa aktarım analizi — takipçi, takip, karşılıklılar ve daha fazlasını kendi veri dışa aktarımınızdan analiz edin.</span>
+        <span class="l10n-en">Instagram export analyzer — analyze followers, following, mutuals and more from your Instagram data export.</span>
       </li>
       <li class="app-item">
         <strong>AURA</strong>
-        <span>Personal insight &amp; wellness companion — daily guidance, optional health linking, and mindful tools (Google Play &amp; App Store).</span>
+        <span class="l10n-tr">Kişisel içgörü ve wellness arkadaşınız — günlük rehberlik, isteğe bağlı sağlık bağlantısı ve farkındalık araçları (Google Play ve App Store).</span>
+        <span class="l10n-en">Personal insight &amp; wellness companion — daily guidance, optional health linking, and mindful tools (Google Play &amp; App Store).</span>
       </li>
     </ul>
 
-    <h2>Policies</h2>
+    <h2><span class="l10n-tr">Politikalar ve bağlantılar</span><span class="l10n-en">Policies &amp; links</span></h2>
+    <p class="subtitle">
+      <span class="l10n-tr">Uygulama politikaları <code>pages/refollow/</code> ve <code>pages/aura/</code> altında. Site için kök dizinde <a href="privacy.html">gizlilik</a> ve <a href="support.html">destek</a>.</span>
+      <span class="l10n-en">App policies live under <code>pages/refollow/</code> and <code>pages/aura/</code>. Site hub: <a href="privacy.html">privacy</a> and <a href="support.html">support</a> at the site root.</span>
+    </p>
     <ul>
-      <li><a href="https://gezegenselcore.github.io/refollow-policies/privacy.html" target="_blank" rel="noopener">ReFollow — Privacy Policy</a></li>
-      <li><a href="https://gezegenselcore.github.io/refollow-policies/terms.html" target="_blank" rel="noopener">ReFollow — Terms of Use</a></li>
-      <li><a href="https://gezegenselcore.github.io/refollow-policies/support.html" target="_blank" rel="noopener">ReFollow — Support</a></li>
-      <li><a href="https://gezegenselcore.github.io/aura-policies/privacy-policy.html" target="_blank" rel="noopener">AURA — Privacy Policy (TR / EN, full)</a> — recommended for app stores</li>
-      <li><a href="https://gezegenselcore.github.io/aura-policies/privacy.html" target="_blank" rel="noopener">AURA — Privacy Policy</a> (short TR)</li>
-      <li><a href="https://gezegenselcore.github.io/aura-policies/terms.html" target="_blank" rel="noopener">AURA — Terms of Use</a></li>
-      <li><a href="https://gezegenselcore.github.io/aura-support.html" target="_blank" rel="noopener">AURA — Support</a></li>
+      <li><span class="l10n-tr">ReFollow — </span><span class="l10n-en">ReFollow — </span><a href="pages/refollow/policies/privacy.html"><span class="l10n-tr">Gizlilik Politikası</span><span class="l10n-en">Privacy Policy</span></a></li>
+      <li><span class="l10n-tr">ReFollow — </span><span class="l10n-en">ReFollow — </span><a href="pages/refollow/policies/terms.html"><span class="l10n-tr">Kullanım Şartları</span><span class="l10n-en">Terms of Use</span></a></li>
+      <li><span class="l10n-tr">ReFollow — </span><span class="l10n-en">ReFollow — </span><a href="pages/refollow/policies/support.html"><span class="l10n-tr">Destek</span><span class="l10n-en">Support</span></a></li>
+      <li><span class="l10n-tr">AURA — </span><span class="l10n-en">AURA — </span><a href="pages/aura/policies/privacy-policy.html"><strong><span class="l10n-tr">Gizlilik Politikası (TR / EN, tam)</span><span class="l10n-en">Privacy Policy (TR / EN, full)</span></strong></a> <span class="l10n-tr">— mağazalar için önerilir</span><span class="l10n-en">— recommended for app stores</span></li>
+      <li><span class="l10n-tr">AURA — </span><span class="l10n-en">AURA — </span><a href="pages/aura/policies/privacy.html"><span class="l10n-tr">Gizlilik (kısa TR)</span><span class="l10n-en">Privacy (short TR)</span></a></li>
+      <li><span class="l10n-tr">AURA — </span><span class="l10n-en">AURA — </span><a href="pages/aura/policies/terms.html"><span class="l10n-tr">Kullanım Koşulları</span><span class="l10n-en">Terms of Use</span></a></li>
+      <li><span class="l10n-tr">AURA — </span><span class="l10n-en">AURA — </span><a href="pages/aura/support.html"><span class="l10n-tr">Destek</span><span class="l10n-en">Support</span></a></li>
+      <li><span class="l10n-tr">Site — </span><span class="l10n-en">Site — </span><a href="privacy.html"><span class="l10n-tr">Site gizlilik notu</span><span class="l10n-en">Site privacy notice</span></a> · <a href="support.html"><span class="l10n-tr">Destek merkezi</span><span class="l10n-en">Support hub</span></a></li>
     </ul>
 
-    <h2>Contact</h2>
-    <p>E-mail: <a href="mailto:support@gezegenselcore.com">support@gezegenselcore.com</a></p>
+    <h2><span class="l10n-tr">İletişim</span><span class="l10n-en">Contact</span></h2>
+    <p><span class="l10n-tr">E-posta:</span><span class="l10n-en">E-mail:</span> <a href="mailto:support@gezegenselcore.com">support@gezegenselcore.com</a></p>
 
-    <footer>Last updated: 2026-04-05</footer>
+    <footer>
+      <span class="l10n-tr">Son güncelleme: 2026-04-10 · </span><span class="l10n-en">Last updated: 2026-04-10 · </span>
+      <a href="https://gezegenselcore.com">gezegenselcore.com</a>
+    </footer>
   </main>
+  <script src="assets/gezegensel.js" defer></script>
 </body>
 </html>
