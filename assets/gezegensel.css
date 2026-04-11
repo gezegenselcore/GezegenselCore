@@ -113,6 +113,11 @@ html {
 .inner-page .navbar-default.navbar-fixed-top {
   background-color: rgba(255, 255, 255, 0.97);
 }
+
+/* Marka adı: büyük harf satırı ile aynı harf aralığı */
+.navbar-default .navbar-brand {
+  letter-spacing: 0.04em;
+}
 html[lang="tr"] .l10n-en,
 html[lang="tr"] .policy-locale-en {
   display: none !important;
@@ -247,43 +252,35 @@ section.first {
   padding-top: 120px;
 }
 
-/* İç sayfalar — turkuaz başlık: ana sayfaya dönüş (navbar ile aynı dil, alt çizgi yok) */
+/* Turkuaz bant: ana sayfa — yalnız metin, sembol yok; kart linkleriyle aynı punto (15px) */
 .gc-breadcrumb-row {
-  margin: 0 0 18px;
+  margin: 0 0 14px;
   text-align: left;
 }
 .gc-breadcrumb-home {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
+  display: inline-block;
   font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 700;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.04em;
+  line-height: 1.45;
   color: #0d2137 !important;
   text-decoration: none !important;
-  padding: 9px 16px 9px 12px;
-  line-height: 1.2;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.42);
-  border: 1px solid rgba(13, 33, 55, 0.14);
-  box-shadow: 0 1px 3px rgba(13, 33, 55, 0.06);
-  transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  padding: 0;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
 }
-.gc-breadcrumb-home .fa-angle-left {
-  font-size: 14px;
-  opacity: 0.75;
+section.success a.gc-breadcrumb-home,
+section.success a.gc-breadcrumb-home:hover,
+section.success a.gc-breadcrumb-home:focus,
+section.success a.gc-breadcrumb-home:active {
+  text-decoration: none !important;
+  color: #0d2137 !important;
 }
 section.success a.gc-breadcrumb-home:hover,
 section.success a.gc-breadcrumb-home:focus {
-  text-decoration: none !important;
-  color: #0d2137 !important;
-  background: rgba(255, 255, 255, 0.72);
-  border-color: rgba(13, 33, 55, 0.22);
-  box-shadow: 0 2px 8px rgba(13, 33, 55, 0.08);
-}
-section.success a.gc-breadcrumb-home:active {
-  background: rgba(255, 255, 255, 0.55);
+  opacity: 0.82;
 }
 
 @media (max-width: 767px) {
