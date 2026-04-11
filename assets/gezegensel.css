@@ -252,13 +252,13 @@ section.first {
   padding-top: 120px;
 }
 
-/* Turkuaz bant: ana sayfa — yalnız metin, sembol yok; kart linkleriyle aynı punto (15px) */
-.gc-breadcrumb-row {
+/* Yalnız iç sayfalar (inner-page): turkuaz banttaki ana sayfa — düz metin, kutu/renk yok */
+.inner-page section.success.first .gc-breadcrumb-row {
   margin: 0 0 14px;
   text-align: left;
 }
-.gc-breadcrumb-home {
-  display: inline-block;
+.inner-page section.success.first a.gc-breadcrumb-home {
+  display: inline;
   font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 15px;
   font-weight: 700;
@@ -266,21 +266,29 @@ section.first {
   line-height: 1.45;
   color: #0d2137 !important;
   text-decoration: none !important;
-  padding: 0;
-  background: none !important;
-  border: none !important;
+  padding: 0 !important;
+  margin: 0;
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
   box-shadow: none !important;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
 }
-section.success a.gc-breadcrumb-home,
-section.success a.gc-breadcrumb-home:hover,
-section.success a.gc-breadcrumb-home:focus,
-section.success a.gc-breadcrumb-home:active {
+.inner-page section.success.first a.gc-breadcrumb-home:hover,
+.inner-page section.success.first a.gc-breadcrumb-home:focus,
+.inner-page section.success.first a.gc-breadcrumb-home:active,
+.inner-page section.success.first a.gc-breadcrumb-home:focus-visible {
   text-decoration: none !important;
   color: #0d2137 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  opacity: 1;
 }
-section.success a.gc-breadcrumb-home:hover,
-section.success a.gc-breadcrumb-home:focus {
-  opacity: 0.82;
+.inner-page section.success.first a.gc-breadcrumb-home:focus-visible {
+  outline: 2px solid rgba(13, 33, 55, 0.35);
+  outline-offset: 3px;
 }
 
 @media (max-width: 767px) {
