@@ -23,7 +23,7 @@
 
 | Dosya | Canlı URL | Not |
 |-------|-----------|-----|
-| `aura/privacy-policy.html` | `https://gezegenselcore.com/aura/privacy-policy.html` | Google Play gizlilik + hesap silme (`#account-deletion`) için **tercih edilen** adres. İçerik `pages/aura/policies/privacy-policy.html` ile aynı; varlık yolları `../assets/…`, destek/özet linkleri `../pages/aura/…`. Güncelleme: önce `pages/…` düzenlenir, sonra aynı dosyadan kopyalanıp yollar değiştirilir (veya betik). |
+| `aura/privacy-policy.html` | `https://gezegenselcore.com/aura/privacy-policy.html` | Google Play gizlilik + hesap silme (`#account-deletion`) için **tercih edilen** adres. İçerik `pages/aura/policies/privacy-policy.html` ile aynı; varlık yolları `../assets/…`, destek/özet linkleri `../pages/aura/…`. **Senkron (manuel):** hukuki metin değişince önce `pages/aura/policies/privacy-policy.html`, ardından aynı gövde `aura/privacy-policy.html` — otomasyon yok; `README.md` özet tablosuna bak. |
 
 ## `pages/aura/` · `pages/refollow/`
 
@@ -32,5 +32,7 @@ Uygulama HTML’leri; **Bootstrap 3** üst çubuk (`navbar`), sol üst görünen
 ## Yayın (GitHub Pages)
 
 Kaynak repo ör. `gezegenselcore/gezegenselcore.github.io` — `main` kökten yayın; `CNAME` özel alanı işaret eder. Push sonrası birkaç dakika içinde `https://gezegenselcore.com` güncellenir.
+
+**Marka kökü (`index.html`):** AURA ve ReFollow tanıtım metinleri, `assets/gezegensel.css` ile ince stil; Freelancer / navbar script’lerine dokunulmadan güncellenir.
 
 Son güncelleme: 2026-04-16

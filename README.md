@@ -26,7 +26,10 @@ Push’tan sonra CDN önbelleği nedeniyle tema/dil değişikliği **birkaç dak
 |--------|-----|
 | Hub | `/` |
 | Site gizlilik / destek | `/privacy.html`, `/support.html` |
-| AURA | `/pages/aura/…` |
+| AURA (tam gizlilik — Play / mağaza kamu) | **`/aura/privacy-policy.html`** (içerik `pages/aura/policies/privacy-policy.html` ile **aynı**; güncellerken **ikisini** senkron tut) |
+| AURA (dosya yolu, politikalar klasörü) | `/pages/aura/…` |
 | ReFollow | `/pages/refollow/…` |
 
-Son güncelleme: 2026-04-10
+**Policy senkronu:** `pages/aura/policies/privacy-policy.html` düzenlendiyse, aynı HTML’i `aura/privacy-policy.html` içine kopyalayıp yalnız varlık yollarını `../assets/` ve menü linklerini `../pages/aura/…` olacak şekilde düzelt (`SITE_STRUCTURE.md`).
+
+Son güncelleme: 2026-04-16

@@ -805,3 +805,53 @@ section.success code {
     padding-bottom: 2.25rem;
   }
 }
+
+/* --- Marka kökü (index): AURA vurgusu + güven satırı — navbar/header seçicileri yok --- */
+.index .gc-app-card--featured {
+  border: 1px solid rgba(13, 33, 55, 0.14);
+  box-shadow: 0 10px 36px rgba(15, 23, 42, 0.1);
+}
+.index .gc-app-spotlight {
+  margin: 0 0 6px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: rgba(13, 33, 55, 0.52);
+}
+.index #apps .gc-app-stack {
+  margin-top: 6px;
+}
+.index #apps .gc-app-col + .gc-app-col {
+  margin-top: 1.35rem;
+}
+@media (min-width: 768px) {
+  .index #apps .gc-app-col + .gc-app-col {
+    margin-top: 0;
+  }
+}
+.index .gc-app-store-note {
+  margin: 10px 0 0;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: rgba(13, 33, 55, 0.68);
+}
+.index .gc-index-trust {
+  margin: 1.65rem auto 0;
+  max-width: 36rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: rgba(13, 33, 55, 0.82);
+}
+.index .gc-policies-lead {
+  margin-bottom: 1.25rem;
+}
+.gc-support-callout {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(13, 33, 55, 0.1);
+  font-size: 0.98rem;
+  line-height: 1.5;
+}
