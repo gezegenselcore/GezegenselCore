@@ -31,6 +31,7 @@
         <ul class="nav navbar-nav navbar-right">
           <li><a href="../support.html"><span class="l10n-tr">Destek</span><span class="l10n-en">Support</span></a></li>
           <li><a href="privacy.html"><span class="l10n-tr">Özet</span><span class="l10n-en">Summary</span></a></li>
+          <li><a href="../../../aura/terms-of-use.html"><span class="l10n-tr">Kullanım Koşulları</span><span class="l10n-en">Terms of Use</span></a></li>
           <li class="gc-lang-wrap">
             <div class="gc-lang-group" role="group" aria-label="Language">
               <button type="button" class="gc-lang-btn" data-lang="tr" aria-pressed="false">TR</button>
@@ -57,172 +58,104 @@
     <div class="container gc-prose gc-legal">
   <article id="content-tr" lang="tr">
     <h1>AURA — Gizlilik Politikası</h1>
-    <p class="meta"><strong>Son güncelleme:</strong> 5 Nisan 2026 · <strong>Geliştirici:</strong> Gezegensel Core · <a href="mailto:support@gezegenselcore.com">support@gezegenselcore.com</a> · iOS ve Android</p>
+    <p class="meta"><strong>Son güncelleme:</strong> 16 Nisan 2026 · <strong>Veri sorumlusu:</strong> GezegenselCore · <a href="mailto:support@gezegenselcore.com">support@gezegenselcore.com</a> · iOS ve Android</p>
+    <p>Aura olarak gizliliğinizi önemsiyoruz. Bu Gizlilik Politikası, Aura uygulamasını kullanırken hangi verileri işlediğimizi, bu verileri neden kullandığımızı ve haklarınızı açıklar.</p>
 
-    <h2>1. Giriş</h2>
-    <p>Bu politika, <strong>AURA</strong> uygulamasını kullanırken kişisel verilerinizin nasıl işlendiğini açıklar. Uygulamayı kullanmaya devam ederek burada anlatılan uygulamayı kabul etmiş sayılırsınız. Sorularınız için bize yazabilirsiniz.</p>
-
-    <h2>2. Toplanan Veriler</h2>
-
-    <h3>Hesap bilgileri</h3>
-    <p><strong>Firebase Authentication</strong> ile e-posta, ad ve soyad; Google veya Apple ile giriş yaptığınızda ilgili hesap tanımlayıcıları işlenebilir.</p>
-
-    <h3>Profil (isteğe bağlı)</h3>
-    <p>Doğum tarihi, doğum yeri ve saati, cinsiyet gibi bilgileri yalnızca siz eklediğinizde kullanırız (örneğin kişiselleştirme ve uygulama özellikleri için).</p>
-
-    <h3>Konum (isteğe bağlı)</h3>
-    <p>Hassas konum (GPS) veya daha az hassas seçenekler (örneğin şehir düzeyi) yalnızca izin verdiğinizde kullanılır.</p>
-
-    <h3>Sağlık verileri (isteğe bağlı, izinle)</h3>
-    <p>Android’de <strong>Health Connect</strong>, iOS’ta <strong>HealthKit</strong> üzerinden yalnızca açıkça verdiğiniz izinlerle; örneğin adım, uyku veya nabız gibi verilere erişilebilir. Bu veriler yalnızca uygulama içinde, sunduğumuz özellikler için kullanılır.</p>
-
-    <h3>Kullanım verileri</h3>
+    <h2>Bölüm 1 — Hangi verileri işleyebiliriz?</h2>
+    <p>Aura, kullanım şeklinize ve verdiğiniz izinlere bağlı olarak aşağıdaki veri türlerini işleyebilir:</p>
     <ul>
-      <li><strong>Firebase Analytics</strong> — anonimleştirilmiş veya toplu kullanım istatistikleri</li>
-      <li><strong>Firebase Crashlytics</strong> — çökme ve hata raporları (cihaz/uygulama sürümü gibi teknik bilgilerle)</li>
-      <li><strong>Push bildirimleri</strong> — cihazınıza bildirim göndermek için platform token’ı</li>
-      <li><strong>Bilişsel egzersiz skorları</strong> — <strong>Firestore</strong> üzerinde hesabınıza bağlı olarak saklanabilir</li>
+      <li>Hesap bilgileri (ör. ad, e-posta adresi, kullanıcı kimliği)</li>
+      <li>Profil bilgileri (ör. doğum tarihi, tercihler, uygulama ayarları)</li>
+      <li>Uygulama kullanım verileri</li>
+      <li>Cihaz ve hata kayıtları</li>
+      <li>Konum verileri (izin verilirse)</li>
+      <li>Sağlık ve wellness verileri (izin verilirse)</li>
+      <li>Uygulama içinde oluşturduğunuz bazı içerikler (ör. günlük girişleri, etkileşim verileri)</li>
     </ul>
 
-    <h3>AI içerikleri</h3>
-    <p>AI rehber özelliğinde yazdığınız mesajlar, yanıt üretmek için <strong>Google Gemini</strong>’ye gönderilir. Bu mesajlar <strong>AURA’nın sunucularında saklanmaz</strong>; işleme sonrası bizim sistemimizde tutulmaz.</p>
+    <h2>Bölüm 2 — Verileri neden kullanırız?</h2>
+    <p>Verilerinizi şu amaçlarla kullanabiliriz: uygulamayı çalıştırmak; deneyiminizi kişiselleştirmek; günlük içgörüler, öneriler ve ilgili özellikleri sunmak; hesabınızı ve ayarlarınızı yönetmek; güvenlik, hata tespiti ve performans iyileştirmesi yapmak; destek taleplerini yanıtlamak; yasal yükümlülükleri yerine getirmek.</p>
 
-    <h3>Cihazda saklanan veriler</h3>
-    <div class="callout">
-      <strong>Rüya günlüğü ve yansıma notları yalnızca cihazınızda kalır.</strong> Bu içerikler sunucuya gönderilmez ve bulutta saklanmaz. Uygulamayı silerseniz veya cihaz verisini temizlerseniz bu kayıtlar da cihazdan kalkar (yedeklemediyseniz geri gelmez).
-    </div>
+    <h2>Bölüm 3 — Sağlık verileri</h2>
+    <p>Sağlık veya wellness verileri yalnızca açık izniniz doğrultusunda işlenir. Bu veriler tıbbi teşhis amacıyla kullanılmaz; tedavi önerisi üretmek için kullanılmaz; yalnızca Aura deneyimini desteklemek ve kişiselleştirmek için kullanılır. Aura bir tıbbi cihaz veya klinik hizmet değildir.</p>
 
-    <h2>3. Verileri Nasıl Kullanıyoruz</h2>
-    <p>Verileri hesabınızı yönetmek, uygulamayı çalıştırmak, özellikleri kişiselleştirmek, güvenliği sağlamak, hataları gidermek, yasal yükümlülükleri yerine getirmek ve (izin verdiğiniz ölçüde) bildirim göndermek için kullanırız. Sağlık verilerini tanı veya tedavi amacıyla kullanmayız; AURA bir tıbbi cihaz değildir.</p>
+    <h2>Bölüm 4 — Yapay zekâ kullanımı</h2>
+    <p>Aura içinde bazı özellikler yapay zekâ destekli olabilir. Yapay zekâ tarafından üretilen içerikler yardımcı ve bilgilendirici niteliktedir; kesin doğruluk garantisi taşımaz; profesyonel sağlık, psikoloji, hukuk veya finans danışmanlığının yerine geçmez. Gerekli olduğu durumlarda, bazı içerikler güvenli sunucu altyapısı üzerinden işlenebilir.</p>
 
-    <h2>4. Üçüncü Taraflar</h2>
-    <p>Hizmeti sunmak için güvendiğimiz sağlayıcılar verilerinize sınırlı erişebilir:</p>
-    <ul>
-      <li><strong>Google Firebase</strong> — Kimlik doğrulama, Firestore, Analytics, Crashlytics</li>
-      <li><strong>Google Maps / Places API</strong> — konum tabanlı özellikler</li>
-      <li><strong>Google Gemini AI</strong> — AI rehber yanıtları (mesajlarınız bu işlem için Google’a iletilir)</li>
-      <li><strong>Apple HealthKit</strong> / <strong>Google Health Connect</strong> — yalnızca sizin verdiğiniz izinlerle</li>
-    </ul>
-    <p>Bu şirketlerin kendi gizlilik kuralları da geçerlidir.</p>
+    <h2>Bölüm 5 — Veri paylaşımı</h2>
+    <p>Aura, kullanıcı verilerini satmaz. Verileriniz reklam amaçlı üçüncü taraflara satılmaz veya lisanslanmaz. Hizmetin sağlanması için kimlik doğrulama, bulut veritabanı ve sunucu hizmetleri, analiz ve hata izleme servisleri, abonelik ve ödeme doğrulama altyapısı, harita, konum veya bildirim servisleri gibi teknik sağlayıcılarla sınırlı işleme yapılabilir; bu paylaşımlar yalnızca hizmetin teknik olarak sağlanması için gerekli olduğu ölçüdedir.</p>
 
-    <h2>5. Verilerinizi Satmıyoruz</h2>
-    <div class="highlight">
-      <strong>Verilerinizi satmıyoruz</strong>
-      <span>Kişisel verilerinizi reklam verenlere veya veri komisyoncularına satmıyor ve “satış” tanımına giren paylaşımlar için parayla takas etmiyoruz.</span>
-    </div>
+    <h2>Bölüm 6 — Veri güvenliği</h2>
+    <p>Verilerinizi korumak için makul teknik ve organizasyonel önlemler uygularız. Buna rağmen, hiçbir dijital sistem yüzde yüz güvenli değildir.</p>
 
-    <h2>6. Sağlık Verisi Hassasiyeti</h2>
-    <p>Sağlık ve aktivite verileri hassastır. Bu verilere yalnızca siz izin verdiğinizde erişilir; izni kapattığınızda veya bağlantıyı kestiğinizde bu akış durur. Verileri yalnızca uygulama içi deneyimi iyileştirmek için kullanırız; doktor veya acil servis yerine geçmez.</p>
+    <h2>Bölüm 7 — Kullanıcı hakları ve kontrol</h2>
+    <p>Duruma göre verilerinize erişim talep etmek; yanlış bilgilerin düzeltilmesini istemek; hesabınızı silmek; belirli izinleri geri çekmek; uygulama içi ayarları değiştirmek mümkün olabilir. Hesap silme ve veri silme süreçleri uygulama ayarları veya destek kanalları üzerinden yürütülebilir.</p>
 
-    <h2>7. Çocukların Gizliliği</h2>
-    <p>AURA, bilerek 13 yaşın altındaki çocuklardan kişisel veri toplamak için tasarlanmamıştır. 13 yaş altı olduğunu düşündüğünüz bir hesap fark ederseniz lütfen bize yazın.</p>
+    <h2>Bölüm 8 — Saklama</h2>
+    <p>Veriler, hizmetin sunulması ve yasal yükümlülüklerin yerine getirilmesi için gereken süre boyunca saklanır. Gerekmeyen veriler silinir, anonimleştirilir veya erişime kapatılır.</p>
 
-    <h2>8. Haklarınız</h2>
-    <p>Yürürlükteki kanunlar çerçevesinde şunları talep edebilirsiniz:</p>
-    <ul>
-      <li>Hangi verilerin işlendiğini <strong>görme</strong></li>
-      <li>Yanlış veya eksik verilerin <strong>düzeltilmesi</strong></li>
-      <li>Hesabınızı ve buna bağlı bulut verilerini <strong>silme</strong> (Firestore’daki skorlar gibi)</li>
-    </ul>
-    <p>Talepler için: <a href="mailto:support@gezegenselcore.com">support@gezegenselcore.com</a></p>
-    <p>Rüya günlüğü ve yansıma notları cihazda olduğu için bunları silmek genelde uygulama veya cihaz ayarlarından yapılır.</p>
+    <h2>Bölüm 9 — Çocukların gizliliği</h2>
+    <p>Aura, yürürlükteki yasalara aykırı olacak şekilde çocuklardan bilerek veri toplamayı hedeflemez. Gerekirse yaşa bağlı erişim ve kullanım kuralları uygulanabilir.</p>
 
-    <h2>9. Güvenlik</h2>
-    <p>Verileri korumak için sektörde yaygın teknik ve idari önlemler kullanıyoruz. İnternet veya mobil ortamda hiçbir sistem %100 güvenli değildir; endişeniz varsa bize ulaşın.</p>
+    <h2>Bölüm 10 — Politika değişiklikleri</h2>
+    <p>Bu politika zaman zaman güncellenebilir. Önemli değişiklikler uygulama içinde, web sitesinde veya uygun diğer kanallarda duyurulabilir.</p>
 
-    <h2>10. Değişiklikler</h2>
-    <p>Bu politikayı zaman zaman güncelleyebiliriz. Önemli değişikliklerde uygulama veya e-posta ile haber verebiliriz. Üstteki “Son güncelleme” tarihi her revizyonda yenilenir.</p>
+    <h2>Bölüm 11 — İletişim</h2>
+    <p>Sorularınız için: <a href="mailto:support@gezegenselcore.com">support@gezegenselcore.com</a></p>
 
-    <h2 id="account-deletion" class="gc-account-deletion-heading">11. Hesap Silme</h2>
-    <p>Hesabınızı ve ilişkili verilerinizi silmek için uygulama içinde <strong>Profil → Hesap Ayarları → Verileri Sil</strong> yolunu kullanabilir veya <a href="mailto:support@gezegenselcore.com">support@gezegenselcore.com</a> adresine yazabilirsiniz.</p>
-
-    <h2>12. İletişim</h2>
-    <p><strong>Gezegensel Core</strong> — <a href="mailto:support@gezegenselcore.com">support@gezegenselcore.com</a></p>
+    <h2 id="account-deletion" class="gc-account-deletion-heading">Bölüm 12 — Hesap ve veri silme (Veri güvenliği)</h2>
+    <p>Hesabınızı ve Aura ile ilişkili bulut verilerinizi uygulama içi <strong>Profil → Hesap Ayarları → Verileri Sil</strong> akışından talep edebilirsiniz. Tam silme için platform kimlik doğrulaması gerekebilir. Destek: <a href="mailto:support@gezegenselcore.com">support@gezegenselcore.com</a>. Teknik süreç özeti: Aura uygulama reposu <code>DATA_AND_PRIVACY.md</code> belgesi ile uyumlu tutulur.</p>
   </article>
 
   <article id="content-en" lang="en">
     <h1>AURA — Privacy Policy</h1>
-    <p class="meta"><strong>Last updated:</strong> April 5, 2026 · <strong>Developer:</strong> Gezegensel Core · <a href="mailto:support@gezegenselcore.com">support@gezegenselcore.com</a> · iOS and Android</p>
+    <p class="meta"><strong>Last updated:</strong> April 16, 2026 · <strong>Data controller:</strong> GezegenselCore · <a href="mailto:support@gezegenselcore.com">support@gezegenselcore.com</a> · iOS and Android</p>
+    <p>At Aura, we care about your privacy. This Privacy Policy explains what data we may process when you use Aura, why we use it, and what rights you may have.</p>
 
-    <h2>1. Introduction</h2>
-    <p>This policy explains how <strong>AURA</strong> handles personal information when you use the app. By continuing to use AURA, you agree to the practices described here. If you have questions, please contact us.</p>
-
-    <h2>2. Data We Collect</h2>
-
-    <h3>Account information</h3>
-    <p>With <strong>Firebase Authentication</strong>, we process your email, name, and sign-in identifiers when you use email or sign in with <strong>Google</strong> or <strong>Apple</strong>.</p>
-
-    <h3>Profile (optional)</h3>
-    <p>Information such as date of birth, place and time of birth, and gender is used only if you choose to provide it (for example, personalization and in-app features).</p>
-
-    <h3>Location (optional)</h3>
-    <p>Precise location (GPS) or less precise options (for example, city-level) are used only when you allow it.</p>
-
-    <h3>Health data (optional, with permission)</h3>
-    <p>Through <strong>Health Connect</strong> on Android and <strong>HealthKit</strong> on iOS, we may access data such as steps, sleep, or heart rate only with your explicit permission. This data is used only inside the app for the features we provide.</p>
-
-    <h3>Usage data</h3>
+    <h2>Section 1 — Data we may process</h2>
+    <p>Depending on how you use the app and the permissions you grant, Aura may process:</p>
     <ul>
-      <li><strong>Firebase Analytics</strong> — aggregated or de-identified usage statistics</li>
-      <li><strong>Firebase Crashlytics</strong> — crash and error reports (with technical details like app version)</li>
-      <li><strong>Push notifications</strong> — a device token so we can deliver notifications</li>
-      <li><strong>Cognitive exercise scores</strong> — may be stored in <strong>Firestore</strong> and linked to your account</li>
+      <li>Account information (such as name, email address, user ID)</li>
+      <li>Profile information (such as birth date, preferences, app settings)</li>
+      <li>App usage data</li>
+      <li>Device and error logs</li>
+      <li>Location data (if permission is granted)</li>
+      <li>Health and wellness data (if permission is granted)</li>
+      <li>Certain in-app content you create (such as journal entries and interaction data)</li>
     </ul>
 
-    <h3>AI-related content</h3>
-    <p>Messages you send to the AI guide are sent to <strong>Google Gemini</strong> to generate a reply. <strong>We do not store those messages on AURA’s servers</strong>; they are not kept in our systems after processing.</p>
+    <h2>Section 2 — Why we use data</h2>
+    <p>We may use data to operate the app; personalize your experience; provide daily insights, recommendations, and related features; manage your account and settings; improve security, diagnose issues, and improve performance; respond to support requests; and comply with legal obligations.</p>
 
-    <h3>Data stored only on your device</h3>
-    <div class="callout">
-      <strong>Dream journal entries and reflection notes stay only on your device.</strong> They are not uploaded to our servers and are not stored in the cloud. If you delete the app or clear app data, those records are removed from the device (and cannot be recovered unless you backed them up yourself).
-    </div>
+    <h2>Section 3 — Health data</h2>
+    <p>Health or wellness data is processed only with your explicit permission. This data is not used for medical diagnosis; is not used to provide treatment; and is only used to support and personalize the Aura experience. Aura is not a medical device or clinical service.</p>
 
-    <h2>3. How We Use Your Data</h2>
-    <p>We use data to run your account, operate and improve the app, personalize features, protect security, fix crashes, meet legal obligations, and send notifications when you allow it. We do not use health data for diagnosis or treatment; AURA is not a medical device.</p>
+    <h2>Section 4 — AI features</h2>
+    <p>Some Aura features may be supported by artificial intelligence. AI-generated outputs are informative and supportive in nature; are not guaranteed to be fully accurate; and do not replace professional medical, psychological, legal, or financial advice. Where needed, certain content may be processed through secure server infrastructure.</p>
 
-    <h2>4. Third Parties</h2>
-    <p>Trusted providers may process limited data on our behalf:</p>
-    <ul>
-      <li><strong>Google Firebase</strong> — Authentication, Firestore, Analytics, Crashlytics</li>
-      <li><strong>Google Maps / Places API</strong> — location-based features</li>
-      <li><strong>Google Gemini AI</strong> — AI guide responses (your messages are sent to Google for this processing)</li>
-      <li><strong>Apple HealthKit</strong> / <strong>Google Health Connect</strong> — only as permitted by you</li>
-    </ul>
-    <p>Their own privacy policies also apply.</p>
+    <h2>Section 5 — Data sharing</h2>
+    <p>Aura does not sell user data. Your data is not sold or licensed to third parties for advertising purposes. Limited data processing may involve third-party technical providers necessary to operate the service (authentication, cloud database and server services, analytics and crash reporting, subscription and payment verification, map, location, or notification services). Such processing is limited to what is necessary to provide the service.</p>
 
-    <h2>5. We Don’t Sell Your Data</h2>
-    <div class="highlight">
-      <strong>We don’t sell your personal information</strong>
-      <span>We do not sell your personal data to advertisers or data brokers, and we do not exchange it for money in ways that qualify as a “sale” under applicable privacy laws.</span>
-    </div>
+    <h2>Section 6 — Data security</h2>
+    <p>We apply reasonable technical and organizational measures to protect your data. However, no digital system can be guaranteed to be 100% secure.</p>
 
-    <h2>6. Health Data Sensitivity</h2>
-    <p>Health and activity data is sensitive. We access it only with your permission, and you can withdraw that permission or disconnect integrations at any time. We use it only to power in-app experiences—not as a substitute for a doctor or emergency services.</p>
+    <h2>Section 7 — User rights and control</h2>
+    <p>Depending on your situation and local law, you may be able to request access to your data; ask for incorrect information to be corrected; delete your account; withdraw certain permissions; and change in-app settings. Account and data deletion processes may be managed through app settings or support channels.</p>
 
-    <h2>7. Children’s Privacy</h2>
-    <p>AURA is not designed to knowingly collect personal information from children under 13. If you believe we have received such data, please contact us.</p>
+    <h2>Section 8 — Retention</h2>
+    <p>Data is retained only for as long as necessary to provide the service and comply with legal obligations. Data that is no longer needed may be deleted, anonymized, or restricted.</p>
 
-    <h2>8. Your Rights</h2>
-    <p>Depending on where you live, you may have the right to:</p>
-    <ul>
-      <li><strong>Access</strong> information about data we hold</li>
-      <li><strong>Correct</strong> inaccurate or incomplete data</li>
-      <li><strong>Delete</strong> your account and related cloud data (such as scores in Firestore)</li>
-    </ul>
-    <p>Contact: <a href="mailto:support@gezegenselcore.com">support@gezegenselcore.com</a></p>
-    <p>Dream journal and reflection notes live on your device, so removing them is usually done in the app or device settings.</p>
+    <h2>Section 9 — Children’s privacy</h2>
+    <p>Aura is not intended to knowingly collect personal data from children in violation of applicable law. Age-related access rules may apply where required.</p>
 
-    <h2>9. Security</h2>
-    <p>We use widely accepted technical and organizational measures to protect data. No mobile or internet service is 100% secure; reach out if you have concerns.</p>
+    <h2>Section 10 — Policy changes</h2>
+    <p>This policy may be updated from time to time. Important changes may be announced in the app, on the website, or through other appropriate channels.</p>
 
-    <h2>10. Changes</h2>
-    <p>We may update this policy from time to time. For material changes, we may notify you in the app or by email. The “Last updated” date at the top will change when we revise the policy.</p>
+    <h2>Section 11 — Contact</h2>
+    <p>For privacy-related questions, contact: <a href="mailto:support@gezegenselcore.com">support@gezegenselcore.com</a></p>
 
-    <h2 class="gc-account-deletion-heading">11. Account Deletion</h2>
-    <p>To delete your account and associated data, use <strong>Profile → Account Settings → Delete Data</strong> in the app, or contact us at <a href="mailto:support@gezegenselcore.com">support@gezegenselcore.com</a>.</p>
-
-    <h2>12. Contact</h2>
-    <p><strong>Gezegensel Core</strong> — <a href="mailto:support@gezegenselcore.com">support@gezegenselcore.com</a></p>
+    <h2 class="gc-account-deletion-heading">Section 12 — Account and data deletion (Data safety)</h2>
+    <p>You may request deletion of your account and related Aura cloud data through in-app <strong>Profile → Account Settings → Delete Data</strong>. Platform re-authentication may be required. Support: <a href="mailto:support@gezegenselcore.com">support@gezegenselcore.com</a>. Technical flow summary: see the Aura app repository document <code>DATA_AND_PRIVACY.md</code> (kept in sync with product behaviour).</p>
   </article>
     </div>
   </section>

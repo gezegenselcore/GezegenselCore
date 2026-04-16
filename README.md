@@ -26,10 +26,11 @@ Push’tan sonra CDN önbelleği nedeniyle tema/dil değişikliği **birkaç dak
 |--------|-----|
 | Hub | `/` |
 | Site gizlilik / destek | `/privacy.html`, `/support.html` |
-| AURA (tam gizlilik — Play / mağaza kamu) | **`/aura/privacy-policy.html`** (içerik `pages/aura/policies/privacy-policy.html` ile **aynı**; güncellerken **ikisini** senkron tut) |
+| AURA gizlilik (Play / mağaza kamu) | **`/aura/privacy-policy.html`** (`#account-deletion`) — gövde `pages/aura/policies/privacy-policy.html` ile senkron |
+| AURA kullanım koşulları (Play / mağaza kamu) | **`/aura/terms-of-use.html`** — özet `pages/aura/policies/terms.html` |
 | AURA (dosya yolu, politikalar klasörü) | `/pages/aura/…` |
 | ReFollow | `/pages/refollow/…` |
 
-**Policy senkronu:** `pages/aura/policies/privacy-policy.html` düzenlendiyse, aynı HTML’i `aura/privacy-policy.html` içine kopyalayıp yalnız varlık yollarını `../assets/` ve menü linklerini `../pages/aura/…` olacak şekilde düzelt (`SITE_STRUCTURE.md`).
+**Policy senkronu:** Aura mobil repodaki `legal-public/aura/*.html` hukuki gövde kaynağıdır. Burada yayımlanırken **Freelancer + `gezegensel.css`** şablonu (`aura/privacy-policy.html`, `aura/terms-of-use.html`) korunur; `pages/aura/policies/privacy-policy.html` gizlilik gövdesi `aura/` ile aynı kalır. Koşullar özeti `pages/aura/policies/terms.html` → tam metin `aura/terms-of-use.html`. Ayrıntı: `SITE_STRUCTURE.md`.
 
 Son güncelleme: 2026-04-16
