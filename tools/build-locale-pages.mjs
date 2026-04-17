@@ -47,6 +47,24 @@ function prependSiteScriptsFlex(html) {
   );
 }
 
+/** Ortak tasarım katmanı (gezegensel.css hemen ardından). */
+function injectDesignSystem(html, assetPrefix) {
+  const href = `${assetPrefix}assets/gc-design-system.css`;
+  if (html.includes("gc-design-system.css")) return html;
+  return html.replace(
+    /(<link rel="stylesheet" href="[^"]*gezegensel\.css">)/i,
+    `$1\n  <link rel="stylesheet" href="${href}">`
+  );
+}
+
+function injectDesignSystemAuraRoot(html) {
+  if (html.includes("gc-design-system.css")) return html;
+  return html.replace(
+    /(<link rel="stylesheet" href="\/assets\/gezegensel\.css">)/i,
+    `$1\n  <link rel="stylesheet" href="/assets/gc-design-system.css">`
+  );
+}
+
 /** Statik SEO: yalnızca tr | en; metin yönü her zaman LTR. */
 function applyHtmlLocaleShell(html, locale) {
   const htmlLang = locale === "tr" ? "tr" : "en";
@@ -80,6 +98,7 @@ function processInnerPage(html, relUnderLocale, locale, logicalPath) {
   const canonicalUrl = `${ORIGIN}/${locale}${logicalPath}`;
   let h = html.includes("site-path.js") ? html : prependSiteScriptsFlex(html);
   h = h.replace(/(href|src)="assets\//g, `$1="${assetPx}assets/`);
+  h = injectDesignSystem(h, assetPx);
   h = h.replace(
     /<a class="navbar-brand" href="\/">/g,
     `<a class="navbar-brand" href="${homeIndexHref(relUnderLocale)}">`
@@ -133,6 +152,8 @@ function processAuraLegal(html, locale, logicalPath) {
     /https:\/\/gezegenselcore\.com\/pages\/aura\/support\.html/g,
     `${ORIGIN}/${locale}/pages/aura/support.html`
   );
+  h = h.replace(/<a href="\/">([^<]*)<\/a>/g, `<a href="/${locale}/index.html">$1</a>`);
+  h = injectDesignSystemAuraRoot(h);
   return applyHtmlLocaleShell(h, locale);
 }
 

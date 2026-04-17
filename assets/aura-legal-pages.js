@@ -99,35 +99,41 @@
 
     if (mount && !mount.dataset.built) {
       mount.dataset.built = "1";
-      mount.className = (mount.className ? mount.className + " " : "") + "aura-legal-picker";
-      var lab = document.createElement("span");
-      lab.className = "aura-legal-picker-label";
-      lab.setAttribute("data-aura-picker-label", "1");
-      mount.appendChild(lab);
-      LOCALES.forEach(function (code) {
-        var b = document.createElement("button");
-        b.type = "button";
-        b.setAttribute("data-aura-lang", code);
-        b.textContent = BTN_SHORT[code] || code;
-        b.setAttribute("aria-pressed", "false");
-        b.addEventListener("click", function () {
-          persist(code);
-          if (typeof GezegenselSitePath !== "undefined") {
-            GezegenselSitePath.navigateToLocaleSegment(code);
-            return;
-          }
-          apply();
-          scrollAccountDeletionIfNeeded();
+      var prebuilt = mount.querySelector(".gc-lang-btn[data-lang]");
+      if (!prebuilt) {
+        if (!/\baura-legal-picker\b/.test(mount.className)) {
+          mount.className = (mount.className ? mount.className + " " : "") + "aura-legal-picker";
+        }
+        var lab = document.createElement("span");
+        lab.className = "aura-legal-picker-label";
+        lab.setAttribute("data-aura-picker-label", "1");
+        mount.appendChild(lab);
+        LOCALES.forEach(function (code) {
+          var b = document.createElement("button");
+          b.type = "button";
+          b.setAttribute("data-aura-lang", code);
+          b.textContent = BTN_SHORT[code] || code;
+          b.setAttribute("aria-pressed", "false");
+          b.addEventListener("click", function () {
+            persist(code);
+            if (typeof GezegenselSitePath !== "undefined") {
+              GezegenselSitePath.navigateToLocaleSegment(code);
+              return;
+            }
+            apply();
+            scrollAccountDeletionIfNeeded();
+          });
+          mount.appendChild(b);
         });
-        mount.appendChild(b);
-      });
+      }
     }
 
     if (mount) {
       var pl = mount.querySelector("[data-aura-picker-label]");
       if (pl) pl.textContent = PICKER_LABELS[ui] || PICKER_LABELS.en;
-      mount.querySelectorAll("[data-aura-lang]").forEach(function (btn) {
-        btn.setAttribute("aria-pressed", btn.getAttribute("data-aura-lang") === ui ? "true" : "false");
+      mount.querySelectorAll("[data-aura-lang], .gc-lang-btn[data-lang]").forEach(function (btn) {
+        var code = btn.getAttribute("data-aura-lang") || btn.getAttribute("data-lang");
+        btn.setAttribute("aria-pressed", code === ui ? "true" : "false");
       });
     }
 

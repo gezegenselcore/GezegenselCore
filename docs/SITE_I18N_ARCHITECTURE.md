@@ -2,7 +2,7 @@
 
 ## Özet
 
-Statik site **build zamanında** yerelleştirilir: `node tools/build-locale-pages.mjs` yalnızca **`tr`** ve **`en`** için HTML üretir. Şablonlarda `{{i18n:key}}` (düz metin, kaçışlı) ve `{{i18nH:key}}` (güvenilir HTML parçaları) yer tutucuları kullanılır.
+Statik site **build zamanında** yerelleştirilir: `node tools/build-locale-pages.mjs` yalnızca **`tr`** ve **`en`** için HTML üretir. Şablonlarda `{{i18n:key}}` (düz metin, kaçışlı) ve `{{i18nH:key}}` (güvenilir HTML parçaları) yer tutucuları kullanılır. Tüm sayfa tipleri aynı **navbar + hero + main + footer** kabuğunu paylaşır (`docs/SITE_TEMPLATE_ARCHITECTURE.md`); `gezegensel.css` sonrası **`gc-design-system.css`** otomatik eklenir.
 
 ## Dosyalar
 

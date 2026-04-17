@@ -1,6 +1,9 @@
 const L = (tr, en) => ({ tr, en });
 
 export const AURA_SEO = {
+  "aura_privacy.hero_h2": L("Gizlilik Politikası — AURA", "Privacy Policy — AURA"),
+  "aura_terms.hero_h2": L("Kullanım Koşulları — AURA", "Terms of Use — AURA"),
+  "aura_support.hero_h2": L("AURA — Destek", "AURA — Support"),
   "aura_privacy.meta_title": L(
     "Gizlilik Politikası — AURA",
     "Privacy Policy — AURA"

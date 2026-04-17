@@ -6,7 +6,7 @@
 
 **English:** `x-default` hreflang ve bilinmeyen dil fallback’i `en`’i işaret eder. Bkz. `assets/site-path.js`.
 
-**Tema:** `assets/freelancer/` (Bootstrap 3 + Freelancer). Marka katmanı: `assets/gezegensel.css`, `assets/lang-boot.js`, `assets/gezegensel.js`, **`assets/site-path.js`**, `assets/legacy-path-redirect.js`, `assets/root-locale-redirect.js`. AURA hukuk: `assets/aura-legal-pages.{js,css}`.
+**Tema:** `assets/freelancer/` (Bootstrap 3 + Freelancer). Marka katmanı: `assets/gezegensel.css`, **`assets/gc-design-system.css`** (ortak kabuk), `assets/lang-boot.js`, `assets/gezegensel.js`, **`assets/site-path.js`**, `assets/legacy-path-redirect.js`, `assets/root-locale-redirect.js`. AURA hukuk: `assets/aura-legal-pages.{js,css}`. Şablon özeti: **`docs/SITE_TEMPLATE_ARCHITECTURE.md`**.
 
 ## Kök (`/`)
 

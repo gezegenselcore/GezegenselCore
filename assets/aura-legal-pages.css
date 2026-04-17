@@ -4,10 +4,6 @@
   --aura-picker-border: rgba(15, 23, 42, 0.12);
 }
 
-body.aura-legal-body {
-  padding-top: 3.25rem;
-}
-
 .aura-legal-picker {
   position: fixed;
   top: 0;

@@ -1,0 +1,87 @@
+/**
+ * Gezegensel Core — ortak site kabuğu ve tasarım jetonları.
+ * Bootstrap Freelancer + gezegensel.css üzerine yüklenir; tüm sayfa tipleri aynı layout dilini paylaşır.
+ */
+:root {
+  --gc-ink: #0d2137;
+  --gc-ink-muted: #475569;
+  --gc-accent: #00f2fe;
+  --gc-surface: #f8fafc;
+  --gc-max-read: 48rem;
+  --gc-space-section: 2.5rem;
+  --gc-space-block: 1.25rem;
+  --gc-radius-card: 10px;
+}
+
+/* ——— Sayfa iskeleti ——— */
+body.gc-site {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.gc-main {
+  flex: 1 0 auto;
+  width: 100%;
+}
+
+.gc-site-footer {
+  flex-shrink: 0;
+}
+
+/* İç sayfa / AURA: hero bandı ile gövde arası ritim */
+.inner-page.gc-site .gc-page-hero.success.first {
+  padding-bottom: 0.5rem;
+}
+
+.inner-page.gc-site > .gc-main > section:last-of-type {
+  padding-bottom: var(--gc-space-section);
+}
+
+/* ——— Bölüm başlığı (tüm inner + refollow + AURA hero) ——— */
+.gc-page-hero.success.first .container {
+  padding-top: 0.25rem;
+}
+
+/* ——— Footer ailesi (tüm sayfalarda aynı üst çizgi) ——— */
+footer.gc-site-footer {
+  border-top: 1px solid rgba(13, 33, 55, 0.08);
+}
+
+/* ——— AURA: navbar içi dil şeridi ——— */
+.navbar .aura-legal-picker,
+.aura-legal-picker--embedded {
+  position: static !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  z-index: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 3px;
+  padding: 0 !important;
+  margin: 0;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+.navbar .aura-legal-picker-label {
+  display: none;
+}
+
+/* AURA gövde: aynı prose genişliği ve kart hissi (gezegensel .gc-prose.gc-legal ile birlikte) */
+.aura-legal-body.inner-page .gc-main .gc-prose.gc-legal {
+  padding-top: 0.5rem;
+}
+
+@media (max-width: 767px) {
+  .navbar .aura-legal-picker {
+    width: 100%;
+    justify-content: flex-start;
+    margin-top: 0.35rem;
+  }
+}

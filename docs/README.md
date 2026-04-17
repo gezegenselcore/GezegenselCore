@@ -12,6 +12,7 @@ Bu klasör, marka statik sitesinin **iki dilli (TR / EN) URL mimarisi**, **yönl
 | Kök legacy | `/`, `/privacy.html`, `/support.html`, `/aura/*.html`, `/pages/aura/support.html` → kullanıcı tercihi + `legacy-path-redirect.js` / `root-locale-redirect.js` ile `/tr/…` veya `/en/…` adresine. |
 | Ortak çözümleyici | `assets/site-path.js` → `GezegenselSitePath` (`buildAbsoluteUrl`, `getLogicalPath`, `navigateToLocaleSegment`). |
 | Navbar / iç sayfa | `assets/lang-boot.js` (`data-ui-locale`), `assets/gezegensel.js` (path modunda dil düğmesi navigasyon). |
+| Ortak kabuk / tasarım | `assets/gc-design-system.css` + sınıflar `gc-site`, `gc-main`, `gc-page-hero`, `gc-site-footer` — bkz. `docs/DESIGN_SYSTEM.md`, `docs/SITE_TEMPLATE_ARCHITECTURE.md`. |
 | AURA hukuk HTML | `assets/aura-legal-pages.js` — tam gövde TR + EN; dil şeridi yalnız TR / EN. |
 | Üretim | `node tools/build-locale-pages.mjs` — şablonlar `tools/templates/*` + `tools/i18n/messages/*` (`{{i18n:…}}` / `{{i18nH:…}}`); AURA tam metin master’ları `aura-*.master.html` (ilk çalıştırmada mevcut siteden oluşturulur). |
 | Sitemap | `sitemap.xml` — yalnızca kök `/` + her mantıksal yol için `tr` ve `en` URL’leri; tekrarlayan `<loc>` yok. |
@@ -24,6 +25,8 @@ Bu klasör, marka statik sitesinin **iki dilli (TR / EN) URL mimarisi**, **yönl
 - **`404.html`** — Bilinmeyen yollar; eski çok dilli önek içeren isteklerde `site-path.js` ile `/en/…`’e düşer.
 - **`tools/build-locale-pages.mjs`** — İki dil × (index, privacy, support, 3×AURA, 3×ReFollow) üretir; kök AURA ve site sayfalarını redirect stub yapar.
 - **`tools/templates/`** — `index.master.html`, `privacy.master.html`, `support.master.html`, `aura-*.master.html` (AURA gövdesi; hukuk metni güncellenince burayı veya üretim kaynağını güncelleyin).
+- **`docs/DESIGN_SYSTEM.md`** — tasarım jetonları ve `gc-*` sınıf sözlüğü.
+- **`docs/SITE_TEMPLATE_ARCHITECTURE.md`** — sayfa tipleri ve ortak şablon akışı.
 
 ## İçerik ve dil geri dönüşü (fallback)
 
