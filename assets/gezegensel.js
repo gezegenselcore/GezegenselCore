@@ -154,13 +154,15 @@
       legacyEn.setAttribute("aria-pressed", ui === "en" ? "true" : "false");
     }
 
-    var tTr = document.body && document.body.getAttribute("data-title-tr");
-    var tEn = document.body && document.body.getAttribute("data-title-en");
-    var tUi = document.body && document.body.getAttribute("data-title-" + ui);
-    if (tUi) {
-      document.title = tUi;
-    } else if (tTr && tEn) {
-      document.title = ui === "tr" ? tTr : tEn;
+    if (!pathLocaleMode()) {
+      var tTr = document.body && document.body.getAttribute("data-title-tr");
+      var tEn = document.body && document.body.getAttribute("data-title-en");
+      var tUi = document.body && document.body.getAttribute("data-title-" + ui);
+      if (tUi) {
+        document.title = tUi;
+      } else if (tTr && tEn) {
+        document.title = ui === "tr" ? tTr : tEn;
+      }
     }
   }
 

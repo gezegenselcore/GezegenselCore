@@ -15,7 +15,7 @@
 | `index.html` | **Yönlendirme** → `/{locale}/index.html` (`root-locale-redirect.js`). |
 | `privacy.html`, `support.html` | **Yönlendirme** → `/{locale}/privacy.html` vb. |
 | `assets/` | Ortak JS/CSS; yukarıdaki çözümleyiciler. |
-| `tools/build-locale-pages.mjs` | Locale ağacını üretir. |
+| `tools/build-locale-pages.mjs` | Locale ağacını üretir; `tools/i18n/` çeviri paketini uygular. |
 | `tools/templates/` | `index.master.html`, `privacy.master.html`, `support.master.html`, `aura-*.master.html`. |
 | `docs/` | Site mimarisi ve Aura hizalama belgeleri. |
 

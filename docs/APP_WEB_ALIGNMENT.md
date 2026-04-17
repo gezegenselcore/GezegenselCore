@@ -26,6 +26,10 @@ Uygulama tarafı: `src/utils/gezegenselLegalUrls.ts` → `appLanguageToUrlSegmen
 
 Remote Config’te verilen URL `gezegenselcore.com` içeriyorsa, uygulama açılışında yukarıdaki segment ile **yeniden yazar**; zaten `/{tr|en|…|ar}/aura/…` veya `…/pages/aura/…` biçiminde yerelleştirilmişse **dokunulmaz**. Eski kök biçim (`…/aura/privacy-policy.html` gibi, dil segmenti yok) RC’de kalmışsa yine kullanıcı diline göre **yeniden yazılır**. Harici CDN veya farklı alan adı ise RC URL’si **olduğu gibi** kullanılır.
 
+## Statik site çok dillilik (özet)
+
+- Hub ve marka sayfaları: `tools/i18n/messages/` + `{{i18n:…}}` ile 8 dil; ayrıntı: `docs/SITE_I18N_ARCHITECTURE.md`.
+
 ## Web tarafı depolama
 
 - Anahtar: `localStorage` **`gezegensel-lang`**

@@ -5,6 +5,8 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { MESSAGES } from "./i18n/messages/registry.mjs";
+import { expandI18n, injectRefollowLegalBanner } from "./i18n/expand.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
@@ -80,7 +82,10 @@ function processInnerPage(html, relUnderLocale, locale, logicalPath) {
   const canonicalUrl = `${ORIGIN}/${locale}${logicalPath}`;
   let h = html.includes("site-path.js") ? html : prependSiteScriptsFlex(html);
   h = h.replace(/(href|src)="assets\//g, `$1="${assetPx}assets/`);
-  h = h.replace(/<a class="navbar-brand" href="\/"/g, `<a class="navbar-brand" href="${homeIndexHref(relUnderLocale)}">`);
+  h = h.replace(
+    /<a class="navbar-brand" href="\/">/g,
+    `<a class="navbar-brand" href="${homeIndexHref(relUnderLocale)}">`
+  );
   h = h.replace(/href="\/#apps"/g, `href="${homeIndexHref(relUnderLocale)}#apps"`);
   h = h.replace(/href="\/#policies"/g, `href="${homeIndexHref(relUnderLocale)}#policies"`);
   h = h.replace(/href="\/#about"/g, `href="${homeIndexHref(relUnderLocale)}#about"`);
@@ -110,7 +115,7 @@ function processInnerPage(html, relUnderLocale, locale, logicalPath) {
 
 function processAuraLegal(html, locale, logicalPath) {
   const canonicalUrl = `${ORIGIN}/${locale}${logicalPath}`;
-  let h = html;
+  let h = expandI18n(html, locale, MESSAGES);
   h = h.replace(/<link rel="canonical" href="[^"]*" ?\/?>/i, `<link rel="canonical" href="${canonicalUrl}" />`);
   if (!h.includes('hreflang="tr"')) {
     h = h.replace(
@@ -248,15 +253,15 @@ function main() {
   const rfSupport = read(path.join(ROOT, "pages", "refollow", "policies", "support.html"));
 
   for (const loc of LOCALES) {
-    let indexOut = processInnerPage(indexMaster, "index.html", loc, "/index.html");
+    let indexOut = processInnerPage(expandI18n(indexMaster, loc, MESSAGES), "index.html", loc, "/index.html");
     indexOut = indexOut.replace(/data-lang="pt-BR"/g, 'data-lang="pt-br"');
     write(path.join(ROOT, loc, "index.html"), indexOut);
 
-    let priv = processInnerPage(privacyMaster, "privacy.html", loc, "/privacy.html");
+    let priv = processInnerPage(expandI18n(privacyMaster, loc, MESSAGES), "privacy.html", loc, "/privacy.html");
     priv = priv.replace(/data-lang="pt-BR"/g, 'data-lang="pt-br"');
     write(path.join(ROOT, loc, "privacy.html"), priv);
 
-    let sup = processInnerPage(supportMaster, "support.html", loc, "/support.html");
+    let sup = processInnerPage(expandI18n(supportMaster, loc, MESSAGES), "support.html", loc, "/support.html");
     sup = sup.replace(/data-lang="pt-BR"/g, 'data-lang="pt-br"');
     write(path.join(ROOT, loc, "support.html"), sup);
 
@@ -264,9 +269,24 @@ function main() {
     write(path.join(ROOT, loc, "aura", "terms-of-use.html"), processAuraLegal(auraTerms, loc, "/aura/terms-of-use.html"));
     write(path.join(ROOT, loc, "pages", "aura", "support.html"), processAuraLegal(auraSupport, loc, "/pages/aura/support.html"));
 
-    const rfP = processInnerPage(refollowForLocale(rfPrivacy), "pages/refollow/policies/privacy.html", loc, "/pages/refollow/policies/privacy.html").replace(/data-lang="pt-BR"/g, 'data-lang="pt-br"');
-    const rfT = processInnerPage(refollowForLocale(rfTerms), "pages/refollow/policies/terms.html", loc, "/pages/refollow/policies/terms.html").replace(/data-lang="pt-BR"/g, 'data-lang="pt-br"');
-    const rfS = processInnerPage(refollowForLocale(rfSupport), "pages/refollow/policies/support.html", loc, "/pages/refollow/policies/support.html").replace(/data-lang="pt-BR"/g, 'data-lang="pt-br"');
+    const rfP = processInnerPage(
+      injectRefollowLegalBanner(expandI18n(refollowForLocale(rfPrivacy), loc, MESSAGES), loc, MESSAGES),
+      "pages/refollow/policies/privacy.html",
+      loc,
+      "/pages/refollow/policies/privacy.html"
+    ).replace(/data-lang="pt-BR"/g, 'data-lang="pt-br"');
+    const rfT = processInnerPage(
+      injectRefollowLegalBanner(expandI18n(refollowForLocale(rfTerms), loc, MESSAGES), loc, MESSAGES),
+      "pages/refollow/policies/terms.html",
+      loc,
+      "/pages/refollow/policies/terms.html"
+    ).replace(/data-lang="pt-BR"/g, 'data-lang="pt-br"');
+    const rfS = processInnerPage(
+      injectRefollowLegalBanner(expandI18n(refollowForLocale(rfSupport), loc, MESSAGES), loc, MESSAGES),
+      "pages/refollow/policies/support.html",
+      loc,
+      "/pages/refollow/policies/support.html"
+    ).replace(/data-lang="pt-BR"/g, 'data-lang="pt-br"');
     write(path.join(ROOT, loc, "pages", "refollow", "policies", "privacy.html"), rfP);
     write(path.join(ROOT, loc, "pages", "refollow", "policies", "terms.html"), rfT);
     write(path.join(ROOT, loc, "pages", "refollow", "policies", "support.html"), rfS);

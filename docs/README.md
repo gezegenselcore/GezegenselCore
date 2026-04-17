@@ -12,7 +12,7 @@ Bu klasör, marka statik sitesinin **çok dilli URL mimarisi**, **yönlendirme /
 | Ortak çözümleyici | `assets/site-path.js` → `GezegenselSitePath` (`buildAbsoluteUrl`, `getLogicalPath`, `navigateToLocaleSegment`). |
 | Navbar / iç sayfa | `assets/lang-boot.js` (`data-ui-locale`), `assets/gezegensel.js` (path modunda dil düğmesi navigasyon). |
 | AURA hukuk HTML | `assets/aura-legal-pages.js` — tam gövde TR/EN; dil şeridi navigasyon; Arapça `dir=rtl` kabuk + `article` LTR. |
-| Üretim | `node tools/build-locale-pages.mjs` — şablonlar `tools/templates/*`, AURA tam metin master’ları `aura-*.master.html` (ilk çalıştırmada mevcut siteden oluşturulur). |
+| Üretim | `node tools/build-locale-pages.mjs` — şablonlar `tools/templates/*` + `tools/i18n/messages/*` (`{{i18n:…}}` / `{{i18nH:…}}`); AURA tam metin master’ları `aura-*.master.html` (ilk çalıştırmada mevcut siteden oluşturulur). |
 | Sitemap | `sitemap.xml` — `build-locale-pages.mjs` ile üretilir: 8 dil × 9 mantıksal yol + kök `/` + legacy kök stub’ları + yerelleştirilmemiş ReFollow kök politikaları; tekrarlayan `<loc>` yok. |
 
 ## Dosya ve klasör
@@ -25,7 +25,7 @@ Bu klasör, marka statik sitesinin **çok dilli URL mimarisi**, **yönlendirme /
 
 ## İçerik ve dil geri dönüşü (fallback)
 
-- **Marka kökü (`index`, `privacy`, `support`):** Çoğu paragraf yalnızca `l10n-tr` + `l10n-en` içerir; `de` … `ar` seçildiğinde `gezegensel.js` önce tam eşleşme, yoksa **EN**, yoksa **TR** sırasıyla gösterir. `gezegensel.css` içinde `html[data-ui-locale="…"]` ile ilk boyamada tek dil görünür.
+- **Hub, site `privacy` / `support`, ReFollow kromu:** Metinler build’de seçilir; `tools/i18n/expand.mjs` içinde **locale → en → tr**. İstemci tarafında çoklu `l10n-*` kardeşi gerekmez (sayfa tek dil HTML olarak yayınlanır).
 - **AURA kanonik hukuk:** Tam metin yalnız TR ve EN; diğer dillerde EN gövde + `aura-legal-fallback-banner` uyarısı.
 - **ReFollow politikaları:** TR ve EN `lang-block` bölümleri; çoklu dil seçiminde aynı sıra (EN ikinci öncelik).
 
