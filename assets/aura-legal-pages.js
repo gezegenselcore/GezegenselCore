@@ -1,33 +1,18 @@
 /**
- * AURA kanonik hukuk / destek HTML sayfaları — Aura uygulamasıyla aynı dil kodları.
- * Tam metin yalnızca TR ve EN; diğer seçimlerde içerik EN + yerelleştirilmiş kısa uyarı.
+ * AURA kanonik hukuk / destek HTML sayfaları — yalnızca TR ve EN.
  * /{locale}/… URL'lerinde dil düğmesi aynı sayfanın başka dil yoluna gider (site-path).
  */
 (function () {
   var STORAGE_KEY = "gezegensel-lang";
-  var LOCALES = ["tr", "en", "de", "fr", "es", "it", "pt-br", "ar"];
-  var PICKER_LABELS = { tr: "Dil", en: "Language", de: "Sprache", fr: "Langue", es: "Idioma", it: "Lingua", "pt-br": "Idioma", ar: "اللغة" };
-  var BTN_SHORT = { tr: "TR", en: "EN", de: "DE", fr: "FR", es: "ES", it: "IT", "pt-br": "PT", ar: "AR" };
-  var FALLBACK_BANNER = {
-    tr: "",
-    en: "",
-    de: "Der vollständige Rechtstext erscheint auf Englisch.",
-    fr: "Le texte juridique complet est en anglais.",
-    es: "El texto legal completo está en inglés.",
-    it: "Il testo legale completo è in inglese.",
-    "pt-br": "O texto legal completo está em inglês.",
-    ar: "النص القانوني الكامل معروض بالإنجليزية.",
-  };
+  var LOCALES = ["tr", "en"];
+  var PICKER_LABELS = { tr: "Dil", en: "Language" };
+  var BTN_SHORT = { tr: "TR", en: "EN" };
 
   function normalize(v) {
     if (!v || typeof v !== "string") return null;
-    var s = v.trim();
-    if (s === "pt-BR" || s.toLowerCase() === "pt-br" || s.toLowerCase() === "pt_br") return "pt-br";
-    if (/^pt\b/i.test(s)) return "pt-br";
-    var low = s.toLowerCase();
-    if (LOCALES.indexOf(low) >= 0) return low;
-    var base = low.split("-")[0];
-    if (LOCALES.indexOf(base) >= 0) return base;
+    var low = v.trim().toLowerCase().replace(/_/g, "-");
+    if (low === "tr" || low.indexOf("tr-") === 0) return "tr";
+    if (low === "en" || low.indexOf("en-") === 0) return "en";
     return null;
   }
 
@@ -53,7 +38,7 @@
       if (s) return s;
       var legacy = normalize(localStorage.getItem("aura-public-lang"));
       if (legacy) {
-        localStorage.setItem(STORAGE_KEY, legacy === "pt-br" ? "pt-BR" : legacy);
+        localStorage.setItem(STORAGE_KEY, legacy);
         localStorage.removeItem("aura-public-lang");
         return legacy;
       }
@@ -66,14 +51,11 @@
   }
 
   function bcp47(ui) {
-    if (ui === "pt-br") return "pt-BR";
-    return ui;
+    return ui === "tr" ? "tr" : "en";
   }
 
-  /** Arapça sayfa kabuğu RTL; hukuk gövdesi (TR/EN) satır içi okunabilirlik için LTR. */
-  function setDir(ui) {
-    var rtl = ui === "ar";
-    document.documentElement.dir = rtl ? "rtl" : "ltr";
+  function setDir() {
+    document.documentElement.dir = "ltr";
     ["aura-block-tr", "aura-block-en"].forEach(function (id) {
       var el = document.getElementById(id);
       if (el) {
@@ -85,7 +67,7 @@
 
   function persist(ui) {
     try {
-      localStorage.setItem(STORAGE_KEY, ui === "pt-br" ? "pt-BR" : ui);
+      localStorage.setItem(STORAGE_KEY, ui === "tr" ? "tr" : "en");
     } catch (e) {}
   }
 
@@ -97,7 +79,7 @@
     var banner = document.getElementById("aura-legal-fallback-banner");
     if (!trBlock || !enBlock) return;
 
-    setDir(ui);
+    setDir();
     document.documentElement.setAttribute("lang", bcp47(ui));
 
     var c = contentLang(ui);
@@ -105,14 +87,8 @@
     enBlock.hidden = c !== "en";
 
     if (banner) {
-      var msg = FALLBACK_BANNER[ui] || "";
-      if (msg) {
-        banner.textContent = msg;
-        banner.hidden = false;
-      } else {
-        banner.textContent = "";
-        banner.hidden = true;
-      }
+      banner.textContent = "";
+      banner.hidden = true;
     }
 
     var titleTr = document.body.getAttribute("data-title-tr");

@@ -1,10 +1,10 @@
 # gezegenselcore.com — dosya haritası
 
-**Çok dilli kanonik yollar:** Asıl içerik `/{locale}/…` altında (`locale` ∈ `tr`, `en`, `de`, `fr`, `es`, `it`, `pt-br`, `ar`). Kök `index.html`, `privacy.html`, `support.html`, `aura/*.html`, `pages/aura/support.html` **yönlendirme** (kullanıcı diline göre `/{locale}/…`). Ayrıntı: **`docs/README.md`**, **`docs/APP_WEB_ALIGNMENT.md`**.
+**Kanonik yollar:** Asıl içerik yalnızca `/{tr|en}/…` altında. Kök `index.html`, `privacy.html`, `support.html`, `aura/*.html`, `pages/aura/support.html` **yönlendirme** (kullanıcı tercihi + `legacy-path-redirect.js` / `root-locale-redirect.js` ile `/{tr|en}/…`). Eski çok dilli segment (`/de/`, `/fr/`, …) istekleri `assets/site-path.js` ile **aynı mantıksal yol** üzerinden `/en/…`’e düşer. Ayrıntı: **`docs/README.md`**, **`docs/APP_WEB_ALIGNMENT.md`**.
 
-**AURA kamu hukuk — tam metin:** `tools/templates/aura-privacy.master.html`, `aura-terms.master.html`, `aura-support.master.html` (ilk `node tools/build-locale-pages.mjs` çalıştırmasında mevcut siteden kopyalanır). Üretilen canlı dosyalar: `/{locale}/aura/privacy-policy.html`, `/{locale}/aura/terms-of-use.html`, `/{locale}/pages/aura/support.html`.
+**AURA kamu hukuk — tam metin:** `tools/templates/aura-privacy.master.html`, `aura-terms.master.html`, `aura-support.master.html` (ilk `node tools/build-locale-pages.mjs` çalıştırmasında mevcut siteden kopyalanır). Üretilen canlı dosyalar: `/{tr|en}/aura/privacy-policy.html`, `/{tr|en}/aura/terms-of-use.html`, `/{tr|en}/pages/aura/support.html`.
 
-**English:** Legacy paths without `/{locale}/` redirect to the localized URL; `x-default` hreflang points to `en`. See `assets/site-path.js`.
+**English:** `x-default` hreflang ve bilinmeyen dil fallback’i `en`’i işaret eder. Bkz. `assets/site-path.js`.
 
 **Tema:** `assets/freelancer/` (Bootstrap 3 + Freelancer). Marka katmanı: `assets/gezegensel.css`, `assets/lang-boot.js`, `assets/gezegensel.js`, **`assets/site-path.js`**, `assets/legacy-path-redirect.js`, `assets/root-locale-redirect.js`. AURA hukuk: `assets/aura-legal-pages.{js,css}`.
 
@@ -12,20 +12,21 @@
 
 | Dosya / klasör | Açıklama |
 |-----------------|----------|
-| `index.html` | **Yönlendirme** → `/{locale}/index.html` (`root-locale-redirect.js`). |
-| `privacy.html`, `support.html` | **Yönlendirme** → `/{locale}/privacy.html` vb. |
+| `index.html` | **Yönlendirme** → `/{tr\|en}/index.html` (`root-locale-redirect.js`). |
+| `privacy.html`, `support.html` | **Yönlendirme** → `/{tr\|en}/privacy.html` vb. |
+| `404.html` | GitHub Pages 404; `site-path.js` ile eski dil önekli yollar `/en/…`’e. |
 | `assets/` | Ortak JS/CSS; yukarıdaki çözümleyiciler. |
-| `tools/build-locale-pages.mjs` | Locale ağacını üretir; `tools/i18n/` çeviri paketini uygular. |
+| `tools/build-locale-pages.mjs` | `tr` / `en` ağacını üretir; `tools/i18n/` çeviri paketini uygular. |
 | `tools/templates/` | `index.master.html`, `privacy.master.html`, `support.master.html`, `aura-*.master.html`. |
-| `docs/` | Site mimarisi ve Aura hizalama belgeleri. |
+| `docs/` | Site mimarisi ve uygulama hizalama belgeleri. |
 
-## `/{locale}/` (ör. `en/`, `tr/`, `pt-br/`)
+## `/{tr|en}/`
 
 | Yol | Açıklama |
 |-----|----------|
 | `{locale}/index.html` | Ana hub (CTA, politikalar). |
 | `{locale}/privacy.html`, `support.html` | Site gizlilik / destek. |
-| `{locale}/aura/privacy-policy.html`, `terms-of-use.html` | AURA hukuk (8 dil şeridi; gövde TR+EN). |
+| `{locale}/aura/privacy-policy.html`, `terms-of-use.html` | AURA hukuk (dil şeridi TR / EN; gövde TR + EN). |
 | `{locale}/pages/aura/support.html` | AURA destek. |
 | `{locale}/pages/refollow/policies/*.html` | ReFollow politikaları. |
 
@@ -35,23 +36,22 @@ Varlık yolları: bir seviye `../assets/` (`en/index.html`); iç içe sayfalar i
 
 | Dosya | Davranış |
 |-------|----------|
-| `privacy-policy.html`, `terms-of-use.html` | **Yönlendirme** stub → `/{locale}/aura/…` |
+| `privacy-policy.html`, `terms-of-use.html` | **Yönlendirme** stub → `/{tr\|en}/aura/…` |
 
 ## `pages/aura/`
 
 | Dosya | Davranış |
 |-------|----------|
 | `support.html` | **Yönlendirme** stub. |
-| `policies/*.html` | **Yönlendirme** stub → locale’li kanonik. |
 
 ## `pages/refollow/` (kök)
 
-Orijinal `pages/refollow/policies/*.html` **kaynak**; build çıktısı `/{locale}/pages/refollow/…` altında çoğaltılır. Kök dosyalar GitHub’da kalır (derleme sırasında üzerine yazılmaz).
+Orijinal `pages/refollow/policies/*.html` **kaynak**; build çıktısı `/{tr|en}/pages/refollow/…` altında çoğaltılır. Kök dosyalar GitHub’da kalır (derleme sırasında üzerine yazılmaz).
 
 ## Yayın
 
-`main` kökten GitHub Pages; `CNAME` → `gezegenselcore.com`. `sitemap.xml` tüm locale URL’lerini listeler.
+`main` kökten GitHub Pages; `CNAME` → `gezegenselcore.com`. `sitemap.xml` yalnızca `tr` ve `en` locale URL’lerini (+ kök `/`) listeler.
 
-**Policy senkronu (Aura mobil repo):** `legal-public/aura/*.html` + `legal-public/assets/` bu yapı ile uyumlu tutulur; uygulama `src/utils/gezegenselLegalUrls.ts` ile tarayıcıda doğru `/{locale}/…` açar.
+**Policy senkronu (Aura mobil repo):** `legal-public/aura/*.html` + `legal-public/assets/` bu yapı ile uyumlu tutulur; uygulama tarafında dil `tr` → `/tr/…`, diğerleri → `/en/…` kuralı geçerlidir.
 
 Son güncelleme: 2026-04-18

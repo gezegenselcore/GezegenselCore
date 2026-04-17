@@ -1,7 +1,6 @@
 /**
- * Gezegensel Core — path tabanlı çok dilli URL çözümleyici (Aura ile uyumlu dil kodları).
- * URL segmenti: tr | en | de | fr | es | it | pt-br | ar
- * Depolama: localStorage "gezegensel-lang" — pt-BR (eski) ve pt-br (yeni) kabul edilir.
+ * Gezegensel Core — path tabanlı dil: yalnızca tr | en. Eski önekler (de, fr, …) EN’ye yönlendirilir.
+ * Depolama: localStorage "gezegensel-lang" — yalnızca tr / en kalıcı; diğer değerler EN sayılır.
  */
 (function (global) {
   function runtimeOrigin() {
@@ -17,29 +16,55 @@
     return "https://gezegenselcore.com";
   }
   var ORIGIN = runtimeOrigin();
-  var LOCALE_SEGMENTS = ["tr", "en", "de", "fr", "es", "it", "pt-br", "ar"];
+  var CANONICAL_LOCALES = ["tr", "en"];
+  var LEGACY_LOCALE_PREFIXES = ["de", "fr", "es", "it", "pt-br", "ar"];
+  var PATH_PREFIXES = CANONICAL_LOCALES.concat(LEGACY_LOCALE_PREFIXES);
   var STORAGE_KEY = "gezegensel-lang";
   var DEFAULT_SEGMENT = "en";
 
-  function isLocaleSegment(seg) {
-    return LOCALE_SEGMENTS.indexOf(seg) >= 0;
+  function isCanonicalLocaleSegment(seg) {
+    return CANONICAL_LOCALES.indexOf(String(seg || "").toLowerCase()) >= 0;
+  }
+
+  function isLegacyLocalePrefix(seg) {
+    return LEGACY_LOCALE_PREFIXES.indexOf(String(seg || "").toLowerCase()) >= 0;
+  }
+
+  function isPathLocalePrefix(seg) {
+    var s = String(seg || "").toLowerCase();
+    return PATH_PREFIXES.indexOf(s) >= 0;
+  }
+
+  /** Eski URL /de/… → /en/… (sonsuz döngü yok: yalnızca legacy önekte çalışır) */
+  function redirectLegacyPathPrefixIfNeeded() {
+    try {
+      var raw = pathnameNoQuery();
+      var path = String(raw || "").split("?")[0].replace(/\/+$/, "") || "/";
+      var parts = path.replace(/^\/+/, "").split("/").filter(Boolean);
+      if (!parts.length) return;
+      var first = parts[0].toLowerCase();
+      if (!isLegacyLocalePrefix(first)) return;
+      var logical = getLogicalPath(path);
+      var target = buildAbsoluteUrl("en", logical);
+      var cur = global.location ? global.location.href.split("#")[0] : "";
+      if (cur !== target.split("#")[0]) {
+        global.location.replace(target);
+      }
+    } catch (e) {}
   }
 
   function normalizeStorageToSegment(v) {
     if (!v || typeof v !== "string") return null;
     var s = v.trim();
-    if (s === "pt-BR" || s.toLowerCase() === "pt-br" || s.toLowerCase() === "pt_br") return "pt-br";
-    if (/^pt\b/i.test(s)) return "pt-br";
-    var low = s.toLowerCase();
-    if (LOCALE_SEGMENTS.indexOf(low) >= 0) return low;
-    var base = low.split("-")[0];
-    if (LOCALE_SEGMENTS.indexOf(base) >= 0) return base;
+    var low = s.toLowerCase().replace(/_/g, "-");
+    if (low === "tr" || low.indexOf("tr-") === 0) return "tr";
+    if (low === "en" || low.indexOf("en-") === 0) return "en";
+    if (isLegacyLocalePrefix(low.split("-")[0]) || low === "pt-br" || /^pt\b/i.test(low)) return "en";
     return null;
   }
 
   function segmentToBcp47(seg) {
-    if (seg === "pt-br") return "pt-BR";
-    return seg;
+    return seg === "tr" ? "tr" : "en";
   }
 
   function pathnameNoQuery() {
@@ -50,7 +75,7 @@
     var p = String(pathname || "").replace(/^\/+|\/+$/g, "");
     if (!p) return null;
     var first = p.split("/")[0].toLowerCase();
-    return isLocaleSegment(first) ? first : null;
+    return isCanonicalLocaleSegment(first) ? first : null;
   }
 
   /**
@@ -63,7 +88,7 @@
     if (path === "" || path === "/") return "/index.html";
     var parts = path.replace(/^\/+/, "").split("/").filter(Boolean);
     if (!parts.length) return "/index.html";
-    if (isLocaleSegment(parts[0].toLowerCase())) {
+    if (isPathLocalePrefix(parts[0].toLowerCase())) {
       var rest = parts.slice(1);
       if (!rest.length) return "/index.html";
       return "/" + rest.join("/");
@@ -72,7 +97,7 @@
   }
 
   function buildAbsoluteUrl(localeSeg, logicalPath) {
-    var seg = isLocaleSegment(localeSeg) ? localeSeg : DEFAULT_SEGMENT;
+    var seg = isCanonicalLocaleSegment(localeSeg) ? localeSeg.toLowerCase() : DEFAULT_SEGMENT;
     var log = logicalPath || "/index.html";
     if (log.charAt(0) !== "/") log = "/" + log;
     return ORIGIN + "/" + seg + log;
@@ -81,7 +106,7 @@
   function persistSegment(seg) {
     var s = normalizeStorageToSegment(seg) || DEFAULT_SEGMENT;
     try {
-      global.localStorage.setItem(STORAGE_KEY, segmentToBcp47(s) === "pt-BR" ? "pt-BR" : s);
+      global.localStorage.setItem(STORAGE_KEY, s);
     } catch (e) {}
     return s;
   }
@@ -113,12 +138,15 @@
     }
   }
 
+  redirectLegacyPathPrefixIfNeeded();
+
   global.GezegenselSitePath = {
     ORIGIN: ORIGIN,
-    LOCALE_SEGMENTS: LOCALE_SEGMENTS,
+    /** @deprecated Eski kod uyumu — yalnızca tr, en */
+    LOCALE_SEGMENTS: CANONICAL_LOCALES.slice(),
     DEFAULT_SEGMENT: DEFAULT_SEGMENT,
     STORAGE_KEY: STORAGE_KEY,
-    isLocaleSegment: isLocaleSegment,
+    isLocaleSegment: isCanonicalLocaleSegment,
     normalizeStorageToSegment: normalizeStorageToSegment,
     segmentToBcp47: segmentToBcp47,
     getLocaleSegmentFromPathname: getLocaleSegmentFromPathname,

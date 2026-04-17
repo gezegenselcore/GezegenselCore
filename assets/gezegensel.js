@@ -1,21 +1,17 @@
 /**
- * GezegenselCore statik site — dil: Aura ile aynı 8 kod (path: tr … pt-br … ar).
- * URL /{locale}/… altında: dil düğmeleri aynı mantıksal sayfanın başka dil URL’sine gider (EN fallback site-path ile).
+ * GezegenselCore statik site — yalnızca tr | en (path: /tr/…, /en/…).
+ * URL /{locale}/… altında: dil düğmeleri aynı mantıksal sayfanın başka dil URL’sine gider.
  * Kök eski sayfalar: yalnızca localStorage tabanlı görünürlük (path yokken).
  */
 (function () {
   var STORAGE_KEY = "gezegensel-lang";
-  var LOCALES = ["tr", "en", "de", "fr", "es", "it", "pt-br", "ar"];
+  var LOCALES = ["tr", "en"];
 
   function normalize(v) {
     if (!v || typeof v !== "string") return null;
-    var s = v.trim();
-    if (s === "pt-BR" || s.toLowerCase() === "pt-br" || s.toLowerCase() === "pt_br") return "pt-br";
-    if (/^pt\b/i.test(s)) return "pt-br";
-    var low = s.toLowerCase();
-    if (LOCALES.indexOf(low) >= 0) return low;
-    var base = low.split("-")[0];
-    if (LOCALES.indexOf(base) >= 0) return base;
+    var low = v.trim().toLowerCase().replace(/_/g, "-");
+    if (low === "tr" || low.indexOf("tr-") === 0) return "tr";
+    if (low === "en" || low.indexOf("en-") === 0) return "en";
     return null;
   }
 
@@ -56,9 +52,7 @@
     for (var i = 0; i < el.classList.length; i++) {
       var c = el.classList[i];
       if (c.indexOf("l10n-") === 0) {
-        var code = c.slice(5);
-        if (code === "pt-BR") return "pt-br";
-        return code;
+        return c.slice(5);
       }
     }
     return null;
@@ -122,18 +116,17 @@
   }
 
   function bcp47(ui) {
-    if (ui === "pt-br") return "pt-BR";
-    return ui;
+    return ui === "tr" ? "tr" : "en";
   }
 
   function applyLang(lang) {
     var ui = normalize(lang) || "en";
     try {
-      localStorage.setItem(STORAGE_KEY, ui === "pt-br" ? "pt-BR" : ui);
+      localStorage.setItem(STORAGE_KEY, ui === "tr" ? "tr" : "en");
     } catch (e) {}
 
     document.documentElement.lang = bcp47(ui);
-    document.documentElement.dir = ui === "ar" ? "rtl" : "ltr";
+    document.documentElement.dir = "ltr";
     document.documentElement.setAttribute("data-ui-locale", ui);
     document.documentElement.removeAttribute("data-boot-l10n");
 

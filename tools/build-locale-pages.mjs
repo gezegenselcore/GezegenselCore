@@ -1,16 +1,16 @@
 /**
- * Dil önekli statik sayfalar: /{tr|en|de|fr|es|it|pt-br|ar}/…
+ * Dil önekli statik sayfalar: yalnızca /tr/… ve /en/…
  * node tools/build-locale-pages.mjs
  */
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { MESSAGES } from "./i18n/messages/registry.mjs";
-import { expandI18n, injectRefollowLegalBanner } from "./i18n/expand.mjs";
+import { expandI18n } from "./i18n/expand.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
-const LOCALES = ["tr", "en", "de", "fr", "es", "it", "pt-br", "ar"];
+const LOCALES = ["tr", "en"];
 const ORIGIN = "https://gezegenselcore.com";
 
 const read = (p) => fs.readFileSync(p, "utf8");
@@ -20,12 +20,11 @@ const write = (p, c) => {
 };
 
 function hreflangBlock(logicalPath) {
-  const lines = LOCALES.map((loc) => {
-    const hreflang = loc === "pt-br" ? "pt-BR" : loc;
-    return `  <link rel="alternate" hreflang="${hreflang}" href="${ORIGIN}/${loc}${logicalPath}" />`;
-  });
-  lines.push(`  <link rel="alternate" hreflang="x-default" href="${ORIGIN}/en${logicalPath}" />`);
-  return lines.join("\n");
+  return [
+    `  <link rel="alternate" hreflang="tr" href="${ORIGIN}/tr${logicalPath}" />`,
+    `  <link rel="alternate" hreflang="en" href="${ORIGIN}/en${logicalPath}" />`,
+    `  <link rel="alternate" hreflang="x-default" href="${ORIGIN}/en${logicalPath}" />`,
+  ].join("\n");
 }
 
 function assetPrefix(relUnderLocale) {
@@ -48,11 +47,10 @@ function prependSiteScriptsFlex(html) {
   );
 }
 
-/** Statik SEO + RTL: her locale için <html lang> ve dir. */
+/** Statik SEO: yalnızca tr | en; metin yönü her zaman LTR. */
 function applyHtmlLocaleShell(html, locale) {
-  const htmlLang = locale === "pt-br" ? "pt-BR" : locale;
-  const dir = locale === "ar" ? "rtl" : "ltr";
-  return html.replace(/<html\s+[^>]*>/i, `<html lang="${htmlLang}" dir="${dir}">`);
+  const htmlLang = locale === "tr" ? "tr" : "en";
+  return html.replace(/<html\s+[^>]*>/i, `<html lang="${htmlLang}" dir="ltr">`);
 }
 
 function ensureAuraMasters() {
@@ -203,23 +201,11 @@ function writeSitemap() {
     entries.push({ loc, changefreq, priority });
   };
   push(`${ORIGIN}/`, "weekly", "1.0");
-  for (const p of [
-    "/privacy.html",
-    "/support.html",
-    "/pages/aura/support.html",
-    "/aura/privacy-policy.html",
-    "/aura/terms-of-use.html",
-  ]) {
-    push(ORIGIN + p, "monthly", "0.85");
-  }
   for (const loc of LOCALES) {
     for (const log of SITEMAP_LOGICAL_PATHS) {
       const pri = log.includes("/aura/") ? "0.95" : log.includes("refollow") ? "0.82" : "0.9";
       push(`${ORIGIN}/${loc}${log}`, "monthly", pri);
     }
-  }
-  for (const p of ["/pages/refollow/policies/privacy.html", "/pages/refollow/policies/terms.html", "/pages/refollow/policies/support.html"]) {
-    push(ORIGIN + p, "monthly", "0.8");
   }
   const seen = new Set();
   const unique = entries.filter((e) => {
@@ -253,16 +239,13 @@ function main() {
   const rfSupport = read(path.join(ROOT, "pages", "refollow", "policies", "support.html"));
 
   for (const loc of LOCALES) {
-    let indexOut = processInnerPage(expandI18n(indexMaster, loc, MESSAGES), "index.html", loc, "/index.html");
-    indexOut = indexOut.replace(/data-lang="pt-BR"/g, 'data-lang="pt-br"');
+    const indexOut = processInnerPage(expandI18n(indexMaster, loc, MESSAGES), "index.html", loc, "/index.html");
     write(path.join(ROOT, loc, "index.html"), indexOut);
 
-    let priv = processInnerPage(expandI18n(privacyMaster, loc, MESSAGES), "privacy.html", loc, "/privacy.html");
-    priv = priv.replace(/data-lang="pt-BR"/g, 'data-lang="pt-br"');
+    const priv = processInnerPage(expandI18n(privacyMaster, loc, MESSAGES), "privacy.html", loc, "/privacy.html");
     write(path.join(ROOT, loc, "privacy.html"), priv);
 
-    let sup = processInnerPage(expandI18n(supportMaster, loc, MESSAGES), "support.html", loc, "/support.html");
-    sup = sup.replace(/data-lang="pt-BR"/g, 'data-lang="pt-br"');
+    const sup = processInnerPage(expandI18n(supportMaster, loc, MESSAGES), "support.html", loc, "/support.html");
     write(path.join(ROOT, loc, "support.html"), sup);
 
     write(path.join(ROOT, loc, "aura", "privacy-policy.html"), processAuraLegal(auraPrivacy, loc, "/aura/privacy-policy.html"));
@@ -270,23 +253,23 @@ function main() {
     write(path.join(ROOT, loc, "pages", "aura", "support.html"), processAuraLegal(auraSupport, loc, "/pages/aura/support.html"));
 
     const rfP = processInnerPage(
-      injectRefollowLegalBanner(expandI18n(refollowForLocale(rfPrivacy), loc, MESSAGES), loc, MESSAGES),
+      expandI18n(refollowForLocale(rfPrivacy), loc, MESSAGES),
       "pages/refollow/policies/privacy.html",
       loc,
       "/pages/refollow/policies/privacy.html"
-    ).replace(/data-lang="pt-BR"/g, 'data-lang="pt-br"');
+    );
     const rfT = processInnerPage(
-      injectRefollowLegalBanner(expandI18n(refollowForLocale(rfTerms), loc, MESSAGES), loc, MESSAGES),
+      expandI18n(refollowForLocale(rfTerms), loc, MESSAGES),
       "pages/refollow/policies/terms.html",
       loc,
       "/pages/refollow/policies/terms.html"
-    ).replace(/data-lang="pt-BR"/g, 'data-lang="pt-br"');
+    );
     const rfS = processInnerPage(
-      injectRefollowLegalBanner(expandI18n(refollowForLocale(rfSupport), loc, MESSAGES), loc, MESSAGES),
+      expandI18n(refollowForLocale(rfSupport), loc, MESSAGES),
       "pages/refollow/policies/support.html",
       loc,
       "/pages/refollow/policies/support.html"
-    ).replace(/data-lang="pt-BR"/g, 'data-lang="pt-br"');
+    );
     write(path.join(ROOT, loc, "pages", "refollow", "policies", "privacy.html"), rfP);
     write(path.join(ROOT, loc, "pages", "refollow", "policies", "terms.html"), rfT);
     write(path.join(ROOT, loc, "pages", "refollow", "policies", "support.html"), rfS);

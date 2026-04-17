@@ -1,18 +1,14 @@
 /* Sync: <html lang> + data-boot-l10n (tr|en) before first paint — gezegensel.js tam seçimi uygular.
- * Dil URL öneki: /tr/ … /pt-br/ … /ar/ — varsa öncelikli; depolama pt-BR / pt-br uyumlu. */
+ * Dil URL öneki: yalnızca /tr/ … /en/ … */
 (function () {
-  var LOCALE_SEGMENTS = ["tr", "en", "de", "fr", "es", "it", "pt-br", "ar"];
+  var LOCALE_SEGMENTS = ["tr", "en"];
   var STORAGE_KEY = "gezegensel-lang";
 
   function normalize(v) {
     if (!v || typeof v !== "string") return null;
-    var s = v.trim();
-    if (s === "pt-BR" || s.toLowerCase() === "pt-br" || s.toLowerCase() === "pt_br") return "pt-br";
-    if (/^pt\b/i.test(s)) return "pt-br";
-    var low = s.toLowerCase();
-    if (LOCALE_SEGMENTS.indexOf(low) >= 0) return low;
-    var base = low.split("-")[0];
-    if (LOCALE_SEGMENTS.indexOf(base) >= 0) return base;
+    var low = v.trim().toLowerCase().replace(/_/g, "-");
+    if (low === "tr" || low.indexOf("tr-") === 0) return "tr";
+    if (low === "en" || low.indexOf("en-") === 0) return "en";
     return null;
   }
 
@@ -45,8 +41,7 @@
   }
 
   function bcp47(ui) {
-    if (ui === "pt-br") return "pt-BR";
-    return ui;
+    return ui === "tr" ? "tr" : "en";
   }
 
   var ui = null;
@@ -59,5 +54,5 @@
   document.documentElement.lang = bcp47(ui);
   document.documentElement.setAttribute("data-ui-locale", ui);
   document.documentElement.setAttribute("data-boot-l10n", bootContentLang(ui));
-  document.documentElement.dir = ui === "ar" ? "rtl" : "ltr";
+  document.documentElement.dir = "ltr";
 })();
