@@ -18,7 +18,7 @@ node tools/build-locale-pages.mjs
 
 ## Tema ve dil
 
-- **Tema:** `assets/freelancer/`; renkler `#00f2fe` / `#0d2137`; üstüne `assets/gezegensel.css`.
+- **Tema:** `assets/freelancer/`; zemin / hero duman grisi (`#d4d9e0` vb.) + `#0d2137` metin; üstüne `assets/gezegensel.css` ve `assets/gc-design-system.css`.
 - **Betikler:** `lang-boot.js` (`data-ui-locale`), `gezegensel.js` (navbar; path altında dil düğmesi **sayfa değiştirir**), **`site-path.js`**, AURA sayfalarında `aura-legal-pages.js`.
 - **Diller:** Yalnızca **`tr`** ve **`en`**; `hreflang` yalnızca `tr`, `en`, `x-default` (varsayılan EN).
 

@@ -50,15 +50,15 @@
 
 .aura-legal-picker button[aria-pressed="true"] {
   background: #0d2137;
-  color: #e0f2fe;
+  color: #eceef2;
   border-color: #0d2137;
 }
 
 .aura-legal-fallback-banner {
   font-size: 0.88rem;
   color: #334155;
-  background: #eff6ff;
-  border: 1px solid #bfdbfe;
+  background: #f1f3f5;
+  border: 1px solid #cbd5e1;
   border-radius: 0.5rem;
   padding: 0.65rem 0.85rem;
   margin: 0 0 1rem;

@@ -5,7 +5,10 @@
 :root {
   --gc-ink: #0d2137;
   --gc-ink-muted: #475569;
-  --gc-accent: #00f2fe;
+  /* Eski turkuaz yerine: duman grisi kabuk + bağlantı için koyu arduvaz */
+  --gc-accent: #4a5568;
+  --gc-hero-bg: #d4d9e0;
+  --gc-hero-fill: #b4bcc8;
   --gc-surface: #f8fafc;
   --gc-max-read: 48rem;
   --gc-space-section: 2.5rem;

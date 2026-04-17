@@ -18,7 +18,7 @@ Tüm kullanıcı sayfaları aynı **görsel dil**i paylaşır: Bootstrap Freelan
 |--------|----------|
 | `gc-site` | `body` — dikey flex, footer alta itilir. |
 | `gc-main` | Ana içerik sarmalayıcı (`<main>`) — `flex: 1`. |
-| `gc-page-hero` | Turkuaz üst bant (`section.success.first` ile birlikte) — hub / iç sayfa / AURA / ReFollow hero hizası. |
+| `gc-page-hero` | Duman grisi üst bant (`section.success.first` ile birlikte; zemin `#d4d9e0` — `gezegensel.css` / tema) — hub / iç sayfa / AURA / ReFollow hero hizası. |
 | `gc-site-footer` | `<footer>` — ince üst border, tüm sayfalarda aynı aile. |
 | `gc-prose` / `gc-legal` | Uzun metin ve hukuk düzeni (`gezegensel.css` ile birlikte). |
 

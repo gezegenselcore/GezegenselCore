@@ -28,7 +28,7 @@ html {
 
 /* Ana sayfa — Hakkında (okunabilirlik + zemin) */
 .index .gc-section-about {
-  background: linear-gradient(180deg, #f2fafc 0%, #e2f2f7 45%, #d7ebf2 100%);
+  background: linear-gradient(180deg, #f5f6f8 0%, #ebecef 45%, #dfe2e7 100%);
   color: #0d2137;
 }
 .gc-about-prose {
@@ -78,7 +78,7 @@ html {
 
 /* Ana sayfa — Uygulamalar zemin + dikey yığın */
 .index .gc-section-apps {
-  background: linear-gradient(180deg, #d7ebf2 0%, #cce5ef 50%, #c2dfea 100%);
+  background: linear-gradient(180deg, #dfe2e7 0%, #d4d8df 50%, #cacfd7 100%);
   color: #0d2137;
 }
 .gc-app-stack-wrap {
@@ -165,12 +165,18 @@ hr.star-primary:after {
   font-weight: 900;
 }
 
-/* Açık cyan (#00f2fe) üzerinde koyu metin — Freelancer varsayılanı beyaz metin teal üzerinde; bizim primary daha açık */
+/* Duman grisi hero (#d4d9e0) üzerinde koyu metin */
 header,
 header .intro-text .name,
 header .intro-text .skills,
 section.success {
   color: #0d2137 !important;
+}
+header {
+  background: #d4d9e0 !important;
+}
+section.success {
+  background: #d4d9e0 !important;
 }
 header a,
 section.success a {
@@ -182,14 +188,14 @@ hr.star-light {
 }
 hr.star-light:after {
   color: #0d2137 !important;
-  background-color: #00f2fe !important;
+  background-color: #d4d9e0 !important;
 }
 section.success hr.star-primary {
   border-color: #0d2137 !important;
 }
 section.success hr.star-primary:after {
   color: #0d2137 !important;
-  background-color: #00f2fe !important;
+  background-color: #d4d9e0 !important;
 }
 
 /* Navbar dil düğmeleri (TR / EN) */
@@ -219,8 +225,8 @@ section.success hr.star-primary:after {
   color: #0d2137;
 }
 .gc-lang-btn[aria-pressed="true"] {
-  background: #00f2fe !important;
-  border-color: #00f2fe !important;
+  background: #b4bcc8 !important;
+  border-color: #9aa3b0 !important;
   color: #0d2137 !important;
 }
 
@@ -263,7 +269,7 @@ section.success hr.star-primary:after {
   margin: 1rem 0;
 }
 .gc-prose .callout {
-  background: rgba(0, 242, 254, 0.12);
+  background: rgba(100, 116, 139, 0.12);
   border-left: 4px solid #0d2137;
   padding: 0.85rem 1rem;
   margin: 1rem 0;
@@ -273,7 +279,7 @@ section.first {
   padding-top: 120px;
 }
 
-/* Yalnız iç sayfalar (inner-page): turkuaz banttaki ana sayfa — düz metin, kutu/renk yok */
+/* Yalnız iç sayfalar (inner-page): hero (duman grisi) banttaki ana sayfa — düz metin, kutu/renk yok */
 .inner-page section.success.first .gc-breadcrumb-row {
   margin: 0 0 14px;
   text-align: left;
@@ -326,7 +332,7 @@ section.first {
   }
 }
 
-/* Ana sayfa: header cyan iken nav koyu metin */
+/* Ana sayfa: header duman grisi iken nav koyu metin */
 .index .navbar-default:not(.navbar-shrink) .navbar-brand,
 .index .navbar-default:not(.navbar-shrink) .navbar-nav > li > a {
   color: #0d2137 !important;
@@ -420,7 +426,7 @@ header .gc-hero-icon {
   text-align: center;
   padding: 28px 22px 32px;
   margin-bottom: 28px;
-  background: #b0d9e8;
+  background: #ccd2da;
   border-radius: 14px;
   border: 1px solid rgba(13, 33, 55, 0.14);
   box-shadow: 0 6px 28px rgba(13, 33, 55, 0.1);
@@ -483,7 +489,7 @@ header .gc-hero-icon {
   margin-right: 4px;
 }
 
-/* Politikalar: cyan bant üzerinde kartlar */
+/* Politikalar: duman grisi bant üzerinde kartlar */
 section.success code {
   background: rgba(13, 33, 55, 0.08);
   color: #0d2137;
@@ -508,12 +514,12 @@ section.success code {
   border: 1px solid rgba(13, 33, 55, 0.16) !important;
   border-radius: 14px !important;
   box-shadow: 0 8px 28px rgba(13, 33, 55, 0.12) !important;
-  background: #9fd4e5 !important;
+  background: #c8ced6 !important;
   overflow: hidden;
   margin-bottom: 0;
 }
 .gc-policy-card .panel-heading {
-  background: #7fc4da !important;
+  background: #b8bfc8 !important;
   border-bottom: 1px solid rgba(13, 33, 55, 0.12) !important;
 }
 .gc-policy-card-head {
@@ -546,20 +552,20 @@ section.success code {
 .gc-policy-card .list-group-item {
   border-color: rgba(13, 33, 55, 0.1) !important;
   padding: 14px 20px !important;
-  background: #b8e6f0 !important;
+  background: #dce0e6 !important;
 }
 .gc-policy-card .list-group-item a {
   font-weight: 600;
-  color: #0c4a6e !important;
+  color: #1e3a5f !important;
   text-decoration: none !important;
 }
 .gc-policy-card .list-group-item a:hover,
 .gc-policy-card .list-group-item a:focus {
   text-decoration: underline !important;
-  color: #00a8b8 !important;
+  color: #0d2137 !important;
 }
 .gc-policy-card .panel-footer {
-  background: #8cc9de !important;
+  background: #bfc6cf !important;
   border-top: 1px solid rgba(13, 33, 55, 0.12) !important;
   text-align: center !important;
 }
@@ -585,12 +591,12 @@ section.success code {
   --gc-prose-fg: #1e293b;
   --gc-prose-heading: #0f172a;
   --gc-prose-border: #e2e8f0;
-  --gc-prose-bg: #eef6f9;
+  --gc-prose-bg: #eef0f3;
   --gc-prose-card: #ffffff;
 }
 
 .inner-page > section:not(.success) {
-  background: linear-gradient(180deg, var(--gc-prose-bg) 0%, #e8f0f5 100%);
+  background: linear-gradient(180deg, var(--gc-prose-bg) 0%, #e2e4e8 100%);
   padding-top: 2rem;
   padding-bottom: 3rem;
 }
@@ -689,20 +695,20 @@ section.success code {
 
 .gc-prose blockquote,
 .gc-prose .gc-prose-note {
-  border-left: 4px solid #0d9488;
+  border-left: 4px solid #64748b;
   padding: 0.85rem 1rem 0.9rem 1.1rem;
   margin: 1.25rem 0 1.35rem;
-  background: rgba(13, 148, 136, 0.08);
+  background: rgba(100, 116, 139, 0.1);
   border-radius: 0 8px 8px 0;
   font-size: 1rem;
   line-height: 1.65;
-  color: #134e4a;
+  color: #334155;
 }
 
 .gc-prose blockquote strong,
 .gc-prose .gc-prose-note strong {
   display: inline;
-  color: #0f766e;
+  color: #1e293b;
 }
 
 /* Eski Bootstrap gövdeli hukuk düzeni (referans); kanonik AURA metinleri /aura/*.html içinde gömülü CSS */
@@ -748,20 +754,20 @@ section.success code {
 
 .gc-prose .gc-support-lead a {
   text-decoration: none;
-  color: #0c4a6e;
+  color: #1e3a5f;
 }
 
 .gc-prose .gc-support-lead a:hover,
 .gc-prose .gc-support-lead a:focus {
   text-decoration: underline;
-  color: #0e7490;
+  color: #0d2137;
 }
 
 .gc-prose .policy-locale-tr h3:first-of-type,
 .gc-prose .policy-locale-en h3:first-of-type {
   margin-top: 0.25rem;
   padding-bottom: 0.35rem;
-  border-bottom: 2px solid rgba(13, 148, 136, 0.35);
+  border-bottom: 2px solid rgba(71, 85, 105, 0.4);
   font-size: 1.15rem;
   color: var(--gc-prose-heading);
 }
@@ -773,7 +779,7 @@ section.success code {
   padding-bottom: 0.45rem;
   margin-bottom: 1rem;
   border-top: none;
-  border-bottom: 2px solid rgba(13, 148, 136, 0.35);
+  border-bottom: 2px solid rgba(71, 85, 105, 0.4);
   font-size: 1.25rem;
 }
 
