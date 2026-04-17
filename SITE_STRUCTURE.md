@@ -23,8 +23,8 @@
 
 | Dosya | Canlı URL | Not |
 |-------|-----------|-----|
-| `aura/privacy-policy.html` | `https://gezegenselcore.com/aura/privacy-policy.html` | Google Play gizlilik + hesap silme (`#account-deletion`) için **tercih edilen** adres. İçerik `pages/aura/policies/privacy-policy.html` ile aynı gövde (TR/EN `article`, 1–13 numaralı bölümler); varlık yolları `../assets/…`, menü: destek, gizlilik özeti, **Kullanım Koşulları** (`aura/terms-of-use.html`). **Senkron:** Aura repodaki `legal-public/aura/privacy-policy.html` kaynak alınır; burada Bootstrap + `gezegensel.css` şablonu korunur. |
-| `aura/terms-of-use.html` | `https://gezegenselcore.com/aura/terms-of-use.html` | Mağaza / uygulama kamu **Kullanım Koşulları** (TR/EN tam metin). Özet sayfa: `pages/aura/policies/terms.html`. **Senkron:** Aura `legal-public/aura/terms-of-use.html` ile aynı hukuki metin; şablon `privacy-policy.html` ile hizalı. |
+| `aura/privacy-policy.html` | `https://gezegenselcore.com/aura/privacy-policy.html` | Google Play gizlilik + hesap silme (**`#account-deletion`**, TR §12) için **kanonik** adres. **Gövde:** Aura repodaki `legal-public/aura/privacy-policy.html` ile aynı tam metin (TR + EN, tek sayfa, gömülü sade CSS). Eski yol `pages/aura/policies/privacy-policy.html` → buraya yönlendirilir. |
+| `aura/terms-of-use.html` | `https://gezegenselcore.com/aura/terms-of-use.html` | Kamu **Kullanım Koşulları** (TR + EN). Aura `legal-public/aura/terms-of-use.html` ile senkron. Eski özet yolu `pages/aura/policies/terms.html` → buraya yönlendirilir. |
 
 ## `pages/aura/` · `pages/refollow/`
 
@@ -36,4 +36,4 @@ Kaynak repo ör. `gezegenselcore/gezegenselcore.github.io` — `main` kökten ya
 
 **Marka kökü (`index.html`):** AURA ve ReFollow tanıtım metinleri, `assets/gezegensel.css` ile ince stil; Freelancer / navbar script’lerine dokunulmadan güncellenir.
 
-Son güncelleme: 2026-04-16
+Son güncelleme: 2026-04-18
