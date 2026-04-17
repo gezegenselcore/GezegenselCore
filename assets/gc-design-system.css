@@ -284,3 +284,135 @@ section.success hr.star-primary:after {
 .floating-label-form-group-with-focus label {
   color: var(--gc-accent) !important;
 }
+
+/* =============================================================================
+   Mobil (≤767px): bölüm yüksekliği, başlık boyutu, hero, dil grubu, navbar sıkılığı
+   Kaynak sorunlar: Freelancer `section{padding:75px}`, `section h2{font-size:3em}`,
+   `hr.star-*` büyük margin; gezegensel `section.first` 120px; dil `margin-top:14px`.
+   ============================================================================= */
+@media (max-width: 767px) {
+  html {
+    scroll-padding-top: 72px;
+  }
+
+  /* Ana içerikteki tüm bölümler — 75px yerine sıkı dikey ritim */
+  main.gc-main > section {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+
+  main.gc-main > section#about {
+    padding-top: 1.65rem !important;
+  }
+
+  /* Freelancer dev H2 — “UYGULAMALAR” vb. */
+  main.gc-main section h2 {
+    font-size: 1.55rem !important;
+    line-height: 1.2 !important;
+    margin: 0 0 0.1rem !important;
+  }
+
+  hr.star-light,
+  hr.star-primary {
+    margin: 8px auto 12px !important;
+  }
+
+  /* Ana sayfa hero — üst boşluk ve isim satırı */
+  .index header .container {
+    padding-top: 52px !important;
+    padding-bottom: 1.25rem !important;
+  }
+
+  header .intro-text .name {
+    font-size: 1.55rem !important;
+    line-height: 1.12 !important;
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+  }
+
+  header .intro-text .skills {
+    font-size: 0.95rem !important;
+    line-height: 1.45 !important;
+    display: block;
+    max-width: 22rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .index header .gc-hero-icon {
+    max-width: 132px !important;
+    max-height: 132px !important;
+    width: 36vmin !important;
+    height: 36vmin !important;
+  }
+
+  /* #apps: başlık satırı ile kart satırı arası */
+  #apps .container > .row:first-child + .row {
+    margin-top: 0 !important;
+  }
+
+  #apps .gc-app-row {
+    margin-top: 0 !important;
+  }
+
+  #apps .gc-app-stack-wrap {
+    margin-top: 0.15rem !important;
+  }
+
+  /* İç sayfa üst bant */
+  body.inner-page section.success.first.gc-page-hero {
+    padding-top: 3.5rem !important;
+    padding-bottom: 1rem !important;
+  }
+
+  body.inner-page main > section:not(.success) {
+    padding-top: 1.25rem !important;
+    padding-bottom: 1.75rem !important;
+  }
+
+  /* Navbar gövdesi — kapalıyken gereksiz yükseklik azalsın */
+  .navbar.navbar-default.navbar-fixed-top {
+    min-height: 50px;
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+  }
+
+  .navbar.navbar-default.navbar-fixed-top.navbar-shrink {
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+  }
+
+  .navbar-default .navbar-brand {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 1.05rem !important;
+    line-height: 1.2 !important;
+  }
+
+  /* Dil: menü linklerinin altında tam genişlik satır (yüzen küçük blok olmasın) */
+  .navbar-default .navbar-nav > li.gc-lang-wrap {
+    float: none !important;
+    width: 100%;
+    display: block;
+    clear: both;
+    border-top: 1px solid rgba(10, 22, 40, 0.1);
+    margin-top: 0.35rem;
+    padding-top: 0.4rem;
+    padding-bottom: 0.15rem;
+  }
+
+  .navbar-default .navbar-nav > li.gc-lang-wrap .gc-lang-group {
+    width: 100%;
+    max-width: none !important;
+    justify-content: flex-start !important;
+    margin-top: 0 !important;
+    margin-left: 0 !important;
+    padding: 4px 15px 10px;
+    box-sizing: border-box;
+  }
+
+  .navbar-collapse .navbar-nav > li > a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}

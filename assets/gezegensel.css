@@ -222,8 +222,14 @@ hr.star-primary:after {
   margin: 1rem 0;
 }
 
+/* İç sayfa hero üst boşluğu gc-design-system ile; 120px mobilde dev boşluk üretirdi */
 section.first {
   padding-top: 120px;
+}
+@media (max-width: 767px) {
+  section.first {
+    padding-top: 0;
+  }
 }
 
 /* Yalnız iç sayfalar (inner-page): hero (duman grisi) banttaki ana sayfa — düz metin, kutu/renk yok */
@@ -272,12 +278,7 @@ section.first {
   }
 }
 
-@media (max-width: 767px) {
-  .gc-lang-group {
-    margin-top: 0;
-    padding: 10px 15px;
-  }
-}
+/* Dil grubu mobil düzeni: gc-design-system (.gc-lang-wrap toolbar) */
 
 /* Ana sayfa: header duman grisi iken nav koyu metin */
 .index .navbar-default:not(.navbar-shrink) .navbar-brand,

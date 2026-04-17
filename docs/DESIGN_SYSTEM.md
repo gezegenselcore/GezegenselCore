@@ -37,6 +37,14 @@ Yükleme sırası (tipik): `bootstrap` → `main.css` → `gezegensel.css` → *
 | `--gc-prose-note-bg`, `--gc-prose-note-border` | Alıntı / not kutusu. |
 | `--gc-border-subtle`, `--gc-border-strong` | Ayırıcılar. |
 
+## Mobil dikey ritim (≤767px)
+
+- `main.gc-main > section`: Freelancer’ın **75px** bölüm padding’i yerine **~1.5rem** (`gc-design-system.css`).
+- Bölüm **h2**: **~1.55rem** (Freelancer **3em** dev başlığı iptal).
+- **hr.star-*** margin mobilde küçültüldü; **#apps** başlık satırı ↔ kart satırı arası **margin sıfır**.
+- Ana **header** `.container` ve **inner hero** üst/alt padding mobilde ayrı sıkıldı; **`section.first`** üst 120px mobilde **0** (`gezegensel.css`).
+- **Dil**: `.gc-lang-wrap` tam genişlik, üst border, `.gc-lang-group` `margin-top` sıfır (`gc-design-system.css`).
+
 ## Katmanlama (mobil / kaydırma)
 
 - **Navbar** üstte opak beyaz zemin (`gezegensel.css`); yarı saydam bar kaydırırken metnin “soluk üst katman” altında kalması hissi oluşturmaz.
