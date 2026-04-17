@@ -83,7 +83,7 @@ body.gc-site {
   overflow-x: hidden;
 }
 
-/* Ana içerik: sabit navbar altında kendi stacking bağlamı; hero altı metinlerle çakışma olmasın */
+/* Ana içerik: sabit navbar altında gövde genişliği / taşma kontrolü */
 main.gc-main {
   flex: 1 0 auto;
   width: 100%;
@@ -91,12 +91,111 @@ main.gc-main {
   min-height: 0;
   position: relative;
   z-index: 0;
-  isolation: isolate;
 }
 
 /* Bootstrap navbar katmanı (içerik asla menünün altında “soluk” katmana binmesin diye opak zemin gezegensel.css’te) */
 .navbar.navbar-default.navbar-fixed-top {
   z-index: 1030;
+}
+
+/* Dil TR/EN: collapse dışında sabit satır (mobil); md+ üst barda logo | menü | dil */
+.gc-navbar-split::before,
+.gc-navbar-split::after {
+  content: " ";
+  display: table;
+}
+.gc-navbar-split::after {
+  clear: both;
+}
+
+.gc-navbar-toolbar {
+  box-sizing: border-box;
+}
+
+.gc-navbar-toolbar .gc-lang-group,
+.gc-navbar-toolbar .aura-legal-picker.gc-lang-group {
+  margin-top: 0;
+  margin-left: 0;
+}
+
+@media (max-width: 767px) {
+  .gc-navbar-split .gc-navbar-toolbar {
+    float: none;
+    width: 100%;
+    clear: both;
+    border-bottom: 1px solid var(--gc-border-subtle);
+    padding: 6px 15px 8px;
+  }
+
+  .gc-navbar-split .gc-navbar-toolbar .gc-lang-group,
+  .gc-navbar-split .gc-navbar-toolbar .aura-legal-picker.gc-lang-group {
+    width: 100%;
+    max-width: none !important;
+    justify-content: flex-start !important;
+    margin: 0 !important;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .gc-navbar-split .navbar-collapse {
+    clear: both;
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  .gc-navbar-split {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .gc-navbar-split > .navbar-header {
+    float: none;
+    order: 1;
+    flex: 0 0 auto;
+    margin-right: auto;
+  }
+
+  .gc-navbar-split > .navbar-collapse {
+    float: none !important;
+    order: 2;
+    flex: 1 1 auto;
+    width: auto !important;
+    min-width: 0;
+    clear: none !important;
+    border-top: 0;
+    box-shadow: none;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .gc-navbar-split > .navbar-collapse.collapse {
+    display: block !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    visibility: visible !important;
+  }
+
+  .gc-navbar-split > .gc-navbar-toolbar {
+    float: none;
+    order: 3;
+    flex: 0 0 auto;
+    width: auto;
+    clear: none;
+    border-bottom: 0;
+    padding: 0;
+    margin-left: 0.75rem;
+  }
+
+  .gc-navbar-split > .gc-navbar-toolbar .gc-lang-group,
+  .gc-navbar-split > .gc-navbar-toolbar .aura-legal-picker.gc-lang-group {
+    width: auto;
+    max-width: 15rem;
+    justify-content: flex-end;
+  }
 }
 
 .gc-site-footer {
@@ -180,7 +279,6 @@ footer.gc-site-footer a:active {
 header,
 section.success {
   position: relative;
-  isolation: isolate;
   color: var(--gc-hero-text) !important;
   background: linear-gradient(168deg, var(--gc-hero-bg) 0%, var(--gc-hero-bg-2) 100%) !important;
 }
@@ -268,10 +366,10 @@ section.success hr.star-primary:after {
 }
 
 @media (max-width: 767px) {
-  .navbar .aura-legal-picker {
+  .gc-navbar-toolbar .aura-legal-picker {
     width: 100%;
     justify-content: flex-start;
-    margin-top: 0.35rem;
+    margin-top: 0;
   }
 }
 
@@ -346,9 +444,10 @@ section.success hr.star-primary:after {
     height: 36vmin !important;
   }
 
-  /* #apps: başlık satırı ile kart satırı arası */
-  #apps .container > .row:first-child + .row {
-    margin-top: 0 !important;
+  /* #apps: tek .row içinde başlık + kartlar — aralık sıkı */
+  #apps .gc-apps-head-col {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
   }
 
   #apps .gc-app-row {
@@ -387,28 +486,6 @@ section.success hr.star-primary:after {
     padding-bottom: 10px;
     font-size: 1.05rem !important;
     line-height: 1.2 !important;
-  }
-
-  /* Dil: menü linklerinin altında tam genişlik satır (yüzen küçük blok olmasın) */
-  .navbar-default .navbar-nav > li.gc-lang-wrap {
-    float: none !important;
-    width: 100%;
-    display: block;
-    clear: both;
-    border-top: 1px solid rgba(10, 22, 40, 0.1);
-    margin-top: 0.35rem;
-    padding-top: 0.4rem;
-    padding-bottom: 0.15rem;
-  }
-
-  .navbar-default .navbar-nav > li.gc-lang-wrap .gc-lang-group {
-    width: 100%;
-    max-width: none !important;
-    justify-content: flex-start !important;
-    margin-top: 0 !important;
-    margin-left: 0 !important;
-    padding: 4px 15px 10px;
-    box-sizing: border-box;
   }
 
   .navbar-collapse .navbar-nav > li > a {
