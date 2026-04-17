@@ -1,51 +1,57 @@
 # gezegenselcore.com — dosya haritası
 
-**AURA public legal — tek kaynak (canonical):** Yalnız şu üç URL tam hukuki / destek metnini taşır: `/aura/privacy-policy.html`, `/aura/terms-of-use.html`, `/pages/aura/support.html`. Başka bir yolda AURA hukuk gövdesi yoktur.
+**Çok dilli kanonik yollar:** Asıl içerik `/{locale}/…` altında (`locale` ∈ `tr`, `en`, `de`, `fr`, `es`, `it`, `pt-br`, `ar`). Kök `index.html`, `privacy.html`, `support.html`, `aura/*.html`, `pages/aura/support.html` **yönlendirme** (kullanıcı diline göre `/{locale}/…`). Ayrıntı: **`docs/README.md`**, **`docs/APP_WEB_ALIGNMENT.md`**.
 
-**English:** Only these canonical legal URLs are used. Legacy paths under `/pages/aura/policies/` are redirect stubs (meta refresh + click-through link); they do not duplicate policy text.
+**AURA kamu hukuk — tam metin:** `tools/templates/aura-privacy.master.html`, `aura-terms.master.html`, `aura-support.master.html` (ilk `node tools/build-locale-pages.mjs` çalıştırmasında mevcut siteden kopyalanır). Üretilen canlı dosyalar: `/{locale}/aura/privacy-policy.html`, `/{locale}/aura/terms-of-use.html`, `/{locale}/pages/aura/support.html`.
 
-**Tema:** `D:\GezegenselCore\Theme` altındaki **Freelancer (Jekyll)** zip’inden derlenen statik varlıklar — `assets/freelancer/` (`bootstrap.min.css`, `css/main.css`, `js/*`, `img/*`, Font Awesome). Renkler zip yerine marka paleti: `primary` **#00f2fe**, `secondary` **#0d2137** (`main.css` içinde liquid yerine sabitlenmiş). Üzerine ince katman: `assets/gezegensel.css` (navbar + çoklu dil, iç sayfa metinleri).
+**English:** Legacy paths without `/{locale}/` redirect to the localized URL; `x-default` hreflang points to `en`. See `assets/site-path.js`.
 
-**Dil (marka sitesi):** `assets/lang-boot.js` (ilk boyama: `html[lang]`, `data-boot-l10n` = `tr` \| `en`) + `assets/gezegensel.js` — navbar’da **8 dil** (`tr`, `en`, `de`, `fr`, `es`, `it`, `pt-BR`, `ar`), tercih **`localStorage` → `gezegensel-lang`** (Aura uygulaması `SUPPORTED_LANGUAGES` ile aynı kodlar). Sayfa içi `l10n-*` kardeşleri: seçilen dil varsa o metin, yoksa **TR**, aksi **EN**. **AURA kanonik hukuk HTML** (`aura/*.html`, `pages/aura/support.html`) ayrıca `aura-legal-pages.js` / `aura-legal-pages.css`: tam gövde yalnız **TR+EN**; diğer seçimlerde **EN** + kısa uyarı bandı.
+**Tema:** `assets/freelancer/` (Bootstrap 3 + Freelancer). Marka katmanı: `assets/gezegensel.css`, `assets/lang-boot.js`, `assets/gezegensel.js`, **`assets/site-path.js`**, `assets/legacy-path-redirect.js`, `assets/root-locale-redirect.js`. AURA hukuk: `assets/aura-legal-pages.{js,css}`.
 
 ## Kök (`/`)
 
 | Dosya / klasör | Açıklama |
-|----------------|----------|
-| `index.html` | Ana sayfa (`#about`, `#apps`, `#policies` — uygulama/politika kartları dikey ortalı; `assets/gezegensel.css` tema zeminleri) |
-| `privacy.html`, `support.html` | Site gizlilik / destek |
-| `assets/freelancer/` | Freelancer zip’ten kopyalanan CSS/JS/img/FA |
-| `assets/icons/` | `Theme/icons` kaynaklı uygulama ve marka görselleri (deploy için burada tutulur) |
-| `assets/gezegensel.css` | Çoklu dil (`data-boot-l10n`, `l10n-*`) / `#content-tr`·`#content-en` (varsa) / iç sayfa ince ayar |
-| `assets/gezegensel.js` | Dil seçici + başlık senkronu |
-| `assets/lang-boot.js` | Erken `html[lang]` + `data-boot-l10n` (ilk boyama) |
-| `assets/aura-legal-pages.js`, `assets/aura-legal-pages.css` | AURA kanonik hukuk / destek HTML (8 dil seçici; gövde TR+EN, diğerleri EN + uyarı) |
-| `CNAME` | `gezegenselcore.com` |
-| `app-ads.txt` | Reklam doğrulama |
-| `README.md` | Repo + GitHub Pages notları |
+|-----------------|----------|
+| `index.html` | **Yönlendirme** → `/{locale}/index.html` (`root-locale-redirect.js`). |
+| `privacy.html`, `support.html` | **Yönlendirme** → `/{locale}/privacy.html` vb. |
+| `assets/` | Ortak JS/CSS; yukarıdaki çözümleyiciler. |
+| `tools/build-locale-pages.mjs` | Locale ağacını üretir. |
+| `tools/templates/` | `index.master.html`, `privacy.master.html`, `support.master.html`, `aura-*.master.html`. |
+| `docs/` | Site mimarisi ve Aura hizalama belgeleri. |
 
-## `aura/` (AURA — mağaza kamu URL)
+## `/{locale}/` (ör. `en/`, `tr/`, `pt-br/`)
 
-| Dosya | Canlı URL | Not |
-|-------|-----------|-----|
-| `aura/privacy-policy.html` | `https://gezegenselcore.com/aura/privacy-policy.html` | Google Play gizlilik + hesap silme (**`#account-deletion`** TR §12, EN §12 **`#account-deletion-en`**) için **kanonik** adres. **Gövde:** Aura `legal-public/aura/privacy-policy.html` ile aynı; üstte 8 dil şeridi (`aura-legal-pages.*`). |
-| `aura/terms-of-use.html` | `https://gezegenselcore.com/aura/terms-of-use.html` | Kamu **Kullanım Koşulları** (TR + EN). Aura `legal-public/aura/terms-of-use.html` ile senkron. |
+| Yol | Açıklama |
+|-----|----------|
+| `{locale}/index.html` | Ana hub (CTA, politikalar). |
+| `{locale}/privacy.html`, `support.html` | Site gizlilik / destek. |
+| `{locale}/aura/privacy-policy.html`, `terms-of-use.html` | AURA hukuk (8 dil şeridi; gövde TR+EN). |
+| `{locale}/pages/aura/support.html` | AURA destek. |
+| `{locale}/pages/refollow/policies/*.html` | ReFollow politikaları. |
+
+Varlık yolları: bir seviye `../assets/` (`en/index.html`); iç içe sayfalar için çoklu `../`.
+
+## `aura/` (kök — legacy)
+
+| Dosya | Davranış |
+|-------|----------|
+| `privacy-policy.html`, `terms-of-use.html` | **Yönlendirme** stub → `/{locale}/aura/…` |
 
 ## `pages/aura/`
 
-| Dosya | Canlı URL | Not |
-|-------|-----------|-----|
-| `pages/aura/support.html` | `https://gezegenselcore.com/pages/aura/support.html` | AURA **destek** tam metni (TR + EN gövde; üstte 8 dil, `aura-legal-pages.*`). Aura `legal-public/aura/support.html` ile senkron. |
-| `pages/aura/policies/*.html` | `/pages/aura/policies/…` | Yalnızca **yönlendirme stub** (`meta refresh` + tıklanabilir link). Hukuki gövde yok; kanonik `/aura/*.html`. Açıklama: `pages/aura/policies/README.md`. |
+| Dosya | Davranış |
+|-------|----------|
+| `support.html` | **Yönlendirme** stub. |
+| `policies/*.html` | **Yönlendirme** stub → locale’li kanonik. |
 
-## `pages/refollow/`
+## `pages/refollow/` (kök)
 
-Uygulama HTML’leri; **Bootstrap 3** üst çubuk (`navbar`), sol üst görünen marka **Gezegensel Core** (boşluklu) → kök `index.html`. ReFollow politika sayfaları bu klasörde. Varlıklar: `../../../assets/freelancer/…`, `../../../assets/icons/…`, `../../../assets/gezegensel.css`.
+Orijinal `pages/refollow/policies/*.html` **kaynak**; build çıktısı `/{locale}/pages/refollow/…` altında çoğaltılır. Kök dosyalar GitHub’da kalır (derleme sırasında üzerine yazılmaz).
 
-## Yayın (GitHub Pages)
+## Yayın
 
-Kaynak repo ör. `gezegenselcore/gezegenselcore.github.io` — `main` kökten yayın; `CNAME` özel alanı işaret eder. Push sonrası birkaç dakika içinde `https://gezegenselcore.com` güncellenir.
+`main` kökten GitHub Pages; `CNAME` → `gezegenselcore.com`. `sitemap.xml` tüm locale URL’lerini listeler.
 
-**Marka kökü (`index.html`):** AURA ve ReFollow tanıtım metinleri, `assets/gezegensel.css` ile ince stil; Freelancer / navbar script’lerine dokunulmadan güncellenir.
+**Policy senkronu (Aura mobil repo):** `legal-public/aura/*.html` + `legal-public/assets/` bu yapı ile uyumlu tutulur; uygulama `src/utils/gezegenselLegalUrls.ts` ile tarayıcıda doğru `/{locale}/…` açar.
 
 Son güncelleme: 2026-04-18

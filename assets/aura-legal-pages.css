@@ -71,3 +71,14 @@ body.aura-legal-body {
 .aura-legal-body [hidden] {
   display: none !important;
 }
+
+/* Arapça kabuk (html dir=rtl): dil şeridi sağdan okunur; hukuk gövdesi article içinde LTR kalır */
+html[dir="rtl"] .aura-legal-picker {
+  justify-content: flex-start;
+  flex-direction: row-reverse;
+}
+
+html[dir="rtl"] .aura-legal-picker-label {
+  margin-right: 0;
+  margin-left: 0.35rem;
+}

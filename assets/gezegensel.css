@@ -124,6 +124,7 @@ html[data-boot-l10n="tr"] .l10n-de,
 html[data-boot-l10n="tr"] .l10n-fr,
 html[data-boot-l10n="tr"] .l10n-es,
 html[data-boot-l10n="tr"] .l10n-it,
+html[data-boot-l10n="tr"] .l10n-pt-br,
 html[data-boot-l10n="tr"] .l10n-pt-BR,
 html[data-boot-l10n="tr"] .l10n-ar,
 html[data-boot-l10n="tr"] .policy-locale-en {
@@ -134,9 +135,99 @@ html[data-boot-l10n="en"] .l10n-de,
 html[data-boot-l10n="en"] .l10n-fr,
 html[data-boot-l10n="en"] .l10n-es,
 html[data-boot-l10n="en"] .l10n-it,
+html[data-boot-l10n="en"] .l10n-pt-br,
 html[data-boot-l10n="en"] .l10n-pt-BR,
 html[data-boot-l10n="en"] .l10n-ar,
 html[data-boot-l10n="en"] .policy-locale-tr {
+  display: none !important;
+}
+
+/* İlk boyama: URL / tercih diline göre yalnız bir .l10n-* görünür (lang-boot data-ui-locale). */
+html[data-ui-locale="tr"] .l10n-en,
+html[data-ui-locale="tr"] .l10n-de,
+html[data-ui-locale="tr"] .l10n-fr,
+html[data-ui-locale="tr"] .l10n-es,
+html[data-ui-locale="tr"] .l10n-it,
+html[data-ui-locale="tr"] .l10n-pt-br,
+html[data-ui-locale="tr"] .l10n-pt-BR,
+html[data-ui-locale="tr"] .l10n-ar {
+  display: none !important;
+}
+html[data-ui-locale="en"] .l10n-tr,
+html[data-ui-locale="en"] .l10n-de,
+html[data-ui-locale="en"] .l10n-fr,
+html[data-ui-locale="en"] .l10n-es,
+html[data-ui-locale="en"] .l10n-it,
+html[data-ui-locale="en"] .l10n-pt-br,
+html[data-ui-locale="en"] .l10n-pt-BR,
+html[data-ui-locale="en"] .l10n-ar {
+  display: none !important;
+}
+html[data-ui-locale="de"] .l10n-tr,
+html[data-ui-locale="de"] .l10n-en,
+html[data-ui-locale="de"] .l10n-fr,
+html[data-ui-locale="de"] .l10n-es,
+html[data-ui-locale="de"] .l10n-it,
+html[data-ui-locale="de"] .l10n-pt-br,
+html[data-ui-locale="de"] .l10n-pt-BR,
+html[data-ui-locale="de"] .l10n-ar {
+  display: none !important;
+}
+html[data-ui-locale="fr"] .l10n-tr,
+html[data-ui-locale="fr"] .l10n-en,
+html[data-ui-locale="fr"] .l10n-de,
+html[data-ui-locale="fr"] .l10n-es,
+html[data-ui-locale="fr"] .l10n-it,
+html[data-ui-locale="fr"] .l10n-pt-br,
+html[data-ui-locale="fr"] .l10n-pt-BR,
+html[data-ui-locale="fr"] .l10n-ar {
+  display: none !important;
+}
+html[data-ui-locale="es"] .l10n-tr,
+html[data-ui-locale="es"] .l10n-en,
+html[data-ui-locale="es"] .l10n-de,
+html[data-ui-locale="es"] .l10n-fr,
+html[data-ui-locale="es"] .l10n-it,
+html[data-ui-locale="es"] .l10n-pt-br,
+html[data-ui-locale="es"] .l10n-pt-BR,
+html[data-ui-locale="es"] .l10n-ar {
+  display: none !important;
+}
+html[data-ui-locale="it"] .l10n-tr,
+html[data-ui-locale="it"] .l10n-en,
+html[data-ui-locale="it"] .l10n-de,
+html[data-ui-locale="it"] .l10n-fr,
+html[data-ui-locale="it"] .l10n-es,
+html[data-ui-locale="it"] .l10n-pt-br,
+html[data-ui-locale="it"] .l10n-pt-BR,
+html[data-ui-locale="it"] .l10n-ar {
+  display: none !important;
+}
+html[data-ui-locale="pt-br"] .l10n-tr,
+html[data-ui-locale="pt-br"] .l10n-en,
+html[data-ui-locale="pt-br"] .l10n-de,
+html[data-ui-locale="pt-br"] .l10n-fr,
+html[data-ui-locale="pt-br"] .l10n-es,
+html[data-ui-locale="pt-br"] .l10n-it,
+html[data-ui-locale="pt-br"] .l10n-ar {
+  display: none !important;
+}
+html[data-ui-locale="ar"] .l10n-tr,
+html[data-ui-locale="ar"] .l10n-en,
+html[data-ui-locale="ar"] .l10n-de,
+html[data-ui-locale="ar"] .l10n-fr,
+html[data-ui-locale="ar"] .l10n-es,
+html[data-ui-locale="ar"] .l10n-it,
+html[data-ui-locale="ar"] .l10n-pt-br,
+html[data-ui-locale="ar"] .l10n-pt-BR {
+  display: none !important;
+}
+
+/* policy-locale-tr / policy-locale-en: TR dışı seçimde EN metin */
+html[data-ui-locale="tr"] .policy-locale-en {
+  display: none !important;
+}
+html[data-ui-locale]:not([data-ui-locale="tr"]) .policy-locale-tr {
   display: none !important;
 }
 

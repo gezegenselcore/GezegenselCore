@@ -1,38 +1,47 @@
 # GezegenselCore — marka sitesi
 
 **Canlı:** [https://gezegenselcore.com](https://gezegenselcore.com)  
-Statik HTML, GitHub Pages (`CNAME` → özel alan). Dosya haritası: **`SITE_STRUCTURE.md`**.
+Statik HTML, GitHub Pages (`CNAME` → özel alan). **Dosya haritası:** `SITE_STRUCTURE.md` · **Teknik / Aura hizalaması:** `docs/README.md`, `docs/APP_WEB_ALIGNMENT.md`.
 
-**AURA legal URLs:** Only canonical paths are used: `/aura/privacy-policy.html`, `/aura/terms-of-use.html`, `/pages/aura/support.html`. Legacy `/pages/aura/policies/*` HTML files are redirects only (no duplicate legal body).
+## Çok dilli yapı
+
+- **URL:** `/{tr|en|de|fr|es|it|pt-br|ar}/…` — örnek: `https://gezegenselcore.com/de/aura/privacy-policy.html`
+- **Kök** (`/`, `/aura/…`, `/privacy.html` …): tarayıcı dil tercihi + `localStorage` (`gezegensel-lang`) ile **locale’li** sayfaya yönlendirme.
+- **Tek buton:** Kullanıcıya tek “Gizlilik” bağlantısı; hedef dil yolu sunucu tarafında değil, **aynı origin** üzerinde segment ile seçilir.
+- **Üretim:** Depoda locale ağacını güncellemek için:
+
+```bash
+node tools/build-locale-pages.mjs
+```
+
+Şablonlar: `tools/templates/`. AURA tam metin master’ları `tools/templates/aura-*.master.html` (ilk çalıştırmada otomatik oluşturulur; hukuk metni değişince bu dosyaları güncelleyip script’i yeniden çalıştırın).
 
 ## Tema ve dil
 
-- **Tema:** `Theme/freelancer-theme-master` zip’inden `assets/freelancer/`; renkler marka paletiyle (`#00f2fe` / `#0d2137`). Üstine `assets/gezegensel.css` + `assets/lang-boot.js` + `assets/gezegensel.js`.
-- **Diller (Aura ile aynı 8 kod):** Navbar’da `TR` · `EN` · `DE` · `FR` · `ES` · `IT` · `PT` · `AR` (`pt-BR` → PT). Varsayılan = tarayıcı dili eşlemesi; tercih **`localStorage` → `gezegensel-lang`**. Sayfa içi çeviriler `l10n-*` span kardeşleriyle; eksik dilde **EN** yedeği. **AURA kanonik hukuk sayfaları** ek olarak `assets/aura-legal-pages.js` + `assets/aura-legal-pages.css` (tam metin yalnız TR+EN; diğer seçimlerde EN + kısa uyarı).
+- **Tema:** `assets/freelancer/`; renkler `#00f2fe` / `#0d2137`; üstüne `assets/gezegensel.css`.
+- **Betikler:** `lang-boot.js` (`data-ui-locale`), `gezegensel.js` (navbar; path altında dil düğmesi **sayfa değiştirir**), **`site-path.js`**, AURA sayfalarında `aura-legal-pages.js`.
+- **Diller:** `tr`, `en`, `de`, `fr`, `es`, `it`, `pt-br`, `ar` — `hreflang` için `pt-BR` eşlemesi kullanılır.
 
 ## GitHub repo ve deploy
 
 1. Örnek remote: `https://github.com/gezegenselcore/gezegenselcore.github.io.git`
-2. `main` dalını kökten yayınla (GitHub Pages **Deploy from branch** → `main` / root).
-3. Repo ayarlarında **Custom domain** = `gezegenselcore.com`, DNS’te GitHub Pages kayıtları tanımlı olmalı.
+2. `main` dalını kökten yayınla.
+3. Custom domain: `gezegenselcore.com`.
 
 ```bash
+node tools/build-locale-pages.mjs
 git add -A && git commit -m "site: …" && git push origin main
 ```
 
-Push’tan sonra CDN önbelleği nedeniyle tema/dil değişikliği **birkaç dakika** gecikebilir; sabit sürüm görmek için gizli pencere veya `?v=2` gibi önbellek kırıcı kullanın.
-
-## URL özeti
+## URL özeti (kanonik örnekler, `en`)
 
 | Sayfa | URL |
 |--------|-----|
-| Hub | `/` |
-| Site gizlilik / destek | `/privacy.html`, `/support.html` |
-| AURA gizlilik (Play / kamu) | **`/aura/privacy-policy.html`** (`#account-deletion`) — kanonik tam metin; eski `pages/aura/policies/*` yolları yönlendirme |
-| AURA kullanım koşulları (Play / kamu) | **`/aura/terms-of-use.html`** |
-| AURA destek | **`/pages/aura/support.html`** — kanonik destek metni (TR + EN gövde; 8 dil şeridi) |
-| ReFollow | `/pages/refollow/…` |
+| Hub | `https://gezegenselcore.com/en/index.html` |
+| Site gizlilik / destek | `…/en/privacy.html`, `…/en/support.html` |
+| AURA gizlilik / koşullar / destek | `…/en/aura/privacy-policy.html`, `…/en/aura/terms-of-use.html`, `…/en/pages/aura/support.html` |
+| ReFollow | `…/en/pages/refollow/policies/…` |
 
-**Policy senkronu:** Aura mobil repodaki `legal-public/aura/*.html` ve `legal-public/assets/aura-legal-pages.{js,css}` dosyaları sırasıyla site `aura/*.html`, `pages/aura/support.html`, `assets/aura-legal-pages.*` ile **aynı içerikte** tutulur (push öncesi kopyalanır). `pages/aura/policies/*.html` yalnızca eski bağlantılar için **kanonik URL’ye yönlendirme** stub’ıdır. Ayrıntı: `SITE_STRUCTURE.md`.
+**Aura uygulaması:** `D:\GezegenselCore\Aura` içinde `src/utils/gezegenselLegalUrls.ts` ve `docs/DATA_AND_PRIVACY.md`.
 
 Son güncelleme: 2026-04-18

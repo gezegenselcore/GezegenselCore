@@ -1,15 +1,29 @@
 /**
- * GezegenselCore statik site — dil: Aura ile aynı 8 kod (tr, en, de, fr, es, it, pt-BR, ar).
- * Aynı üst öğede birden fazla .l10n-* / policy-locale-* varsa: seçilen dil varsa o, yoksa TR aksi EN.
+ * GezegenselCore statik site — dil: Aura ile aynı 8 kod (path: tr … pt-br … ar).
+ * URL /{locale}/… altında: dil düğmeleri aynı mantıksal sayfanın başka dil URL’sine gider (EN fallback site-path ile).
+ * Kök eski sayfalar: yalnızca localStorage tabanlı görünürlük (path yokken).
  */
 (function () {
   var STORAGE_KEY = "gezegensel-lang";
-  var LOCALES = ["tr", "en", "de", "fr", "es", "it", "pt-BR", "ar"];
+  var LOCALES = ["tr", "en", "de", "fr", "es", "it", "pt-br", "ar"];
 
   function normalize(v) {
     if (!v || typeof v !== "string") return null;
-    v = v.trim();
-    return LOCALES.indexOf(v) >= 0 ? v : null;
+    var s = v.trim();
+    if (s === "pt-BR" || s.toLowerCase() === "pt-br" || s.toLowerCase() === "pt_br") return "pt-br";
+    if (/^pt\b/i.test(s)) return "pt-br";
+    var low = s.toLowerCase();
+    if (LOCALES.indexOf(low) >= 0) return low;
+    var base = low.split("-")[0];
+    if (LOCALES.indexOf(base) >= 0) return base;
+    return null;
+  }
+
+  function pathLocaleMode() {
+    return (
+      typeof GezegenselSitePath !== "undefined" &&
+      GezegenselSitePath.getLocaleSegmentFromPathname(location.pathname)
+    );
   }
 
   function fromNavigator() {
@@ -18,20 +32,17 @@
         ? navigator.languages || [navigator.language || navigator.userLanguage || "en"]
         : ["en"];
     for (var i = 0; i < list.length; i++) {
-      var raw = String(list[i]).toLowerCase();
-      if (raw.indexOf("tr") === 0) return "tr";
-      if (raw.indexOf("pt") === 0) return "pt-BR";
-      if (raw.indexOf("de") === 0) return "de";
-      if (raw.indexOf("fr") === 0) return "fr";
-      if (raw.indexOf("es") === 0) return "es";
-      if (raw.indexOf("it") === 0) return "it";
-      if (raw.indexOf("ar") === 0) return "ar";
-      if (raw.indexOf("en") === 0) return "en";
+      var n = normalize(String(list[i]));
+      if (n) return n;
     }
     return "en";
   }
 
   function detect() {
+    if (typeof GezegenselSitePath !== "undefined") {
+      var seg = GezegenselSitePath.getLocaleSegmentFromPathname(location.pathname);
+      if (seg) return normalize(seg) || "en";
+    }
     try {
       var s = normalize(localStorage.getItem(STORAGE_KEY));
       if (s) return s;
@@ -44,7 +55,11 @@
     if (el.classList.contains("policy-locale-en")) return "en";
     for (var i = 0; i < el.classList.length; i++) {
       var c = el.classList[i];
-      if (c.indexOf("l10n-") === 0) return c.slice(5);
+      if (c.indexOf("l10n-") === 0) {
+        var code = c.slice(5);
+        if (code === "pt-BR") return "pt-br";
+        return code;
+      }
     }
     return null;
   }
@@ -82,8 +97,8 @@
       }
       var pick =
         exact ||
-        (uiLang === "tr" ? findFirst(children, function (n) { return localeCodeFromNode(n) === "tr"; }) : null);
-      if (!pick) pick = findFirst(children, function (n) { return localeCodeFromNode(n) === "en"; });
+        findFirst(children, function (n) { return localeCodeFromNode(n) === "en"; }) ||
+        findFirst(children, function (n) { return localeCodeFromNode(n) === "tr"; });
       if (!pick) pick = children[0];
 
       children.forEach(function (c) {
@@ -107,22 +122,25 @@
   }
 
   function bcp47(ui) {
-    if (ui === "pt-BR") return "pt-BR";
+    if (ui === "pt-br") return "pt-BR";
     return ui;
   }
 
   function applyLang(lang) {
     var ui = normalize(lang) || "en";
     try {
-      localStorage.setItem(STORAGE_KEY, ui);
+      localStorage.setItem(STORAGE_KEY, ui === "pt-br" ? "pt-BR" : ui);
     } catch (e) {}
 
     document.documentElement.lang = bcp47(ui);
     document.documentElement.dir = ui === "ar" ? "rtl" : "ltr";
+    document.documentElement.setAttribute("data-ui-locale", ui);
     document.documentElement.removeAttribute("data-boot-l10n");
 
     document.querySelectorAll(".gc-lang-btn").forEach(function (btn) {
-      var active = btn.getAttribute("data-lang") === ui;
+      var raw = btn.getAttribute("data-lang") || "";
+      var btnSeg = normalize(raw);
+      var active = btnSeg === ui;
       btn.setAttribute("aria-pressed", active ? "true" : "false");
     });
 
@@ -138,7 +156,10 @@
 
     var tTr = document.body && document.body.getAttribute("data-title-tr");
     var tEn = document.body && document.body.getAttribute("data-title-en");
-    if (tTr && tEn) {
+    var tUi = document.body && document.body.getAttribute("data-title-" + ui);
+    if (tUi) {
+      document.title = tUi;
+    } else if (tTr && tEn) {
       document.title = ui === "tr" ? tTr : tEn;
     }
   }
@@ -150,7 +171,7 @@
     var el =
       ui === "tr"
         ? document.getElementById("account-deletion")
-        : document.querySelector("#content-en .gc-account-deletion-heading");
+        : document.querySelector("#content-en .gc-account-deletion-heading, #account-deletion-en");
     if (!el) return;
     window.requestAnimationFrame(function () {
       try {
@@ -161,25 +182,41 @@
     });
   }
 
+  function wireLangButton(btn) {
+    btn.addEventListener("click", function () {
+      var raw = btn.getAttribute("data-lang") || "en";
+      var seg = normalize(raw) || "en";
+      if (pathLocaleMode() && typeof GezegenselSitePath !== "undefined") {
+        GezegenselSitePath.navigateToLocaleSegment(seg);
+        return;
+      }
+      applyLang(raw);
+      scrollToAccountDeletionSection();
+    });
+  }
+
   function onReady() {
     applyLang(detect());
     scrollToAccountDeletionSection();
-    document.querySelectorAll(".gc-lang-btn").forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        applyLang(btn.getAttribute("data-lang") || "en");
-        scrollToAccountDeletionSection();
-      });
-    });
+    document.querySelectorAll(".gc-lang-btn").forEach(wireLangButton);
     var legacyTr = document.getElementById("btn-tr");
     var legacyEn = document.getElementById("btn-en");
     if (legacyTr) {
       legacyTr.addEventListener("click", function () {
+        if (pathLocaleMode() && typeof GezegenselSitePath !== "undefined") {
+          GezegenselSitePath.navigateToLocaleSegment("tr");
+          return;
+        }
         applyLang("tr");
         scrollToAccountDeletionSection();
       });
     }
     if (legacyEn) {
       legacyEn.addEventListener("click", function () {
+        if (pathLocaleMode() && typeof GezegenselSitePath !== "undefined") {
+          GezegenselSitePath.navigateToLocaleSegment("en");
+          return;
+        }
         applyLang("en");
         scrollToAccountDeletionSection();
       });
