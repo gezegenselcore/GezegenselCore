@@ -17,6 +17,7 @@
   }
   var ORIGIN = runtimeOrigin();
   var CANONICAL_LOCALES = ["tr", "en"];
+  /** Eski URL yolu ilk segmentleri — yalnızca yönlendirme eşlemesi; arayüzde dil düğmesi yok. */
   var LEGACY_LOCALE_PREFIXES = ["de", "fr", "es", "it", "pt-br", "ar"];
   var PATH_PREFIXES = CANONICAL_LOCALES.concat(LEGACY_LOCALE_PREFIXES);
   var STORAGE_KEY = "gezegensel-lang";

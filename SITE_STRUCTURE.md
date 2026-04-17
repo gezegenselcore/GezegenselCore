@@ -1,6 +1,6 @@
 # gezegenselcore.com — dosya haritası
 
-**Kanonik yollar:** Asıl içerik yalnızca `/tr/…` ve `/en/…` altında. Kök `index.html`, `privacy.html`, `support.html`, `aura/*.html`, `pages/aura/support.html` **yönlendirme** (kullanıcı tercihi + `legacy-path-redirect.js` / `root-locale-redirect.js` ile locale önekli adrese). Eski çok dilli segment (`/de/`, `/fr/`, …) istekleri `assets/site-path.js` ile **aynı mantıksal yol** üzerinden `/en/…`’e düşer. Ayrıntı: **`docs/README.md`**, **`docs/APP_WEB_ALIGNMENT.md`**.
+**Kanonik yollar:** Asıl içerik yalnızca `/tr/…` ve `/en/…` altında. Kök `index.html`, `privacy.html`, `support.html`, `aura/*.html`, `pages/aura/support.html` **yönlendirme** (kullanıcı tercihi + `legacy-path-redirect.js` / `root-locale-redirect.js` ile locale önekli adrese). Eski, artık yayınlanmayan dil önekli istekler `assets/site-path.js` ile **aynı mantıksal yolun** `/en/…` sürümüne düşer. Ayrıntı: **`docs/README.md`**, **`docs/APP_WEB_ALIGNMENT.md`**.
 
 **AURA kamu hukuk — tam metin:** `tools/templates/aura-privacy.master.html`, `aura-terms.master.html`, `aura-support.master.html` (ilk `node tools/build-locale-pages.mjs` çalıştırmasında mevcut siteden kopyalanır). Üretilen canlı dosyalar: `/{tr|en}/aura/privacy-policy.html`, `/{tr|en}/aura/terms-of-use.html`, `/{tr|en}/pages/aura/support.html`.
 

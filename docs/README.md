@@ -8,7 +8,7 @@ Bu klasör, marka statik sitesinin **iki dilli (TR / EN) URL mimarisi**, **yönl
 |------|-----------|
 | Dil segmentleri | Yalnızca `tr` ve `en` — URL’de küçük harf. |
 | Kanonik içerik | Her dil altında aynı mantıksal yollar: örn. `/en/aura/privacy-policy.html`, `/tr/aura/privacy-policy.html`. |
-| Eski URL’ler | `/de/…`, `/fr/…`, `/es/…`, `/it/…`, `/pt-br/…`, `/ar/…` yolları `assets/site-path.js` ile **aynı mantıksal yol üzerinden** `/en/…` adresine yönlendirilir (GitHub Pages’te dosya yoksa `404.html` + aynı script). |
+| Eski URL’ler | Artık yayımda olmayan eski dil URL önekleri `assets/site-path.js` ile **aynı mantıksal yolun** `/en/…` sürümüne yönlendirilir (GitHub Pages’te `404.html` + aynı script ile de desteklenir). |
 | Kök legacy | `/`, `/privacy.html`, `/support.html`, `/aura/*.html`, `/pages/aura/support.html` → kullanıcı tercihi + `legacy-path-redirect.js` / `root-locale-redirect.js` ile `/tr/…` veya `/en/…` adresine. |
 | Ortak çözümleyici | `assets/site-path.js` → `GezegenselSitePath` (`buildAbsoluteUrl`, `getLogicalPath`, `navigateToLocaleSegment`). |
 | Navbar / iç sayfa | `assets/lang-boot.js` (`data-ui-locale`), `assets/gezegensel.js` (path modunda dil düğmesi navigasyon). |

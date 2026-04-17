@@ -192,7 +192,7 @@ section.success hr.star-primary:after {
   background-color: #00f2fe !important;
 }
 
-/* Navbar dil düğmeleri (8 dil — Aura ile aynı kodlar) */
+/* Navbar dil düğmeleri (TR / EN) */
 .gc-lang-group {
   display: flex;
   flex-wrap: wrap;

@@ -5,7 +5,7 @@
 | Uygulama / bağlam | Web URL segmenti |
 |-------------------|------------------|
 | Türkçe (`tr`) | `tr` |
-| Diğer tüm diller (ör. `en`, `de`, `fr`, …) veya bilinmeyen | `en` |
+| İngilizce ve uygulamadaki diğer tüm dil kodları veya bilinmeyen | `en` |
 
 **Kural:** Web sitesi yalnızca **`/tr/…`** ve **`/en/…`** üretir ve indeksler. Aura uygulaması içi dil **`tr`** ise kamu hukuk / destek bağlantıları **`https://gezegenselcore.com/tr/…`**; **aksi halde** her zaman **`https://gezegenselcore.com/en/…`**.
 
@@ -28,7 +28,7 @@ Remote Config’te verilen URL `gezegenselcore.com` içeriyorsa, uygulama açıl
 ## Web tarafı depolama
 
 - Anahtar: `localStorage` **`gezegensel-lang`**
-- Değer: yalnızca `tr` veya `en` kalıcı; eski `pt-BR`, `de`, … değerleri okunurken **en**e normalize edilir (`site-path.js`, `lang-boot.js`, `gezegensel.js`, `aura-legal-pages.js`).
+- Değer: yalnızca `tr` veya `en` kalıcı; eski depolama değerleri okunurken **en**e normalize edilir (`site-path.js`, `lang-boot.js`, `gezegensel.js`, `aura-legal-pages.js`).
 
 ## Yayın sonrası
 

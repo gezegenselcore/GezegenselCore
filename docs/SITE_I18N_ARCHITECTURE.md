@@ -15,7 +15,7 @@ Statik site **build zamanında** yerelleştirilir: `node tools/build-locale-page
 
 ## Fallback
 
-- **URL:** Eski dil öneki (`/de/`, `/fr/`, …) `assets/site-path.js` içinde `/en` + aynı mantıksal yola yönlendirilir. Bilinmeyen veya eksik segment **EN**.
+- **URL:** Eski, artık yayınlanmayan dil önekli yollar `assets/site-path.js` içinde `/en` + aynı mantıksal yola yönlendirilir. Bilinmeyen veya eksik segment **EN**.
 - **Metin:** `pick()` — istenen locale `tr` değilse **İngilizce** string; yoksa `tr` yedek.
 
 ## ReFollow uzun metin
