@@ -143,8 +143,8 @@ export const INDEX = {
     "Policies & links"
   ),
   "index.policies_lead": L(
-    "AURA için kamu hukuku ve destek bağlantıları aşağıda üç maddede toplanmıştır. Marka geneli için bkz. <a href=\\\"privacy.html\\\">site gizliliği</a> ve <a href=\\\"support.html\\\">site desteği</a>.",
-    "AURA public legal and support links are grouped in three items below. For the whole studio, see <a href=\\\"privacy.html\\\">site privacy</a> and <a href=\\\"support.html\\\">site support</a>."
+    "AURA için kamu hukuku ve destek bağlantıları aşağıda üç maddede toplanmıştır. Marka geneli için bkz. <a href=\"privacy.html\">site gizliliği</a> ve <a href=\"support.html\">site desteği</a>.",
+    "AURA public legal and support links are grouped in three items below. For the whole studio, see <a href=\"privacy.html\">site privacy</a> and <a href=\"support.html\">site support</a>."
   ),
   "index.refollow_card_tagline": L(
     "Instagram veri analiz aracı",
