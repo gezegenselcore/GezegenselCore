@@ -300,6 +300,21 @@ section {
   color: var(--gc-ink);
 }
 
+.hero__brands {
+  margin: 0.5rem auto 0;
+  max-width: var(--gc-max);
+  font-size: clamp(0.9rem, 3vw, 1.02rem);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: var(--gc-ink-muted);
+}
+
+.hero__brands strong {
+  color: var(--gc-ink);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+
 .hero .section-inner {
   position: relative;
 }
