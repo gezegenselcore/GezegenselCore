@@ -54,12 +54,20 @@ export const SUPPORT = {
     "ReFollow"
   ),
   "support.refollow_p1": L(
-    "<strong>ReFollow</strong> — Instagram veri analiz aracı. Takipçi, takip edilen ve karşılıklı bağlantıları analiz ederek sosyal medya deneyimini netleştirir. Verilerinizi nasıl dışa aktaracağınız ve uygulamada kullanacağınız adımlar:",
-    "<strong>ReFollow</strong> — Instagram data analysis tool. Analyzes followers, following, and mutual connections to bring clarity to your social experience. Steps to export your data and use it in the app:"
+    "<strong>ReFollow</strong> — Instagram verisi ve takipçi analizi için net içgörüler sunar. Destek, gizlilik veya kullanım koşulları için kanonik bağlantılar:",
+    "<strong>ReFollow</strong> — Clear insights for Instagram data and follower analysis. Canonical links for support, privacy, or terms of use:"
   ),
   "support.link_rf_support": L(
-    "ReFollow destek",
-    "ReFollow support"
+    "ReFollow — Destek",
+    "ReFollow — Support"
+  ),
+  "support.link_rf_privacy": L(
+    "ReFollow — Gizlilik Politikası",
+    "ReFollow — Privacy Policy"
+  ),
+  "support.link_rf_terms": L(
+    "ReFollow — Kullanım Koşulları",
+    "ReFollow — Terms of Use"
   ),
   "support.h3_aura": L(
     "AURA",
