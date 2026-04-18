@@ -11,6 +11,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
 const outDir = path.join(ROOT, "tools", "_layout-verify");
 const url = process.argv[2] || "https://gezegenselcore.com/tr/index.html";
+const slug = url.replace(/^https?:\/\//, "").replace(/[^\w.-]+/g, "_");
 
 import { chromium } from "playwright";
 
@@ -78,7 +79,7 @@ if (box) {
   const y = Math.max(0, Math.min(box.y - pad, 2000));
   const h = Math.min(Math.max(box.height + pad * 2, 120), 844);
   await page.screenshot({
-    path: path.join(outDir, "mobile-apps-region.png"),
+    path: path.join(outDir, `mobile-apps-region__${slug}.png`),
     clip: {
       x: 0,
       y,
@@ -88,11 +89,11 @@ if (box) {
   });
 } else {
   await page.screenshot({
-    path: path.join(outDir, "mobile-viewport.png"),
+    path: path.join(outDir, `mobile-viewport__${slug}.png`),
     fullPage: false,
   });
 }
 
 await browser.close();
 console.log(JSON.stringify({ url, metrics }, null, 2));
-console.log("PNG:", path.join(outDir, "mobile-apps-region.png"));
+console.log("PNG:", path.join(outDir, `mobile-apps-region__${slug}.png`));
