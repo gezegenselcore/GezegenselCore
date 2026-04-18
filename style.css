@@ -55,25 +55,25 @@ body {
 .gc-tech-bg__layer--grid {
   transform: translate3d(calc(var(--gc-px) * 0.38px), calc(var(--gc-py) * 0.3px), 0);
   background-image:
-    linear-gradient(90deg, rgba(10, 22, 40, 0.042) 1px, transparent 1px),
-    linear-gradient(0deg, rgba(10, 22, 40, 0.042) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(17, 26, 36, 0.022) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(17, 26, 36, 0.022) 1px, transparent 1px),
     repeating-linear-gradient(
       -36deg,
       transparent,
       transparent 14px,
-      rgba(201, 162, 39, 0.024) 14px,
-      rgba(201, 162, 39, 0.024) 15px
+      rgba(17, 26, 36, 0.012) 14px,
+      rgba(17, 26, 36, 0.012) 15px
     );
   background-size: 34px 34px, 34px 34px, auto;
-  opacity: 0.88;
+  opacity: 0.82;
 }
 
 .gc-tech-bg__layer--schema {
   transform: translate3d(calc(var(--gc-px) * -0.52px), calc(var(--gc-py) * -0.4px), 0);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'%3E%3Cg fill='none' stroke='%230a1628' stroke-opacity='0.055' stroke-width='0.45'%3E%3Crect x='18' y='28' width='76' height='48' rx='4'/%3E%3Crect x='118' y='40' width='62' height='36' rx='3'/%3E%3Cpath d='M94 52h18M180 58l28 24M40 118h55M130 108v40'/%3E%3Crect x='32' y='150' width='88' height='28' rx='3' opacity='0.8'/%3E%3C/g%3E%3Cg fill='none' stroke='%23c9a227' stroke-opacity='0.05' stroke-width='0.55'%3E%3Cpath d='M28 168l42-28 58 18 72-48M128 178l36 32'/%3E%3Ccircle cx='28' cy='168' r='2.2' fill='%23c9a227' fill-opacity='0.065' stroke='none'/%3E%3Ccircle cx='128' cy='178' r='2' fill='%23c9a227' fill-opacity='0.06' stroke='none'/%3E%3Ccircle cx='200' cy='92' r='1.8' fill='%23ffffff' fill-opacity='0.045' stroke='none'/%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'%3E%3Cg fill='none' stroke='%23111A24' stroke-opacity='0.034' stroke-width='0.45'%3E%3Crect x='18' y='28' width='76' height='48' rx='4'/%3E%3Crect x='118' y='40' width='62' height='36' rx='3'/%3E%3Cpath d='M94 52h18M180 58l28 24M40 118h55M130 108v40'/%3E%3Crect x='32' y='150' width='88' height='28' rx='3' opacity='0.8'/%3E%3C/g%3E%3Cg fill='none' stroke='%23111A24' stroke-opacity='0.024' stroke-width='0.55'%3E%3Cpath d='M28 168l42-28 58 18 72-48M128 178l36 32'/%3E%3Ccircle cx='28' cy='168' r='2.2' fill='%23111A24' fill-opacity='0.032' stroke='none'/%3E%3Ccircle cx='128' cy='178' r='2' fill='%23111A24' fill-opacity='0.028' stroke='none'/%3E%3Ccircle cx='200' cy='92' r='1.8' fill='%23111A24' fill-opacity='0.018' stroke='none'/%3E%3C/g%3E%3C/svg%3E");
   background-size: 300px 300px;
   background-repeat: repeat;
-  opacity: 0.5;
+  opacity: 0.42;
   mix-blend-mode: multiply;
 }
 
@@ -363,17 +363,17 @@ section {
       0deg,
       transparent,
       transparent 17px,
-      rgba(10, 22, 40, 0.022) 17px,
-      rgba(10, 22, 40, 0.022) 18px
+      rgba(17, 26, 36, 0.016) 17px,
+      rgba(17, 26, 36, 0.016) 18px
     ),
     repeating-linear-gradient(
       90deg,
       transparent,
       transparent 13px,
-      rgba(201, 162, 39, 0.035) 13px,
-      rgba(201, 162, 39, 0.035) 14px
+      rgba(17, 26, 36, 0.012) 13px,
+      rgba(17, 26, 36, 0.012) 14px
     ),
-    linear-gradient(115deg, transparent 55%, rgba(10, 22, 40, 0.03) 100%);
+    linear-gradient(115deg, transparent 55%, rgba(17, 26, 36, 0.022) 100%);
   opacity: 0.85;
 }
 
@@ -566,18 +566,18 @@ section {
       -8deg,
       transparent,
       transparent 20px,
-      rgba(10, 22, 40, 0.018) 20px,
-      rgba(10, 22, 40, 0.018) 21px
+      rgba(17, 26, 36, 0.014) 20px,
+      rgba(17, 26, 36, 0.014) 21px
     ),
     linear-gradient(
       200deg,
       transparent 30%,
-      rgba(201, 162, 39, 0.04) 55%,
+      rgba(17, 26, 36, 0.026) 55%,
       transparent 85%
     ),
     repeating-linear-gradient(
       0deg,
-      rgba(10, 22, 40, 0.012) 0 1px,
+      rgba(17, 26, 36, 0.009) 0 1px,
       transparent 1px 15px
     );
   opacity: 0.75;
@@ -900,13 +900,13 @@ body.gc-inner .gc-doc::before {
       -8deg,
       transparent,
       transparent 20px,
-      rgba(10, 22, 40, 0.018) 20px,
-      rgba(10, 22, 40, 0.018) 21px
+      rgba(17, 26, 36, 0.014) 20px,
+      rgba(17, 26, 36, 0.014) 21px
     ),
     linear-gradient(
       200deg,
       transparent 30%,
-      rgba(201, 162, 39, 0.045) 55%,
+      rgba(17, 26, 36, 0.028) 55%,
       transparent 85%
     );
   opacity: 0.65;
