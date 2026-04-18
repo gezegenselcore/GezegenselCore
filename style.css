@@ -473,3 +473,253 @@ section {
   color: #fff;
   border-radius: 8px;
 }
+
+/* ——— İç sayfalar (ortak kabuk) ——— */
+body.gc-inner > main,
+main.gc-inner-main {
+  padding-top: var(--gc-header-h);
+}
+
+.gc-page-hero {
+  text-align: center;
+  padding: calc(var(--gc-header-h) + 1.25rem) 1.25rem 2rem;
+  background: var(--gc-surface);
+  border-bottom: 1px solid rgba(10, 22, 40, 0.08);
+}
+
+.gc-page-hero h1 {
+  margin: 0;
+  font-size: clamp(1.35rem, 4vw, 1.75rem);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--gc-ink);
+}
+
+.gc-crumb {
+  margin: 0 0 0.75rem;
+  font-size: 0.88rem;
+}
+
+.gc-crumb a {
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--gc-accent-dark);
+}
+
+.gc-crumb a:hover {
+  color: var(--gc-ink);
+}
+
+.gc-doc {
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3rem;
+  color: var(--gc-ink-muted);
+}
+
+.gc-doc h1 {
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.45rem, 4vw, 1.85rem);
+  font-weight: 800;
+  color: var(--gc-ink);
+}
+
+.gc-doc h2 {
+  margin: 1.75rem 0 0.5rem;
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: var(--gc-ink);
+}
+
+.gc-doc h3 {
+  margin: 1.25rem 0 0.45rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--gc-ink);
+}
+
+.gc-doc p {
+  margin: 0 0 0.9rem;
+}
+
+.gc-doc ul,
+.gc-doc ol {
+  margin: 0 0 1rem;
+  padding-left: 1.35rem;
+}
+
+.gc-doc li {
+  margin-bottom: 0.35rem;
+}
+
+.gc-doc .muted {
+  color: var(--gc-ink-muted);
+  font-size: 0.95rem;
+  margin-bottom: 1.25rem;
+}
+
+.gc-doc a {
+  font-weight: 600;
+}
+
+.gc-doc hr {
+  border: 0;
+  border-top: 1px solid rgba(10, 22, 40, 0.12);
+  margin: 1.75rem 0;
+}
+
+.lang-block {
+  margin-bottom: 2.5rem;
+}
+
+.lang-block h2 {
+  margin-top: 0;
+  padding-bottom: 0.35rem;
+  border-bottom: 2px solid rgba(201, 162, 39, 0.35);
+}
+
+.gc-updated {
+  margin-top: 1.5rem;
+  font-size: 0.88rem;
+  color: var(--gc-ink-muted);
+}
+
+.gc-footer-grid {
+  display: grid;
+  gap: 1.25rem;
+  max-width: 48rem;
+  margin: 0 auto 1rem;
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  .gc-footer-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.gc-footer-grid h3 {
+  margin: 0 0 0.4rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--gc-ink);
+}
+
+.gc-footer-grid p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.gc-footer-grid a {
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.gc-footer-social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.gc-footer-social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0.4rem 0.75rem;
+  border-radius: 10px;
+  border: 2px solid var(--gc-accent-dark);
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--gc-ink);
+  background: rgba(201, 162, 39, 0.12);
+}
+
+.gc-footer-social a:hover {
+  background: rgba(201, 162, 39, 0.22);
+}
+
+.site-footer .gc-footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 1rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.site-footer .gc-footer-nav a {
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--gc-accent-dark);
+}
+
+.site-footer .gc-footer-nav a:hover {
+  color: var(--gc-ink);
+}
+
+/* AURA hukuk: dil seçici */
+#aura-legal-picker {
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 0.75rem 1.25rem 0;
+}
+
+.aura-legal-fallback-banner {
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 0.5rem 1.25rem;
+  font-size: 0.9rem;
+  color: var(--gc-ink-muted);
+}
+
+/* Ürün kartı — çoklu düğme */
+.product-tagline {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--gc-ink);
+  margin: 0 0 0.35rem;
+  line-height: 1.35;
+}
+
+.gc-btn-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 20rem;
+  margin-top: 0.35rem;
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.55rem 0.9rem;
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: var(--gc-ink);
+  background: transparent;
+  border: 2px solid var(--gc-accent-dark);
+  border-radius: 10px;
+  text-decoration: none;
+}
+
+.btn-ghost:hover {
+  background: rgba(201, 162, 39, 0.15);
+  color: var(--gc-ink);
+}
+
+.gc-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  justify-content: center;
+  margin: 1rem 0 1.5rem;
+}

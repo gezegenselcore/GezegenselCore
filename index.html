@@ -7,7 +7,7 @@
   <title>Gezegensel Core</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body id="top">
   <a class="skip-link" href="#hakkinda">İçeriğe atla</a>
 
   <header class="site-header">
@@ -76,14 +76,24 @@
           <article class="product-card">
             <img src="assets/icons/AURA.png" width="120" height="120" alt="AURA uygulama simgesi">
             <h3>AURA</h3>
-            <p>Günlük özet, isteğe bağlı sağlık verisi ve yapay zekâ rehberi — tıbbi teşhis yerine geçmez.</p>
-            <a class="btn-play" href="https://play.google.com/store/apps/details?id=com.gezegenselcore.aura" target="_blank" rel="noopener noreferrer">Google Play</a>
+            <p class="product-tagline">Yapay zekâ destekli wellness ve sağlık rehberi</p>
+            <p>Günlük özet, isteğe bağlı sağlık verisi ve rehberlik; tıbbi teşhis veya tedavi sunmaz.</p>
+            <div class="gc-btn-stack">
+              <a class="btn-play" href="https://play.google.com/store/apps/details?id=com.gezegenselcore.aura" target="_blank" rel="noopener noreferrer">Google Play'de İndir</a>
+              <a class="btn-ghost" href="pages/aura/support.html">Destek</a>
+              <a class="btn-ghost" href="aura/privacy-policy.html">Gizlilik Politikası</a>
+            </div>
           </article>
           <article class="product-card">
             <img src="assets/icons/ReFollow_icon.png" width="120" height="120" alt="ReFollow uygulama simgesi">
             <h3>ReFollow</h3>
-            <p>Instagram ilişkilerinizi tablo ve özetlerle okunur hâle getirir.</p>
-            <a class="btn-play" href="https://play.google.com/store/apps/details?id=com.refollow.app" target="_blank" rel="noopener noreferrer">Google Play</a>
+            <p class="product-tagline">Instagram verisi ve takipçi analizi için net içgörüler</p>
+            <p>Dışa aktarılan veriyi cihazınızda analiz eder; tablolar ve özetlerle ilişkilerinizi okunur kılar.</p>
+            <div class="gc-btn-stack">
+              <a class="btn-play" href="https://play.google.com/store/apps/details?id=com.refollow.app" target="_blank" rel="noopener noreferrer">Google Play'de İndir</a>
+              <a class="btn-ghost" href="pages/refollow/policies/support.html">Destek</a>
+              <a class="btn-ghost" href="pages/refollow/policies/privacy.html">Gizlilik Politikası</a>
+            </div>
           </article>
         </div>
       </div>
@@ -106,9 +116,15 @@
   </main>
 
   <footer class="site-footer">
+    <nav class="gc-footer-nav" aria-label="Site">
+      <a href="privacy.html">Gizlilik</a>
+      <a href="support.html">Destek</a>
+      <a href="#iletisim">İletişim</a>
+      <a href="aura/terms-of-use.html">AURA koşulları</a>
+    </nav>
     <p>© 2024 Gezegensel Core. Tüm hakları saklıdır.</p>
   </footer>
 
-  <a class="scroll-top" href="#ust" aria-label="Yukarı çık">↑</a>
+  <a class="scroll-top" href="#top" aria-label="Yukarı çık">↑</a>
 </body>
 </html>
