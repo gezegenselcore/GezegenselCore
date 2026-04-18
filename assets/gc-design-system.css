@@ -224,6 +224,16 @@ section.success hr.star-primary:after {
   background: linear-gradient(168deg, var(--gc-hero-bg) 0%, var(--gc-hero-bg-2) 100%) !important;
 }
 
+/* #about, #apps vb. (success bandı dışı): açık zeminde koyu çizgi + beyaz yıldız zemin */
+main.gc-main > section:not(.success) hr.star-primary {
+  border-top-color: #0d2137 !important;
+}
+
+main.gc-main > section:not(.success) hr.star-primary:after {
+  color: #0d2137 !important;
+  background-color: #ffffff !important;
+}
+
 /* Ana sayfa kahraman: biraz daha sıkı dikey (mobilde boşluk azalır) */
 .index header .container {
   padding-top: 88px;

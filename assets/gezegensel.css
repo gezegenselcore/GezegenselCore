@@ -200,6 +200,13 @@ header .intro-text hr.star-light {
   margin-top: 1rem !important;
   margin-bottom: 1rem !important;
 }
+/* Yıldız glifinin taşmasından sonra alt satır (tagline) okunaklı kalsın */
+header .intro-text .skills {
+  position: relative;
+  z-index: 1;
+  margin-top: 0.35rem;
+  padding-top: 0.25rem;
+}
 main.gc-main .text-center > h2 {
   margin-bottom: 0.65rem !important;
 }
