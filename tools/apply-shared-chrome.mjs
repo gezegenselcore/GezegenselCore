@@ -12,6 +12,12 @@ const ROOT = path.join(__dirname, "..");
 
 const SKIP_FILES = new Set(["tr/index.html", "en/index.html"]);
 
+/** Tüm HTML’lerde style önbürücüsü (tek tip). */
+const STYLE_QUERY = "global1";
+
+const FONT_AWESOME_LINK = `  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+`;
+
 const TECH_BG = `  <div class="gc-tech-bg" aria-hidden="true">
     <div class="gc-tech-bg__layer gc-tech-bg__layer--grid"></div>
     <div class="gc-tech-bg__layer gc-tech-bg__layer--schema"></div>
@@ -42,6 +48,8 @@ function relHref(fromFile, toFile) {
 function otherLocaleFile(fromFile) {
   if (fromFile.startsWith("tr/")) return fromFile.replace(/^tr\//, "en/");
   if (fromFile.startsWith("en/")) return fromFile.replace(/^en\//, "tr/");
+  if (fromFile === "privacy.html") return "en/privacy.html";
+  if (fromFile === "support.html") return "en/support.html";
   const pairs = [
     ["privacy.html", "en/privacy.html"],
     ["support.html", "en/support.html"],
@@ -60,6 +68,20 @@ function otherLocaleFile(fromFile) {
 }
 
 function fixFooterPaths(fromFile) {
+  if (fromFile === "privacy.html" || fromFile === "support.html") {
+    return {
+      privacy: "privacy.html",
+      support: "support.html",
+      contact: "tr/index.html#iletisim",
+    };
+  }
+  if (fromFile === "en/privacy.html" || fromFile === "en/support.html") {
+    return {
+      privacy: "privacy.html",
+      support: "support.html",
+      contact: "index.html#iletisim",
+    };
+  }
   if (fromFile.startsWith("tr/")) {
     const d = posixDirname(fromFile);
     const parts = d.split("/").filter(Boolean);
@@ -95,6 +117,26 @@ function parallaxSrc(fromFile) {
   const d = posixDirname(fromFile);
   const depth = d && d !== "." ? d.split("/").filter(Boolean).length : 0;
   return `${depth ? "../".repeat(depth) : ""}assets/gc-home-parallax.js`.replace(/^\//, "");
+}
+
+function ensureStylesheetVersion(html) {
+  const v = STYLE_QUERY;
+  return html.replace(/href="([^"]*?)style\.css(\?[^"]*)?"/g, (full, prefix, query) => {
+    if (query && query.includes(v)) return full;
+    return `href="${prefix}style.css?v=${v}"`;
+  });
+}
+
+function ensureFontAwesomeLink(html) {
+  const needsFa = /\bfa-brands\b|\bfa-solid\b|\bfa-regular\b/.test(html);
+  if (!needsFa) return html;
+  if (/font-awesome|fontawesome|cdnjs\.cloudflare\.com\/ajax\/libs\/font-awesome/.test(html)) return html;
+  const injected = html.replace(
+    /(<link rel="stylesheet" href="[^"]*style\.css[^"]*">)(\s*)/i,
+    `$1\n${FONT_AWESOME_LINK}$2`
+  );
+  if (injected !== html) return injected;
+  return html.replace(/<\/head>/i, `${FONT_AWESOME_LINK}</head>`);
 }
 
 function buildFooter(fromFile, en) {
@@ -159,13 +201,15 @@ function buildHeader(fromFile, opts) {
     if (fromFile.startsWith("en/")) return `${relHref(fromFile, "en/index.html")}#ust`;
     if (fromFile === "404.html") return "tr/index.html#ust";
     if (fromFile === "privacy.html" || fromFile === "support.html") return "tr/index.html#ust";
+    if (fromFile === "en/privacy.html" || fromFile === "en/support.html") return "index.html#ust";
     return `${relHref(fromFile, "tr/index.html")}#ust`;
   })();
 
   const h = (hash) => {
     if (fromFile.startsWith("tr/")) return `${relHref(fromFile, "tr/index.html")}#${hash}`;
     if (fromFile.startsWith("en/")) return `${relHref(fromFile, "en/index.html")}#${hash}`;
-    return `tr/index.html#${hash}`;
+    if (fromFile === "en/privacy.html" || fromFile === "en/support.html") return `index.html#${hash}`;
+    return `${relHref(fromFile, "tr/index.html")}#${hash}`;
   };
 
   let langBlock;
@@ -237,11 +281,15 @@ function walkHtml(dir, out = []) {
 
 function patch(html, fromFile) {
   const posixFile = posix(path.relative(ROOT, fromFile));
-  if (SKIP_FILES.has(posixFile)) return null;
-  if (!html.includes("style.css") || !html.includes("site-header")) return null;
-
   const en = posixFile.startsWith("en/");
   const is404 = posixFile === "404.html";
+
+  if (SKIP_FILES.has(posixFile)) {
+    let out = ensureStylesheetVersion(html);
+    out = ensureFontAwesomeLink(out);
+    return out !== html ? out : null;
+  }
+  if (!html.includes("style.css") || !html.includes("site-header")) return null;
 
   let out = html;
   if (!out.includes("gc-tech-bg")) {
@@ -273,6 +321,9 @@ function patch(html, fromFile) {
   if (is404 && !out.includes('id="icerik"')) {
     out = out.replace(/<main(\s|>)/i, `<main id="icerik"$1`);
   }
+
+  out = ensureStylesheetVersion(out);
+  out = ensureFontAwesomeLink(out);
 
   return out;
 }
