@@ -117,6 +117,26 @@ html {
   box-shadow: 0 1px 0 rgba(10, 22, 40, 0.06), 0 4px 14px rgba(10, 22, 40, 0.06);
 }
 
+/*
+ * Üst menü (mobil): menü kapalıyken .navbar-collapse BS3’te bazen yükseklik / max-height
+ * ile “hayalet” alan bırakıyor; sabit barın altından geçen metin bu katmanın altında
+ * kesilmiş gibi görünüyor. Sadece kapalı + animasyon dışı durumda tamamen kapat.
+ */
+@media (max-width: 767px) {
+  .navbar-default.navbar-fixed-top .navbar-collapse.collapse:not(.in):not(.collapsing) {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 0 !important;
+    pointer-events: none !important;
+  }
+}
+
 /* Marka adı: büyük harf satırı ile aynı harf aralığı */
 .navbar-default .navbar-brand {
   letter-spacing: 0.04em;
