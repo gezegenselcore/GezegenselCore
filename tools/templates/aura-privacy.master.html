@@ -17,7 +17,7 @@
 </head>
 <body id="page-top" class="inner-page gc-site aura-legal-body" data-title-tr="Gizlilik Politikası — AURA" data-title-en="Privacy Policy — AURA">
   <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container gc-navbar-split">
+    <div class="container">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#gc-navbar-collapse">
           <span class="sr-only">{{i18n:index.sr_nav_toggle}}</span>
@@ -27,12 +27,6 @@
         </button>
         <a class="navbar-brand" href="../index.html">GEZEGENSEL CORE</a>
       </div>
-      <div class="gc-navbar-toolbar">
-        <div id="aura-legal-picker" class="aura-legal-picker aura-legal-picker--embedded gc-lang-group" role="group" aria-label="{{i18n:index.aria_lang_group}}">
-          <button type="button" class="gc-lang-btn" data-lang="tr" aria-pressed="false">TR</button>
-          <button type="button" class="gc-lang-btn" data-lang="en" aria-pressed="false">EN</button>
-        </div>
-      </div>
       <div class="collapse navbar-collapse" id="gc-navbar-collapse">
         <ul class="nav navbar-nav navbar-right">
           <li class="page-scroll"><a href="../index.html#about">{{i18n:index.nav_about}}</a></li>
@@ -40,6 +34,12 @@
           <li class="page-scroll"><a href="../index.html#policies">{{i18n:index.nav_policies}}</a></li>
           <li><a href="../privacy.html">{{i18n:index.nav_privacy}}</a></li>
           <li><a href="../support.html">{{i18n:index.nav_support}}</a></li>
+          <li class="gc-lang-wrap">
+            <div id="aura-legal-picker" class="aura-legal-picker aura-legal-picker--embedded gc-lang-group" role="group" aria-label="{{i18n:index.aria_lang_group}}">
+              <button type="button" class="gc-lang-btn" data-lang="tr" aria-pressed="false">TR</button>
+              <button type="button" class="gc-lang-btn" data-lang="en" aria-pressed="false">EN</button>
+            </div>
+          </li>
         </ul>
       </div>
     </div>

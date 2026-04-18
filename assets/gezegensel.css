@@ -278,7 +278,7 @@ section.first {
   }
 }
 
-/* Dil: `.gc-navbar-toolbar` (gc-design-system) */
+/* Dil grubu mobil düzeni: gc-design-system (.gc-lang-wrap toolbar) */
 
 /* Ana sayfa: header duman grisi iken nav koyu metin */
 .index .navbar-default:not(.navbar-shrink) .navbar-brand,
