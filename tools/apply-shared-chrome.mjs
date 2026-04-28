@@ -25,6 +25,8 @@ const FAVICON_LINKS = `  <link rel="icon" href="/favicon.ico" type="image/x-icon
   <link rel="shortcut icon" href="/favicon.ico">
 `;
 
+const ORIGIN = "https://gezegenselcore.com";
+
 const TECH_BG = `  <div class="gc-tech-bg" aria-hidden="true">
     <div class="gc-tech-bg__layer gc-tech-bg__layer--grid"></div>
     <div class="gc-tech-bg__layer gc-tech-bg__layer--schema"></div>
@@ -162,6 +164,75 @@ function ensureFaviconLinks(html) {
     return html.slice(0, i) + FAVICON_LINKS + html.slice(i);
   }
   return html;
+}
+
+function localeFromFile(posixFile) {
+  if (posixFile.startsWith("tr/")) return "tr";
+  if (posixFile.startsWith("en/")) return "en";
+  return null;
+}
+
+function logicalPathFromFile(posixFile) {
+  if (posixFile.startsWith("tr/")) return "/" + posixFile.slice("tr".length);
+  if (posixFile.startsWith("en/")) return "/" + posixFile.slice("en".length);
+  return "/" + posixFile.replace(/^\//, "");
+}
+
+function seoBlockFor(posixFile) {
+  const loc = localeFromFile(posixFile);
+  if (!loc) return null;
+  const logicalPath = logicalPathFromFile(posixFile);
+  const join = (a, b) => `${a.replace(/\/+$/, "")}/${b.replace(/^\/+/, "")}`;
+  const canonicalUrl = join(join(ORIGIN, loc), logicalPath);
+  const hrefTr = join(join(ORIGIN, "tr"), logicalPath);
+  const hrefEn = join(join(ORIGIN, "en"), logicalPath);
+  return [
+    `  <link rel="canonical" href="${canonicalUrl}" />`,
+    `  <link rel="alternate" hreflang="tr" href="${hrefTr}" />`,
+    `  <link rel="alternate" hreflang="en" href="${hrefEn}" />`,
+    `  <link rel="alternate" hreflang="x-default" href="${hrefEn}" />`,
+  ].join("\n") + "\n";
+}
+
+function ensureSeoForLocalePages(html, posixFile) {
+  const block = seoBlockFor(posixFile);
+  if (!block) return html;
+
+  // Replace existing canonical if present
+  let out = html.replace(/^\s*<link\s+rel="canonical"[^>]*>\s*\n?/gim, "");
+  // Replace existing alternates for tr/en/x-default if present
+  out = out.replace(/^\s*<link\s+rel="alternate"\s+hreflang="(?:tr|en|x-default)"[^>]*>\s*\n?/gim, "");
+
+  if (out.includes('rel="canonical"') && out.includes('hreflang="tr"')) return out;
+
+  const m = out.match(/<meta\s+name="viewport"[^>]*>\s*\n/i);
+  if (m && m.index !== undefined) {
+    const i = m.index + m[0].length;
+    return out.slice(0, i) + block + out.slice(i);
+  }
+  const m2 = out.match(/<meta\s+charset="utf-8"[^>]*>\s*\n/i);
+  if (m2 && m2.index !== undefined) {
+    const i = m2.index + m2[0].length;
+    return out.slice(0, i) + block + out.slice(i);
+  }
+  return out.replace(/<\/head>/i, `${block}</head>`);
+}
+
+function ensureNoindexForNonLocale(html, posixFile) {
+  if (localeFromFile(posixFile)) return html;
+  if (/<meta\s+name="robots"\s+/i.test(html)) return html;
+  const robots = `  <meta name="robots" content="noindex,follow" />\n`;
+  const m = html.match(/<meta\s+name="viewport"[^>]*>\s*\n/i);
+  if (m && m.index !== undefined) {
+    const i = m.index + m[0].length;
+    return html.slice(0, i) + robots + html.slice(i);
+  }
+  const m2 = html.match(/<meta\s+charset="utf-8"[^>]*>\s*\n/i);
+  if (m2 && m2.index !== undefined) {
+    const i = m2.index + m2[0].length;
+    return html.slice(0, i) + robots + html.slice(i);
+  }
+  return html.replace(/<\/head>/i, `${robots}</head>`);
 }
 
 function buildFooter(fromFile, en) {
@@ -320,6 +391,7 @@ function patch(html, fromFile) {
     let out = ensureStylesheetVersion(html);
     out = ensureFontAwesomeLink(out);
     out = ensureFaviconLinks(out);
+    out = ensureSeoForLocalePages(out, posixFile);
     return out !== html ? out : null;
   }
   if (!html.includes("style.css") || !html.includes("site-header")) return null;
@@ -358,6 +430,8 @@ function patch(html, fromFile) {
   out = ensureStylesheetVersion(out);
   out = ensureFontAwesomeLink(out);
   out = ensureFaviconLinks(out);
+  out = ensureSeoForLocalePages(out, posixFile);
+  out = ensureNoindexForNonLocale(out, posixFile);
 
   return out;
 }
