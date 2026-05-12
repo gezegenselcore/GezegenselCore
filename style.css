@@ -1296,10 +1296,41 @@ body.aura-launch .scroll-top {
   max-width: 38rem;
 }
 
+.aura-launch__hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 1rem 1.25rem;
+}
+
+.aura-launch__hero-actions .aura-launch__product-hunt {
+  margin-top: 0;
+}
+
 .aura-launch__hero-cta {
   display: flex;
   flex-wrap: wrap;
   gap: 0.65rem;
+  flex: 0 0 auto;
+}
+
+.aura-launch__product-hunt {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  flex: 1 1 220px;
+  min-width: 0;
+  max-width: min(100%, 500px);
+}
+
+.aura-launch__product-hunt > a {
+  line-height: 0;
+}
+
+.aura-launch__product-hunt img {
+  max-width: 100%;
+  height: auto;
 }
 
 .aura-launch__btn-play.btn-play {
