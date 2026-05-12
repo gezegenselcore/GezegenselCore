@@ -1299,11 +1299,11 @@ body.aura-launch .scroll-top {
 .aura-launch__hero-actions {
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-start;
+  align-items: center;
   gap: 1rem 1.25rem;
 }
 
-.aura-launch__hero-actions .aura-launch__product-hunt {
+.aura-launch__hero-actions .aura-launch__ph-badge {
   margin-top: 0;
 }
 
@@ -1314,23 +1314,35 @@ body.aura-launch .scroll-top {
   flex: 0 0 auto;
 }
 
-.aura-launch__product-hunt {
+/* Hero: Product Hunt featured SVG — match .btn-play height (min-height 44px) */
+.aura-launch__ph-badge {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 1rem;
-  flex: 1 1 220px;
-  min-width: 0;
-  max-width: min(100%, 500px);
+  align-items: center;
+  flex: 0 0 auto;
 }
 
-.aura-launch__product-hunt > a {
+.aura-launch__ph-badge > a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   line-height: 0;
+  min-height: 44px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
-.aura-launch__product-hunt img {
-  max-width: 100%;
-  height: auto;
+.aura-launch__ph-badge img {
+  height: 44px;
+  width: auto;
+  max-width: min(100vw - 10rem, 240px);
+  display: block;
+  object-fit: contain;
+}
+
+.aura-launch__ph-card-host {
+  max-width: 500px;
+  margin: 0.75rem auto 0;
 }
 
 .aura-launch__btn-play.btn-play {
