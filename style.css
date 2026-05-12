@@ -1535,13 +1535,16 @@ body.aura-launch .scroll-top {
   overflow: hidden;
   border: 1px solid rgba(232, 238, 245, 0.1);
   background: rgba(0, 0, 0, 0.4);
+  aspect-ratio: 16 / 9;
+  position: relative;
 }
 
-.aura-launch__video-frame video {
+.aura-launch__video-frame iframe {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: auto;
-  display: block;
-  vertical-align: middle;
+  height: 100%;
+  border: 0;
 }
 
 .aura-launch__narrow {
