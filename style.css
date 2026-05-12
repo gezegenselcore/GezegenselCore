@@ -1511,6 +1511,39 @@ body.aura-launch .scroll-top {
   border-bottom: 1px solid rgba(232, 238, 245, 0.06);
 }
 
+.aura-launch__section--video {
+  padding-top: clamp(1rem, 3vw, 1.75rem);
+}
+
+.aura-launch__video-wrap {
+  max-width: 56rem;
+  margin: 0 auto;
+}
+
+.aura-launch__video-lead {
+  margin: 0 auto 1.1rem;
+  max-width: 36rem;
+  text-align: center;
+  font-size: clamp(0.98rem, 2.2vw, 1.05rem);
+  line-height: 1.65;
+  color: rgba(232, 238, 245, 0.78);
+}
+
+.aura-launch__video-frame {
+  margin-top: 0.25rem;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(232, 238, 245, 0.1);
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.aura-launch__video-frame video {
+  width: 100%;
+  height: auto;
+  display: block;
+  vertical-align: middle;
+}
+
 .aura-launch__narrow {
   max-width: 44rem;
   margin: 0 auto;
