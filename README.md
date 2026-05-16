@@ -1,8 +1,8 @@
-# Gezegensel Core
+﻿# GezegenselCore
 
 **Canlı site:** [gezegenselcore.com](https://gezegenselcore.com)
 
-Gezegensel Core; **AURA** ve **ReFollow** gibi yapay zekâ ve veri odaklı dijital ürünlerin marka ve bilgilendirme sitesidir. Statik HTML; Türkçe ve İngilizce (`/tr/…`, `/en/…`).
+GezegenselCore; **AURA** ve **ReFollow** gibi yapay zekâ ve veri odaklı dijital ürünlerin marka ve bilgilendirme sitesidir. Statik HTML; Türkçe ve İngilizce (`/tr/…`, `/en/…`).
 
 ## Ürünler
 

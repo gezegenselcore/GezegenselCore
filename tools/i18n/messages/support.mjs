@@ -1,13 +1,13 @@
-const L = (tr, en) => ({ tr, en });
+﻿const L = (tr, en) => ({ tr, en });
 
 export const SUPPORT = {
   "support.meta_title": L(
-    "Destek — Gezegensel Core",
-    "Support — Gezegensel Core"
+    "Destek — GezegenselCore",
+    "Support — GezegenselCore"
   ),
   "support.meta_description": L(
-    "Gezegensel Core uygulama desteği ve resmi AURA / ReFollow bağlantıları.",
-    "Gezegensel Core app support and official AURA / ReFollow links."
+    "GezegenselCore uygulama desteği ve resmi AURA / ReFollow bağlantıları.",
+    "GezegenselCore app support and official AURA / ReFollow links."
   ),
   "support.nav_apps": L(
     "Uygulamalar",

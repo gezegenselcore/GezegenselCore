@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Ortak kabuk: gc-tech-bg, ana sayfa ile aynı header (tail + dil), ikonlu footer, parallax.
  * node tools/apply-shared-chrome.mjs
  */
@@ -282,7 +282,7 @@ function buildFooter(fromFile, en) {
         ${ICONS.x}
       </a>
     </nav>
-    <p class="site-footer__legal">${en ? "© 2024 Gezegensel Core. All rights reserved." : "© 2024 Gezegensel Core. Tüm hakları saklıdır."}</p>
+    <p class="site-footer__legal">${en ? "© 2024 GezegenselCore. All rights reserved." : "© 2024 GezegenselCore. Tüm hakları saklıdır."}</p>
   </footer>`;
 }
 
@@ -356,7 +356,7 @@ function buildHeader(fromFile, opts) {
 
   return `  <header class="site-header">
     <div class="site-header__inner">
-      <a class="brand" href="${brandHref}">GEZEGENSEL CORE</a>
+      <a class="brand" href="${brandHref}">GezegenselCore</a>
       <div class="site-header__tail">
 ${langBlock}
         <input type="checkbox" id="nav-open" class="nav-toggle">

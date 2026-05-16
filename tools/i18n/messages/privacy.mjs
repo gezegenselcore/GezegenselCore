@@ -1,13 +1,13 @@
-const L = (tr, en) => ({ tr, en });
+﻿const L = (tr, en) => ({ tr, en });
 
 export const PRIVACY = {
   "privacy.meta_title": L(
-    "Gizlilik — Gezegensel Core",
-    "Privacy — Gezegensel Core"
+    "Gizlilik — GezegenselCore",
+    "Privacy — GezegenselCore"
   ),
   "privacy.meta_description": L(
-    "Gezegensel Core sitesi gizlilik notu ve uygulama politikalarına bağlantılar.",
-    "Gezegensel Core site privacy notice and links to app policies."
+    "GezegenselCore sitesi gizlilik notu ve uygulama politikalarına bağlantılar.",
+    "GezegenselCore site privacy notice and links to app policies."
   ),
   "privacy.nav_apps": L(
     "Uygulamalar",

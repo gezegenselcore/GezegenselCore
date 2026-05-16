@@ -1,5 +1,5 @@
-/**
- * Gezegensel Core — path tabanlı dil: yalnızca tr | en. Eski önekler (de, fr, …) EN’ye yönlendirilir.
+﻿/**
+ * GezegenselCore — path tabanlı dil: yalnızca tr | en. Eski önekler (de, fr, …) EN’ye yönlendirilir.
  * Depolama: localStorage "gezegensel-lang" — yalnızca tr / en kalıcı; diğer değerler EN sayılır.
  */
 (function (global) {

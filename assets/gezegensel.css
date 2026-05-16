@@ -1,5 +1,5 @@
-/*!
- * Gezegensel Core — Freelancer zip teması üzerine: TR/EN + okunabilirlik + iç sayfa
+﻿/*!
+ * GezegenselCore — Freelancer zip teması üzerine: TR/EN + okunabilirlik + iç sayfa
  * Asıl tema: assets/freelancer/css/{bootstrap.min.css, main.css}
  */
 
@@ -328,7 +328,7 @@ section.first {
   outline-offset: 3px;
 }
 
-/* Ana sayfa: Politikalar (#policies) hedefliyken sol üst navbar markası (o ekrandaki GEZEGENSEL CORE) */
+/* Ana sayfa: Politikalar (#policies) hedefliyken sol üst navbar markası (o ekrandaki GezegenselCore) */
 @supports selector(:has(*)) {
   body.index:has(#policies:target) .navbar-default .navbar-brand {
     display: none !important;

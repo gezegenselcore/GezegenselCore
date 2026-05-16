@@ -1,25 +1,25 @@
-const L = (tr, en) => ({ tr, en });
+﻿const L = (tr, en) => ({ tr, en });
 
 export const REFOLLOW = {
   "refollow_privacy.meta_title": L(
-    "ReFollow — Gizlilik Politikası | Gezegensel Core",
-    "ReFollow — Privacy Policy | Gezegensel Core"
+    "ReFollow — Gizlilik Politikası | GezegenselCore",
+    "ReFollow — Privacy Policy | GezegenselCore"
   ),
   "refollow_privacy.meta_description": L(
     "ReFollow uygulaması gizlilik politikası — veriler cihazınızda işlenir.",
     "ReFollow app privacy policy — data is processed on your device."
   ),
   "refollow_terms.meta_title": L(
-    "ReFollow — Kullanım Şartları | Gezegensel Core",
-    "ReFollow — Terms of Use | Gezegensel Core"
+    "ReFollow — Kullanım Şartları | GezegenselCore",
+    "ReFollow — Terms of Use | GezegenselCore"
   ),
   "refollow_terms.meta_description": L(
     "ReFollow kullanım şartları.",
     "ReFollow terms of use."
   ),
   "refollow_support.meta_title": L(
-    "ReFollow — Destek | Gezegensel Core",
-    "ReFollow — Support | Gezegensel Core"
+    "ReFollow — Destek | GezegenselCore",
+    "ReFollow — Support | GezegenselCore"
   ),
   "refollow_support.meta_description": L(
     "ReFollow destek ve veri dışa aktarma.",
@@ -78,8 +78,8 @@ export const REFOLLOW = {
     "Hub"
   ),
   "refollow.footer_hub_link": L(
-    "Gezegensel Core",
-    "Gezegensel Core"
+    "GezegenselCore",
+    "GezegenselCore"
   ),
   "refollow.play_store": L(
     "Google Play'den indir",

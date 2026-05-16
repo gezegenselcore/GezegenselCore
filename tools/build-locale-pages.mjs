@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Dil önekli statik sayfalar: yalnızca /tr/… ve /en/…
  * node tools/build-locale-pages.mjs
  */
@@ -186,15 +186,15 @@ function rootIndexRedirect() {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Gezegensel Core</title>
+  <title>GezegenselCore</title>
   <link rel="canonical" href="${ORIGIN}/en/index.html" />
   <script src="/assets/site-path.js"></script>
   <script src="/assets/lang-boot.js"></script>
   <script src="/assets/root-locale-redirect.js"></script>
 </head>
 <body>
-  <p><a href="${ORIGIN}/en/index.html">Gezegensel Core</a></p>
-  <noscript><p><a href="${ORIGIN}/en/index.html">Gezegensel Core (English)</a></p></noscript>
+  <p><a href="${ORIGIN}/en/index.html">GezegenselCore</a></p>
+  <noscript><p><a href="${ORIGIN}/en/index.html">GezegenselCore (English)</a></p></noscript>
 </body>
 </html>`;
 }
@@ -297,8 +297,8 @@ function main() {
   }
 
   write(path.join(ROOT, "index.html"), rootIndexRedirect());
-  write(path.join(ROOT, "privacy.html"), rootRedirectStub("Privacy — Gezegensel Core", "/privacy.html"));
-  write(path.join(ROOT, "support.html"), rootRedirectStub("Support — Gezegensel Core", "/support.html"));
+  write(path.join(ROOT, "privacy.html"), rootRedirectStub("Privacy — GezegenselCore", "/privacy.html"));
+  write(path.join(ROOT, "support.html"), rootRedirectStub("Support — GezegenselCore", "/support.html"));
   write(path.join(ROOT, "aura", "privacy-policy.html"), rootRedirectStub("Privacy Policy — AURA", "/aura/privacy-policy.html"));
   write(path.join(ROOT, "aura", "terms-of-use.html"), rootRedirectStub("Terms of Use — AURA", "/aura/terms-of-use.html"));
   write(path.join(ROOT, "pages", "aura", "support.html"), rootRedirectStub("AURA — Support", "/pages/aura/support.html"));

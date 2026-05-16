@@ -1,14 +1,14 @@
-/** Ana sayfa (hub) — görünür metinler: yalnızca TR ve EN. */
+﻿/** Ana sayfa (hub) — görünür metinler: yalnızca TR ve EN. */
 const L = (tr, en) => ({ tr, en });
 
 export const INDEX = {
   "index.meta_title": L(
-    "Gezegensel Core — AURA ve ReFollow",
-    "Gezegensel Core — AURA & ReFollow"
+    "GezegenselCore — AURA ve ReFollow",
+    "GezegenselCore — AURA & ReFollow"
   ),
   "index.meta_description": L(
-    "Gezegensel Core — AURA (yapay zekâ wellness) ve ReFollow (Instagram içgörüleri). Bağımsız stüdyo.",
-    "Gezegensel Core — AURA (AI wellness) and ReFollow (Instagram insights). Independent studio."
+    "GezegenselCore — AURA (yapay zekâ wellness) ve ReFollow (Instagram içgörüleri). Bağımsız stüdyo.",
+    "GezegenselCore — AURA (AI wellness) and ReFollow (Instagram insights). Independent studio."
   ),
   "index.nav_about": L(
     "Hakkında",
@@ -47,16 +47,16 @@ export const INDEX = {
     "About"
   ),
   "index.about_p1": L(
-    "<strong>Gezegensel Core</strong>, bağımsız bir stüdyo markasıdır; <strong>AURA</strong> ile günlük wellness, sağlık sinyalleri ve yapay zekâ destekli rehberlik; <strong>ReFollow</strong> ile Instagram verisinde net içgörü sunar. Karmaşık veriyi sade arayüzlerle göstermek ve gün içi kararlarınızda ölçülebilir bir özet vermek işimizin merkezindedir.",
-    "<strong>Gezegensel Core</strong> is an independent studio brand: <strong>AURA</strong> focuses on daily wellness, health signals, and AI-guided coaching, while <strong>ReFollow</strong> brings clearer insights from Instagram data. We turn complex information into simple interfaces and measurable, day-to-day guidance."
+    "<strong>GezegenselCore</strong>, bağımsız bir stüdyo markasıdır; <strong>AURA</strong> ile günlük wellness, sağlık sinyalleri ve yapay zekâ destekli rehberlik; <strong>ReFollow</strong> ile Instagram verisinde net içgörü sunar. Karmaşık veriyi sade arayüzlerle göstermek ve gün içi kararlarınızda ölçülebilir bir özet vermek işimizin merkezindedir.",
+    "<strong>GezegenselCore</strong> is an independent studio brand: <strong>AURA</strong> focuses on daily wellness, health signals, and AI-guided coaching, while <strong>ReFollow</strong> brings clearer insights from Instagram data. We turn complex information into simple interfaces and measurable, day-to-day guidance."
   ),
   "index.about_p2": L(
     "Ürünlerde performans, gizlilik odaklı varsayılanlar ve okunabilir veri sunumu ön plandadır. Yapay zekâ; tıbbi teşhis veya kesin gelecek iddiası olmadan rehberlik ve özetleme için kullanılır.",
     "Across products we prioritize performance, privacy-minded defaults, and readable data views. AI is used for coaching and summarization—not medical diagnosis or guaranteed predictions."
   ),
   "index.about_p3": L(
-    "Gezegensel Core, her projede şu prensipleri benimser:",
-    "Gezegensel Core adopts the following principles in every project:"
+    "GezegenselCore, her projede şu prensipleri benimser:",
+    "GezegenselCore adopts the following principles in every project:"
   ),
   "index.about_principle_simplicity": L(
     "<strong>Sadelik:</strong> Karmaşadan uzak, anlaşılır ve kullanıcı dostu tasarımlar",
@@ -79,8 +79,8 @@ export const INDEX = {
     "We evolve products through user feedback and measurable quality. The Apps section below explains what each product does and where to download it."
   ),
   "index.about_p5": L(
-    "<strong>Kısaca:</strong> Gezegensel Core; günlük yaşamda wellness ve sosyal veride netlik sunan, şeffaf ve sade mobil deneyimler üretir.",
-    "<strong>In short:</strong> Gezegensel Core ships transparent, simple mobile experiences—wellness in daily life and clarity in social data."
+    "<strong>Kısaca:</strong> GezegenselCore; günlük yaşamda wellness ve sosyal veride netlik sunan, şeffaf ve sade mobil deneyimler üretir.",
+    "<strong>In short:</strong> GezegenselCore ships transparent, simple mobile experiences—wellness in daily life and clarity in social data."
   ),
   "index.about_h3_apps": L(
     "Uygulamalarımız",
