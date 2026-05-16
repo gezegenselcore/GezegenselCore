@@ -1185,8 +1185,24 @@ body.aura-launch .nav-panel a:focus-visible {
   color: var(--gc-accent);
 }
 
+body.aura-launch .nav-burger {
+  background: rgba(18, 28, 42, 0.9);
+  border-color: rgba(201, 162, 39, 0.28);
+}
+
 body.aura-launch .nav-burger span {
   background: #e8eef5;
+}
+
+body.aura-launch .nav-panel {
+  background: rgba(8, 14, 22, 0.98);
+  border-bottom: 1px solid rgba(201, 162, 39, 0.14);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+}
+
+body.aura-launch .nav-panel a:hover,
+body.aura-launch .nav-panel a:focus-visible {
+  background: rgba(201, 162, 39, 0.14);
 }
 
 body.aura-launch .gc-lang-switch a {
