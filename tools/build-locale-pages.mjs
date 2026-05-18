@@ -73,9 +73,9 @@ function applyHtmlLocaleShell(html, locale) {
 
 function ensureAuraMasters() {
   const pairs = [
-    ["aura-privacy.master.html", path.join(ROOT, "aura", "privacy-policy.html")],
-    ["aura-terms.master.html", path.join(ROOT, "aura", "terms-of-use.html")],
-    ["aura-support.master.html", path.join(ROOT, "pages", "aura", "support.html")],
+    ["aura-privacy.master.html", path.join(ROOT, "tr", "aura", "privacy-policy.html")],
+    ["aura-terms.master.html", path.join(ROOT, "tr", "aura", "terms-of-use.html")],
+    ["aura-support.master.html", path.join(ROOT, "tr", "pages", "aura", "support.html")],
   ];
   for (const [name, livePath] of pairs) {
     const tpl = path.join(ROOT, "tools", "templates", name);
@@ -130,30 +130,69 @@ function processInnerPage(html, relUnderLocale, locale, logicalPath) {
   return applyHtmlLocaleShell(h, locale);
 }
 
+function auraAssetPrefix(logicalPath) {
+  const depth = logicalPath.split("/").filter(Boolean).length;
+  return "../".repeat(depth);
+}
+
+function auraLangSwitchHtml(locale, logicalPath) {
+  const other = locale === "tr" ? "en" : "tr";
+  const px = auraAssetPrefix(logicalPath);
+  const otherHref = `${px}${other}${logicalPath}`;
+  if (locale === "tr") {
+    return [
+      '          <span class="gc-lang-switch__current" aria-current="true">TR</span>',
+      '          <span class="gc-lang-switch__sep" aria-hidden="true">|</span>',
+      `          <a href="${otherHref}">EN</a>`,
+    ].join("\n");
+  }
+  return [
+    `          <a href="${otherHref}">TR</a>`,
+    '          <span class="gc-lang-switch__sep" aria-hidden="true">|</span>',
+    '          <span class="gc-lang-switch__current" aria-current="true">EN</span>',
+  ].join("\n");
+}
+
 function processAuraLegal(html, locale, logicalPath) {
+  const other = locale === "tr" ? "en" : "tr";
+  const assetPx = auraAssetPrefix(logicalPath);
   const canonicalUrl = `${ORIGIN}/${locale}${logicalPath}`;
   let h = expandI18n(html, locale, MESSAGES);
-  h = h.replace(/<link rel="canonical" href="[^"]*" ?\/?>/i, `<link rel="canonical" href="${canonicalUrl}" />`);
-  if (!h.includes('hreflang="tr"')) {
+  h = h.replace(/\{\{locale\}\}/g, locale);
+  h = h.replace(/\{\{localeOther\}\}/g, other);
+  h = h.replace(/\{\{assetPrefix\}\}/g, assetPx);
+  h = h.replace("<!--AURA_LANG_SWITCH-->", auraLangSwitchHtml(locale, logicalPath));
+  h = prependSiteScriptsFlex(h);
+  if (/<link rel="canonical"/i.test(h)) {
+    h = h.replace(/<link rel="canonical" href="[^"]*" ?\/?>/i, `<link rel="canonical" href="${canonicalUrl}" />`);
+  } else {
     h = h.replace(
       /(<meta name="viewport"[^>]*>)/i,
-      "$1\n  " + hreflangBlock(logicalPath).replace(/\n/g, "\n  ")
+      `$1\n  <link rel="canonical" href="${canonicalUrl}" />`
     );
   }
   h = h.replace(
-    /<script src="\/assets\/lang-boot\.js"><\/script>/,
-    `<script src="/assets/site-path.js"></script>\n  <script src="/assets/lang-boot.js"></script>`
+    /https:\/\/gezegenselcore\.com\/\{\{locale\}\}/g,
+    `${ORIGIN}/${locale}`
   );
   h = h.replace(
     /https:\/\/gezegenselcore\.com\/aura\/(privacy-policy|terms-of-use)\.html/g,
     `${ORIGIN}/${locale}/aura/$1.html`
   );
   h = h.replace(
+    /https:\/\/gezegenselcore\.com\/(?:tr|en)\/aura\/(privacy-policy|terms-of-use)\.html/g,
+    `${ORIGIN}/${locale}/aura/$1.html`
+  );
+  h = h.replace(
     /https:\/\/gezegenselcore\.com\/pages\/aura\/support\.html/g,
     `${ORIGIN}/${locale}/pages/aura/support.html`
   );
-  h = h.replace(/<a href="\/">([^<]*)<\/a>/g, `<a href="/${locale}/index.html">$1</a>`);
-  h = injectDesignSystemAuraRoot(h);
+  h = h.replace(/<link rel="alternate" hreflang="[^"]+"[^>]*>\s*/gi, "");
+  const hreflang = hreflangBlock(logicalPath).replace(/\n/g, "\n  ");
+  h = h.replace(/(<meta name="viewport"[^>]*>)/i, `$1\n  ${hreflang}`);
+  if (!h.includes("style.css?v=global1") && !h.includes('class="gc-inner"')) {
+    h = injectDesignSystemAuraRoot(h);
+  }
   return applyHtmlLocaleShell(h, locale);
 }
 
