@@ -1,70 +1,64 @@
-/* AURA kanonik hukuk / destek sayfaları (standalone HTML) — dil seçici */
-:root {
-  --aura-picker-bg: rgba(255, 255, 255, 0.96);
-  --aura-picker-border: rgba(15, 23, 42, 0.12);
-}
-
-.aura-legal-picker {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 50;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 0.35rem;
-  padding: 0.5rem 0.75rem;
-  background: var(--aura-picker-bg);
-  border-bottom: 1px solid var(--aura-picker-border);
-  backdrop-filter: blur(8px);
-}
-
-.aura-legal-picker-label {
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--gc-muted, #5a6a7a);
-  margin-right: 0.25rem;
-}
-
-.aura-legal-picker button {
-  font-family: inherit;
-  font-size: 0.72rem;
-  font-weight: 600;
-  padding: 0.35rem 0.5rem;
-  border-radius: 0.5rem;
-  border: 1px solid #cbd5e1;
-  background: #fff;
-  color: #0f172a;
-  cursor: pointer;
-  line-height: 1.2;
-}
-
-.aura-legal-picker button:hover {
-  border-color: #94a3b8;
-  background: #f8fafc;
-}
-
-.aura-legal-picker button[aria-pressed="true"] {
-  background: var(--gc-lang-active-bg, #2c3d52);
-  color: var(--gc-lang-active-fg, #f1f5f9);
-  border-color: var(--gc-lang-active-border, #1e2d3d);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-}
+/* AURA hukuk sayfaları — içerik dil geçişi (kabuk: style.css gc-inner) */
 
 .aura-legal-fallback-banner {
-  font-size: 0.88rem;
-  color: #334155;
-  background: #f1f3f5;
-  border: 1px solid #cbd5e1;
-  border-radius: 0.5rem;
-  padding: 0.65rem 0.85rem;
-  margin: 0 0 1rem;
+  font-size: 0.92rem;
+  color: var(--gc-ink-muted);
+  background: rgba(201, 162, 39, 0.12);
+  border: 1px solid rgba(201, 162, 39, 0.28);
+  border-radius: var(--gc-radius);
+  padding: 0.75rem 1rem;
+  margin: 0 0 1.25rem;
 }
 
-.aura-legal-body [hidden] {
+.aura-legal-page [hidden] {
   display: none !important;
+}
+
+.gc-aura-legal-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0 0 1.35rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(10, 22, 40, 0.1);
+}
+
+.gc-aura-legal-nav .btn-ghost {
+  font-size: 0.82rem;
+  padding: 0.45rem 0.75rem;
+}
+
+/* Makale içi h1 → sayfa başlığı gc-page-hero’da; içerikte h2 seviyesi */
+.gc-doc article h1 {
+  margin: 0 0 0.75rem;
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: var(--gc-ink);
+}
+
+.gc-doc article table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.75rem 0 1.1rem;
+  font-size: 0.9rem;
+}
+
+.gc-doc article th,
+.gc-doc article td {
+  border: 1px solid rgba(10, 22, 40, 0.14);
+  padding: 0.5rem 0.65rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.gc-doc article th {
+  background: rgba(10, 22, 40, 0.05);
+  font-weight: 700;
+}
+
+.gc-doc article code {
+  font-size: 0.88em;
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  background: rgba(10, 22, 40, 0.06);
 }

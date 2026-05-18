@@ -101,17 +101,11 @@
       mount.dataset.built = "1";
       var prebuilt = mount.querySelector(".gc-lang-btn[data-lang]");
       if (!prebuilt) {
-        if (!/\baura-legal-picker\b/.test(mount.className)) {
-          mount.className = (mount.className ? mount.className + " " : "") + "aura-legal-picker";
-        }
-        var lab = document.createElement("span");
-        lab.className = "aura-legal-picker-label";
-        lab.setAttribute("data-aura-picker-label", "1");
-        mount.appendChild(lab);
         LOCALES.forEach(function (code) {
           var b = document.createElement("button");
           b.type = "button";
-          b.setAttribute("data-aura-lang", code);
+          b.className = "gc-lang-btn";
+          b.setAttribute("data-lang", code);
           b.textContent = BTN_SHORT[code] || code;
           b.setAttribute("aria-pressed", "false");
           b.addEventListener("click", function () {
@@ -126,13 +120,8 @@
           mount.appendChild(b);
         });
       }
-    }
-
-    if (mount) {
-      var pl = mount.querySelector("[data-aura-picker-label]");
-      if (pl) pl.textContent = PICKER_LABELS[ui] || PICKER_LABELS.en;
-      mount.querySelectorAll("[data-aura-lang], .gc-lang-btn[data-lang]").forEach(function (btn) {
-        var code = btn.getAttribute("data-aura-lang") || btn.getAttribute("data-lang");
+      mount.querySelectorAll(".gc-lang-btn[data-lang]").forEach(function (btn) {
+        var code = btn.getAttribute("data-lang");
         btn.setAttribute("aria-pressed", code === ui ? "true" : "false");
       });
     }
@@ -157,8 +146,6 @@
       }
     });
   }
-
-  document.body.classList.add("aura-legal-body");
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", apply);

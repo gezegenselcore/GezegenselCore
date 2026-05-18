@@ -878,6 +878,33 @@ main.gc-inner-main {
   margin: 1.75rem 0;
 }
 
+.gc-doc table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.75rem 0 1.1rem;
+  font-size: 0.9rem;
+}
+
+.gc-doc th,
+.gc-doc td {
+  border: 1px solid rgba(10, 22, 40, 0.14);
+  padding: 0.5rem 0.65rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.gc-doc th {
+  background: rgba(10, 22, 40, 0.05);
+  font-weight: 700;
+}
+
+.gc-doc code {
+  font-size: 0.88em;
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  background: rgba(10, 22, 40, 0.06);
+}
+
 /* İç sayfalar: ürün kartlarıyla aynı cam / gölge dilimi */
 body.gc-inner .gc-doc {
   margin-top: 0;
