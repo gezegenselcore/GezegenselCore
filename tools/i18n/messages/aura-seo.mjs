@@ -9,8 +9,8 @@ export const AURA_SEO = {
     "Privacy Policy — AURA"
   ),
   "aura_privacy.meta_description": L(
-    "AURA uygulaması gizlilik politikası — GezegenselCore.",
-    "AURA app privacy policy — GezegenselCore."
+    "AURA gizlilik politikası — hesap/veri silme, KVKK/GDPR — GezegenselCore.",
+    "AURA privacy policy — account/data deletion, GDPR/KVKK — GezegenselCore."
   ),
   "aura_terms.meta_title": L(
     "Kullanım Koşulları — AURA",
