@@ -1,38 +1,16 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="/favicon.ico" type="image/x-icon">
-  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png">
-  <link rel="icon" type="image/png" sizes="512x512" href="/assets/icon-512.png">
-  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-  <link rel="shortcut icon" href="/favicon.ico">
   <title>GezegenselCore</title>
-  <script>
-    (function () {
-      var n = (navigator.languages && navigator.languages[0]) || navigator.language || "";
-      n = String(n).toLowerCase();
-      var tr = n === "tr" || n.indexOf("tr-") === 0;
-      var h = typeof location !== "undefined" && location.hash ? location.hash : "";
-      var base = tr ? "tr/" : "en/";
-      if (typeof location !== "undefined" && location.replace) {
-        location.replace(base + h);
-      }
-    })();
-  </script>
-  <meta http-equiv="refresh" content="0;url=en/">
-  <noscript>
-    <p style="font-family: system-ui, sans-serif; padding: 1.5rem; text-align: center;">
-      <a href="en/">English</a> · <a href="tr/">Türkçe</a>
-    </p>
-  </noscript>
+  <link rel="canonical" href="https://gezegenselcore.com/en/index.html" />
+  <script src="/assets/site-path.js"></script>
+  <script src="/assets/lang-boot.js"></script>
+  <script src="/assets/root-locale-redirect.js"></script>
 </head>
 <body>
-  <p style="font-family: system-ui, sans-serif; padding: 1.5rem; text-align: center; line-height: 1.6;">
-    <a href="tr/">Türkçe</a>
-    ·
-    <a href="en/">English</a>
-  </p>
+  <p><a href="https://gezegenselcore.com/en/index.html">GezegenselCore</a></p>
+  <noscript><p><a href="https://gezegenselcore.com/en/index.html">GezegenselCore (English)</a></p></noscript>
 </body>
 </html>

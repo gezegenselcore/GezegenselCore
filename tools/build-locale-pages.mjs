@@ -206,6 +206,7 @@ function rootRedirectStub(title, logical) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,follow" />
   <title>${title.replace(/—/g, "-")}</title>
   <link rel="canonical" href="${ORIGIN}/en${logical}" />
   <script src="/assets/site-path.js"></script>
@@ -213,7 +214,7 @@ function rootRedirectStub(title, logical) {
   <script src="/assets/legacy-path-redirect.js" data-logical="${logical}"></script>
 </head>
 <body>
-  <p><a href="${ORIGIN}/en${logical}">Continue</a></p>
+  <p><a href="${ORIGIN}/tr${logical}">Türkçe</a> · <a href="${ORIGIN}/en${logical}">English</a></p>
   <noscript><p><a href="${ORIGIN}/en${logical}">Continue (English)</a></p></noscript>
 </body>
 </html>`;
