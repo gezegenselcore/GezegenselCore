@@ -25,7 +25,8 @@ const TARGETS = [
 ];
 
 function extractArticles(html) {
-  const m = html.match(
+  const stripped = html.replace(/<div id="aura-legal-picker"[^>]*><\/div>\s*/gi, "");
+  const m = stripped.match(
     /<article id="aura-block-tr"[\s\S]*?<\/article>\s*<article id="aura-block-en"[\s\S]*?<\/article>/
   );
   if (!m) throw new Error("Could not extract aura-block articles");

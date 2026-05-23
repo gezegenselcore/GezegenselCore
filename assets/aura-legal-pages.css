@@ -1,5 +1,11 @@
 /* AURA hukuk sayfaları — içerik dil geçişi (kabuk: style.css gc-inner) */
 
+#aura-legal-picker,
+.aura-legal-picker,
+.aura-legal-picker--embedded {
+  display: none !important;
+}
+
 .aura-legal-fallback-banner {
   font-size: 0.92rem;
   color: var(--gc-ink-muted);

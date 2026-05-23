@@ -1,12 +1,9 @@
 /**
- * AURA kanonik hukuk / destek HTML sayfaları — yalnızca TR ve EN.
- * /{locale}/… URL'lerinde dil düğmesi aynı sayfanın başka dil yoluna gider (site-path).
+ * AURA hukuk / destek — TR ve EN gövde blokları.
+ * Dil: yalnızca URL öneki (/tr/ | /en/) ve üst menüdeki gc-lang-switch; sayfa içi TR/EN yok.
  */
 (function () {
   var STORAGE_KEY = "gezegensel-lang";
-  var LOCALES = ["tr", "en"];
-  var PICKER_LABELS = { tr: "Dil", en: "Language" };
-  var BTN_SHORT = { tr: "TR", en: "EN" };
 
   function normalize(v) {
     if (!v || typeof v !== "string") return null;
@@ -16,42 +13,17 @@
     return null;
   }
 
-  function mapNavigatorToLocale() {
-    var list =
-      typeof navigator !== "undefined"
-        ? navigator.languages || [navigator.language || navigator.userLanguage || "en"]
-        : ["en"];
-    for (var i = 0; i < list.length; i++) {
-      var n = normalize(String(list[i]));
-      if (n) return n;
-    }
-    return "en";
-  }
-
-  function detectLocale() {
+  function localeFromPath() {
     if (typeof GezegenselSitePath !== "undefined") {
       var seg = GezegenselSitePath.getLocaleSegmentFromPathname(location.pathname);
-      if (seg) return normalize(seg) || "en";
+      if (seg) return normalize(seg);
     }
-    try {
-      var s = normalize(localStorage.getItem(STORAGE_KEY));
-      if (s) return s;
-      var legacy = normalize(localStorage.getItem("aura-public-lang"));
-      if (legacy) {
-        localStorage.setItem(STORAGE_KEY, legacy);
-        localStorage.removeItem("aura-public-lang");
-        return legacy;
-      }
-    } catch (e) {}
-    return mapNavigatorToLocale();
+    var parts = (location.pathname || "").replace(/^\/+/, "").split("/");
+    return normalize(parts[0] || "");
   }
 
-  function contentLang(ui) {
-    return ui === "tr" ? "tr" : "en";
-  }
-
-  function bcp47(ui) {
-    return ui === "tr" ? "tr" : "en";
+  function contentLang() {
+    return localeFromPath() === "tr" ? "tr" : "en";
   }
 
   function setDir() {
@@ -65,27 +37,27 @@
     });
   }
 
-  function persist(ui) {
-    try {
-      localStorage.setItem(STORAGE_KEY, ui === "tr" ? "tr" : "en");
-    } catch (e) {}
+  function removeInPagePicker() {
+    document.querySelectorAll("#aura-legal-picker, .aura-legal-picker").forEach(function (el) {
+      el.remove();
+    });
   }
 
   function apply() {
-    var ui = detectLocale();
-    var mount = document.getElementById("aura-legal-picker");
     var trBlock = document.getElementById("aura-block-tr");
     var enBlock = document.getElementById("aura-block-en");
-    var banner = document.getElementById("aura-legal-fallback-banner");
     if (!trBlock || !enBlock) return;
 
-    setDir();
-    document.documentElement.setAttribute("lang", bcp47(ui));
+    removeInPagePicker();
 
-    var c = contentLang(ui);
+    var c = contentLang();
+    setDir();
+    document.documentElement.setAttribute("lang", c === "tr" ? "tr" : "en");
+
     trBlock.hidden = c !== "tr";
     enBlock.hidden = c !== "en";
 
+    var banner = document.getElementById("aura-legal-fallback-banner");
     if (banner) {
       banner.textContent = "";
       banner.hidden = true;
@@ -97,48 +69,23 @@
       document.title = c === "tr" ? titleTr : titleEn;
     }
 
-    if (mount && !mount.dataset.built) {
-      mount.dataset.built = "1";
-      var prebuilt = mount.querySelector(".gc-lang-btn[data-lang]");
-      if (!prebuilt) {
-        LOCALES.forEach(function (code) {
-          var b = document.createElement("button");
-          b.type = "button";
-          b.className = "gc-lang-btn";
-          b.setAttribute("data-lang", code);
-          b.textContent = BTN_SHORT[code] || code;
-          b.setAttribute("aria-pressed", "false");
-          b.addEventListener("click", function () {
-            persist(code);
-            if (typeof GezegenselSitePath !== "undefined") {
-              GezegenselSitePath.navigateToLocaleSegment(code);
-              return;
-            }
-            apply();
-            scrollAccountDeletionIfNeeded();
-          });
-          mount.appendChild(b);
-        });
-      }
-      mount.querySelectorAll(".gc-lang-btn[data-lang]").forEach(function (btn) {
-        var code = btn.getAttribute("data-lang");
-        btn.setAttribute("aria-pressed", code === ui ? "true" : "false");
-      });
-    }
+    try {
+      localStorage.setItem(STORAGE_KEY, c);
+    } catch (e) {}
 
     scrollAccountDeletionIfNeeded();
   }
 
   function scrollAccountDeletionIfNeeded() {
-    var raw = (typeof location !== "undefined" && location.hash) || "";
-    if (raw.replace(/^#/, "") !== "account-deletion") return;
-    var c = contentLang(detectLocale());
+    var raw = (location.hash || "").replace(/^#/, "");
+    if (raw !== "account-deletion") return;
+    var c = contentLang();
     var el =
       c === "tr"
         ? document.getElementById("account-deletion")
         : document.getElementById("account-deletion-en");
     if (!el) return;
-    window.requestAnimationFrame(function () {
+    requestAnimationFrame(function () {
       try {
         el.scrollIntoView({ block: "start", behavior: "smooth" });
       } catch (e) {

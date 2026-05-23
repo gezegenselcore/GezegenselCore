@@ -42,7 +42,8 @@ const SPECS = [
 ];
 
 function extractArticles(html) {
-  const m = html.match(
+  const stripped = html.replace(/<div id="aura-legal-picker"[^>]*><\/motion>\s*/gi, "").replace(/<div id="aura-legal-picker"[^>]*><\/motion>\s*/gi, "");
+  const m = stripped.replace(/<div id="aura-legal-picker"[^>]*>\s*<\/motion>\s*/gi, "").match(
     /<article id="aura-block-tr"[\s\S]*?<\/article>\s*<article id="aura-block-en"[\s\S]*?<\/article>/
   );
   if (!m) throw new Error("Could not extract aura-block articles");

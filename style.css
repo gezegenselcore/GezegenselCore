@@ -1060,17 +1060,7 @@ body.gc-inner .gc-doc a.btn-ghost {
   box-shadow: 0 0 0 1px rgba(201, 162, 39, 0.2);
 }
 
-/* AURA hukuk: dil seçici */
-#aura-legal-picker {
-  max-width: 48rem;
-  margin: 0 auto;
-  padding: 0.75rem 1.25rem 0;
-}
-
 .aura-legal-fallback-banner {
-  max-width: 48rem;
-  margin: 0 auto;
-  padding: 0.5rem 1.25rem;
   font-size: 0.9rem;
   color: var(--gc-ink-muted);
 }
