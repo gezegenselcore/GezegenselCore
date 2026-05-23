@@ -1,6 +1,6 @@
 /**
  * AURA hukuk / destek — TR ve EN gövde blokları.
- * Dil: yalnızca URL öneki (/tr/ | /en/) ve üst menüdeki gc-lang-switch; sayfa içi TR/EN yok.
+ * Dil: URL öneki (/tr/ | /en/), yoksa <html lang> (build ile uyumlu).
  */
 (function () {
   var STORAGE_KEY = "gezegensel-lang";
@@ -18,12 +18,20 @@
       var seg = GezegenselSitePath.getLocaleSegmentFromPathname(location.pathname);
       if (seg) return normalize(seg);
     }
-    var parts = (location.pathname || "").replace(/^\/+/, "").split("/");
-    return normalize(parts[0] || "");
+    var parts = (location.pathname || "").replace(/^\/+/, "").split("/").filter(Boolean);
+    for (var i = 0; i < parts.length; i++) {
+      var n = normalize(parts[i]);
+      if (n) return n;
+    }
+    return null;
+  }
+
+  function localeFromDocument() {
+    return normalize(document.documentElement.getAttribute("lang") || "");
   }
 
   function contentLang() {
-    return localeFromPath() === "tr" ? "tr" : "en";
+    return localeFromPath() || localeFromDocument() || "en";
   }
 
   function setDir() {
@@ -51,11 +59,12 @@
     removeInPagePicker();
 
     var c = contentLang();
+    var isTr = c === "tr";
     setDir();
-    document.documentElement.setAttribute("lang", c === "tr" ? "tr" : "en");
+    document.documentElement.setAttribute("lang", isTr ? "tr" : "en");
 
-    trBlock.hidden = c !== "tr";
-    enBlock.hidden = c !== "en";
+    trBlock.hidden = !isTr;
+    enBlock.hidden = isTr;
 
     var banner = document.getElementById("aura-legal-fallback-banner");
     if (banner) {
@@ -66,7 +75,7 @@
     var titleTr = document.body.getAttribute("data-title-tr");
     var titleEn = document.body.getAttribute("data-title-en");
     if (titleTr && titleEn) {
-      document.title = c === "tr" ? titleTr : titleEn;
+      document.title = isTr ? titleTr : titleEn;
     }
 
     try {

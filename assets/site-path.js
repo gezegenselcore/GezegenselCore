@@ -73,10 +73,15 @@
   }
 
   function getLocaleSegmentFromPathname(pathname) {
-    var p = String(pathname || "").replace(/^\/+|\/+$/g, "");
-    if (!p) return null;
-    var first = p.split("/")[0].toLowerCase();
-    return isCanonicalLocaleSegment(first) ? first : null;
+    var parts = String(pathname || "")
+      .replace(/^\/+|\/+$/g, "")
+      .split("/")
+      .filter(Boolean);
+    for (var i = 0; i < parts.length; i++) {
+      var seg = parts[i].toLowerCase();
+      if (isCanonicalLocaleSegment(seg)) return seg;
+    }
+    return null;
   }
 
   /**

@@ -20,6 +20,15 @@
   display: none !important;
 }
 
+/* JS yüklenmeden önce ve locale algılama yedek: build’in html lang değeri */
+html[lang="tr"] .aura-legal-page #aura-block-en {
+  display: none !important;
+}
+
+html[lang="en"] .aura-legal-page #aura-block-tr {
+  display: none !important;
+}
+
 .gc-aura-legal-nav {
   display: flex;
   flex-wrap: wrap;
