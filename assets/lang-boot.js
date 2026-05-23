@@ -14,14 +14,16 @@
 
   function fromPath() {
     try {
-      var p = (typeof location !== "undefined" ? location.pathname : "")
+      var parts = (typeof location !== "undefined" ? location.pathname : "")
         .replace(/^\/+/, "")
-        .split("/");
-      var seg = (p[0] || "").toLowerCase();
-      return LOCALE_SEGMENTS.indexOf(seg) >= 0 ? seg : null;
-    } catch (e) {
-      return null;
-    }
+        .split("/")
+        .filter(Boolean);
+      for (var i = 0; i < parts.length; i++) {
+        var seg = (parts[i] || "").toLowerCase();
+        if (LOCALE_SEGMENTS.indexOf(seg) >= 0) return seg;
+      }
+    } catch (e) {}
+    return null;
   }
 
   function fromNavigator() {

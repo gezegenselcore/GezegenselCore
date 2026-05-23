@@ -131,6 +131,21 @@ function parallaxSrc(fromFile) {
   return `${depth ? "../".repeat(depth) : ""}assets/gc-home-parallax.js`.replace(/^\//, "");
 }
 
+function siteScriptsPrefix(fromFile) {
+  const d = posixDirname(fromFile);
+  const depth = d && d !== "." ? d.split("/").filter(Boolean).length : 0;
+  return depth ? "../".repeat(depth) : "";
+}
+
+function ensureSiteScripts(html, fromFile) {
+  if (html.includes("site-path.js")) return html;
+  const pre = siteScriptsPrefix(fromFile);
+  return html.replace(
+    /(<meta charset="utf-8">)/i,
+    `$1\n  <script src="${pre}assets/site-path.js"></script>\n  <script src="${pre}assets/lang-boot.js"></script>`
+  );
+}
+
 function ensureStylesheetVersion(html) {
   const v = STYLE_QUERY;
   return html.replace(/href="([^"]*?)style\.css(\?[^"]*)?"/g, (full, prefix, query) => {
@@ -442,6 +457,7 @@ function patch(html, fromFile) {
   out = ensureStylesheetVersion(out);
   out = ensureFontAwesomeLink(out);
   out = ensureFaviconLinks(out);
+  out = ensureSiteScripts(out, posixFile);
   out = ensureSeoForLocalePages(out, posixFile);
   out = ensureNoindexForNonLocale(out, posixFile);
 

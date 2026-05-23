@@ -43,6 +43,7 @@ export function buildAuraLegalMaster(cfg) {
 <html lang="{{locale}}" dir="ltr">
 <head>
   <meta charset="utf-8">
+  <script src="${assetPrefix}assets/site-path.js"></script>
   <script src="${assetPrefix}assets/lang-boot.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="/favicon.ico" type="image/x-icon">

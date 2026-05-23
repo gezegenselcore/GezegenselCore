@@ -959,6 +959,16 @@ body.gc-inner .gc-doc a.btn-ghost {
   margin-bottom: 2.5rem;
 }
 
+/* TR / EN policy blocks — lang-boot sets data-ui-locale / data-boot-l10n on <html> */
+html[data-boot-l10n="tr"] .policy-locale-en,
+html[data-ui-locale="tr"] .policy-locale-en {
+  display: none !important;
+}
+html[data-boot-l10n="en"] .policy-locale-tr,
+html[data-ui-locale="en"] .policy-locale-tr {
+  display: none !important;
+}
+
 .lang-block h2 {
   margin-top: 0;
   padding-bottom: 0.35rem;
