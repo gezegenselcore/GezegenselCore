@@ -289,9 +289,6 @@ function writeSitemap() {
 function main() {
   ensureAuraMasters();
 
-  const indexMaster = read(path.join(ROOT, "tools", "templates", "index.master.html"));
-  const privacyMaster = read(path.join(ROOT, "tools", "templates", "privacy.master.html"));
-  const supportMaster = read(path.join(ROOT, "tools", "templates", "support.master.html"));
   const auraPrivacy = read(path.join(ROOT, "tools", "templates", "aura-privacy.master.html"));
   const auraTerms = read(path.join(ROOT, "tools", "templates", "aura-terms.master.html"));
   const auraSupport = read(path.join(ROOT, "tools", "templates", "aura-support.master.html"));
@@ -300,14 +297,8 @@ function main() {
   const rfSupport = read(path.join(ROOT, "pages", "refollow", "policies", "support.html"));
 
   for (const loc of LOCALES) {
-    const indexOut = processInnerPage(expandI18n(indexMaster, loc, MESSAGES), "index.html", loc, "/index.html");
-    write(path.join(ROOT, loc, "index.html"), indexOut);
-
-    const priv = processInnerPage(expandI18n(privacyMaster, loc, MESSAGES), "privacy.html", loc, "/privacy.html");
-    write(path.join(ROOT, loc, "privacy.html"), priv);
-
-    const sup = processInnerPage(expandI18n(supportMaster, loc, MESSAGES), "support.html", loc, "/support.html");
-    write(path.join(ROOT, loc, "support.html"), sup);
+    /* Hub pages use style.css chrome — hand-maintained; do not overwrite from legacy Freelancer masters. */
+    // index.html, privacy.html, support.html skipped intentionally
 
     write(path.join(ROOT, loc, "aura", "privacy-policy.html"), processAuraLegal(auraPrivacy, loc, "/aura/privacy-policy.html"));
     write(path.join(ROOT, loc, "aura", "terms-of-use.html"), processAuraLegal(auraTerms, loc, "/aura/terms-of-use.html"));
