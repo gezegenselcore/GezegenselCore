@@ -1,0 +1,84 @@
+/* Anima kanonik hukuk / destek sayfaları (standalone HTML) — dil seçici */
+:root {
+  --anima-picker-bg: rgba(255, 255, 255, 0.96);
+  --anima-picker-border: rgba(15, 23, 42, 0.12);
+}
+
+body.anima-legal-body {
+  padding-top: 3.25rem;
+}
+
+.anima-legal-picker {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.35rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--anima-picker-bg);
+  border-bottom: 1px solid var(--anima-picker-border);
+  backdrop-filter: blur(8px);
+}
+
+.anima-legal-picker-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #64748b;
+  margin-right: 0.25rem;
+}
+
+.anima-legal-picker button {
+  font-family: inherit;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.35rem 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #cbd5e1;
+  background: #fff;
+  color: #0f172a;
+  cursor: pointer;
+  line-height: 1.2;
+}
+
+.anima-legal-picker button:hover {
+  border-color: #94a3b8;
+  background: #f8fafc;
+}
+
+.anima-legal-picker button[aria-pressed="true"] {
+  background: #0d2137;
+  color: #e0f2fe;
+  border-color: #0d2137;
+}
+
+.anima-legal-fallback-banner {
+  font-size: 0.88rem;
+  color: #334155;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 0.5rem;
+  padding: 0.65rem 0.85rem;
+  margin: 0 0 1rem;
+}
+
+.anima-legal-body [hidden] {
+  display: none !important;
+}
+
+/* Arapça kabuk (html dir=rtl): dil şeridi sağdan okunur; hukuk gövdesi article içinde LTR kalır */
+html[dir="rtl"] .anima-legal-picker {
+  justify-content: flex-start;
+  flex-direction: row-reverse;
+}
+
+html[dir="rtl"] .anima-legal-picker-label {
+  margin-right: 0;
+  margin-left: 0.35rem;
+}

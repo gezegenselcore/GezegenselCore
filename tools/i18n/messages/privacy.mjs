@@ -42,8 +42,8 @@ export const PRIVACY = {
     "Site privacy notice"
   ),
   "privacy.intro": L(
-    "Bu site statiktir: tarayıcıda kişisel veri toplamıyoruz; çerez veya izleme kullanmıyoruz. <strong>AURA</strong> ve <strong>ReFollow</strong> uygulamaları kendi gizlilik kurallarıyla çalışır — aşağıdaki bağlantılar resmi uygulama metinleridir.",
-    "This site is static: we do not collect personal data in the browser and do not use cookies or tracking here. <strong>AURA</strong> and <strong>ReFollow</strong> follow their own privacy rules—the links below are the official app documents."
+    "Bu site statiktir: tarayıcıda kişisel veri toplamıyoruz; çerez veya izleme kullanmıyoruz. <strong>Anima</strong> ve <strong>ReFollow</strong> uygulamaları kendi gizlilik kurallarıyla çalışır — aşağıdaki bağlantılar resmi uygulama metinleridir.",
+    "This site is static: we do not collect personal data in the browser and do not use cookies or tracking here. <strong>Anima</strong> and <strong>ReFollow</strong> follow their own privacy rules—the links below are the official app documents."
   ),
   "privacy.h3_apps": L(
     "Uygulama gizlilik politikaları",
@@ -58,12 +58,12 @@ export const PRIVACY = {
     "ReFollow — Privacy Policy"
   ),
   "privacy.link_aura_privacy": L(
-    "AURA — Gizlilik Politikası",
-    "AURA — Privacy Policy"
+    "Anima — Gizlilik Politikası",
+    "Anima — Privacy Policy"
   ),
   "privacy.link_aura_terms": L(
-    "AURA — Kullanım Koşulları",
-    "AURA — Terms of Use"
+    "Anima — Kullanım Koşulları",
+    "Anima — Terms of Use"
   ),
   "privacy.updated": L(
     "Son güncelleme: 18 Nisan 2026",

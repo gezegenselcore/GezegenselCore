@@ -1,6 +1,6 @@
 # Marka web sitesi — teknoloji yığını (bu repo)
 
-Bu repository **statik bir marka sitesidir** (GitHub Pages). **React Native / Expo kodu burada değildir**; mobil uygulama yığını için bkz. `docs/MOBILE_APP_STACK.md` ve Aura monoreposu.
+Bu repository **statik bir marka sitesidir** (GitHub Pages). **React Native / Expo kodu burada değildir**; mobil uygulama yığını için bkz. `docs/MOBILE_APP_STACK.md` ve Anima monoreposu.
 
 ## Çekirdek
 
@@ -29,7 +29,7 @@ node tools\apply-shared-chrome.mjs
 ## Varlıklar ve çok dillilik
 
 - **`assets/site-path.js`**, **`lang-boot.js`**, **`gezegensel.js`**, **`legacy-path-redirect.js`**, **`root-locale-redirect.js`**: URL segmenti (`tr` \| `en`), legacy yollar, isteğe bağlı UI dili.  
-- **AURA kamu hukuk:** `assets/aura-legal-pages.js` (+ ilgili CSS), tam gövde TR/EN.  
+- **Anima kamu hukuk:** `assets/anima-legal-pages.js` (+ ilgili CSS), tam gövde TR/EN.  
 - **İkonlar:** Footer’da **satır içi SVG**; ReFollow destek sayfasındaki Google Play rozeti için **Font Awesome 6** (CDN, yalnız ilgili HTML’lerde).
 
 ## Eski tema dosyaları (`assets/freelancer/`, `gc-design-system.css`)

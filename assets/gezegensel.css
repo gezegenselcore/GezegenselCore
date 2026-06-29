@@ -360,7 +360,7 @@ section.first {
 }
 
 /*
- * İç sayfalar (support, privacy, pages/aura/…): navbar zemini açık / yarı saydam beyaz.
+ * İç sayfalar (support, privacy, pages/anima/…): navbar zemini açık / yarı saydam beyaz.
  * Freelancer + scroll öncesi durumda bağlantılar açık gri veya tema varsayılanıyla kaybolabiliyor;
  * marka ve menüyü her zaman koyu renkte tut.
  */
@@ -740,7 +740,7 @@ section.success code {
   color: var(--gc-prose-heading);
 }
 
-/* Eski Bootstrap gövdeli hukuk düzeni (referans); kanonik AURA metinleri /aura/*.html içinde gömülü CSS */
+/* Eski Bootstrap gövdeli hukuk düzeni (referans); kanonik Anima metinleri /anima/*.html içinde gömülü CSS */
 .gc-prose.gc-legal {
   max-width: 40rem;
 }
@@ -857,7 +857,7 @@ section.success code {
   }
 }
 
-/* --- Marka kökü (index): AURA vurgusu + güven satırı — navbar/header seçicileri yok --- */
+/* --- Marka kökü (index): Anima vurgusu + güven satırı — navbar/header seçicileri yok --- */
 .index .gc-app-card--featured {
   border: 1px solid rgba(13, 33, 55, 0.14);
   box-shadow: 0 10px 36px rgba(15, 23, 42, 0.1);

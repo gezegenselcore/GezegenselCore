@@ -1,8 +1,8 @@
-# Aura mobil uygulama — teknoloji yığını (özet)
+# Anima mobil uygulama — teknoloji yığını (özet)
 
-**gezegenselcore.com** deposu yalnızca **statik web** içerir. **AURA** uygulamasının kaynak kodu ve mobil yığın ayrı repoda (**Aura** / `D:\GezegenselCore\Aura`) tutulur. Bu belge, web dokümantasyonu ile hizalı kısa bir referanstır.
+**gezegenselcore.com** deposu yalnızca **statik web** içerir. **Anima** uygulamasının kaynak kodu ve mobil yığın ayrı repoda (**Anima** / `D:\GezegenselCore\Anima`) tutulur. Bu belge, web dokümantasyonu ile hizalı kısa bir referanstır.
 
-## Tipik Aura yığını (Aura reposuna bakın)
+## Tipik Anima yığını (Anima reposuna bakın)
 
 | Alan | Teknoloji (özet) |
 |------|-------------------|
@@ -15,6 +15,6 @@
 
 - Kamu **Gizlilik**, **Koşullar**, **Destek** URL’leri: `https://gezegenselcore.com/tr/…` veya `…/en/…` (uygulama dili `tr` değilse `en`).  
 - Ayrıntılı kural: **`docs/APP_WEB_ALIGNMENT.md`**.  
-- Aura içi hukuk metinleri ve uygulama davranışı: Aura reposunda `docs/legal/`, `legal-public/` vb.
+- Anima içi hukuk metinleri ve uygulama davranışı: Anima reposunda `docs/legal/`, `legal-public/` vb.
 
 Son güncelleme: 2026-04-18

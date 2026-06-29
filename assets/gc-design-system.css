@@ -246,9 +246,9 @@ main.gc-main > section:not(.success) hr.star-primary:after {
   }
 }
 
-/* ——— AURA: navbar içi dil şeridi ——— */
-.navbar .aura-legal-picker,
-.aura-legal-picker--embedded {
+/* ——— Anima: navbar içi dil şeridi ——— */
+.navbar .anima-legal-picker,
+.anima-legal-picker--embedded {
   position: static !important;
   top: auto !important;
   left: auto !important;
@@ -267,16 +267,16 @@ main.gc-main > section:not(.success) hr.star-primary:after {
   backdrop-filter: none !important;
 }
 
-.navbar .aura-legal-picker-label {
+.navbar .anima-legal-picker-label {
   display: none;
 }
 
-.aura-legal-body.inner-page .gc-main .gc-prose.gc-legal {
+.anima-legal-body.inner-page .gc-main .gc-prose.gc-legal {
   padding-top: 0.5rem;
 }
 
 @media (max-width: 767px) {
-  .navbar .aura-legal-picker {
+  .navbar .anima-legal-picker {
     width: 100%;
     justify-content: flex-start;
     margin-top: 0.35rem;

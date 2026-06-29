@@ -1,10 +1,8 @@
 /**
- * AURA hukuk / destek — TR ve EN gövde blokları.
+ * Anima hukuk / destek — TR ve EN gövde blokları.
  * Dil: URL öneki (/tr/ | /en/), yoksa <html lang> (build ile uyumlu).
  */
 (function () {
-  var STORAGE_KEY = "gezegensel-lang";
-
   function normalize(v) {
     if (!v || typeof v !== "string") return null;
     var low = v.trim().toLowerCase().replace(/_/g, "-");
@@ -36,7 +34,7 @@
 
   function setDir() {
     document.documentElement.dir = "ltr";
-    ["aura-block-tr", "aura-block-en"].forEach(function (id) {
+    ["anima-block-tr", "anima-block-en"].forEach(function (id) {
       var el = document.getElementById(id);
       if (el) {
         el.setAttribute("dir", "ltr");
@@ -46,14 +44,14 @@
   }
 
   function removeInPagePicker() {
-    document.querySelectorAll("#aura-legal-picker, .aura-legal-picker").forEach(function (el) {
+    document.querySelectorAll("#anima-legal-picker, .anima-legal-picker").forEach(function (el) {
       el.remove();
     });
   }
 
   function apply() {
-    var trBlock = document.getElementById("aura-block-tr");
-    var enBlock = document.getElementById("aura-block-en");
+    var trBlock = document.getElementById("anima-block-tr");
+    var enBlock = document.getElementById("anima-block-en");
     if (!trBlock || !enBlock) return;
 
     removeInPagePicker();
@@ -66,7 +64,7 @@
     trBlock.hidden = !isTr;
     enBlock.hidden = isTr;
 
-    var banner = document.getElementById("aura-legal-fallback-banner");
+    var banner = document.getElementById("anima-legal-fallback-banner");
     if (banner) {
       banner.textContent = "";
       banner.hidden = true;
@@ -78,25 +76,21 @@
       document.title = isTr ? titleTr : titleEn;
     }
 
-    try {
-      localStorage.setItem(STORAGE_KEY, c);
-    } catch (e) {}
-
     scrollAccountDeletionIfNeeded();
   }
 
   function scrollAccountDeletionIfNeeded() {
-    var raw = (location.hash || "").replace(/^#/, "");
-    if (raw !== "account-deletion") return;
+    var raw = (typeof location !== "undefined" && location.hash) || "";
+    if (raw.replace(/^#/, "") !== "account-deletion") return;
     var c = contentLang();
     var el =
       c === "tr"
         ? document.getElementById("account-deletion")
         : document.getElementById("account-deletion-en");
     if (!el) return;
-    requestAnimationFrame(function () {
+    window.requestAnimationFrame(function () {
       try {
-        el.scrollIntoView({ block: "start", behavior: "smooth" });
+        el.scrollIntoView({ block: "start", behavior: "auto" });
       } catch (e) {
         el.scrollIntoView(true);
       }

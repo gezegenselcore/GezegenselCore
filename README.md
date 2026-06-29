@@ -2,11 +2,11 @@
 
 **Canlı site:** [gezegenselcore.com](https://gezegenselcore.com)
 
-GezegenselCore; **AURA** ve **ReFollow** gibi yapay zekâ ve veri odaklı dijital ürünlerin marka ve bilgilendirme sitesidir. Statik HTML; Türkçe ve İngilizce (`/tr/…`, `/en/…`).
+GezegenselCore; **Anima** ve **ReFollow** gibi yapay zekâ ve veri odaklı dijital ürünlerin marka ve bilgilendirme sitesidir. Statik HTML; Türkçe ve İngilizce (`/tr/…`, `/en/…`).
 
 ## Ürünler
 
-- **AURA** — [gezegenselcore.com/tr/aura/](https://gezegenselcore.com/tr/aura/) · [English](https://gezegenselcore.com/en/aura/)
+- **Anima** — [gezegenselcore.com/tr/anima/](https://gezegenselcore.com/tr/anima/) · [English](https://gezegenselcore.com/en/anima/)
 - Uygulama mağazası ve güncel politikalar canlı sitedeki ilgili sayfalardadır.
 
 ## İletişim

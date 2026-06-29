@@ -1,6 +1,6 @@
 /**
- * Aura mobil reposu legal-public → site tr/ kaynak sayfalar (article gövdeleri).
- * node tools/import-aura-legal-content.mjs [path/to/Aura/legal-public]
+ * Anima mobil reposu legal-public → site tr/ kaynak sayfalar (article gövdeleri).
+ * node tools/import-anima-legal-content.mjs [path/to/Anima/legal-public]
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -8,37 +8,37 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
-const DEFAULT_AURA = path.join(ROOT, "..", "Aura", "legal-public");
+const DEFAULT_ANIMA = path.join(ROOT, "..", "Anima", "legal-public");
 
 const TARGETS = [
   {
-    source: "aura/privacy-policy.html",
-    dest: "tr/aura/privacy-policy.html",
+    source: "anima/privacy-policy.html",
+    dest: "tr/anima/privacy-policy.html",
     patchPrivacyS14: true,
   },
-  { source: "aura/terms-of-use.html", dest: "tr/aura/terms-of-use.html" },
+  { source: "anima/terms-of-use.html", dest: "tr/anima/terms-of-use.html" },
   {
-    source: "aura/support.html",
-    dest: "tr/pages/aura/support.html",
+    source: "anima/support.html",
+    dest: "tr/pages/anima/support.html",
     fixSupport: true,
   },
 ];
 
 function extractArticles(html) {
-  const stripped = html.replace(/<div id="aura-legal-picker"[^>]*><\/div>\s*/gi, "");
+  const stripped = html.replace(/<div id="anima-legal-picker"[^>]*><\/div>\s*/gi, "");
   const m = stripped.match(
-    /<article id="aura-block-tr"[\s\S]*?<\/article>\s*<article id="aura-block-en"[\s\S]*?<\/article>/
+    /<article id="anima-block-tr"[\s\S]*?<\/article>\s*<article id="anima-block-en"[\s\S]*?<\/article>/
   );
-  if (!m) throw new Error("Could not extract aura-block articles");
+  if (!m) throw new Error("Could not extract anima-block articles");
   return m[0];
 }
 
 function normalizeForTrSource(articles, assetPrefix, destRel) {
   let a = articles;
-  if (destRel.includes("pages/aura/support")) {
+  if (destRel.includes("pages/anima/support")) {
     a = a.replace(
       /https:\/\/gezegenselcore\.com\/en\/aura\/privacy-policy\.html/,
-      "../../tr/aura/privacy-policy.html"
+      "../../tr/anima/privacy-policy.html"
     );
   }
   return a;
@@ -46,7 +46,7 @@ function normalizeForTrSource(articles, assetPrefix, destRel) {
 
 const PRIVACY_S14_TR = `
     <h2>14. Anonim topluluk öğrenmesi</h2>
-    <p>Aura, hizmetlerini iyileştirmek için açık rızanızla anonim kullanım örüntüleri toplayabilir.</p>
+    <p>Anima, hizmetlerini iyileştirmek için açık rızanızla anonim kullanım örüntüleri toplayabilir.</p>
     <h3>Toplananlar</h3>
     <ul>
       <li>Yaş grubu (18–25, 26–64, 65+)</li>
@@ -72,7 +72,7 @@ const PRIVACY_S14_TR = `
 
 const PRIVACY_S14_EN = `
     <h2>14. Anonymous Community Learning</h2>
-    <p>Aura may collect anonymous usage patterns with your explicit consent to improve its services.</p>
+    <p>Anima may collect anonymous usage patterns with your explicit consent to improve its services.</p>
     <h3>What is collected</h3>
     <ul>
       <li>Age group (18–25, 26–64, 65+)</li>
@@ -121,7 +121,7 @@ function fixSupportArticles(articles) {
   );
   a = a.replace(
     /https:\/\/gezegenselcore\.com\/en\/aura\/privacy-policy\.html(?=[^<]*Gizlilik)/,
-    "../../tr/aura/privacy-policy.html"
+    "../../tr/anima/privacy-policy.html"
   );
   return a;
 }
@@ -141,13 +141,13 @@ function patchPage(destRel, articles) {
 }
 
 function main() {
-  const auraRoot = process.argv[2] ? path.resolve(process.argv[2]) : DEFAULT_AURA;
-  if (!fs.existsSync(auraRoot)) {
-    throw new Error("Aura legal-public not found: " + auraRoot);
+  const animaRoot = process.argv[2] ? path.resolve(process.argv[2]) : DEFAULT_ANIMA;
+  if (!fs.existsSync(animaRoot)) {
+    throw new Error("Anima legal-public not found: " + animaRoot);
   }
 
   for (const t of TARGETS) {
-    const src = path.join(auraRoot, t.source);
+    const src = path.join(animaRoot, t.source);
     const parts = t.dest.split("/").filter(Boolean);
     const assetPrefix = "../".repeat(parts.length - 1);
     let articles = extractArticles(fs.readFileSync(src, "utf8"));
@@ -156,7 +156,7 @@ function main() {
     articles = normalizeForTrSource(articles, assetPrefix, t.dest);
     patchPage(t.dest, articles);
   }
-  console.log("Done. Run: node tools/sync-aura-legal-masters.mjs && node tools/build-locale-pages.mjs");
+  console.log("Done. Run: node tools/sync-anima-legal-masters.mjs && node tools/build-locale-pages.mjs");
 }
 
 main();

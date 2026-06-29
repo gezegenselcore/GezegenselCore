@@ -85,7 +85,7 @@
   }
 
   /**
-   * Örn. /de/aura/privacy-policy.html → /aura/privacy-policy.html
+   * Örn. /de/anima/privacy-policy.html → /anima/privacy-policy.html
    * Örn. /tr/index.html → /index.html
    */
   function getLogicalPath(pathname) {

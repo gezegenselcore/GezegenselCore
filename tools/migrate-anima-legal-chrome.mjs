@@ -1,6 +1,6 @@
 /**
- * AURA hukuk/destek sayfalarını site kabuğuna (style.css + site-header + gc-doc) taşır.
- * node tools/migrate-aura-legal-chrome.mjs
+ * Anima hukuk/destek sayfalarını site kabuğuna (style.css + site-header + gc-doc) taşır.
+ * node tools/migrate-anima-legal-chrome.mjs
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -10,12 +10,12 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
 
 const TARGETS = [
-  { file: "tr/aura/privacy-policy.html", locale: "tr", heroTr: "Gizlilik Politikası — AURA", heroEn: "Privacy Policy — AURA", crumbTr: "Gizlilik Politikası", crumbEn: "Privacy Policy" },
-  { file: "en/aura/privacy-policy.html", locale: "en", heroTr: "Gizlilik Politikası — AURA", heroEn: "Privacy Policy — AURA", crumbTr: "Gizlilik Politikası", crumbEn: "Privacy Policy" },
-  { file: "tr/aura/terms-of-use.html", locale: "tr", heroTr: "Kullanım Koşulları — AURA", heroEn: "Terms of Use — AURA", crumbTr: "Kullanım Koşulları", crumbEn: "Terms of Use" },
-  { file: "en/aura/terms-of-use.html", locale: "en", heroTr: "Kullanım Koşulları — AURA", heroEn: "Terms of Use — AURA", crumbTr: "Kullanım Koşulları", crumbEn: "Terms of Use" },
-  { file: "tr/pages/aura/support.html", locale: "tr", heroTr: "AURA — Destek", heroEn: "AURA — Support", crumbTr: "Destek", crumbEn: "Support" },
-  { file: "en/pages/aura/support.html", locale: "en", heroTr: "AURA — Destek", heroEn: "AURA — Support", crumbTr: "Destek", crumbEn: "Support" },
+  { file: "tr/anima/privacy-policy.html", locale: "tr", heroTr: "Gizlilik Politikası — Anima", heroEn: "Privacy Policy — Anima", crumbTr: "Gizlilik Politikası", crumbEn: "Privacy Policy" },
+  { file: "en/anima/privacy-policy.html", locale: "en", heroTr: "Gizlilik Politikası — Anima", heroEn: "Privacy Policy — Anima", crumbTr: "Gizlilik Politikası", crumbEn: "Privacy Policy" },
+  { file: "tr/anima/terms-of-use.html", locale: "tr", heroTr: "Kullanım Koşulları — Anima", heroEn: "Terms of Use — Anima", crumbTr: "Kullanım Koşulları", crumbEn: "Terms of Use" },
+  { file: "en/anima/terms-of-use.html", locale: "en", heroTr: "Kullanım Koşulları — Anima", heroEn: "Terms of Use — Anima", crumbTr: "Kullanım Koşulları", crumbEn: "Terms of Use" },
+  { file: "tr/pages/anima/support.html", locale: "tr", heroTr: "Anima — Destek", heroEn: "Anima — Support", crumbTr: "Destek", crumbEn: "Support" },
+  { file: "en/pages/anima/support.html", locale: "en", heroTr: "Anima — Destek", heroEn: "Anima — Support", crumbTr: "Destek", crumbEn: "Support" },
 ];
 
 const ORIGIN = "https://gezegenselcore.com";
@@ -33,9 +33,9 @@ function otherLocaleFile(fromFile) {
 
 function extractArticles(html) {
   const m = html.match(
-    /<article id="aura-block-tr"[\s\S]*?<\/article>\s*<article id="aura-block-en"[\s\S]*?<\/article>/
+    /<article id="anima-block-tr"[\s\S]*?<\/article>\s*<article id="anima-block-en"[\s\S]*?<\/article>/
   );
-  if (!m) throw new Error("Could not extract aura-block articles");
+  if (!m) throw new Error("Could not extract anima-block articles");
   return m[0];
 }
 
@@ -68,13 +68,13 @@ function seoUrls(file) {
 function policyNav(locale, pre) {
   const en = locale === "en";
   const L = en
-    ? { privacy: "Privacy Policy", terms: "Terms of Use", support: "Support", launch: "AURA overview" }
-    : { privacy: "Gizlilik Politikası", terms: "Kullanım Koşulları", support: "Destek", launch: "AURA tanıtım" };
-  const launch = `${pre}${locale}/aura/`;
-  const priv = `${pre}${locale}/aura/privacy-policy.html`;
-  const terms = `${pre}${locale}/aura/terms-of-use.html`;
-  const sup = `${pre}${locale}/pages/aura/support.html`;
-  return `        <nav class="gc-aura-legal-nav" aria-label="${en ? "AURA policies" : "AURA politikaları"}">
+    ? { privacy: "Privacy Policy", terms: "Terms of Use", support: "Support", launch: "Anima overview" }
+    : { privacy: "Gizlilik Politikası", terms: "Kullanım Koşulları", support: "Destek", launch: "Anima tanıtım" };
+  const launch = `${pre}${locale}/anima/`;
+  const priv = `${pre}${locale}/anima/privacy-policy.html`;
+  const terms = `${pre}${locale}/anima/terms-of-use.html`;
+  const sup = `${pre}${locale}/pages/anima/support.html`;
+  return `        <nav class="gc-anima-legal-nav" aria-label="${en ? "Anima policies" : "Anima politikaları"}">
           <a class="btn-ghost" href="${launch}">${L.launch}</a>
           <a class="btn-ghost" href="${priv}">${L.privacy}</a>
           <a class="btn-ghost" href="${terms}">${L.terms}</a>
@@ -93,7 +93,7 @@ function buildPage(cfg, articles, meta) {
   const hero = en ? heroEn : heroTr;
   const crumb = en ? crumbEn : crumbTr;
   const homeCrumb = en ? "Home" : "Ana sayfa";
-  const auraLaunch = `${pre}${locale}/aura/`;
+  const auraLaunch = `${pre}${locale}/anima/`;
 
   const langBlock = en
     ? `          <a href="${otherHref}">TR</a>
@@ -158,9 +158,9 @@ function buildPage(cfg, articles, meta) {
   <meta name="description" content="${meta.description.replace(/"/g, "&quot;")}">
   <title>${meta.title.replace(/</g, "&lt;")}</title>
   <link rel="stylesheet" href="${pre}style.css?v=global1">
-  <link rel="stylesheet" href="${pre}assets/aura-legal-pages.css">
+  <link rel="stylesheet" href="${pre}assets/anima-legal-pages.css">
 </head>
-<body id="top" class="gc-inner aura-legal-page" data-title-tr="${meta.titleTr.replace(/"/g, "&quot;")}" data-title-en="${meta.titleEn.replace(/"/g, "&quot;")}">
+<body id="top" class="gc-inner anima-legal-page" data-title-tr="${meta.titleTr.replace(/"/g, "&quot;")}" data-title-en="${meta.titleEn.replace(/"/g, "&quot;")}">
   <a class="skip-link" href="#icerik">${L.skip}</a>
   <div class="gc-tech-bg" aria-hidden="true">
     <div class="gc-tech-bg__layer gc-tech-bg__layer--grid"></div>
@@ -196,12 +196,12 @@ ${langBlock}
   </header>
   <main id="icerik">
     <header class="gc-page-hero">
-      <p class="gc-crumb"><a href="${hub}#ust">${homeCrumb}</a> · <a href="${auraLaunch}">AURA</a> · ${crumb}</p>
+      <p class="gc-crumb"><a href="${hub}#ust">${homeCrumb}</a> · <a href="${auraLaunch}">Anima</a> · ${crumb}</p>
       <h1>${hero}</h1>
     </header>
     <div class="gc-doc">
 ${policyNav(locale, pre)}
-      <p id="aura-legal-fallback-banner" class="aura-legal-fallback-banner" hidden></p>
+      <p id="anima-legal-fallback-banner" class="anima-legal-fallback-banner" hidden></p>
 ${articles}
     </div>
   </main>
@@ -239,7 +239,7 @@ ${articles}
   </footer>
   <a class="scroll-top" href="#top" aria-label="${en ? "Back to top" : "Yukarı çık"}">↑</a>
   <script src="${parallax}" defer></script>
-  <script src="${pre}assets/aura-legal-pages.js" defer></script>
+  <script src="${pre}assets/anima-legal-pages.js" defer></script>
 </body>
 </html>`;
 }

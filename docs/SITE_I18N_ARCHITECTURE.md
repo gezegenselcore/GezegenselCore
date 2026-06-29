@@ -10,7 +10,7 @@ Statik site **build zamanında** yerelleştirilir: `node tools/build-locale-page
 |---------|-----------|
 | `tools/i18n/messages/*.mjs` | Çeviri tabloları (`INDEX`, `PRIVACY`, `SUPPORT`, `REFOLLOW`, `AURA_SEO`); her anahtar `{ tr, en }`; `registry.mjs` birleştirir. |
 | `tools/i18n/expand.mjs` | `expandI18n`, `pick` (locale `tr` ise `tr`, aksi halde `en`). |
-| `tools/templates/*.master.html` | Hub, site gizlilik/destek, AURA master şablonları. |
+| `tools/templates/*.master.html` | Hub, site gizlilik/destek, Anima master şablonları. |
 | `pages/refollow/policies/*.html` | ReFollow uzun politika gövdesi (TR/EN blokları) + yerelleştirilmiş krom (nav, footer, meta). |
 
 ## Fallback
@@ -22,9 +22,9 @@ Statik site **build zamanında** yerelleştirilir: `node tools/build-locale-page
 
 Tam hukuk gövdesi yalnızca **Türkçe** ve **İngilizce** bloklar halinde kaynakta kalır. Ek dil uyarı bandı yok (yalnız TR / EN build çıktısı).
 
-## AURA hukuk gövdesi
+## Anima hukuk gövdesi
 
-Tam metin TR/EN; başlık ve `meta` açıklamaları `AURA_SEO` ile build’de doldurulur. Gövde seçimi `assets/aura-legal-pages.js` ile; dil şeridi yalnız TR ve EN düğmeleri.
+Tam metin TR/EN; başlık ve `meta` açıklamaları `AURA_SEO` ile build’de doldurulur. Gövde seçimi `assets/anima-legal-pages.js` ile; dil şeridi yalnız TR ve EN düğmeleri.
 
 ## Dil seçici
 

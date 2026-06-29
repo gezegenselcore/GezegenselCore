@@ -24,11 +24,11 @@ Yükleme: her sayfada `<link rel="stylesheet" href="…/style.css?v=…">` (sür
 |--------|-----|
 | `assets/gezegensel.css`, `assets/gc-design-system.css` | Geçmiş veya alternatif tema yüzeyleri; **yeni hub ve locale sayfaları** `style.css` ile hizalanır. |
 | `assets/freelancer/` | Bootstrap 3 + Freelancer şablonu; yalnızca eski/yardımcı sayfa yollarında kullanılıyorsa geçerli. |
-| `assets/aura-legal-pages.css` | AURA hukuk sayfalarında dil şeridi ve gövde seçimi. |
+| `assets/anima-legal-pages.css` | Anima hukuk sayfalarında dil şeridi ve gövde seçimi. |
 
 ## Ürün mesajı (hub)
 
-- **AURA:** Yapay zekâ destekli wellness ve sağlık **rehberliği**; tıbbi teşhis veya tedavi iddiası yok.  
+- **Anima:** Yapay zekâ destekli wellness ve sağlık **rehberliği**; tıbbi teşhis veya tedavi iddiası yok.  
 - **ReFollow:** Instagram dışa aktarım verisinde **içgörü** ve tablolar; veri cihazda işlenir.
 
 Metinler `tr/index.html` ve `en/index.html` içinde tutulur; yasal uzun metinler ilgili politika sayfalarında.

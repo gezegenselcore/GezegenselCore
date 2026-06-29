@@ -29,7 +29,7 @@
 ## SEO ve hukuk
 
 - Sayfa başına `canonical`, mümkünse `hreflang` (`tr`, `en`, `x-default`).  
-- AURA tam metin: `aura-legal-pages.js` ile TR/EN gövde seçimi.
+- Anima tam metin: `anima-legal-pages.js` ile TR/EN gövde seçimi.
 
 ## Bakım ipuçları
 

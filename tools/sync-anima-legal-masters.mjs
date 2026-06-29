@@ -1,11 +1,11 @@
 /**
- * AURA hukuk master şablonlarını canlı tr/… HTML gövdesinden üretir.
- * node tools/sync-aura-legal-masters.mjs
+ * Anima hukuk master şablonlarını canlı tr/… HTML gövdesinden üretir.
+ * node tools/sync-anima-legal-masters.mjs
  */
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { buildAuraLegalMaster } from "./aura-legal-master-shell.mjs";
+import { buildAuraLegalMaster } from "./anima-legal-master-shell.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
@@ -13,40 +13,40 @@ const TPL = path.join(ROOT, "tools", "templates");
 
 const SPECS = [
   {
-    master: "aura-privacy.master.html",
-    source: "tr/aura/privacy-policy.html",
+    master: "anima-privacy.master.html",
+    source: "tr/anima/privacy-policy.html",
     assetPrefix: "../../",
     seoKey: "aura_privacy",
-    dataTitleTr: "Gizlilik Politikası — AURA",
-    dataTitleEn: "Privacy Policy — AURA",
-    logicalPath: "/aura/privacy-policy.html",
+    dataTitleTr: "Gizlilik Politikası — Anima",
+    dataTitleEn: "Privacy Policy — Anima",
+    logicalPath: "/anima/privacy-policy.html",
   },
   {
-    master: "aura-terms.master.html",
-    source: "tr/aura/terms-of-use.html",
+    master: "anima-terms.master.html",
+    source: "tr/anima/terms-of-use.html",
     assetPrefix: "../../",
     seoKey: "aura_terms",
-    dataTitleTr: "Kullanım Koşulları — AURA",
-    dataTitleEn: "Terms of Use — AURA",
-    logicalPath: "/aura/terms-of-use.html",
+    dataTitleTr: "Kullanım Koşulları — Anima",
+    dataTitleEn: "Terms of Use — Anima",
+    logicalPath: "/anima/terms-of-use.html",
   },
   {
-    master: "aura-support.master.html",
-    source: "tr/pages/aura/support.html",
+    master: "anima-support.master.html",
+    source: "tr/pages/anima/support.html",
     assetPrefix: "../../../",
     seoKey: "aura_support",
-    dataTitleTr: "AURA — Destek",
-    dataTitleEn: "AURA — Support",
-    logicalPath: "/pages/aura/support.html",
+    dataTitleTr: "Anima — Destek",
+    dataTitleEn: "Anima — Support",
+    logicalPath: "/pages/anima/support.html",
   },
 ];
 
 function extractArticles(html) {
-  const stripped = html.replace(/<div id="aura-legal-picker"[^>]*>\s*<\/div>\s*/gi, "");
+  const stripped = html.replace(/<div id="anima-legal-picker"[^>]*>\s*<\/div>\s*/gi, "");
   const m = stripped.match(
-    /<article id="aura-block-tr"[\s\S]*?<\/article>\s*<article id="aura-block-en"[\s\S]*?<\/article>/
+    /<article id="anima-block-tr"[\s\S]*?<\/article>\s*<article id="anima-block-en"[\s\S]*?<\/article>/
   );
-  if (!m) throw new Error("Could not extract aura-block articles");
+  if (!m) throw new Error("Could not extract anima-block articles");
   return m[0];
 }
 
@@ -55,13 +55,13 @@ function normalizeArticleUrls(articles, assetPrefix) {
   let a = articles;
   a = a.replace(
     /https:\/\/gezegenselcore\.com\/(?:tr|en)\/aura\//g,
-    "https://gezegenselcore.com/{{locale}}/aura/"
+    "https://gezegenselcore.com/{{locale}}/anima/"
   );
   a = a.replace(
     /https:\/\/gezegenselcore\.com\/aura\//g,
-    "https://gezegenselcore.com/{{locale}}/aura/"
+    "https://gezegenselcore.com/{{locale}}/anima/"
   );
-  a = a.replace(/\.\.\/\.\.\/aura\//g, `${assetPrefix}{{locale}}/aura/`);
+  a = a.replace(/\.\.\/\.\.\/aura\//g, `${assetPrefix}{{locale}}/anima/`);
   a = a.replace(/\.\.\/\.\.\/\.\.\/tr\//g, `${assetPrefix}{{locale}}/`);
   a = a.replace(/\.\.\/\.\.\/tr\//g, `${assetPrefix}{{locale}}/`);
   a = a.replace(/\.\.\/\.\.\/en\//g, `${assetPrefix}{{localeOther}}/`);

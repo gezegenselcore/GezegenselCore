@@ -57,7 +57,7 @@ function injectDesignSystem(html, assetPrefix) {
   );
 }
 
-function injectDesignSystemAuraRoot(html) {
+function injectDesignSystemAnimaRoot(html) {
   if (html.includes("gc-design-system.css")) return html;
   return html.replace(
     /(<link rel="stylesheet" href="\/assets\/gezegensel\.css">)/i,
@@ -71,11 +71,11 @@ function applyHtmlLocaleShell(html, locale) {
   return html.replace(/<html\s+[^>]*>/i, `<html lang="${htmlLang}" dir="ltr">`);
 }
 
-function ensureAuraMasters() {
+function ensureAnimaMasters() {
   const pairs = [
-    ["aura-privacy.master.html", path.join(ROOT, "tr", "aura", "privacy-policy.html")],
-    ["aura-terms.master.html", path.join(ROOT, "tr", "aura", "terms-of-use.html")],
-    ["aura-support.master.html", path.join(ROOT, "tr", "pages", "aura", "support.html")],
+    ["anima-privacy.master.html", path.join(ROOT, "tr", "anima", "privacy-policy.html")],
+    ["anima-terms.master.html", path.join(ROOT, "tr", "anima", "terms-of-use.html")],
+    ["anima-support.master.html", path.join(ROOT, "tr", "pages", "anima", "support.html")],
   ];
   for (const [name, livePath] of pairs) {
     const tpl = path.join(ROOT, "tools", "templates", name);
@@ -130,14 +130,14 @@ function processInnerPage(html, relUnderLocale, locale, logicalPath) {
   return applyHtmlLocaleShell(h, locale);
 }
 
-function auraAssetPrefix(logicalPath) {
+function animaAssetPrefix(logicalPath) {
   const depth = logicalPath.split("/").filter(Boolean).length;
   return "../".repeat(depth);
 }
 
-function auraLangSwitchHtml(locale, logicalPath) {
+function animaLangSwitchHtml(locale, logicalPath) {
   const other = locale === "tr" ? "en" : "tr";
-  const px = auraAssetPrefix(logicalPath);
+  const px = animaAssetPrefix(logicalPath);
   const otherHref = `${px}${other}${logicalPath}`;
   if (locale === "tr") {
     return [
@@ -153,15 +153,15 @@ function auraLangSwitchHtml(locale, logicalPath) {
   ].join("\n");
 }
 
-function processAuraLegal(html, locale, logicalPath) {
+function processAnimaLegal(html, locale, logicalPath) {
   const other = locale === "tr" ? "en" : "tr";
-  const assetPx = auraAssetPrefix(logicalPath);
+  const assetPx = animaAssetPrefix(logicalPath);
   const canonicalUrl = `${ORIGIN}/${locale}${logicalPath}`;
   let h = expandI18n(html, locale, MESSAGES);
   h = h.replace(/\{\{locale\}\}/g, locale);
   h = h.replace(/\{\{localeOther\}\}/g, other);
   h = h.replace(/\{\{assetPrefix\}\}/g, assetPx);
-  h = h.replace("<!--AURA_LANG_SWITCH-->", auraLangSwitchHtml(locale, logicalPath));
+  h = h.replace("<!--ANIMA_LANG_SWITCH-->", animaLangSwitchHtml(locale, logicalPath));
   h = prependSiteScriptsFlex(h);
   if (/<link rel="canonical"/i.test(h)) {
     h = h.replace(/<link rel="canonical" href="[^"]*" ?\/?>/i, `<link rel="canonical" href="${canonicalUrl}" />`);
@@ -177,21 +177,21 @@ function processAuraLegal(html, locale, logicalPath) {
   );
   h = h.replace(
     /https:\/\/gezegenselcore\.com\/aura\/(privacy-policy|terms-of-use)\.html/g,
-    `${ORIGIN}/${locale}/aura/$1.html`
+    `${ORIGIN}/${locale}/anima/$1.html`
   );
   h = h.replace(
     /https:\/\/gezegenselcore\.com\/(?:tr|en)\/aura\/(privacy-policy|terms-of-use)\.html/g,
-    `${ORIGIN}/${locale}/aura/$1.html`
+    `${ORIGIN}/${locale}/anima/$1.html`
   );
   h = h.replace(
     /https:\/\/gezegenselcore\.com\/pages\/aura\/support\.html/g,
-    `${ORIGIN}/${locale}/pages/aura/support.html`
+    `${ORIGIN}/${locale}/pages/anima/support.html`
   );
   h = h.replace(/<link rel="alternate" hreflang="[^"]+"[^>]*>\s*/gi, "");
   const hreflang = hreflangBlock(logicalPath).replace(/\n/g, "\n  ");
   h = h.replace(/(<meta name="viewport"[^>]*>)/i, `$1\n  ${hreflang}`);
   if (!h.includes("style.css?v=global1") && !h.includes('class="gc-inner"')) {
-    h = injectDesignSystemAuraRoot(h);
+    h = injectDesignSystemAnimaRoot(h);
   }
   return applyHtmlLocaleShell(h, locale);
 }
@@ -243,9 +243,9 @@ const SITEMAP_LOGICAL_PATHS = [
   "/index.html",
   "/privacy.html",
   "/support.html",
-  "/aura/privacy-policy.html",
-  "/aura/terms-of-use.html",
-  "/pages/aura/support.html",
+  "/anima/privacy-policy.html",
+  "/anima/terms-of-use.html",
+  "/pages/anima/support.html",
   "/pages/refollow/policies/privacy.html",
   "/pages/refollow/policies/terms.html",
   "/pages/refollow/policies/support.html",
@@ -264,7 +264,7 @@ function writeSitemap() {
   push(`${ORIGIN}/`, "weekly", "1.0");
   for (const loc of LOCALES) {
     for (const log of SITEMAP_LOGICAL_PATHS) {
-      const pri = log.includes("/aura/") ? "0.95" : log.includes("refollow") ? "0.82" : "0.9";
+      const pri = log.includes("/anima/") ? "0.95" : log.includes("refollow") ? "0.82" : "0.9";
       push(`${ORIGIN}/${loc}${log}`, "monthly", pri);
     }
   }
@@ -287,11 +287,11 @@ function writeSitemap() {
 }
 
 function main() {
-  ensureAuraMasters();
+  ensureAnimaMasters();
 
-  const auraPrivacy = read(path.join(ROOT, "tools", "templates", "aura-privacy.master.html"));
-  const auraTerms = read(path.join(ROOT, "tools", "templates", "aura-terms.master.html"));
-  const auraSupport = read(path.join(ROOT, "tools", "templates", "aura-support.master.html"));
+  const animaPrivacy = read(path.join(ROOT, "tools", "templates", "anima-privacy.master.html"));
+  const animaTerms = read(path.join(ROOT, "tools", "templates", "anima-terms.master.html"));
+  const animaSupport = read(path.join(ROOT, "tools", "templates", "anima-support.master.html"));
   const rfPrivacy = read(path.join(ROOT, "pages", "refollow", "policies", "privacy.html"));
   const rfTerms = read(path.join(ROOT, "pages", "refollow", "policies", "terms.html"));
   const rfSupport = read(path.join(ROOT, "pages", "refollow", "policies", "support.html"));
@@ -300,9 +300,9 @@ function main() {
     /* Hub pages use style.css chrome — hand-maintained; do not overwrite from legacy Freelancer masters. */
     // index.html, privacy.html, support.html skipped intentionally
 
-    write(path.join(ROOT, loc, "aura", "privacy-policy.html"), processAuraLegal(auraPrivacy, loc, "/aura/privacy-policy.html"));
-    write(path.join(ROOT, loc, "aura", "terms-of-use.html"), processAuraLegal(auraTerms, loc, "/aura/terms-of-use.html"));
-    write(path.join(ROOT, loc, "pages", "aura", "support.html"), processAuraLegal(auraSupport, loc, "/pages/aura/support.html"));
+    write(path.join(ROOT, loc, "anima", "privacy-policy.html"), processAnimaLegal(animaPrivacy, loc, "/anima/privacy-policy.html"));
+    write(path.join(ROOT, loc, "anima", "terms-of-use.html"), processAnimaLegal(animaTerms, loc, "/anima/terms-of-use.html"));
+    write(path.join(ROOT, loc, "pages", "anima", "support.html"), processAnimaLegal(animaSupport, loc, "/pages/anima/support.html"));
 
     const rfP = processInnerPage(
       expandI18n(refollowForLocale(rfPrivacy), loc, MESSAGES),
@@ -330,9 +330,18 @@ function main() {
   write(path.join(ROOT, "index.html"), rootIndexRedirect());
   write(path.join(ROOT, "privacy.html"), rootRedirectStub("Privacy — GezegenselCore", "/privacy.html"));
   write(path.join(ROOT, "support.html"), rootRedirectStub("Support — GezegenselCore", "/support.html"));
-  write(path.join(ROOT, "aura", "privacy-policy.html"), rootRedirectStub("Privacy Policy — AURA", "/aura/privacy-policy.html"));
-  write(path.join(ROOT, "aura", "terms-of-use.html"), rootRedirectStub("Terms of Use — AURA", "/aura/terms-of-use.html"));
-  write(path.join(ROOT, "pages", "aura", "support.html"), rootRedirectStub("AURA — Support", "/pages/aura/support.html"));
+  write(path.join(ROOT, "anima", "privacy-policy.html"), rootRedirectStub("Privacy Policy — Anima", "/anima/privacy-policy.html"));
+  write(path.join(ROOT, "anima", "terms-of-use.html"), rootRedirectStub("Terms of Use — Anima", "/anima/terms-of-use.html"));
+  write(path.join(ROOT, "pages", "anima", "support.html"), rootRedirectStub("Anima — Support", "/pages/anima/support.html"));
+  write(path.join(ROOT, "aura", "privacy-policy.html"), rootRedirectStub("Privacy Policy — Anima", "/anima/privacy-policy.html"));
+  write(path.join(ROOT, "aura", "terms-of-use.html"), rootRedirectStub("Terms of Use — Anima", "/anima/terms-of-use.html"));
+  write(path.join(ROOT, "pages", "aura", "support.html"), rootRedirectStub("Anima — Support", "/pages/anima/support.html"));
+  for (const loc of LOCALES) {
+    write(path.join(ROOT, loc, "aura", "index.html"), rootRedirectStub("Anima", "/anima/index.html"));
+    write(path.join(ROOT, loc, "aura", "privacy-policy.html"), rootRedirectStub("Privacy Policy — Anima", "/anima/privacy-policy.html"));
+    write(path.join(ROOT, loc, "aura", "terms-of-use.html"), rootRedirectStub("Terms of Use — Anima", "/anima/terms-of-use.html"));
+    write(path.join(ROOT, loc, "pages", "aura", "support.html"), rootRedirectStub("Anima — Support", "/pages/anima/support.html"));
+  }
 
   writeSitemap();
   console.log("Done. Locales:", LOCALES.join(", "));

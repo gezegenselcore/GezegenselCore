@@ -1,6 +1,6 @@
 /**
  * Kök / eski URL'lerden dil önekli kanonik yola yönlendirme.
- * Çağrı: <script src="/assets/legacy-path-redirect.js" data-logical="/aura/privacy-policy.html" defer></script>
+ * Çağrı: <script src="/assets/legacy-path-redirect.js" data-logical="/anima/privacy-policy.html" defer></script>
  * defer ile lang-boot'un localStorage yazmasından sonra da çalışır; mümkünse head'te senkron yükleme tercih edin.
  */
 (function () {

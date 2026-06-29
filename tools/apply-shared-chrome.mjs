@@ -64,10 +64,10 @@ function otherLocaleFile(fromFile) {
   const pairs = [
     ["privacy.html", "en/privacy.html"],
     ["support.html", "en/support.html"],
-    ["aura/privacy-policy.html", "en/aura/privacy-policy.html"],
-    ["aura/terms-of-use.html", "en/aura/terms-of-use.html"],
-    ["pages/aura/support.html", "en/pages/aura/support.html"],
-    ["tr/aura/index.html", "en/aura/index.html"],
+    ["anima/privacy-policy.html", "en/anima/privacy-policy.html"],
+    ["anima/terms-of-use.html", "en/anima/terms-of-use.html"],
+    ["pages/anima/support.html", "en/pages/anima/support.html"],
+    ["tr/anima/index.html", "en/anima/index.html"],
     ["pages/refollow/policies/privacy.html", "en/pages/refollow/policies/privacy.html"],
     ["pages/refollow/policies/terms.html", "en/pages/refollow/policies/terms.html"],
     ["pages/refollow/policies/support.html", "en/pages/refollow/policies/support.html"],
@@ -193,7 +193,7 @@ function logicalPathFromFile(posixFile) {
   if (posixFile.startsWith("tr/")) p = "/" + posixFile.slice("tr".length);
   else if (posixFile.startsWith("en/")) p = "/" + posixFile.slice("en".length);
   else p = "/" + posixFile.replace(/^\//, "");
-  /* /aura/index.html → /aura/ (temiz canonical & hreflang) */
+  /* /anima/index.html → /anima/ (temiz canonical & hreflang) */
   if (p.endsWith("/index.html")) {
     p = p.slice(0, -"index.html".length);
   }
@@ -226,7 +226,7 @@ function ensureSeoForLocalePages(html, posixFile) {
   out = out.replace(/^\s*<link\s+rel="alternate"\s+hreflang="(?:tr|en|x-default)"[^>]*>\s*\n?/gim, "");
   /* Bazı dosyalarda kalan mükerrer en satırı (index.html yolu) */
   out = out.replace(
-    /^\s*<link\s+rel="alternate"\s+hreflang="en"\s+href="https:\/\/gezegenselcore\.com\/en\/aura\/index\.html"\s*\/>\s*\n?/gim,
+    /^\s*<link\s+rel="alternate"\s+hreflang="en"\s+href="https:\/\/gezegenselcore\.com\/en\/anima\/index\.html"\s*\/>\s*\n?/gim,
     ""
   );
 

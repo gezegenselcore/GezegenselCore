@@ -1,6 +1,6 @@
 /**
- * AURA hukuk/destek master HTML kabuğu (gc-inner + site-header).
- * Placeholders: {{assetPrefix}}, {{locale}}, {{localeOther}}, {{i18n:…}}, <!--AURA_LANG_SWITCH-->
+ * Anima hukuk/destek master HTML kabuğu (gc-inner + site-header).
+ * Placeholders: {{assetPrefix}}, {{locale}}, {{localeOther}}, {{i18n:…}}, <!--ANIMA_LANG_SWITCH-->
  */
 
 const FOOTER_SOCIAL = `
@@ -32,10 +32,10 @@ const FOOTER_SOCIAL = `
 export function buildAuraLegalMaster(cfg) {
   const { assetPrefix, seoKey, dataTitleTr, dataTitleEn, articles } = cfg;
   const hub = `${assetPrefix}{{locale}}/index.html`;
-  const launch = `${assetPrefix}{{locale}}/aura/`;
-  const priv = `${assetPrefix}{{locale}}/aura/privacy-policy.html`;
-  const terms = `${assetPrefix}{{locale}}/aura/terms-of-use.html`;
-  const sup = `${assetPrefix}{{locale}}/pages/aura/support.html`;
+  const launch = `${assetPrefix}{{locale}}/anima/`;
+  const priv = `${assetPrefix}{{locale}}/anima/privacy-policy.html`;
+  const terms = `${assetPrefix}{{locale}}/anima/terms-of-use.html`;
+  const sup = `${assetPrefix}{{locale}}/pages/anima/support.html`;
   const sitePrivacy = `${assetPrefix}{{locale}}/privacy.html`;
   const siteSupport = `${assetPrefix}{{locale}}/support.html`;
 
@@ -54,9 +54,9 @@ export function buildAuraLegalMaster(cfg) {
   <meta name="description" content="{{i18n:${seoKey}.meta_description}}">
   <title>{{i18n:${seoKey}.meta_title}}</title>
   <link rel="stylesheet" href="${assetPrefix}style.css?v=global1">
-  <link rel="stylesheet" href="${assetPrefix}assets/aura-legal-pages.css">
+  <link rel="stylesheet" href="${assetPrefix}assets/anima-legal-pages.css">
 </head>
-<body id="top" class="gc-inner aura-legal-page" data-title-tr="${dataTitleTr}" data-title-en="${dataTitleEn}">
+<body id="top" class="gc-inner anima-legal-page" data-title-tr="${dataTitleTr}" data-title-en="${dataTitleEn}">
   <a class="skip-link" href="#icerik">{{i18n:aura_legal.skip}}</a>
   <div class="gc-tech-bg" aria-hidden="true">
     <div class="gc-tech-bg__layer gc-tech-bg__layer--grid"></div>
@@ -67,7 +67,7 @@ export function buildAuraLegalMaster(cfg) {
       <a class="brand" href="${hub}#ust">GezegenselCore</a>
       <div class="site-header__tail">
         <div class="gc-lang-switch" aria-label="{{i18n:aura_legal.lang_aria}}">
-<!--AURA_LANG_SWITCH-->
+<!--ANIMA_LANG_SWITCH-->
         </div>
         <input type="checkbox" id="nav-open" class="nav-toggle">
         <label for="nav-open" class="nav-burger" aria-label="{{i18n:aura_legal.burger}}">
@@ -92,17 +92,17 @@ export function buildAuraLegalMaster(cfg) {
   </header>
   <main id="icerik">
     <header class="gc-page-hero">
-      <p class="gc-crumb"><a href="${hub}#ust">{{i18n:aura_legal.crumb_home}}</a> · <a href="${launch}">AURA</a> · {{i18n:${seoKey}.crumb}}</p>
+      <p class="gc-crumb"><a href="${hub}#ust">{{i18n:aura_legal.crumb_home}}</a> · <a href="${launch}">Anima</a> · {{i18n:${seoKey}.crumb}}</p>
       <h1>{{i18n:${seoKey}.hero_h2}}</h1>
     </header>
     <div class="gc-doc">
-        <nav class="gc-aura-legal-nav" aria-label="{{i18n:aura_legal.nav_policies_aria}}">
+        <nav class="gc-anima-legal-nav" aria-label="{{i18n:aura_legal.nav_policies_aria}}">
           <a class="btn-ghost" href="${launch}">{{i18n:aura_legal.nav_launch}}</a>
           <a class="btn-ghost" href="${priv}">{{i18n:aura_legal.nav_privacy}}</a>
           <a class="btn-ghost" href="${terms}">{{i18n:aura_legal.nav_terms}}</a>
           <a class="btn-ghost" href="${sup}">{{i18n:aura_legal.nav_support}}</a>
         </nav>
-      <p id="aura-legal-fallback-banner" class="aura-legal-fallback-banner" hidden></p>
+      <p id="anima-legal-fallback-banner" class="anima-legal-fallback-banner" hidden></p>
 ${articles}
     </div>
   </main>
@@ -126,7 +126,7 @@ ${FOOTER_SOCIAL}
   </footer>
   <a class="scroll-top" href="#top" aria-label="{{i18n:aura_legal.scroll_top}}">↑</a>
   <script src="${assetPrefix}assets/gc-home-parallax.js" defer></script>
-  <script src="${assetPrefix}assets/aura-legal-pages.js" defer></script>
+  <script src="${assetPrefix}assets/anima-legal-pages.js" defer></script>
 </body>
 </html>`;
 }

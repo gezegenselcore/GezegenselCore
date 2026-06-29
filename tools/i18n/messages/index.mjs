@@ -3,12 +3,12 @@ const L = (tr, en) => ({ tr, en });
 
 export const INDEX = {
   "index.meta_title": L(
-    "GezegenselCore — AURA ve ReFollow",
-    "GezegenselCore — AURA & ReFollow"
+    "GezegenselCore — Anima ve ReFollow",
+    "GezegenselCore — Anima & ReFollow"
   ),
   "index.meta_description": L(
-    "GezegenselCore — AURA (yapay zekâ wellness) ve ReFollow (Instagram içgörüleri). Bağımsız stüdyo.",
-    "GezegenselCore — AURA (AI wellness) and ReFollow (Instagram insights). Independent studio."
+    "GezegenselCore — Anima (yapay zekâ wellness) ve ReFollow (Instagram içgörüleri). Bağımsız stüdyo.",
+    "GezegenselCore — Anima (AI wellness) and ReFollow (Instagram insights). Independent studio."
   ),
   "index.nav_about": L(
     "Hakkında",
@@ -39,16 +39,16 @@ export const INDEX = {
     "Language"
   ),
   "index.hero_skills": L(
-    "Günlük yaşam için yapay zekâ destekli wellness; sosyal akış için net veri — <strong>AURA</strong> ve <strong>ReFollow</strong>.",
-    "AI-assisted wellness for everyday life; clear data for your social graph — <strong>AURA</strong> and <strong>ReFollow</strong>."
+    "Günlük yaşam için yapay zekâ destekli wellness; sosyal akış için net veri — <strong>Anima</strong> ve <strong>ReFollow</strong>.",
+    "AI-assisted wellness for everyday life; clear data for your social graph — <strong>Anima</strong> and <strong>ReFollow</strong>."
   ),
   "index.about_h2": L(
     "Hakkında",
     "About"
   ),
   "index.about_p1": L(
-    "<strong>GezegenselCore</strong>, bağımsız bir stüdyo markasıdır; <strong>AURA</strong> ile günlük wellness, sağlık sinyalleri ve yapay zekâ destekli rehberlik; <strong>ReFollow</strong> ile Instagram verisinde net içgörü sunar. Karmaşık veriyi sade arayüzlerle göstermek ve gün içi kararlarınızda ölçülebilir bir özet vermek işimizin merkezindedir.",
-    "<strong>GezegenselCore</strong> is an independent studio brand: <strong>AURA</strong> focuses on daily wellness, health signals, and AI-guided coaching, while <strong>ReFollow</strong> brings clearer insights from Instagram data. We turn complex information into simple interfaces and measurable, day-to-day guidance."
+    "<strong>GezegenselCore</strong>, bağımsız bir stüdyo markasıdır; <strong>Anima</strong> ile günlük wellness, sağlık sinyalleri ve yapay zekâ destekli rehberlik; <strong>ReFollow</strong> ile Instagram verisinde net içgörü sunar. Karmaşık veriyi sade arayüzlerle göstermek ve gün içi kararlarınızda ölçülebilir bir özet vermek işimizin merkezindedir.",
+    "<strong>GezegenselCore</strong> is an independent studio brand: <strong>Anima</strong> focuses on daily wellness, health signals, and AI-guided coaching, while <strong>ReFollow</strong> brings clearer insights from Instagram data. We turn complex information into simple interfaces and measurable, day-to-day guidance."
   ),
   "index.about_p2": L(
     "Ürünlerde performans, gizlilik odaklı varsayılanlar ve okunabilir veri sunumu ön plandadır. Yapay zekâ; tıbbi teşhis veya kesin gelecek iddiası olmadan rehberlik ve özetleme için kullanılır.",
@@ -87,8 +87,8 @@ export const INDEX = {
     "Our apps"
   ),
   "index.about_aura_line": L(
-    "<strong>AURA</strong> — Şu an odaktaki ürünümüz: günlük özet, sağlık bağlantıları ve yapay zekâ rehberiyle gününüzü toparlamanıza yardımcı olur. Mağaza bağlantıları aşağıdaki «Uygulamalar» bölümündedir.",
-    "<strong>AURA</strong> — Our current focus: daily summaries, optional health connections, and an AI guide to help you make sense of your day. Store links are in the Apps section below."
+    "<strong>Anima</strong> — Şu an odaktaki ürünümüz: günlük özet, sağlık bağlantıları ve yapay zekâ rehberiyle gününüzü toparlamanıza yardımcı olur. Mağaza bağlantıları aşağıdaki «Uygulamalar» bölümündedir.",
+    "<strong>Anima</strong> — Our current focus: daily summaries, optional health connections, and an AI guide to help you make sense of your day. Store links are in the Apps section below."
   ),
   "index.about_refollow_line": L(
     "<strong>ReFollow</strong> — Instagram hesabınızdaki takip/takipçi ilişkilerini okunur tablolarla gösterir; sosyal akışta neyin önemli olduğunu hızlıca görürsünüz.",
@@ -111,8 +111,8 @@ export const INDEX = {
     "Get it on Google Play"
   ),
   "index.apps_store_note": L(
-    "App Store'da «AURA» veya geliştirici adıyla arayın.",
-    "On the App Store, search for “AURA” or the developer name."
+    "App Store'da «Anima» veya geliştirici adıyla arayın.",
+    "On the App Store, search for “Anima” or the developer name."
   ),
   "index.link_privacy_policy": L(
     "Gizlilik Politikası",
@@ -143,8 +143,8 @@ export const INDEX = {
     "Policies & links"
   ),
   "index.policies_lead": L(
-    "AURA için kamu hukuku ve destek bağlantıları aşağıda üç maddede toplanmıştır. Marka geneli için bkz. <a href=\"privacy.html\">site gizliliği</a> ve <a href=\"support.html\">site desteği</a>.",
-    "AURA public legal and support links are grouped in three items below. For the whole studio, see <a href=\"privacy.html\">site privacy</a> and <a href=\"support.html\">site support</a>."
+    "Anima için kamu hukuku ve destek bağlantıları aşağıda üç maddede toplanmıştır. Marka geneli için bkz. <a href=\"privacy.html\">site gizliliği</a> ve <a href=\"support.html\">site desteği</a>.",
+    "Anima public legal and support links are grouped in three items below. For the whole studio, see <a href=\"privacy.html\">site privacy</a> and <a href=\"support.html\">site support</a>."
   ),
   "index.refollow_card_tagline": L(
     "Instagram veri analiz aracı",

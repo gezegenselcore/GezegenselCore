@@ -6,8 +6,8 @@ export const SUPPORT = {
     "Support — GezegenselCore"
   ),
   "support.meta_description": L(
-    "GezegenselCore uygulama desteği ve resmi AURA / ReFollow bağlantıları.",
-    "GezegenselCore app support and official AURA / ReFollow links."
+    "GezegenselCore uygulama desteği ve resmi Anima / ReFollow bağlantıları.",
+    "GezegenselCore app support and official Anima / ReFollow links."
   ),
   "support.nav_apps": L(
     "Uygulamalar",
@@ -70,24 +70,24 @@ export const SUPPORT = {
     "ReFollow — Terms of Use"
   ),
   "support.h3_aura": L(
-    "AURA",
-    "AURA"
+    "Anima",
+    "Anima"
   ),
   "support.aura_p1": L(
-    "<strong>AURA</strong>, kişisel içgörü ve wellness odaklı bir dijital asistandır. Tıbbi teşhis veya tedavi sunmaz; içerikler bilgilendirme ve destek amaçlıdır. Acil durumlarda yerel acil servislerle iletişime geçin. Hesap, gizlilik veya destek için yalnızca aşağıdaki <strong>kanonik</strong> adresler kullanılır (uygulama ve mağazalar bu URL’leri referans alır):",
-    "<strong>AURA</strong> is a personal insight and wellness-focused digital assistant. It does not provide medical diagnosis or treatment; content is for information and support only. In an emergency, contact your local emergency services. For account, privacy, or support, use only these <strong>canonical</strong> URLs (the app and stores reference the same links):"
+    "<strong>Anima</strong>, kişisel içgörü ve wellness odaklı bir dijital asistandır. Tıbbi teşhis veya tedavi sunmaz; içerikler bilgilendirme ve destek amaçlıdır. Acil durumlarda yerel acil servislerle iletişime geçin. Hesap, gizlilik veya destek için yalnızca aşağıdaki <strong>kanonik</strong> adresler kullanılır (uygulama ve mağazalar bu URL’leri referans alır):",
+    "<strong>Anima</strong> is a personal insight and wellness-focused digital assistant. It does not provide medical diagnosis or treatment; content is for information and support only. In an emergency, contact your local emergency services. For account, privacy, or support, use only these <strong>canonical</strong> URLs (the app and stores reference the same links):"
   ),
   "support.link_aura_support": L(
-    "AURA — Destek",
-    "AURA — Support"
+    "Anima — Destek",
+    "Anima — Support"
   ),
   "support.link_aura_privacy": L(
-    "AURA — Gizlilik Politikası",
-    "AURA — Privacy Policy"
+    "Anima — Gizlilik Politikası",
+    "Anima — Privacy Policy"
   ),
   "support.link_aura_terms": L(
-    "AURA — Kullanım Koşulları",
-    "AURA — Terms of Use"
+    "Anima — Kullanım Koşulları",
+    "Anima — Terms of Use"
   ),
   "support.updated": L(
     "Son güncelleme: 18 Nisan 2026",

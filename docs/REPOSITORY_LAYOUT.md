@@ -7,10 +7,10 @@ Tüm çalışmalar **`D:\GezegenselCore\gezegenselcore.com`** (GitHub: [`gezegen
 | Yol | Açıklama |
 |-----|-----------|
 | **`.github/`** | GitHub notları (ör. `PAGES.md`). |
-| **`assets/`** | Görseller, ortak JS (`site-path.js`, `gc-home-parallax.js`, `aura-legal-pages.js`, …), eski tema / yardımcı CSS (`gezegensel.css`, `gc-design-system.css`, Freelancer vb.). |
-| **`tr/`**, **`en/`** | Kanonik dil ağaçları: hub, site gizlilik/destek, AURA ve ReFollow sayfaları. |
+| **`assets/`** | Görseller, ortak JS (`site-path.js`, `gc-home-parallax.js`, `anima-legal-pages.js`, …), eski tema / yardımcı CSS (`gezegensel.css`, `gc-design-system.css`, Freelancer vb.). |
+| **`tr/`**, **`en/`** | Kanonik dil ağaçları: hub, site gizlilik/destek, Anima ve ReFollow sayfaları. |
 | **`aura/`**, **`pages/`** | Kök **legacy** ve yönlendirme stub’ları; kanonik içerik `tr/` ve `en/` altında. |
-| **`docs/`** | Bu klasör — mimari, tasarım, i18n, Aura hizalaması. |
+| **`docs/`** | Bu klasör — mimari, tasarım, i18n, Anima hizalaması. |
 | **`tools/`** | `build-locale-pages.mjs`, `apply-shared-chrome.mjs`, şablonlar, i18n mesajları. |
 | **`style.css`** | Marka sitesinin birincil stil dosyası (grid, header, footer, iç sayfa). |
 | **`index.html`**, **`404.html`**, **`privacy.html`**, **`support.html`** | Kök hub / hata / legacy girişler. |
