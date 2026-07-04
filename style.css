@@ -53,86 +53,94 @@
 
 [data-theme="dark"] {
   color-scheme: dark;
-  /* Sıcak antrasit — mavi/lacivert yok */
-  --gc-bg: #0d0c0b;
-  --gc-bg-soft: #161412;
-  --gc-ink: #f5f0e8;
-  --gc-ink-muted: #b5a99a;
-  --gc-surface: #1c1916;
-  /* Altın marka renkleri korunur */
+  /* Anima detay sayfası paleti — tüm site koyu mod */
+  --gc-bg: #060a10;
+  --gc-bg-soft: #0c1520;
+  --gc-bg-deep: #080d14;
+  --gc-ink: #e8eef5;
+  --gc-ink-muted: rgba(232, 238, 245, 0.72);
+  --gc-surface: #121c2a;
   --gc-accent: #c9a227;
   --gc-accent-dark: #d4af37;
   --gc-accent-light: #f0d875;
   --gc-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
-  --gc-tech-grid: 201, 162, 39;
-  --gc-header-bg: rgba(13, 12, 11, 0.96);
-  --gc-header-border: rgba(201, 162, 39, 0.18);
-  --gc-nav-panel-bg: rgba(13, 12, 11, 0.99);
-  --gc-footer-bg: rgba(10, 9, 8, 0.92);
-  --gc-page-hero-bg: rgba(22, 20, 18, 0.6);
-  --gc-card-bg: linear-gradient(165deg, #242019 0%, #181614 100%);
-  --gc-card-border: rgba(201, 162, 39, 0.16);
-  --gc-border-subtle: rgba(201, 162, 39, 0.12);
-  --gc-border-medium: rgba(201, 162, 39, 0.2);
-  --gc-border-strong: rgba(201, 162, 39, 0.26);
+  --gc-tech-grid: 40, 55, 75;
+  --gc-header-bg: rgba(8, 14, 22, 0.88);
+  --gc-header-border: rgba(201, 162, 39, 0.14);
+  --gc-nav-panel-bg: rgba(8, 14, 22, 0.98);
+  --gc-footer-bg: rgba(6, 10, 16, 0.65);
+  --gc-page-hero-bg: rgba(8, 14, 22, 0.55);
+  --gc-card-bg: linear-gradient(165deg, rgba(18, 28, 42, 0.78) 0%, rgba(12, 20, 32, 0.88) 100%);
+  --gc-card-border: rgba(232, 238, 245, 0.1);
+  --gc-border-subtle: rgba(201, 162, 39, 0.1);
+  --gc-border-medium: rgba(201, 162, 39, 0.16);
+  --gc-border-strong: rgba(201, 162, 39, 0.22);
   --gc-accent-bg-soft: rgba(201, 162, 39, 0.12);
   --gc-accent-bg-hover: rgba(201, 162, 39, 0.18);
-  --gc-accent-bg-nav: rgba(201, 162, 39, 0.16);
-  --gc-accent-bg-current: rgba(201, 162, 39, 0.24);
-  --gc-pattern-rgb: 201, 162, 39;
+  --gc-accent-bg-nav: rgba(201, 162, 39, 0.14);
+  --gc-accent-bg-current: rgba(201, 162, 39, 0.22);
+  --gc-pattern-rgb: 40, 55, 75;
   --gc-table-head-bg: rgba(201, 162, 39, 0.08);
   --gc-code-bg: rgba(201, 162, 39, 0.1);
-  --gc-tech-grid-opacity: 0.032;
-  --gc-tech-grid-layer-opacity: 0.55;
-  --gc-tech-schema-opacity: 0;
-  --gc-tech-schema-blend: normal;
+  --gc-tech-grid-opacity: 0.05;
+  --gc-tech-grid-layer-opacity: 0.35;
+  --gc-tech-schema-opacity: 0.28;
+  --gc-tech-schema-blend: screen;
   --gc-shadow-strong: rgba(0, 0, 0, 0.4);
   --gc-shadow-card-hover: 0 22px 48px rgba(0, 0, 0, 0.45);
-  --gc-on-accent: #1a1612;
-  --gc-highlights-bg: linear-gradient(118deg, #100e0c 0%, #161412 40%, #1c1916 70%, #12100e 100%);
-  --gc-highlights-title: var(--gc-ink);
-  --gc-highlights-text: var(--gc-ink-muted);
-  --gc-highlights-item-bg: rgba(201, 162, 39, 0.06);
-  --gc-highlights-border-top: rgba(201, 162, 39, 0.24);
-  --gc-highlights-border-bottom: rgba(201, 162, 39, 0.2);
-  --gc-highlights-inset: rgba(201, 162, 39, 0.05);
+  --gc-on-accent: #060a10;
+  --gc-highlights-bg: linear-gradient(118deg, #060a10 0%, #0c1520 42%, #080d14 100%);
+  --gc-highlights-title: #f4f7fb;
+  --gc-highlights-text: rgba(232, 238, 245, 0.78);
+  --gc-highlights-item-bg: rgba(255, 255, 255, 0.03);
+  --gc-highlights-border-top: rgba(201, 162, 39, 0.18);
+  --gc-highlights-border-bottom: rgba(201, 162, 39, 0.14);
+  --gc-highlights-inset: rgba(255, 255, 255, 0.04);
 }
 
 [data-theme="dark"] body {
-  background: var(--gc-bg);
-}
-
-/* Mavi şema SVG koyu modda tamamen kapalı — laciverte boyamasın */
-[data-theme="dark"] .gc-tech-bg__layer--schema {
-  display: none;
+  background: radial-gradient(120% 80% at 50% -10%, rgba(201, 162, 39, 0.12) 0%, transparent 45%),
+    linear-gradient(180deg, var(--gc-bg) 0%, var(--gc-bg-soft) 42%, var(--gc-bg-deep) 100%);
 }
 
 [data-theme="dark"] .about {
-  background: linear-gradient(165deg, #242019 0%, #181614 100%);
-  border: 1px solid rgba(201, 162, 39, 0.14);
+  background: rgba(18, 28, 42, 0.55);
+  border: 1px solid rgba(232, 238, 245, 0.1);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
 }
 
 [data-theme="dark"] .about::before {
-  opacity: 0.35;
+  opacity: 0.45;
 }
 
 [data-theme="dark"] .product-card {
-  background: var(--gc-card-bg);
-  border-color: rgba(201, 162, 39, 0.14);
+  background: rgba(18, 28, 42, 0.55);
+  border-color: rgba(232, 238, 245, 0.1);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
 }
 
 [data-theme="dark"] body.gc-inner .gc-doc {
-  background: var(--gc-card-bg);
-  border-color: rgba(201, 162, 39, 0.14);
+  background: rgba(18, 28, 42, 0.55);
+  border-color: rgba(232, 238, 245, 0.1);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
 }
 
 [data-theme="dark"] .gc-page-hero {
-  background: rgba(20, 18, 16, 0.82);
+  background: rgba(8, 14, 22, 0.55);
   border-bottom-color: rgba(201, 162, 39, 0.14);
 }
 
 [data-theme="dark"] body.gc-inner .gc-doc::before {
-  opacity: 0.22;
+  opacity: 0.3;
+}
+
+[data-theme="dark"] .scroll-top {
+  background: rgba(20, 32, 48, 0.75);
+  border: 1px solid rgba(201, 162, 39, 0.25);
+  color: var(--gc-accent);
 }
 
 *,
@@ -1348,18 +1356,21 @@ html[data-ui-locale="en"] .policy-locale-tr {
   color: var(--gc-ink);
 }
 
-/* ——— Anima ürün sayfası (koyu tema + cam morfolojisi) ——— */
+/* ——— Anima ürün sayfası (cam morfolojisi) ——— */
 body.anima-launch {
   color: #e8eef5;
+}
+
+html[data-theme="light"] body.anima-launch {
   background: radial-gradient(120% 80% at 50% -10%, rgba(201, 162, 39, 0.12) 0%, transparent 45%),
     linear-gradient(180deg, #060a10 0%, #0c1520 42%, #080d14 100%);
 }
 
-body.anima-launch .gc-tech-bg__layer--grid {
+html[data-theme="light"] body.anima-launch .gc-tech-bg__layer--grid {
   opacity: 0.35;
 }
 
-body.anima-launch .gc-tech-bg__layer--schema {
+html[data-theme="light"] body.anima-launch .gc-tech-bg__layer--schema {
   opacity: 0.28;
   mix-blend-mode: screen;
 }
