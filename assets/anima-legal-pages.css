@@ -2,6 +2,33 @@
 :root {
   --anima-picker-bg: rgba(255, 255, 255, 0.96);
   --anima-picker-border: rgba(15, 23, 42, 0.12);
+  --anima-picker-label: #64748b;
+  --anima-picker-btn-bg: #fff;
+  --anima-picker-btn-fg: #0f172a;
+  --anima-picker-btn-border: #cbd5e1;
+  --anima-picker-btn-hover-bg: #f8fafc;
+  --anima-picker-btn-hover-border: #94a3b8;
+  --anima-picker-btn-active-bg: #0d2137;
+  --anima-picker-btn-active-fg: #e0f2fe;
+  --anima-fallback-fg: #334155;
+  --anima-fallback-bg: #eff6ff;
+  --anima-fallback-border: #bfdbfe;
+}
+
+[data-theme="dark"] {
+  --anima-picker-bg: rgba(10, 22, 40, 0.94);
+  --anima-picker-border: rgba(201, 162, 39, 0.16);
+  --anima-picker-label: #a0b0c0;
+  --anima-picker-btn-bg: rgba(21, 42, 69, 0.9);
+  --anima-picker-btn-fg: #e8eef5;
+  --anima-picker-btn-border: rgba(201, 162, 39, 0.2);
+  --anima-picker-btn-hover-bg: rgba(201, 162, 39, 0.12);
+  --anima-picker-btn-hover-border: rgba(201, 162, 39, 0.35);
+  --anima-picker-btn-active-bg: rgba(201, 162, 39, 0.25);
+  --anima-picker-btn-active-fg: #f0d875;
+  --anima-fallback-fg: #c9d4e0;
+  --anima-fallback-bg: rgba(15, 31, 53, 0.85);
+  --anima-fallback-border: rgba(201, 162, 39, 0.2);
 }
 
 body.anima-legal-body {
@@ -30,7 +57,7 @@ body.anima-legal-body {
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #64748b;
+  color: var(--anima-picker-label);
   margin-right: 0.25rem;
 }
 
@@ -40,29 +67,29 @@ body.anima-legal-body {
   font-weight: 600;
   padding: 0.35rem 0.5rem;
   border-radius: 0.5rem;
-  border: 1px solid #cbd5e1;
-  background: #fff;
-  color: #0f172a;
+  border: 1px solid var(--anima-picker-btn-border);
+  background: var(--anima-picker-btn-bg);
+  color: var(--anima-picker-btn-fg);
   cursor: pointer;
   line-height: 1.2;
 }
 
 .anima-legal-picker button:hover {
-  border-color: #94a3b8;
-  background: #f8fafc;
+  border-color: var(--anima-picker-btn-hover-border);
+  background: var(--anima-picker-btn-hover-bg);
 }
 
 .anima-legal-picker button[aria-pressed="true"] {
-  background: #0d2137;
-  color: #e0f2fe;
-  border-color: #0d2137;
+  background: var(--anima-picker-btn-active-bg);
+  color: var(--anima-picker-btn-active-fg);
+  border-color: var(--anima-picker-btn-active-bg);
 }
 
 .anima-legal-fallback-banner {
   font-size: 0.88rem;
-  color: #334155;
-  background: #eff6ff;
-  border: 1px solid #bfdbfe;
+  color: var(--anima-fallback-fg);
+  background: var(--anima-fallback-bg);
+  border: 1px solid var(--anima-fallback-border);
   border-radius: 0.5rem;
   padding: 0.65rem 0.85rem;
   margin: 0 0 1rem;

@@ -13,7 +13,7 @@ const ROOT = path.join(__dirname, "..");
 const SKIP_FILES = new Set(["tr/index.html", "en/index.html"]);
 
 /** Tüm HTML’lerde style önbürücüsü (tek tip). */
-const STYLE_QUERY = "global1";
+const STYLE_QUERY = "global2";
 
 const FONT_AWESOME_LINK = `  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
 `;
@@ -138,12 +138,44 @@ function siteScriptsPrefix(fromFile) {
 }
 
 function ensureSiteScripts(html, fromFile) {
-  if (html.includes("site-path.js")) return html;
   const pre = siteScriptsPrefix(fromFile);
-  return html.replace(
-    /(<meta charset="utf-8">)/i,
-    `$1\n  <script src="${pre}assets/site-path.js"></script>\n  <script src="${pre}assets/lang-boot.js"></script>`
-  );
+  let out = html;
+  if (!out.includes("site-path.js")) {
+    out = out.replace(
+      /(<meta charset="utf-8">)/i,
+      `$1\n  <script src="${pre}assets/site-path.js"></script>\n  <script src="${pre}assets/lang-boot.js"></script>`
+    );
+  }
+  if (!out.includes("theme-boot.js")) {
+    out = out.replace(
+      /(<script src="[^"]*lang-boot\.js"><\/script>)/i,
+      `$1\n  <script src="${pre}assets/theme-boot.js"></script>`
+    );
+  }
+  return out;
+}
+
+function ensureThemeScript(html, fromFile) {
+  if (html.includes("theme.js")) return html;
+  const pre = siteScriptsPrefix(fromFile);
+  return html.replace(/<\/body>/i, `  <script src="${pre}assets/theme.js" defer></script>\n</body>`);
+}
+
+function buildThemeSwitch(en) {
+  const L = en
+    ? { aria: "Theme", light: "Light", dark: "Dark" }
+    : { aria: "Tema", light: "Açık", dark: "Koyu" };
+  return `        <div class="gc-theme-switch" role="group" aria-label="${L.aria}">
+          <button type="button" class="gc-theme-switch__btn" data-gc-theme="light" aria-pressed="false">${L.light}</button>
+          <span class="gc-theme-switch__sep" aria-hidden="true">|</span>
+          <button type="button" class="gc-theme-switch__btn" data-gc-theme="dark" aria-pressed="false">${L.dark}</button>
+        </div>`;
+}
+
+function ensureThemeSwitchInHeader(html, en) {
+  if (html.includes("gc-theme-switch")) return html;
+  const themeBlock = buildThemeSwitch(en);
+  return html.replace(/(<div class="site-header__tail">\s*\n)/, `$1${themeBlock}\n`);
 }
 
 function ensureStylesheetVersion(html) {
@@ -343,6 +375,7 @@ function buildHeader(fromFile, opts) {
   };
 
   let langBlock;
+  const themeBlock = buildThemeSwitch(en);
   if (is404) {
     langBlock = `        <div class="gc-lang-switch" aria-label="${L.langAria}">
           <a href="tr/index.html#ust">TR</a>
@@ -373,6 +406,7 @@ function buildHeader(fromFile, opts) {
     <div class="site-header__inner">
       <a class="brand" href="${brandHref}">GezegenselCore</a>
       <div class="site-header__tail">
+${themeBlock}
 ${langBlock}
         <input type="checkbox" id="nav-open" class="nav-toggle">
         <label for="nav-open" class="nav-burger" aria-label="${L.burger}">
@@ -419,6 +453,9 @@ function patch(html, fromFile) {
     out = ensureFontAwesomeLink(out);
     out = ensureFaviconLinks(out);
     out = ensureSeoForLocalePages(out, posixFile);
+    out = ensureSiteScripts(out, posixFile);
+    out = ensureThemeSwitchInHeader(out, posixFile.startsWith("en/"));
+    out = ensureThemeScript(out, posixFile);
     return out !== html ? out : null;
   }
   if (!html.includes("style.css") || !html.includes("site-header")) return null;
@@ -458,6 +495,7 @@ function patch(html, fromFile) {
   out = ensureFontAwesomeLink(out);
   out = ensureFaviconLinks(out);
   out = ensureSiteScripts(out, posixFile);
+  out = ensureThemeScript(out, posixFile);
   out = ensureSeoForLocalePages(out, posixFile);
   out = ensureNoindexForNonLocale(out, posixFile);
 
