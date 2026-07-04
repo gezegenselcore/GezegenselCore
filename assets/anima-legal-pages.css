@@ -16,19 +16,19 @@
 }
 
 [data-theme="dark"] {
-  --anima-picker-bg: rgba(10, 22, 40, 0.94);
+  --anima-picker-bg: rgba(17, 17, 16, 0.94);
   --anima-picker-border: rgba(201, 162, 39, 0.16);
-  --anima-picker-label: #a0b0c0;
-  --anima-picker-btn-bg: rgba(21, 42, 69, 0.9);
-  --anima-picker-btn-fg: #e8eef5;
+  --anima-picker-label: #a89f94;
+  --anima-picker-btn-bg: rgba(32, 29, 26, 0.95);
+  --anima-picker-btn-fg: #f2ece4;
   --anima-picker-btn-border: rgba(201, 162, 39, 0.2);
-  --anima-picker-btn-hover-bg: rgba(201, 162, 39, 0.12);
-  --anima-picker-btn-hover-border: rgba(201, 162, 39, 0.35);
-  --anima-picker-btn-active-bg: rgba(201, 162, 39, 0.25);
+  --anima-picker-btn-hover-bg: rgba(201, 162, 39, 0.1);
+  --anima-picker-btn-hover-border: rgba(201, 162, 39, 0.32);
+  --anima-picker-btn-active-bg: rgba(201, 162, 39, 0.22);
   --anima-picker-btn-active-fg: #f0d875;
-  --anima-fallback-fg: #c9d4e0;
-  --anima-fallback-bg: rgba(15, 31, 53, 0.85);
-  --anima-fallback-border: rgba(201, 162, 39, 0.2);
+  --anima-fallback-fg: #c9bfb4;
+  --anima-fallback-bg: rgba(32, 29, 26, 0.9);
+  --anima-fallback-border: rgba(201, 162, 39, 0.18);
 }
 
 body.anima-legal-body {

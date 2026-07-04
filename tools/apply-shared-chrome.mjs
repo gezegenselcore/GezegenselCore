@@ -13,7 +13,7 @@ const ROOT = path.join(__dirname, "..");
 const SKIP_FILES = new Set(["tr/index.html", "en/index.html"]);
 
 /** Tüm HTML’lerde style önbürücüsü (tek tip). */
-const STYLE_QUERY = "global2";
+const STYLE_QUERY = "global3";
 
 const FONT_AWESOME_LINK = `  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
 `;
