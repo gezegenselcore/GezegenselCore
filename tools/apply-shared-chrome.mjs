@@ -13,7 +13,7 @@ const ROOT = path.join(__dirname, "..");
 const SKIP_FILES = new Set(["tr/index.html", "en/index.html"]);
 
 /** Tüm HTML’lerde style önbürücüsü (tek tip). */
-const STYLE_QUERY = "global7";
+const STYLE_QUERY = "global8";
 
 const FONT_AWESOME_LINK = `  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
 `;
@@ -138,27 +138,28 @@ function siteScriptsPrefix(fromFile) {
 }
 
 function ensureSiteScripts(html, fromFile) {
-  const pre = siteScriptsPrefix(fromFile);
   let out = html;
   if (!out.includes("site-path.js")) {
     out = out.replace(
       /(<meta charset="utf-8">)/i,
-      `$1\n  <script src="${pre}assets/site-path.js"></script>\n  <script src="${pre}assets/lang-boot.js"></script>`
+      `$1\n  <script src="/assets/site-path.js"></script>\n  <script src="/assets/lang-boot.js"></script>`
     );
   }
   if (!out.includes("theme-boot.js")) {
     out = out.replace(
       /(<script src="[^"]*lang-boot\.js"><\/script>)/i,
-      `$1\n  <script src="${pre}assets/theme-boot.js"></script>`
+      `$1\n  <script src="/assets/theme-boot.js"></script>`
     );
   }
-  return out;
+  return ensureAbsoluteAssetPaths(out);
 }
 
 function ensureThemeScript(html, fromFile) {
-  if (html.includes("theme.js")) return html;
-  const pre = siteScriptsPrefix(fromFile);
-  return html.replace(/<\/body>/i, `  <script src="${pre}assets/theme.js" defer></script>\n</body>`);
+  let out = html.replace(/src="(?:\.\.\/)+assets\/theme\.js"/g, 'src="/assets/theme.js"');
+  if (!out.includes("/assets/theme.js")) {
+    out = out.replace(/<\/body>/i, `  <script src="/assets/theme.js" defer></script>\n</body>`);
+  }
+  return ensureAbsoluteAssetPaths(out);
 }
 
 function buildThemeSwitch(en) {
@@ -180,10 +181,15 @@ function ensureThemeSwitchInHeader(html, en) {
 
 function ensureStylesheetVersion(html) {
   const v = STYLE_QUERY;
-  return html.replace(/href="([^"]*?)style\.css(\?[^"]*)?"/g, (full, prefix, query) => {
-    if (query && query.includes(v)) return full;
-    return `href="${prefix}style.css?v=${v}"`;
-  });
+  return html.replace(/href="[^"]*style\.css(\?[^"]*)?"/g, `href="/style.css?v=${v}"`);
+}
+
+/** Derin klasörlerde kırılmaması için /assets/ mutlak yollar. */
+function ensureAbsoluteAssetPaths(html) {
+  let out = html;
+  out = out.replace(/src="(?:\.\.\/)+assets\//g, 'src="/assets/');
+  out = out.replace(/href="(?:\.\.\/)+assets\//g, 'href="/assets/');
+  return out;
 }
 
 function ensureFontAwesomeLink(html) {
@@ -431,6 +437,13 @@ ${langBlock}
   </header>`;
 }
 
+function fixBrokenInnerLinks(html, posixFile) {
+  if (posixFile.startsWith("tr/pages/") || posixFile.startsWith("en/pages/")) {
+    return html.replace(/href="\.\.\/\.\.\/\.\.\/tr\/index\.html/g, 'href="../../../index.html');
+  }
+  return html;
+}
+
 function walkHtml(dir, out = []) {
   for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
     if (ent.name.startsWith(".")) continue;
@@ -450,6 +463,7 @@ function patch(html, fromFile) {
 
   if (SKIP_FILES.has(posixFile)) {
     let out = ensureStylesheetVersion(html);
+    out = ensureAbsoluteAssetPaths(out);
     out = ensureFontAwesomeLink(out);
     out = ensureFaviconLinks(out);
     out = ensureSeoForLocalePages(out, posixFile);
@@ -484,7 +498,9 @@ function patch(html, fromFile) {
 
   const ps = parallaxSrc(posixFile);
   if (!out.includes("gc-home-parallax.js")) {
-    out = out.replace(/<\/body>/i, `  <script src="${ps}" defer></script>\n</body>`);
+    out = out.replace(/<\/body>/i, `  <script src="/assets/gc-home-parallax.js" defer></script>\n</body>`);
+  } else {
+    out = out.replace(/src="(?:\.\.\/)+assets\/gc-home-parallax\.js"/g, 'src="/assets/gc-home-parallax.js"');
   }
 
   if (is404 && !out.includes('id="icerik"')) {
@@ -492,12 +508,14 @@ function patch(html, fromFile) {
   }
 
   out = ensureStylesheetVersion(out);
+  out = ensureAbsoluteAssetPaths(out);
   out = ensureFontAwesomeLink(out);
   out = ensureFaviconLinks(out);
   out = ensureSiteScripts(out, posixFile);
   out = ensureThemeScript(out, posixFile);
   out = ensureSeoForLocalePages(out, posixFile);
   out = ensureNoindexForNonLocale(out, posixFile);
+  out = fixBrokenInnerLinks(out, posixFile);
 
   return out;
 }
@@ -508,7 +526,13 @@ function main() {
   for (const abs of files) {
     const rel = posix(path.relative(ROOT, abs));
     const raw = fs.readFileSync(abs, "utf8");
-    const next = patch(raw, abs);
+    let next = patch(raw, abs);
+    if (!next && raw.includes("style.css")) {
+      let minimal = ensureStylesheetVersion(raw);
+      minimal = ensureAbsoluteAssetPaths(minimal);
+      minimal = fixBrokenInnerLinks(minimal, rel);
+      if (minimal !== raw) next = minimal;
+    }
     if (next && next !== raw) {
       fs.writeFileSync(abs, next, "utf8");
       console.log("patched", rel);
