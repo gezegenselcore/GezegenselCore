@@ -46,42 +46,70 @@
 
 [data-theme="dark"] {
   color-scheme: dark;
-  /* Sıcak kömür-gri — altın vurgularla uyumlu, soğuk lacivert yerine */
-  --gc-bg: #111110;
-  --gc-bg-soft: #1a1816;
-  --gc-ink: #f2ece4;
-  --gc-ink-muted: #a89f94;
-  --gc-surface: #1e1c19;
+  /* Sıcak antrasit — mavi/lacivert yok */
+  --gc-bg: #0d0c0b;
+  --gc-bg-soft: #161412;
+  --gc-ink: #f5f0e8;
+  --gc-ink-muted: #b5a99a;
+  --gc-surface: #1c1916;
   /* Altın marka renkleri korunur */
   --gc-accent: #c9a227;
   --gc-accent-dark: #d4af37;
   --gc-accent-light: #f0d875;
-  --gc-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
-  --gc-tech-grid: 55, 50, 44;
-  --gc-header-bg: rgba(17, 17, 16, 0.94);
-  --gc-header-border: rgba(201, 162, 39, 0.16);
-  --gc-nav-panel-bg: rgba(17, 17, 16, 0.98);
-  --gc-footer-bg: rgba(14, 13, 12, 0.88);
-  --gc-page-hero-bg: rgba(22, 20, 18, 0.55);
-  --gc-card-bg: linear-gradient(165deg, rgba(32, 29, 26, 0.97) 0%, rgba(22, 20, 18, 0.99) 100%);
-  --gc-card-border: rgba(201, 162, 39, 0.14);
-  --gc-border-subtle: rgba(201, 162, 39, 0.1);
-  --gc-border-medium: rgba(201, 162, 39, 0.18);
-  --gc-border-strong: rgba(201, 162, 39, 0.22);
+  --gc-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+  --gc-tech-grid: 201, 162, 39;
+  --gc-header-bg: rgba(13, 12, 11, 0.96);
+  --gc-header-border: rgba(201, 162, 39, 0.18);
+  --gc-nav-panel-bg: rgba(13, 12, 11, 0.99);
+  --gc-footer-bg: rgba(10, 9, 8, 0.92);
+  --gc-page-hero-bg: rgba(22, 20, 18, 0.6);
+  --gc-card-bg: linear-gradient(165deg, #242019 0%, #181614 100%);
+  --gc-card-border: rgba(201, 162, 39, 0.16);
+  --gc-border-subtle: rgba(201, 162, 39, 0.12);
+  --gc-border-medium: rgba(201, 162, 39, 0.2);
+  --gc-border-strong: rgba(201, 162, 39, 0.26);
   --gc-accent-bg-soft: rgba(201, 162, 39, 0.12);
   --gc-accent-bg-hover: rgba(201, 162, 39, 0.18);
   --gc-accent-bg-nav: rgba(201, 162, 39, 0.16);
-  --gc-accent-bg-current: rgba(201, 162, 39, 0.22);
-  --gc-pattern-rgb: 48, 44, 40;
-  --gc-table-head-bg: rgba(201, 162, 39, 0.07);
-  --gc-code-bg: rgba(201, 162, 39, 0.08);
-  --gc-tech-grid-opacity: 0.045;
-  --gc-tech-grid-layer-opacity: 0.65;
-  --gc-tech-schema-opacity: 0.22;
-  --gc-tech-schema-blend: soft-light;
-  --gc-shadow-strong: rgba(0, 0, 0, 0.35);
-  --gc-shadow-card-hover: 0 22px 48px rgba(0, 0, 0, 0.4);
+  --gc-accent-bg-current: rgba(201, 162, 39, 0.24);
+  --gc-pattern-rgb: 201, 162, 39;
+  --gc-table-head-bg: rgba(201, 162, 39, 0.08);
+  --gc-code-bg: rgba(201, 162, 39, 0.1);
+  --gc-tech-grid-opacity: 0.032;
+  --gc-tech-grid-layer-opacity: 0.55;
+  --gc-tech-schema-opacity: 0;
+  --gc-tech-schema-blend: normal;
+  --gc-shadow-strong: rgba(0, 0, 0, 0.4);
+  --gc-shadow-card-hover: 0 22px 48px rgba(0, 0, 0, 0.45);
   --gc-on-accent: #1a1612;
+}
+
+[data-theme="dark"] body {
+  background: var(--gc-bg);
+}
+
+/* Mavi şema SVG koyu modda tamamen kapalı — laciverte boyamasın */
+[data-theme="dark"] .gc-tech-bg__layer--schema {
+  display: none;
+}
+
+[data-theme="dark"] .about {
+  background: linear-gradient(165deg, #242019 0%, #181614 100%);
+  border: 1px solid rgba(201, 162, 39, 0.14);
+}
+
+[data-theme="dark"] .about::before {
+  opacity: 0.35;
+}
+
+[data-theme="dark"] .product-card {
+  background: var(--gc-card-bg);
+  border-color: rgba(201, 162, 39, 0.14);
+}
+
+[data-theme="dark"] body.gc-inner .gc-doc {
+  background: var(--gc-card-bg);
+  border-color: rgba(201, 162, 39, 0.14);
 }
 
 *,
