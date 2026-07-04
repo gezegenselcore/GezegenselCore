@@ -46,6 +46,8 @@
   --gc-highlights-title: #f0f4fa;
   --gc-highlights-text: rgba(224, 232, 244, 0.78);
   --gc-highlights-item-bg: rgba(255, 255, 255, 0.03);
+  --gc-highlights-item-border: rgba(201, 162, 39, 0.12);
+  --gc-highlights-item-shadow: none;
   --gc-highlights-border-top: rgba(201, 162, 39, 0.22);
   --gc-highlights-border-bottom: rgba(201, 162, 39, 0.18);
   --gc-highlights-inset: rgba(255, 255, 255, 0.04);
@@ -89,18 +91,34 @@
   --gc-shadow-strong: rgba(0, 0, 0, 0.4);
   --gc-shadow-card-hover: 0 22px 48px rgba(0, 0, 0, 0.45);
   --gc-on-accent: #060a10;
-  --gc-highlights-bg: linear-gradient(118deg, #060a10 0%, #0c1520 42%, #080d14 100%);
+  --gc-highlights-bg: rgba(4, 8, 14, 0.72);
   --gc-highlights-title: #f4f7fb;
   --gc-highlights-text: rgba(232, 238, 245, 0.78);
-  --gc-highlights-item-bg: rgba(255, 255, 255, 0.03);
-  --gc-highlights-border-top: rgba(201, 162, 39, 0.18);
-  --gc-highlights-border-bottom: rgba(201, 162, 39, 0.14);
-  --gc-highlights-inset: rgba(255, 255, 255, 0.04);
+  --gc-highlights-item-bg: rgba(18, 28, 42, 0.62);
+  --gc-highlights-item-border: rgba(232, 238, 245, 0.12);
+  --gc-highlights-item-shadow: 0 6px 28px rgba(0, 0, 0, 0.42), 0 0 0 1px rgba(201, 162, 39, 0.08);
+  --gc-highlights-border-top: rgba(201, 162, 39, 0.22);
+  --gc-highlights-border-bottom: rgba(201, 162, 39, 0.18);
+  --gc-highlights-inset: rgba(255, 255, 255, 0.05);
 }
 
 [data-theme="dark"] body {
   background: radial-gradient(120% 80% at 50% -10%, rgba(201, 162, 39, 0.12) 0%, transparent 45%),
     linear-gradient(180deg, var(--gc-bg) 0%, var(--gc-bg-soft) 42%, var(--gc-bg-deep) 100%);
+}
+
+[data-theme="dark"] .gc-highlights {
+  backdrop-filter: blur(8px);
+  border-top: 1px solid var(--gc-highlights-border-top);
+  border-bottom: 1px solid var(--gc-highlights-border-bottom);
+}
+
+[data-theme="dark"] .gc-highlights__item {
+  background: var(--gc-highlights-item-bg);
+  border: 1px solid var(--gc-highlights-item-border);
+  box-shadow: var(--gc-highlights-item-shadow);
+  backdrop-filter: blur(12px);
+  padding: 1rem 0.85rem;
 }
 
 [data-theme="dark"] .about {
@@ -608,7 +626,8 @@ section {
   padding: 0.65rem 0.5rem;
   border-radius: 12px;
   background: var(--gc-highlights-item-bg);
-  border: 1px solid rgba(201, 162, 39, 0.12);
+  border: 1px solid var(--gc-highlights-item-border);
+  box-shadow: var(--gc-highlights-item-shadow);
 }
 
 .gc-highlights__icon {
