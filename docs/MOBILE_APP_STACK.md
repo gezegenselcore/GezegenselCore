@@ -15,6 +15,6 @@
 
 - Kamu **Gizlilik**, **Koşullar**, **Destek** URL’leri: `https://gezegenselcore.com/tr/…` veya `…/en/…` (uygulama dili `tr` değilse `en`).  
 - Ayrıntılı kural: **`docs/APP_WEB_ALIGNMENT.md`**.  
-- Anima içi hukuk metinleri ve uygulama davranışı: Anima reposunda `docs/legal/`, `legal-public/` vb.
+- Anima içi hukuk metinleri ve uygulama davranışı: Anima reposunda `docs/legal/`, **`legal-public/`** (tek kaynak). Siteye aktarım: `node tools/sync-anima-policies.mjs`.
 
 Son güncelleme: 2026-04-18

@@ -1,28 +1,66 @@
 /**
- * Anima mobil reposu legal-public → site tr/ kaynak sayfalar (article gövdeleri).
+ * Anima legal-public → site (yalnızca okuma; SSOT: ../Anima/legal-public).
+ * Metin burada düzenlenmez — Anima reposunda güncellenir, sonra sync çalıştırılır.
+ *
  * node tools/import-anima-legal-content.mjs [path/to/Anima/legal-public]
  */
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { buildAuraLegalMaster } from "./anima-legal-master-shell.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
+const TPL = path.join(ROOT, "tools", "templates");
 const DEFAULT_ANIMA = path.join(ROOT, "..", "Anima", "legal-public");
 
-const TARGETS = [
+const MASTER_SPECS = [
   {
+    master: "anima-privacy.master.html",
     source: "anima/privacy-policy.html",
-    dest: "tr/anima/privacy-policy.html",
-    patchPrivacyS14: true,
+    assetPrefix: "../../",
+    seoKey: "aura_privacy",
+    dataTitleTr: "Gizlilik Politikası — Anima",
+    dataTitleEn: "Privacy Policy — Anima",
   },
-  { source: "anima/terms-of-use.html", dest: "tr/anima/terms-of-use.html" },
   {
+    master: "anima-terms.master.html",
+    source: "anima/terms-of-use.html",
+    assetPrefix: "../../",
+    seoKey: "aura_terms",
+    dataTitleTr: "Kullanım Koşulları — Anima",
+    dataTitleEn: "Terms of Use — Anima",
+  },
+  {
+    master: "anima-support.master.html",
     source: "anima/support.html",
-    dest: "tr/pages/anima/support.html",
-    fixSupport: true,
+    assetPrefix: "../../../",
+    seoKey: "aura_support",
+    dataTitleTr: "Anima — Destek",
+    dataTitleEn: "Anima — Support",
   },
 ];
+
+const ASSET_FILES = ["anima-legal-pages.js", "anima-legal-pages.css"];
+
+/** Site koyu teması — Anima CSS kopyasından sonra korunur */
+const SITE_DARK_CSS = `
+[data-theme="dark"] {
+  --anima-picker-bg: rgba(8, 14, 22, 0.94);
+  --anima-picker-border: rgba(201, 162, 39, 0.16);
+  --anima-picker-label: rgba(232, 238, 245, 0.65);
+  --anima-picker-btn-bg: rgba(18, 28, 42, 0.9);
+  --anima-picker-btn-fg: #e8eef5;
+  --anima-picker-btn-border: rgba(232, 238, 245, 0.12);
+  --anima-picker-btn-hover-bg: rgba(201, 162, 39, 0.12);
+  --anima-picker-btn-hover-border: rgba(201, 162, 39, 0.28);
+  --anima-picker-btn-active-bg: rgba(201, 162, 39, 0.22);
+  --anima-picker-btn-active-fg: #f0d875;
+  --anima-fallback-fg: rgba(232, 238, 245, 0.82);
+  --anima-fallback-bg: rgba(18, 28, 42, 0.75);
+  --anima-fallback-border: rgba(201, 162, 39, 0.18);
+}
+`;
 
 function extractArticles(html) {
   const stripped = html.replace(/<div id="anima-legal-picker"[^>]*><\/div>\s*/gi, "");
@@ -33,130 +71,99 @@ function extractArticles(html) {
   return m[0];
 }
 
-function normalizeForTrSource(articles, assetPrefix, destRel) {
-  let a = articles;
-  if (destRel.includes("pages/anima/support")) {
-    a = a.replace(
-      /https:\/\/gezegenselcore\.com\/en\/aura\/privacy-policy\.html/,
-      "../../tr/anima/privacy-policy.html"
-    );
+/** Kamu URL'leri: TR bloğunda /tr/, EN bloğunda /en/; göreli yollar {{locale}} ile kalır. */
+function normalizeArticleUrls(articles, assetPrefix) {
+  let a = articles.replace(
+    /(<article id="anima-block-tr"[\s\S]*?<\/article>)/,
+    (_, block) =>
+      block.replace(
+        /https:\/\/gezegenselcore\.com\/(?:tr|en)\/(anima\/|pages\/anima\/)/g,
+        "https://gezegenselcore.com/tr/$1"
+      )
+  );
+  a = a.replace(
+    /(<article id="anima-block-en"[\s\S]*?<\/article>)/,
+    (_, block) =>
+      block.replace(
+        /https:\/\/gezegenselcore\.com\/(?:tr|en)\/(anima\/|pages\/anima\/)/g,
+        "https://gezegenselcore.com/en/$1"
+      )
+  );
+  a = a.replace(
+    /https:\/\/gezegenselcore\.com\/(?:tr|en)\/aura\//g,
+    "https://gezegenselcore.com/tr/anima/"
+  );
+  a = a.replace(/https:\/\/gezegenselcore\.com\/aura\//g, "https://gezegenselcore.com/{{locale}}/anima/");
+  a = a.replace(/\.\.\/\.\.\/aura\//g, `${assetPrefix}{{locale}}/anima/`);
+  a = a.replace(/\.\.\/\.\.\/\.\.\/tr\//g, `${assetPrefix}{{locale}}/`);
+  a = a.replace(/\.\.\/\.\.\/tr\//g, `${assetPrefix}{{locale}}/`);
+  a = a.replace(/\.\.\/\.\.\/en\//g, `${assetPrefix}{{localeOther}}/`);
+  return a;
+}
+
+function writeMastersFromAnima(animaRoot) {
+  for (const spec of MASTER_SPECS) {
+    const src = path.join(animaRoot, spec.source);
+    if (!fs.existsSync(src)) {
+      throw new Error("Missing Anima source: " + src);
+    }
+    const articles = normalizeArticleUrls(extractArticles(fs.readFileSync(src, "utf8")), spec.assetPrefix);
+    const master = buildAuraLegalMaster({
+      assetPrefix: spec.assetPrefix,
+      seoKey: spec.seoKey,
+      dataTitleTr: spec.dataTitleTr,
+      dataTitleEn: spec.dataTitleEn,
+      articles,
+    });
+    const outPath = path.join(TPL, spec.master);
+    if (fs.existsSync(outPath) && fs.readFileSync(outPath, "utf8") === master) {
+      console.log("unchanged", spec.master);
+    } else {
+      fs.writeFileSync(outPath, master, "utf8");
+      console.log("wrote", spec.master, "←", spec.source);
+    }
   }
-  return a;
 }
 
-const PRIVACY_S14_TR = `
-    <h2>14. Anonim topluluk öğrenmesi</h2>
-    <p>Anima, hizmetlerini iyileştirmek için açık rızanızla anonim kullanım örüntüleri toplayabilir.</p>
-    <h3>Toplananlar</h3>
-    <ul>
-      <li>Yaş grubu (18–25, 26–64, 65+)</li>
-      <li>Aktivite tipi (binaural, nefes, ritüel, odak vb.)</li>
-      <li>Stres bandı (düşük, orta, yüksek)</li>
-      <li>Kapasite değişimi (aktivite öncesi/sonrası anonim fark)</li>
-      <li>Hafta referansı (gün veya tarih değil)</li>
-    </ul>
-    <h3>Toplanmayanlar</h3>
-    <ul>
-      <li>Ad, e-posta veya kullanıcı kimliği</li>
-      <li>Konum</li>
-      <li>Sağlık kaydı içeriği</li>
-      <li>Rüya veya günlük girdileri</li>
-      <li>Cihaz tanımlayıcısı</li>
-    </ul>
-    <h3>Kullanım</h3>
-    <p>Bu veriler anonim toplu istatistik oluşturmak ve genel öneri kalitesini iyileştirmek için kullanılır; bireysel kullanıcılara geri izlenemez.</p>
-    <h3>Kontrolünüz</h3>
-    <p>Uygulama ayarlarından “Anonim Veri Paylaşımı”nı kapatarak bu toplamayı istediğiniz zaman durdurabilirsiniz. Özellik varsayılan olarak kapalıdır ve yalnızca açık rızanızla etkinleşir.</p>
-    <h3>Saklama</h3>
-    <p>Anonim toplu veriler en fazla 12 ay saklanır.</p>`;
-
-const PRIVACY_S14_EN = `
-    <h2>14. Anonymous Community Learning</h2>
-    <p>Anima may collect anonymous usage patterns with your explicit consent to improve its services.</p>
-    <h3>What is collected</h3>
-    <ul>
-      <li>Age group (18–25, 26–64, 65+)</li>
-      <li>Activity type (binaural, breathing, ritual, focus, etc.)</li>
-      <li>Stress band (low, medium, high)</li>
-      <li>Capacity change (anonymous delta before and after activity)</li>
-      <li>Week reference (not day or date)</li>
-    </ul>
-    <h3>What is NOT collected</h3>
-    <ul>
-      <li>Name, email, or user identifier</li>
-      <li>Location</li>
-      <li>Health record contents</li>
-      <li>Dream or journal entries</li>
-      <li>Device identifier</li>
-    </ul>
-    <h3>How it's used</h3>
-    <p>This data is used to create anonymous aggregate statistics and improve general recommendation quality. It cannot be traced back to individual users.</p>
-    <h3>Your control</h3>
-    <p>You can stop this data collection at any time by turning off "Anonymous Data Sharing" in app settings. This feature is off by default and only activated with your explicit consent.</p>
-    <h3>Retention</h3>
-    <p>Anonymous aggregate data is retained for a maximum of 12 months.</p>`;
-
-function expandPrivacySection14(articles) {
-  let a = articles;
-  a = a.replace(
-    /<h2>14\. Anonim topluluk öğrenmesi<\/h2>[\s\S]*?(?=<h2>15\. İletişim)/,
-    `${PRIVACY_S14_TR}\n`
-  );
-  a = a.replace(
-    /<h2>14\. Anonymous Community Learning<\/h2>[\s\S]*?(?=<h2>15\. Contact)/,
-    `${PRIVACY_S14_EN}\n`
-  );
-  return a;
-}
-
-function fixSupportArticles(articles) {
-  let a = articles;
-  a = a.replace(
-    /Son güncelleme: 18 Nisan 2026/,
-    "Son güncelleme: 26 Nisan 2026"
-  );
-  a = a.replace(
-    /Last updated: April 18, 2026/,
-    "Last updated: April 26, 2026"
-  );
-  a = a.replace(
-    /https:\/\/gezegenselcore\.com\/en\/aura\/privacy-policy\.html(?=[^<]*Gizlilik)/,
-    "../../tr/anima/privacy-policy.html"
-  );
-  return a;
-}
-
-function patchPage(destRel, articles) {
-  const dest = path.join(ROOT, destRel);
-  const html = fs.readFileSync(dest, "utf8");
-  const current = extractArticles(html);
-  if (current === articles) {
-    console.log("unchanged", destRel);
-    return;
+function syncAssets(animaRoot) {
+  for (const name of ASSET_FILES) {
+    const src = path.join(animaRoot, "assets", name);
+    const dest = path.join(ROOT, "assets", name);
+    if (!fs.existsSync(src)) {
+      console.warn("skip missing asset", src);
+      continue;
+    }
+    let content = fs.readFileSync(src, "utf8");
+    if (name === "anima-legal-pages.css") {
+      content = content.replace(/\n\[data-theme="dark"\][\s\S]*$/m, "");
+      if (!content.includes('[data-theme="dark"]')) {
+        content = content.trimEnd() + "\n" + SITE_DARK_CSS;
+      }
+    }
+    if (fs.existsSync(dest) && fs.readFileSync(dest, "utf8") === content) {
+      console.log("unchanged assets/" + name);
+    } else {
+      fs.writeFileSync(dest, content, "utf8");
+      console.log("updated assets/" + name);
+    }
   }
-  const next = html.replace(current, articles);
-  if (next === html) throw new Error("Failed to patch " + destRel);
-  fs.writeFileSync(dest, next, "utf8");
-  console.log("updated", destRel);
 }
 
-function main() {
-  const animaRoot = process.argv[2] ? path.resolve(process.argv[2]) : DEFAULT_ANIMA;
+export function importAnimaLegal(animaRootArg) {
+  const animaRoot = animaRootArg ? path.resolve(animaRootArg) : DEFAULT_ANIMA;
   if (!fs.existsSync(animaRoot)) {
     throw new Error("Anima legal-public not found: " + animaRoot);
   }
-
-  for (const t of TARGETS) {
-    const src = path.join(animaRoot, t.source);
-    const parts = t.dest.split("/").filter(Boolean);
-    const assetPrefix = "../".repeat(parts.length - 1);
-    let articles = extractArticles(fs.readFileSync(src, "utf8"));
-    if (t.patchPrivacyS14) articles = expandPrivacySection14(articles);
-    if (t.fixSupport) articles = fixSupportArticles(articles);
-    articles = normalizeForTrSource(articles, assetPrefix, t.dest);
-    patchPage(t.dest, articles);
-  }
-  console.log("Done. Run: node tools/sync-anima-legal-masters.mjs && node tools/build-locale-pages.mjs");
+  writeMastersFromAnima(animaRoot);
+  syncAssets(animaRoot);
+  return animaRoot;
 }
 
-main();
+function main() {
+  importAnimaLegal(process.argv[2]);
+  console.log("Done. Run: node tools/sync-anima-policies.mjs");
+}
+
+const isDirectRun =
+  process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
+if (isDirectRun) main();

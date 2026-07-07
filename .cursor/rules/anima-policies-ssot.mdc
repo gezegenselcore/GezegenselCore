@@ -1,0 +1,38 @@
+---
+description: Anima hukuk sayfaları yalnızca Anima reposundan okunur; sitede metin düzenlenmez
+globs: tr/anima/**,en/anima/**,tr/pages/anima/**,en/pages/anima/**,tools/*anima*,assets/anima-legal-pages.*
+alwaysApply: false
+---
+
+# Anima politikaları — tek kaynak (SSOT)
+
+## Kaynak (düzenleme burada)
+
+`D:\GezegenselCore\Anima\legal-public\`
+
+- `anima/privacy-policy.html`
+- `anima/terms-of-use.html`
+- `anima/support.html`
+- `assets/anima-legal-pages.js` / `.css`
+
+Politika metinleri **yalnızca** Anima reposunda güncellenir (ayrı Cursor oturumu).
+
+## Site deposu (yalnızca okuma + yayın)
+
+`gezegenselcore.com` bu klasörü **okur**, siteye aktarır:
+
+```bash
+node tools/sync-anima-policies.mjs
+```
+
+Akış: Anima `legal-public` → `tools/templates/anima-*.master.html` → `tr/` ve `en/` sayfaları → chrome.
+
+## Yapma
+
+- `tr/anima/*.html` veya `en/anima/*.html` içinde politika metnini elle düzenleme
+- Site reposunda Anima hukuk metni için ikinci bir kopya oluşturma
+- `pages/anima/policies/` altında tam metin tutma (yalnızca build ile üretilen yönlendirme stub'ları)
+
+## Yayın
+
+Anima'da güncelleme sonrası sync çalıştır; deploy için commit + `main`'e push.

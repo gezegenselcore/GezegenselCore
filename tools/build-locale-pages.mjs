@@ -72,23 +72,17 @@ function applyHtmlLocaleShell(html, locale) {
 }
 
 function ensureAnimaMasters() {
-  const pairs = [
-    ["anima-privacy.master.html", path.join(ROOT, "tr", "anima", "privacy-policy.html")],
-    ["anima-terms.master.html", path.join(ROOT, "tr", "anima", "terms-of-use.html")],
-    ["anima-support.master.html", path.join(ROOT, "tr", "pages", "anima", "support.html")],
+  const required = [
+    "anima-privacy.master.html",
+    "anima-terms.master.html",
+    "anima-support.master.html",
   ];
-  for (const [name, livePath] of pairs) {
+  for (const name of required) {
     const tpl = path.join(ROOT, "tools", "templates", name);
     if (!fs.existsSync(tpl)) {
-      if (!fs.existsSync(livePath)) {
-        throw new Error("Missing " + livePath + " (need full HTML before first build)");
-      }
-      const body = read(livePath);
-      if (body.length < 500 || body.includes("legacy-path-redirect")) {
-        throw new Error("Refusing to seed template from redirect stub: " + livePath);
-      }
-      write(tpl, body);
-      console.log("Saved master template:", name);
+      throw new Error(
+        "Missing " + name + ". Run: node tools/sync-anima-policies.mjs (Anima legal-public → site)"
+      );
     }
   }
 }
@@ -333,6 +327,14 @@ function main() {
   write(path.join(ROOT, "anima", "privacy-policy.html"), rootRedirectStub("Privacy Policy — Anima", "/anima/privacy-policy.html"));
   write(path.join(ROOT, "anima", "terms-of-use.html"), rootRedirectStub("Terms of Use — Anima", "/anima/terms-of-use.html"));
   write(path.join(ROOT, "pages", "anima", "support.html"), rootRedirectStub("Anima — Support", "/pages/anima/support.html"));
+  for (const [legacyPath, logical] of [
+    ["pages/anima/policies/privacy.html", "/anima/privacy-policy.html"],
+    ["pages/anima/policies/privacy-policy.html", "/anima/privacy-policy.html"],
+    ["pages/anima/policies/terms.html", "/anima/terms-of-use.html"],
+  ]) {
+    const title = logical.includes("privacy") ? "Privacy Policy — Anima" : "Terms of Use — Anima";
+    write(path.join(ROOT, legacyPath), rootRedirectStub(title, logical));
+  }
   write(path.join(ROOT, "aura", "privacy-policy.html"), rootRedirectStub("Privacy Policy — Anima", "/anima/privacy-policy.html"));
   write(path.join(ROOT, "aura", "terms-of-use.html"), rootRedirectStub("Terms of Use — Anima", "/anima/terms-of-use.html"));
   write(path.join(ROOT, "pages", "aura", "support.html"), rootRedirectStub("Anima — Support", "/pages/anima/support.html"));

@@ -137,8 +137,17 @@ function siteScriptsPrefix(fromFile) {
   return depth ? "../".repeat(depth) : "";
 }
 
+function dedupeSitePathScript(html) {
+  let seen = false;
+  return html.replace(/\s*<script src="\/assets\/site-path\.js"><\/script>/g, (m) => {
+    if (seen) return "";
+    seen = true;
+    return m;
+  });
+}
+
 function ensureSiteScripts(html, fromFile) {
-  let out = html;
+  let out = dedupeSitePathScript(html);
   if (!out.includes("site-path.js")) {
     out = out.replace(
       /(<meta charset="utf-8">)/i,
