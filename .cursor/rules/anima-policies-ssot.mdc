@@ -1,38 +1,48 @@
 ---
-description: Anima hukuk sayfaları yalnızca Anima reposundan okunur; sitede metin düzenlenmez
-globs: tr/anima/**,en/anima/**,tr/pages/anima/**,en/pages/anima/**,tools/*anima*,assets/anima-legal-pages.*
-alwaysApply: false
+description: Anima politikaları yalnızca Anima/legal-public'tan okunur; bu repoda metin düzenlenmez, sadece sync + deploy.
+alwaysApply: true
 ---
 
-# Anima politikaları — tek kaynak (SSOT)
+# Anima politikaları — site tarafı (sync only)
 
-## Kaynak (düzenleme burada)
+## Tek kaynak (SSOT) — bu repoda değil
 
-`D:\GezegenselCore\Anima\legal-public\`
+```
+D:\GezegenselCore\Anima\legal-public\
+├── anima/privacy-policy.html
+├── anima/terms-of-use.html
+├── anima/support.html
+└── assets/anima-legal-pages.{css,js}
+```
 
-- `anima/privacy-policy.html`
-- `anima/terms-of-use.html`
-- `anima/support.html`
-- `assets/anima-legal-pages.js` / `.css`
+Politika metni **Anima reposunda** (diğer Cursor ekranı) inşa edilir ve güncellenir. Bu repoda **yalnızca okunur**.
 
-Politika metinleri **yalnızca** Anima reposunda güncellenir (ayrı Cursor oturumu).
+## Rol dağılımı
 
-## Site deposu (yalnızca okuma + yayın)
+- **Anima Cursor ekranı:** Uygulama + `legal-public/` + `docs/legal/*.md` — SSOT burada.
+- **Bu Cursor ekranı (gezegenselcore.com):** Anima'dan **alıp** siteye taşır; metin **elle düzenlenmez**.
 
-`gezegenselcore.com` bu klasörü **okur**, siteye aktarır:
+## Agent için zorunlu
+
+1. Politika/destek metni değişikliği istenirse **bu repoda düzenleme yapma.** Kullanıcıyı Anima `legal-public/` tarafına yönlendir; değişiklik orada yapıldıktan sonra burada sync çalıştır.
+2. Sync komutu (site kökünden):
 
 ```bash
 node tools/sync-anima-policies.mjs
 ```
 
-Akış: Anima `legal-public` → `tools/templates/anima-*.master.html` → `tr/` ve `en/` sayfaları → chrome.
+Akış: Anima `legal-public` → `tools/templates/anima-*.master.html` → `tr/` + `en/` sayfaları → `apply-shared-chrome`.
+
+3. **Çıktı sayfalarına dokunma:** `tr/anima/*`, `en/anima/*`, `tr/pages/anima/*`, `en/pages/anima/*` her sync'te üzerine yazılır.
+4. **İkinci kopya oluşturma:** `pages/anima/policies/` altında tam metin tutma; yalnızca build'in ürettiği yönlendirme stub'ları kalır.
+5. Kanonik URL'ler sabit (uygulama `gezegenselLegalUrls.ts` ile bağlı):
+   - `/{locale}/anima/privacy-policy.html`
+   - `/{locale}/anima/terms-of-use.html`
+   - `/{locale}/pages/anima/support.html`
+6. Sync sonrası: commit + `main`'e push → GitHub Pages deploy.
 
 ## Yapma
 
-- `tr/anima/*.html` veya `en/anima/*.html` içinde politika metnini elle düzenleme
-- Site reposunda Anima hukuk metni için ikinci bir kopya oluşturma
-- `pages/anima/policies/` altında tam metin tutma (yalnızca build ile üretilen yönlendirme stub'ları)
-
-## Yayın
-
-Anima'da güncelleme sonrası sync çalıştır; deploy için commit + `main`'e push.
+- `tr/` veya `en/` altında politika metnini elle patch etme
+- Anima `legal-public` dışından hukuk içeriği kopyalama veya saklama
+- Kanonik URL yollarını değiştirme
