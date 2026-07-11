@@ -9,15 +9,19 @@ alwaysApply: true
 
 ```
 D:\GezegenselCore\ReFollow\
-├── src/i18n/locales/{tr,en,…}.json   → settings.privacyPolicyContent
-└── src/config/links.ts               → SUPPORT_EMAIL
+├── src/i18n/locales/{tr,en,…}.json
+│     → settings.privacyPolicyContent
+│     → settings.termsOfUseContent
+└── src/config/links.ts
+      → SUPPORT_EMAIL
+      → PRIVACY_POLICY_URL / TERMS_OF_USE_URL
 ```
 
 Politika metni **ReFollow reposunda** (diğer Cursor ekranı) inşa edilir ve güncellenir. Bu repoda **yalnızca okunur**.
 
 ## Rol dağılımı
 
-- **ReFollow Cursor ekranı:** Uygulama + i18n gizlilik metni + `links.ts` — SSOT burada.
+- **ReFollow Cursor ekranı:** Uygulama + i18n gizlilik/şartlar + `links.ts` — SSOT burada.
 - **Bu Cursor ekranı (gezegenselcore.com):** ReFollow'dan **alıp** siteye taşır; metin **elle düzenlenmez**.
 
 ## Agent için zorunlu
@@ -29,18 +33,19 @@ Politika metni **ReFollow reposunda** (diğer Cursor ekranı) inşa edilir ve g�
 node tools/sync-refollow-policies.mjs
 ```
 
-Akış: ReFollow i18n/links → `pages/refollow/policies/*` → `tr/` + `en/` sayfaları → `apply-shared-chrome`.
+Akış: ReFollow i18n/links → `pages/refollow/policies/{privacy,terms,support}.html` → `tr/` + `en/` sayfaları → `apply-shared-chrome`.
 
-3. **Çıktı sayfalarına dokunma:** `pages/refollow/policies/privacy.html`, `tr|en/pages/refollow/policies/*` her sync'te üzerine yazılır (privacy gövdesi).
+3. **Çıktı sayfalarına dokunma:** `pages/refollow/policies/*`, `tr|en/pages/refollow/policies/*` her sync'te üzerine yazılır.
 4. **İkinci kopya oluşturma:** `pages/refollow/policies-temp/` altında kalıcı hukuk metni tutma.
 5. Kanonik URL'ler sabit:
    - `/{locale}/pages/refollow/policies/privacy.html`
    - `/{locale}/pages/refollow/policies/terms.html`
    - `/{locale}/pages/refollow/policies/support.html`
+   - Eski yol stub: `/refollow-policies/{privacy,terms,support}.html`
 6. Sync sonrası: commit + `main`'e push → GitHub Pages deploy.
 
 ## Yapma
 
-- `pages/refollow/policies/` veya `tr/` / `en/` altında gizlilik metnini elle patch etme
-- ReFollow dışı bir kaynaktan (eski `refollow-policies` GitHub Pages vb.) hukuk içeriği kopyalama
+- `pages/refollow/policies/` veya `tr/` / `en/` altında gizlilik/şartlar metnini elle patch etme
+- ReFollow dışı bir kaynaktan hukuk içeriği kopyalama
 - Kanonik URL yollarını değiştirme

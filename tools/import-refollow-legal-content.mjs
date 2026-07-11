@@ -1,6 +1,7 @@
 /**
  * ReFollow i18n → site (yalnızca okuma; SSOT: ../ReFollow).
- * Gizlilik metni: src/i18n/locales/{tr,en}.json → settings.privacyPolicyContent
+ * Gizlilik: settings.privacyPolicyContent
+ * Kullanım şartları: settings.termsOfUseContent
  * Destek e-postası: src/config/links.ts → SUPPORT_EMAIL
  *
  * node tools/import-refollow-legal-content.mjs [path/to/ReFollow]
@@ -32,8 +33,8 @@ function formatPara(text) {
   return `<p>${linkifyEmails(escapeHtml(text).replace(/\n/g, "<br />"))}</p>`;
 }
 
-/** Uygulama içi düz metni h3/p HTML'e çevirir. */
-export function parsePrivacyPolicyContent(raw) {
+/** Uygulama içi düz metni h3/p HTML'e çevirir (privacy + terms). */
+export function parsePolicyContent(raw) {
   const blocks = String(raw)
     .replace(/\r\n/g, "\n")
     .trim()
@@ -63,11 +64,14 @@ export function parsePrivacyPolicyContent(raw) {
     }
 
     if (sections.length === 0) {
-      sections.push({ title: first, paras: lines.slice(1).join("\n").trim() ? [lines.slice(1).join("\n").trim()] : [] });
+      sections.push({
+        title: first,
+        paras: lines.slice(1).join("\n").trim() ? [lines.slice(1).join("\n").trim()] : [],
+      });
       continue;
     }
 
-    if (/^(Bu uygulama|This app is not)/i.test(first)) {
+    if (/^(Bu uygulama|This app is not|ReFollow, Instagram|ReFollow is not officially)/i.test(first)) {
       trail.push(trimmed);
       continue;
     }
@@ -94,12 +98,12 @@ function renderLocaleBlock(langClass, h2, parsed) {
   return parts.join("\n");
 }
 
-function readLocalePrivacy(refollowRoot, localeFile) {
+function readLocaleField(refollowRoot, localeFile, field) {
   const p = path.join(refollowRoot, "src", "i18n", "locales", localeFile);
   const json = JSON.parse(fs.readFileSync(p, "utf8"));
-  const content = json?.settings?.privacyPolicyContent;
+  const content = json?.settings?.[field];
   if (!content || typeof content !== "string") {
-    throw new Error("Missing settings.privacyPolicyContent in " + p);
+    throw new Error(`Missing settings.${field} in ${p}`);
   }
   return content;
 }
@@ -112,13 +116,14 @@ function readSupportEmail(refollowRoot) {
   return m[1];
 }
 
-function patchPrivacyPage(html, trBlock, enBlock, updatedLine) {
-  const next = html.replace(
-    /<div class="policy-locale-tr lang-block">[\s\S]*?<div class="policy-locale-en lang-block">[\s\S]*?<\/div>\s*<p class="gc-updated">[^<]*<\/p>/,
+function patchDualLocalePage(html, fileLabel, trBlock, enBlock, updatedLine) {
+  const re =
+    /<div class="policy-locale-tr lang-block">[\s\S]*?<div class="policy-locale-en lang-block">[\s\S]*?<\/div>\s*<p class="gc-updated">[^<]*<\/p>/;
+  if (!re.test(html)) throw new Error("Failed to find policy blocks in " + fileLabel);
+  return html.replace(
+    re,
     `${trBlock}\n\n    ${enBlock}\n\n      <p class="gc-updated">${escapeHtml(updatedLine)}</p>`
   );
-  if (next === html) throw new Error("Failed to patch pages/refollow/policies/privacy.html");
-  return next;
 }
 
 function patchSupportEmails(html, email, updatedLine) {
@@ -128,33 +133,50 @@ function patchSupportEmails(html, email, updatedLine) {
     .replace(/<p class="gc-updated">[^<]*<\/p>/, `<p class="gc-updated">${escapeHtml(updatedLine)}</p>`);
 }
 
+function writePolicyPage(relPath, field, trRaw, enRaw, fallbackUpdated) {
+  const trParsed = parsePolicyContent(trRaw);
+  const enParsed = parsePolicyContent(enRaw);
+  const updatedLine = trParsed.updatedLabel || fallbackUpdated;
+  const trBlock = renderLocaleBlock("policy-locale-tr", "Türkçe", trParsed);
+  const enBlock = renderLocaleBlock("policy-locale-en", "English", enParsed);
+  const dest = path.join(ROOT, relPath);
+  const html = fs.readFileSync(dest, "utf8");
+  const next = patchDualLocalePage(html, relPath, trBlock, enBlock, updatedLine);
+  if (next === html) {
+    console.log("unchanged", relPath);
+  } else {
+    fs.writeFileSync(dest, next, "utf8");
+    console.log("updated", relPath, "← settings." + field);
+  }
+  return updatedLine;
+}
+
 export function importRefollowLegal(refollowRootArg) {
   const refollowRoot = refollowRootArg ? path.resolve(refollowRootArg) : DEFAULT_REFOLLOW;
   if (!fs.existsSync(refollowRoot)) {
     throw new Error("ReFollow repo not found: " + refollowRoot);
   }
 
-  const trRaw = readLocalePrivacy(refollowRoot, "tr.json");
-  const enRaw = readLocalePrivacy(refollowRoot, "en.json");
   const email = readSupportEmail(refollowRoot);
+  const fallbackUpdated = "Son güncelleme: 12 Temmuz 2026";
 
-  const trParsed = parsePrivacyPolicyContent(trRaw);
-  const enParsed = parsePrivacyPolicyContent(enRaw);
-  const updatedLine = trParsed.updatedLabel || "Son güncelleme: 12 Temmuz 2026";
+  const privacyUpdated = writePolicyPage(
+    "pages/refollow/policies/privacy.html",
+    "privacyPolicyContent",
+    readLocaleField(refollowRoot, "tr.json", "privacyPolicyContent"),
+    readLocaleField(refollowRoot, "en.json", "privacyPolicyContent"),
+    fallbackUpdated
+  );
 
-  const trBlock = renderLocaleBlock("policy-locale-tr", "Türkçe", trParsed);
-  const enBlock = renderLocaleBlock("policy-locale-en", "English", enParsed);
+  const termsUpdated = writePolicyPage(
+    "pages/refollow/policies/terms.html",
+    "termsOfUseContent",
+    readLocaleField(refollowRoot, "tr.json", "termsOfUseContent"),
+    readLocaleField(refollowRoot, "en.json", "termsOfUseContent"),
+    privacyUpdated || fallbackUpdated
+  );
 
-  const privacyPath = path.join(ROOT, "pages", "refollow", "policies", "privacy.html");
-  const privacyHtml = fs.readFileSync(privacyPath, "utf8");
-  const privacyNext = patchPrivacyPage(privacyHtml, trBlock, enBlock, updatedLine);
-  if (privacyNext === privacyHtml) {
-    console.log("unchanged pages/refollow/policies/privacy.html");
-  } else {
-    fs.writeFileSync(privacyPath, privacyNext, "utf8");
-    console.log("updated pages/refollow/policies/privacy.html ← ReFollow i18n");
-  }
-
+  const updatedLine = termsUpdated || privacyUpdated || fallbackUpdated;
   const supportPath = path.join(ROOT, "pages", "refollow", "policies", "support.html");
   const supportHtml = fs.readFileSync(supportPath, "utf8");
   const supportNext = patchSupportEmails(supportHtml, email, updatedLine);

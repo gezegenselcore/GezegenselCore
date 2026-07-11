@@ -1,7 +1,7 @@
 /**
  * ReFollow politika sayfalarını SSOT'tan siteye aktarır (tek komut).
  * Kaynak (yalnızca okuma): D:\GezegenselCore\ReFollow
- *   - src/i18n/locales/{tr,en}.json → settings.privacyPolicyContent
+ *   - src/i18n/locales/{tr,en}.json → settings.privacyPolicyContent, settings.termsOfUseContent
  *   - src/config/links.ts → SUPPORT_EMAIL
  *
  * node tools/sync-refollow-policies.mjs
