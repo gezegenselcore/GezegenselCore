@@ -49,6 +49,13 @@
       if (seg) return normalize(seg) || "en";
     }
     try {
+      var parts = (location.pathname || "").replace(/^\/+/, "").split("/").filter(Boolean);
+      for (var i = 0; i < parts.length; i++) {
+        var n = normalize(parts[i]);
+        if (n === "tr" || n === "en") return n;
+      }
+    } catch (e) {}
+    try {
       var s = normalize(localStorage.getItem(STORAGE_KEY));
       if (s) return s;
       var legacy = normalize(localStorage.getItem("anima-public-lang"));

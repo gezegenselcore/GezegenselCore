@@ -148,19 +148,8 @@
     try {
       var pathSeg = getLocaleSegmentFromPathname(pathnameNoQuery());
       if (!pathSeg) return;
-      var stored = null;
-      try {
-        stored = normalizeStorageToSegment(global.localStorage.getItem(STORAGE_KEY));
-      } catch (e) {}
-      if (!stored || stored === pathSeg) {
-        persistSegment(pathSeg);
-        return;
-      }
-      var logical = getLogicalPath(pathnameNoQuery());
-      var target = buildAbsoluteUrl(stored, logical) + (global.location.hash || "");
-      if (global.location.href.split("#")[0] !== target.split("#")[0]) {
-        global.location.replace(target);
-      }
+      /* URL yolu kaynak: /en/… açıldıysa EN kalır; storage yolu takip eder (tersine yönlendirme yok). */
+      persistSegment(pathSeg);
     } catch (e) {}
   }
 

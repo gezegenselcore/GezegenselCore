@@ -156,6 +156,20 @@ function processAnimaLegal(html, locale, logicalPath) {
   h = h.replace(/\{\{localeOther\}\}/g, other);
   h = h.replace(/\{\{assetPrefix\}\}/g, assetPx);
   h = h.replace("<!--ANIMA_LANG_SWITCH-->", animaLangSwitchHtml(locale, logicalPath));
+  /* Locale sayfasında doğru dil bloğu görünür olsun (JS yüklenmeden Türkçe FOUC olmasın). */
+  h = h
+    .replace(/<article id="anima-block-tr"([^>]*)>/gi, (_, attrs) => {
+      const clean = attrs.replace(/\s*\bhidden\b/gi, "");
+      return locale === "tr"
+        ? `<article id="anima-block-tr"${clean}>`
+        : `<article id="anima-block-tr"${clean} hidden>`;
+    })
+    .replace(/<article id="anima-block-en"([^>]*)>/gi, (_, attrs) => {
+      const clean = attrs.replace(/\s*\bhidden\b/gi, "");
+      return locale === "en"
+        ? `<article id="anima-block-en"${clean}>`
+        : `<article id="anima-block-en"${clean} hidden>`;
+    });
   h = prependSiteScriptsFlex(h);
   if (/<link rel="canonical"/i.test(h)) {
     h = h.replace(/<link rel="canonical" href="[^"]*" ?\/?>/i, `<link rel="canonical" href="${canonicalUrl}" />`);
@@ -192,6 +206,73 @@ function processAnimaLegal(html, locale, logicalPath) {
 
 function refollowForLocale(rawHtml) {
   return rawHtml.replace(/\.\.\/\.\.\/\.\.\/assets\//g, "../../../../assets/");
+}
+
+/** ReFollow politika: yalnızca sayfa dilindeki gövde + yerelleştirilmiş başlık/breadcrumb. */
+function localizeRefollowPolicyPage(html, locale, logicalPath) {
+  const en = locale === "en";
+  const msg = (key) => {
+    const m = MESSAGES[key];
+    if (!m) return "";
+    return en ? m.en : m.tr;
+  };
+
+  let pageKey = "privacy";
+  if (logicalPath.includes("terms")) pageKey = "terms";
+  else if (logicalPath.includes("support")) pageKey = "support";
+
+  const titleKey = `refollow_${pageKey}.meta_title`;
+  const h1Key = `refollow.${pageKey}_h2`;
+
+  let h = html;
+
+  if (en) {
+    h = h.replace(/<div class="policy-locale-tr lang-block">[\s\S]*?(?=<div class="policy-locale-en lang-block">)/, "");
+  } else {
+    h = h.replace(/<div class="policy-locale-en lang-block">[\s\S]*?(?=<p class="gc-updated">)/, "");
+  }
+
+  h = h.replace(/<h2>Türkçe<\/h2>\s*/g, "");
+  h = h.replace(/<h2>English<\/h2>\s*/g, "");
+  h = h.replace(/\s*lang-block/g, "");
+
+  const title = msg(titleKey);
+  const h1 = msg(h1Key);
+  const home = msg("refollow.breadcrumb_home");
+  const skip = en ? "Skip to content" : "İçeriğe atla";
+  const play = msg("refollow.play_store");
+
+  if (title) {
+    h = h.replace(/<title>[^<]*<\/title>/i, `<title>${title}</title>`);
+  }
+  if (h1) {
+    h = h.replace(/<h1>[^<]*<\/h1>/i, `<h1>${h1}</h1>`);
+  }
+  h = h.replace(/(<a class="skip-link"[^>]*>)[^<]*(<\/a>)/i, `$1${skip}$2`);
+  h = h.replace(
+    /(<p class="gc-crumb"><a href="[^"]*">)[^<]*(<\/a>\s*·\s*ReFollow<\/p>)/i,
+    `$1${home}$2`
+  );
+  h = h.replace(
+    /(Google Play'de İndir|Get it on Google Play)/g,
+    play || (en ? "Get it on Google Play" : "Google Play'de İndir")
+  );
+
+  /* Güncelleme satırı: TR "Son güncelleme", EN "Last updated" */
+  h = h.replace(/<p class="gc-updated">([^<]*)<\/p>/i, (_, text) => {
+    let t = text.trim();
+    if (en) {
+      t = t
+        .replace(/^Son güncelleme:\s*/i, "Last updated: ")
+        .replace(/(\d+)\s+Temmuz\s+(\d+)/i, "July $1, $2")
+        .replace(/(\d+)\s+Nisan\s+(\d+)/i, "April $1, $2");
+    } else {
+      t = t.replace(/^Last updated:\s*/i, "Son güncelleme: ");
+    }
+    return `<p class="gc-updated">${t}</p>`;
+  });
+
+  return h;
 }
 
 function rootRedirectStub(title, logical) {
@@ -299,19 +380,31 @@ function main() {
     write(path.join(ROOT, loc, "pages", "anima", "support.html"), processAnimaLegal(animaSupport, loc, "/pages/anima/support.html"));
 
     const rfP = processInnerPage(
-      expandI18n(refollowForLocale(rfPrivacy), loc, MESSAGES),
+      expandI18n(
+        localizeRefollowPolicyPage(refollowForLocale(rfPrivacy), loc, "/pages/refollow/policies/privacy.html"),
+        loc,
+        MESSAGES
+      ),
       "pages/refollow/policies/privacy.html",
       loc,
       "/pages/refollow/policies/privacy.html"
     );
     const rfT = processInnerPage(
-      expandI18n(refollowForLocale(rfTerms), loc, MESSAGES),
+      expandI18n(
+        localizeRefollowPolicyPage(refollowForLocale(rfTerms), loc, "/pages/refollow/policies/terms.html"),
+        loc,
+        MESSAGES
+      ),
       "pages/refollow/policies/terms.html",
       loc,
       "/pages/refollow/policies/terms.html"
     );
     const rfS = processInnerPage(
-      expandI18n(refollowForLocale(rfSupport), loc, MESSAGES),
+      expandI18n(
+        localizeRefollowPolicyPage(refollowForLocale(rfSupport), loc, "/pages/refollow/policies/support.html"),
+        loc,
+        MESSAGES
+      ),
       "pages/refollow/policies/support.html",
       loc,
       "/pages/refollow/policies/support.html"

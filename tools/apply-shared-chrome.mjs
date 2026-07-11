@@ -502,6 +502,11 @@ function patch(html, fromFile) {
   const headerNew = buildHeader(posixFile, { en, is404, skipHref: "#icerik" });
   out = out.replace(/<header class="site-header">[\s\S]*?<\/header>/i, headerNew);
 
+  out = out.replace(
+    /(<a class="skip-link"[^>]*>)[^<]*(<\/a>)/i,
+    `$1${en ? "Skip to content" : "İçeriğe atla"}$2`
+  );
+
   const footerNew = buildFooter(posixFile, en);
   out = out.replace(/<footer class="site-footer">[\s\S]*?<\/footer>/i, footerNew);
 
