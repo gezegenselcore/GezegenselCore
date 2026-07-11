@@ -1,0 +1,46 @@
+---
+description: ReFollow politikaları yalnızca ReFollow reposundan okunur; bu repoda metin düzenlenmez, sadece sync + deploy.
+alwaysApply: true
+---
+
+# ReFollow politikaları — site tarafı (sync only)
+
+## Tek kaynak (SSOT) — bu repoda değil
+
+```
+D:\GezegenselCore\ReFollow\
+├── src/i18n/locales/{tr,en,…}.json   → settings.privacyPolicyContent
+└── src/config/links.ts               → SUPPORT_EMAIL
+```
+
+Politika metni **ReFollow reposunda** (diğer Cursor ekranı) inşa edilir ve güncellenir. Bu repoda **yalnızca okunur**.
+
+## Rol dağılımı
+
+- **ReFollow Cursor ekranı:** Uygulama + i18n gizlilik metni + `links.ts` — SSOT burada.
+- **Bu Cursor ekranı (gezegenselcore.com):** ReFollow'dan **alıp** siteye taşır; metin **elle düzenlenmez**.
+
+## Agent için zorunlu
+
+1. Politika/destek metni değişikliği istenirse **bu repoda düzenleme yapma.** Kullanıcıyı ReFollow tarafına yönlendir; değişiklik orada yapıldıktan sonra burada sync çalıştır.
+2. Sync komutu (site kökünden):
+
+```bash
+node tools/sync-refollow-policies.mjs
+```
+
+Akış: ReFollow i18n/links → `pages/refollow/policies/*` → `tr/` + `en/` sayfaları → `apply-shared-chrome`.
+
+3. **Çıktı sayfalarına dokunma:** `pages/refollow/policies/privacy.html`, `tr|en/pages/refollow/policies/*` her sync'te üzerine yazılır (privacy gövdesi).
+4. **İkinci kopya oluşturma:** `pages/refollow/policies-temp/` altında kalıcı hukuk metni tutma.
+5. Kanonik URL'ler sabit:
+   - `/{locale}/pages/refollow/policies/privacy.html`
+   - `/{locale}/pages/refollow/policies/terms.html`
+   - `/{locale}/pages/refollow/policies/support.html`
+6. Sync sonrası: commit + `main`'e push → GitHub Pages deploy.
+
+## Yapma
+
+- `pages/refollow/policies/` veya `tr/` / `en/` altında gizlilik metnini elle patch etme
+- ReFollow dışı bir kaynaktan (eski `refollow-policies` GitHub Pages vb.) hukuk içeriği kopyalama
+- Kanonik URL yollarını değiştirme

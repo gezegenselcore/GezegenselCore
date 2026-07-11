@@ -331,8 +331,21 @@ function main() {
     ["pages/anima/policies/privacy.html", "/anima/privacy-policy.html"],
     ["pages/anima/policies/privacy-policy.html", "/anima/privacy-policy.html"],
     ["pages/anima/policies/terms.html", "/anima/terms-of-use.html"],
+    ["refollow-policies/privacy.html", "/pages/refollow/policies/privacy.html"],
+    ["refollow-policies/support.html", "/pages/refollow/policies/support.html"],
+    ["refollow-policies/terms.html", "/pages/refollow/policies/terms.html"],
   ]) {
-    const title = logical.includes("privacy") ? "Privacy Policy — Anima" : "Terms of Use — Anima";
+    const title = logical.includes("privacy")
+      ? logical.includes("refollow")
+        ? "Privacy Policy — ReFollow"
+        : "Privacy Policy — Anima"
+      : logical.includes("support")
+        ? logical.includes("refollow")
+          ? "Support — ReFollow"
+          : "Anima — Support"
+        : logical.includes("refollow")
+          ? "Terms of Use — ReFollow"
+          : "Terms of Use — Anima";
     write(path.join(ROOT, legacyPath), rootRedirectStub(title, logical));
   }
   write(path.join(ROOT, "aura", "privacy-policy.html"), rootRedirectStub("Privacy Policy — Anima", "/anima/privacy-policy.html"));

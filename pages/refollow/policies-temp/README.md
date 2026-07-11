@@ -1,5 +1,8 @@
-# ReFollow — taslak politikalar (`policies-temp`)
+# ReFollow policies — geçici deneme alanı
 
-Buraya **yayından önce** deneme HTML’leri koyun. Onaylanınca içeriği `../policies/` altına taşıyın (`privacy.html`, `terms.html`, `support.html`).
+**Kalıcı hukuk metni burada tutulmaz.**
 
-Canlı dosyalar: **`pages/refollow/policies/`** (stil: kök **`/assets/gezegensel.css`** + **`lang-boot.js`** / **`gezegensel.js`**).
+Tek kaynak (SSOT): `D:\GezegenselCore\ReFollow`  
+Siteye aktarım: `node tools/sync-refollow-policies.mjs`
+
+Bu klasör yalnızca yayından önce kısa denemeler içindir; onay sonrası sync ile siteye alınır, burada ikinci bir kopya bırakılmaz.
