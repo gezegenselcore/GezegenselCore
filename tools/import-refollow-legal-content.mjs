@@ -133,6 +133,48 @@ function patchSupportEmails(html, email, updatedLine) {
     .replace(/<p class="gc-updated">[^<]*<\/p>/, `<p class="gc-updated">${escapeHtml(updatedLine)}</p>`);
 }
 
+const TR_MONTH_NUM = {
+  ocak: 1,
+  subat: 2,
+  şubat: 2,
+  mart: 3,
+  nisan: 4,
+  mayis: 5,
+  mayıs: 5,
+  haziran: 6,
+  temmuz: 7,
+  agustos: 8,
+  ağustos: 8,
+  eylul: 9,
+  eylül: 9,
+  ekim: 10,
+  kasim: 11,
+  kasım: 11,
+  aralik: 12,
+  aralık: 12,
+};
+
+function parseTrUpdatedLine(line) {
+  if (!line) return null;
+  const m = String(line).match(/(\d+)\s+([A-Za-zÇĞİÖŞÜçğıöşü]+)\s+(\d{4})/i);
+  if (!m) return null;
+  const day = Number(m[1]);
+  const year = Number(m[3]);
+  const monKey = m[2].toLocaleLowerCase("tr-TR");
+  const month = TR_MONTH_NUM[monKey] || TR_MONTH_NUM[monKey.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ı/g, "i")];
+  if (!month) return null;
+  return Date.UTC(year, month - 1, day);
+}
+
+function pickNewerUpdatedLine(a, b) {
+  const ta = parseTrUpdatedLine(a);
+  const tb = parseTrUpdatedLine(b);
+  if (ta == null && tb == null) return a || b || null;
+  if (ta == null) return b;
+  if (tb == null) return a;
+  return ta >= tb ? a : b;
+}
+
 function writePolicyPage(relPath, field, trRaw, enRaw, fallbackUpdated) {
   const trParsed = parsePolicyContent(trRaw);
   const enParsed = parsePolicyContent(enRaw);
@@ -176,7 +218,8 @@ export function importRefollowLegal(refollowRootArg) {
     privacyUpdated || fallbackUpdated
   );
 
-  const updatedLine = termsUpdated || privacyUpdated || fallbackUpdated;
+  /* Destek sayfası tarihini en yeni politika tarihine hizala */
+  const updatedLine = pickNewerUpdatedLine(privacyUpdated, termsUpdated) || fallbackUpdated;
   const supportPath = path.join(ROOT, "pages", "refollow", "policies", "support.html");
   const supportHtml = fs.readFileSync(supportPath, "utf8");
   const supportNext = patchSupportEmails(supportHtml, email, updatedLine);

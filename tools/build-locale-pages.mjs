@@ -227,9 +227,15 @@ function localizeRefollowPolicyPage(html, locale, logicalPath) {
   let h = html;
 
   if (en) {
-    h = h.replace(/<div class="policy-locale-tr lang-block">[\s\S]*?(?=<div class="policy-locale-en lang-block">)/, "");
+    h = h.replace(
+      /<div class="policy-locale-tr(?:\s+lang-block)?">[\s\S]*?(?=<div class="policy-locale-en(?:\s+lang-block)?">)/,
+      ""
+    );
   } else {
-    h = h.replace(/<div class="policy-locale-en lang-block">[\s\S]*?(?=<p class="gc-updated">)/, "");
+    h = h.replace(
+      /<div class="policy-locale-en(?:\s+lang-block)?">[\s\S]*?(?=<p class="gc-updated">)/,
+      ""
+    );
   }
 
   h = h.replace(/<h2>Türkçe<\/h2>\s*/g, "");
@@ -258,14 +264,43 @@ function localizeRefollowPolicyPage(html, locale, logicalPath) {
     play || (en ? "Get it on Google Play" : "Google Play'de İndir")
   );
 
-  /* Güncelleme satırı: TR "Son güncelleme", EN "Last updated" */
+  /* Güncelleme satırı: TR "Son güncelleme", EN "Last updated" + ay adları */
+  const TR_MONTHS = {
+    ocak: "January",
+    şubat: "February",
+    subat: "February",
+    mart: "March",
+    nisan: "April",
+    mayıs: "May",
+    mayis: "May",
+    haziran: "June",
+    temmuz: "July",
+    ağustos: "August",
+    agustos: "August",
+    eylül: "September",
+    eylul: "September",
+    ekim: "October",
+    kasım: "November",
+    kasim: "November",
+    aralık: "December",
+    aralik: "December",
+  };
   h = h.replace(/<p class="gc-updated">([^<]*)<\/p>/i, (_, text) => {
     let t = text.trim();
     if (en) {
-      t = t
-        .replace(/^Son güncelleme:\s*/i, "Last updated: ")
-        .replace(/(\d+)\s+Temmuz\s+(\d+)/i, "July $1, $2")
-        .replace(/(\d+)\s+Nisan\s+(\d+)/i, "April $1, $2");
+      t = t.replace(/^Son güncelleme:\s*/i, "Last updated: ");
+      t = t.replace(/(\d+)\s+([A-Za-zÇĞİÖŞÜçğıöşü]+)\s+(\d{4})/i, (m, d, mon, y) => {
+        const key = mon
+          .toLocaleLowerCase("tr-TR")
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .replace(/ı/g, "i");
+        const eng =
+          TR_MONTHS[mon.toLocaleLowerCase("tr-TR")] ||
+          TR_MONTHS[key] ||
+          TR_MONTHS[mon.toLowerCase()];
+        return eng ? `${eng} ${d}, ${y}` : m;
+      });
     } else {
       t = t.replace(/^Last updated:\s*/i, "Son güncelleme: ");
     }
