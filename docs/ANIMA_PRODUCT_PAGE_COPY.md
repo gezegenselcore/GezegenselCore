@@ -2,7 +2,11 @@
 
 Kaynak: `tr/anima/index.html` ve `en/anima/index.html` içindeki **Öne çıkan alanlar / Highlights** bölümü. Güncellerken bu dosyayı ve HTML’i birlikte tutun.
 
-**Düzen:** İlk dört alan (Ana Sayfa, Küre, Binaural, Anima) ekran görüntüsü + açıklama; Yansıma, Rüya Günlüğü, Anima Akademi ve Topluluk **yalnızca metin kartları**dır — web’e görsel eklenmeyecek.
+**Düzen:** İlk dört alan (Ana Sayfa, Günün Animası / Today’s Anima, Binaural, Anima) ekran görüntüsü + açıklama; Yansıma, Rüya Günlüğü, Anima Akademi ve Topluluk **yalnızca metin kartları**dır — web’e görsel eklenmeyecek.
+
+**Görseller:** `anima/AnimaEkranGoruntuleri/{TR|EN}/` — `AnaSayfa.jpg`, `GununAnimasi.jpg` / `TodaysAnima.jpg`, `Binaural.jpg`, `Anima.jpg`.
+
+**Tanıtım videosu:** `https://www.youtube.com/embed/OvR--y-lcT0` (her iki dil).
 
 **Ürün adı:** eski “AI Rehber” ifadesi kullanılmaz; resmi özellik adı **Anima**.
 
@@ -13,12 +17,12 @@ Kaynak: `tr/anima/index.html` ve `en/anima/index.html` içindeki **Öne çıkan 
 | **Başlık** | Ana Sayfa | Home |
 | **Açıklama** | Anima’nın ana ekranı; günlük durumunu, enerji–odak dengesini ve sana önerilen en uygun sonraki adımı tek bakışta gösterir. Amaç veri yığını sunmak değil, günü anlamanı kolaylaştırmaktır. | Anima’s home screen shows your daily state, energy–focus balance, and the most relevant next step at a glance. It is designed to simplify your day, not overwhelm you with data. |
 
-## Küre Paneli / Sphere Panel
+## Günün Animası / Today’s Anima
 
 | | TR | EN |
 |---|----|----|
-| **Başlık** | Küre Paneli | Sphere Panel |
-| **Açıklama** | Küre paneli, günün genel anlamını, sinyallerini ve önerilen yönlendirmeyi daha detaylı gösterir. Anima burada verileri yorumlar; kullanıcıya tek ve anlaşılır bir karar hattı sunar. | The Sphere Panel gives a deeper view of your daily meaning, signals, and recommended direction. Anima interprets your data and presents one clear decision path. |
+| **Başlık** | Günün Animası | Today’s Anima |
+| **Açıklama** | Günün Animası, seçilen günün kapasitesini, sinyallerini ve önerilen yönlendirmeyi daha detaylı gösterir. Anima burada verileri yorumlar; kullanıcıya tek ve anlaşılır bir karar hattı sunar. | Today’s Anima gives a deeper view of that day’s capacity, signals, and recommended direction. Anima interprets your data and presents one clear decision path. |
 
 ## Binaural
 
@@ -64,4 +68,4 @@ Kaynak: `tr/anima/index.html` ve `en/anima/index.html` içindeki **Öne çıkan 
 
 ---
 
-Son güncelleme: ürün sayfası metin revizyonu (Anima adlandırması; AI Rehber ifadesi kaldırıldı).
+Son güncelleme: lansman medya — yeni ekran görüntüleri; Küre Paneli → Günün Animası / Today’s Anima; YouTube Short `OvR--y-lcT0`.
