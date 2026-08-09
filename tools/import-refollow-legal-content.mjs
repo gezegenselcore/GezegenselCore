@@ -201,20 +201,24 @@ export function importRefollowLegal(refollowRootArg) {
 
   const email = readSupportEmail(refollowRoot);
   const fallbackUpdated = "Son güncelleme: 12 Temmuz 2026";
+  const withSupportEmail = (text) =>
+    String(text)
+      .replace(/gezegenselcore@gmail\.com/g, email)
+      .replace(/support@gezegenselcore\.com/g, email);
 
   const privacyUpdated = writePolicyPage(
     "pages/refollow/policies/privacy.html",
     "privacyPolicyContent",
-    readLocaleField(refollowRoot, "tr.json", "privacyPolicyContent"),
-    readLocaleField(refollowRoot, "en.json", "privacyPolicyContent"),
+    withSupportEmail(readLocaleField(refollowRoot, "tr.json", "privacyPolicyContent")),
+    withSupportEmail(readLocaleField(refollowRoot, "en.json", "privacyPolicyContent")),
     fallbackUpdated
   );
 
   const termsUpdated = writePolicyPage(
     "pages/refollow/policies/terms.html",
     "termsOfUseContent",
-    readLocaleField(refollowRoot, "tr.json", "termsOfUseContent"),
-    readLocaleField(refollowRoot, "en.json", "termsOfUseContent"),
+    withSupportEmail(readLocaleField(refollowRoot, "tr.json", "termsOfUseContent")),
+    withSupportEmail(readLocaleField(refollowRoot, "en.json", "termsOfUseContent")),
     privacyUpdated || fallbackUpdated
   );
 
