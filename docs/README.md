@@ -40,7 +40,7 @@ Bu klasör, marka statik sitesinin **URL mimarisi**, **yönlendirme**, **üretim
 
 - Uygulama kodu bu repoda değildir; Anima ve ReFollow ayrı GitHub repolarındadır.  
 - Anima kamu hukuk: `node tools/sync-anima-policies.mjs` (`legal-public`).  
-- ReFollow kamu hukuk: `node tools/sync-refollow-policies.mjs` (uygulama i18n + `links.ts`).  
+- ReFollow kamu hukuk: `node tools/sync-refollow-policies.mjs` (uygulama i18n + `links.ts`). Ayrı `refollow-policies` GitHub reposu yok; kamu sayfalar bu sitede.  
 - Dil kuralı: uygulama dili **`tr`** ise web **`/tr/…`**; aksi halde **`/en/…`**. Ayrıntı: **`docs/MOBILE_APP_STACK.md`**, **`docs/APP_WEB_ALIGNMENT.md`**.
 
 ## Manuel kontrol listesi
