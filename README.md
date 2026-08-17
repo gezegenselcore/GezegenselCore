@@ -2,7 +2,7 @@
 
 **Canlı site:** [gezegenselcore.com](https://gezegenselcore.com)
 
-GezegenselCore; **Anima** ve **ReFollow** gibi yapay zekâ ve veri odaklı dijital ürünlerin marka ve bilgilendirme sitesidir. Statik HTML; Türkçe ve İngilizce (`/tr/…`, `/en/…`).
+GezegenselCore; **Anima** ve **ReFollow** gibi yapay zekâ ve veri odaklı dijital ürünlerin marka ve bilgilendirme sitesidir. Statik HTML; Türkçe ve İngilizce
 
 ## Ürünler
 
