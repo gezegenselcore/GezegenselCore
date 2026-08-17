@@ -1,6 +1,6 @@
 # gezegenselcore.com — teknik dokümantasyon
 
-Bu klasör, marka statik sitesinin **URL mimarisi**, **yönlendirme**, **üretim (build)**, **ortak kabuk (header / footer / grid)** ve **Anima uygulaması ile hizalama** bilgisini toplar.
+Bu klasör, marka statik sitesinin **URL mimarisi**, **yönlendirme**, **üretim (build)**, **ortak kabuk (header / footer / grid)** ve **Anima / ReFollow uygulamaları ile hizalama** bilgisini toplar.
 
 **Canlı site:** [https://gezegenselcore.com](https://gezegenselcore.com) — GitHub kaynak: [`gezegenselcore/GezegenselCore`](https://github.com/gezegenselcore/GezegenselCore).
 
@@ -22,11 +22,11 @@ Bu klasör, marka statik sitesinin **URL mimarisi**, **yönlendirme**, **üretim
 |--------|--------|
 | **`REPOSITORY_LAYOUT.md`** | Hedef klasör yapısı (`.github`, `assets`, `tr`/`en`, `docs`, `tools`, kök dosyalar). |
 | **`WEBSITE_TECH_STACK.md`** | Bu repodaki web yığını (HTML, CSS, GitHub Pages, Node script’leri). |
-| **`MOBILE_APP_STACK.md`** | Anima mobil yığınına kısa işaret (kod Anima reposunda). |
+| **`MOBILE_APP_STACK.md`** | Anima ve ReFollow mobil yığınlarına kısa işaret (kod ayrı repolarda). |
 | **`DESIGN_SYSTEM.md`** | `style.css` jetonları, grid, footer, iç sayfa. |
 | **`SITE_TEMPLATE_ARCHITECTURE.md`** | Kabuk katmanları, build vs elle sayfalar. |
 | **`SITE_I18N_ARCHITECTURE.md`** | Build i18n, `tr`/`en`, hreflang. |
-| **`APP_WEB_ALIGNMENT.md`** | Anima ↔ web URL kuralları. |
+| **`APP_WEB_ALIGNMENT.md`** | Anima ↔ web URL kuralları; ReFollow politika URL’leri ayrı sync. |
 
 ## Önemli dosya yolları (kök)
 
@@ -36,15 +36,18 @@ Bu klasör, marka statik sitesinin **URL mimarisi**, **yönlendirme**, **üretim
 - **`tools/apply-shared-chrome.mjs`** — ortak HTML kabuğu.  
 - **`tools/build-locale-pages.mjs`** — locale ağacı üretimi.
 
-## Anima mobil uygulama
+## Anima ve ReFollow
 
-- Uygulama dili **`tr`** ise web **`/tr/…`**; aksi halde **`/en/…`**.  
-- Uygulama kodu bu repoda değildir; bkz. **`docs/MOBILE_APP_STACK.md`** ve Anima reposu.
+- Uygulama kodu bu repoda değildir; Anima ve ReFollow ayrı GitHub repolarındadır.  
+- Anima kamu hukuk: `node tools/sync-anima-policies.mjs` (`legal-public`).  
+- ReFollow kamu hukuk: `node tools/sync-refollow-policies.mjs` (uygulama i18n + `links.ts`).  
+- Dil kuralı: uygulama dili **`tr`** ise web **`/tr/…`**; aksi halde **`/en/…`**. Ayrıntı: **`docs/MOBILE_APP_STACK.md`**, **`docs/APP_WEB_ALIGNMENT.md`**.
 
 ## Manuel kontrol listesi
 
 - [ ] Yeni iç sayfa eklendiyse: `node tools/apply-shared-chrome.mjs` çalıştırıldı mı?  
 - [ ] Firebase Remote Config kamu URL’leri `/tr/…` veya `/en/…` ile mi?  
-- [ ] Hukuk metni değişince: master şablonlar + `build-locale-pages` + Anima `legal-public` senkronu.
+- [ ] Anima hukuk metni değişince: `legal-public` + `node tools/sync-anima-policies.mjs`.  
+- [ ] ReFollow hukuk metni değişince: ReFollow i18n/links + `node tools/sync-refollow-policies.mjs`.
 
-Son güncelleme: 2026-04-18
+Son güncelleme: 2026-08-17
