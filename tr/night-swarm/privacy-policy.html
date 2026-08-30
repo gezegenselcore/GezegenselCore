@@ -70,20 +70,24 @@
     <div class="gc-doc">
 
       <p>Veri sorumlusu: GezegenselCore · <a href="mailto:support@gezegenselcore.com">support@gezegenselcore.com</a> · Türkiye</p>
-      <p>Night Swarm tek oyunculu otomatik saldırı roguelite oyunudur. İlerleme cihazınızda saklanır. Oyun hesabı sunucumuz yoktur.</p>
+      <p>Night Swarm tek oyunculu otomatik saldırı roguelite oyunudur. Kayıt (ayarlar, altın, açılımlar, kişisel skorlar) cihazınızda kalır. Kendi oyun hesabı veya skor sunucumuz yoktur. Android sürümü aşağıdaki Google hizmetlerini kullanabilir. İnternet yoksa veya Play Games girişini kullanmazsanız oyun oynanır; yalnızca bu Google özellikleri o an çalışmaz.</p>
       <h2>1. Yaş</h2>
       <p>Night Swarm 13 yaşından küçükler için tasarlanmamıştır. 13 yaş altından bilerek kişisel veri toplamayız.</p>
       <h2>2. İşlenen veriler</h2>
       <ul>
-        <li><strong>Cihaz içi kayıt</strong> — ayarlar, skor, başarımlar, altın, açılımlar, son koşu tekrarı. Sıralama JSON’unu siz dışa aktarmazsanız cihazdan çıkmaz.</li>
+        <li><strong>Cihaz içi kayıt</strong> — ayarlar, kişisel skor, başarımlar, altın, açılımlar, son koşu tekrarı. Sıralama JSON’unu siz dışa aktarmazsanız cihazdan çıkmaz.</li>
+        <li><strong>Google Play Games Services (isteğe bağlı)</strong> — Play Games ile giriş yaparsanız (cihazda Play Games profili varsa çoğu zaman otomatik), Google Play Games oyuncu kimliğinizi ve herkese açık görünen adınızı işler. Normal bir koşudan sonra hayatta kalma süreniz genel Play Games sıralamasına gönderilebilir. Başarım ilerlemesi de bu özellik açıksa iletilebilir. Bu veri GezegenselCore sunucusunda değil Google’da durur. Giriş yapmadan da oynayabilirsiniz; o zaman yalnızca cihazdaki kişisel geçmiş kalır.</li>
+        <li><strong>Firebase Analytics ve Crashlytics (Android)</strong> — Google Firebase cihaz ve uygulama kimlikleri, kaba kullanım olayları (örneğin oturumun başladığı) ve çökme raporları (yığın izi, cihaz modeli, işletim sistemi) toplayabilir. Bunu satmayız. Google, <a href="https://policies.google.com/privacy">kendi gizlilik politikası</a> ve <a href="https://firebase.google.com/support/privacy">Firebase gizlilik bilgisi</a> kapsamında işler.</li>
         <li><strong>Reklam (isteğe bağlı)</strong> — Reklam açıksa Google AdMob reklam kimliği, IP ve tanılama işleyebilir. İlk açılışta kişiselleştirilmemiş reklam seçebilirsiniz. <strong>Reklamları kaldır</strong> banner ve geçiş reklamlarını durdurur. Ödüllü reklam yalnızca siz dokunursanız oynar.</li>
         <li><strong>Satın almalar</strong> — Google Play Billing. Kart numaranız bize gelmez.</li>
       </ul>
       <h2>3. Paylaşım</h2>
-      <p>Kişisel veri satmayız. Reklam ve satın almalar Google tarafından işlenir. Sosyal akış ve hesap girişi yoktur.</p>
+      <p>Kişisel veri satmayız. Google ile yalnızca Play Games (giriş ve genel sıralama), Firebase Analytics ve Crashlytics, reklam (AdMob) ve Play Billing için gerekeni paylaşırız. Skor gönderildiyse oyun içi sosyal akış yoktur; herkese açık liste Play Games sıralamasıdır.</p>
       <h2>4. Seçenekleriniz</h2>
-      <p>Kişiselleştirilmiş reklamı reddedin; Reklamları kaldır satın alın; Ayarlar’dan kaydı silin; uygulamayı kaldırınca cihaz verisi silinir.</p>
-      <h2>5. İletişim</h2>
+      <p>Play Games girişi olmadan oynayın; kişiselleştirilmiş reklamı reddedin; Reklamları kaldır satın alın; Ayarlar’dan kaydı silin; uygulamayı kaldırınca cihaz verisi silinir. Play Games skor ve profil verisi Google / Play Games hesabınızdan yönetilir. Firebase’de ulaşabildiğimiz analitik veya çökme verisinin silinmesini istemek için <a href="mailto:support@gezegenselcore.com">support@gezegenselcore.com</a>.</p>
+      <h2>5. Güvenlik ve saklama</h2>
+      <p>Google’a giden veri yolda şifrelenir (HTTPS). Yerel kayıt, sıfırlayana veya uygulamayı kaldırana kadar cihazda kalır. Analitik ve çökme verisi, silme istemezseniz Firebase varsayılan süreleriyle saklanır.</p>
+      <h2>6. İletişim</h2>
       <p><a href="mailto:support@gezegenselcore.com">support@gezegenselcore.com</a></p>
     
       <p class="gc-updated">Son güncelleme: 30 Ağustos 2026</p>

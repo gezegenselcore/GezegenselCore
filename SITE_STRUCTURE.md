@@ -30,6 +30,7 @@
 | `…/anima/privacy-policy.html`, `…/anima/terms-of-use.html` | Anima hukuk (dil şeridi TR / EN; gövde TR + EN). |
 | `…/pages/anima/support.html` | Anima destek. |
 | `…/pages/refollow/policies/*.html` | ReFollow politikaları. |
+| `…/night-swarm/` (`index.html`) | Night Swarm ürün sayfası (ikon + özet grafik). |
 | `…/night-swarm/privacy-policy.html`, `terms-of-use.html`, `support.html` | Night Swarm hukuk / destek. |
 
 Varlık yolları: bir seviye `../assets/` (`en/index.html`); iç içe sayfalar için çoklu `../`.
@@ -56,4 +57,4 @@ Orijinal `pages/refollow/policies/*.html` **kaynak**; build çıktısı `/tr/pag
 
 **Policy senkronu (Anima mobil repo):** `legal-public/anima/*.html` + `legal-public/assets/` bu yapı ile uyumlu tutulur; uygulama tarafında dil `tr` → `/tr/…`, diğerleri → `/en/…` kuralı geçerlidir.
 
-Son güncelleme: 2026-04-18
+Son güncelleme: 2026-08-31

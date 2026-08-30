@@ -115,6 +115,18 @@
     <priority>0.82</priority>
   </url>
   <url>
+    <loc>https://gezegenselcore.com/tr/night-swarm/</loc>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.92</priority>
+  </url>
+  <url>
+    <loc>https://gezegenselcore.com/en/night-swarm/</loc>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.92</priority>
+  </url>
+  <url>
     <loc>https://gezegenselcore.com/tr/night-swarm/privacy-policy.html</loc>
     <lastmod>2026-08-30</lastmod>
     <changefreq>monthly</changefreq>
