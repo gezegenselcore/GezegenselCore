@@ -30,6 +30,7 @@
 | `…/anima/privacy-policy.html`, `…/anima/terms-of-use.html` | Anima hukuk (dil şeridi TR / EN; gövde TR + EN). |
 | `…/pages/anima/support.html` | Anima destek. |
 | `…/pages/refollow/policies/*.html` | ReFollow politikaları. |
+| `…/night-swarm/privacy-policy.html`, `terms-of-use.html`, `support.html` | Night Swarm hukuk / destek. |
 
 Varlık yolları: bir seviye `../assets/` (`en/index.html`); iç içe sayfalar için çoklu `../`.
 
