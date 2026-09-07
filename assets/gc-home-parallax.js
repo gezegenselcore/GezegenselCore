@@ -3,7 +3,7 @@
  */
 (function () {
   function kickFeatureLoops() {
-    document.querySelectorAll("video.product-card__feature, video.ns-page__feature").forEach(function (v) {
+    document.querySelectorAll(".product-card__feature video, .ns-page__feature video").forEach(function (v) {
       v.muted = true;
       v.loop = true;
       var p = v.play();
