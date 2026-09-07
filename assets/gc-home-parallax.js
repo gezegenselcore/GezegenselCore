@@ -2,6 +2,22 @@
  * Ana sayfa (tr/en): fareye göre çok hafif arka plan parallax (--gc-px / --gc-py).
  */
 (function () {
+  function kickFeatureLoops() {
+    document.querySelectorAll("video.product-card__feature, video.ns-page__feature").forEach(function (v) {
+      v.muted = true;
+      v.loop = true;
+      var p = v.play();
+      if (p && typeof p.catch === "function") p.catch(function () {});
+    });
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", kickFeatureLoops);
+  } else {
+    kickFeatureLoops();
+  }
+})();
+
+(function () {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   var max = 12;
   window.addEventListener(

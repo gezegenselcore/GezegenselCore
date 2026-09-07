@@ -781,12 +781,15 @@ section {
   object-fit: contain;
 }
 
-.product-card img.product-card__feature {
+.product-card img.product-card__feature,
+.product-card video.product-card__feature {
   width: 100%;
   height: auto;
   aspect-ratio: 1024 / 500;
   object-fit: cover;
   border-radius: 10px;
+  pointer-events: none;
+  display: block;
 }
 
 .ns-page {
@@ -803,6 +806,7 @@ section {
   box-shadow: var(--gc-shadow);
   aspect-ratio: 1024 / 500;
   object-fit: cover;
+  pointer-events: none;
 }
 
 .ns-page__icon {
