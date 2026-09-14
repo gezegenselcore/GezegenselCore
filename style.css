@@ -1,4 +1,4 @@
-﻿/* GezegenselCore — tek sayfa, mobil öncelikli, saf CSS */
+/* GezegenselCore — tek sayfa, mobil öncelikli, saf CSS */
 
 :root {
   --gc-bg: #e8eef5;
@@ -567,13 +567,15 @@ section {
 }
 
 .about__prose {
-  max-width: var(--gc-max);
+  max-width: 42rem;
   margin: 0 auto;
   color: var(--gc-ink-muted);
+  text-align: center;
 }
 
 .about__prose p {
   margin: 0 0 1rem;
+  text-align: center;
 }
 
 .about__prose p:last-child {
