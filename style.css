@@ -922,6 +922,122 @@ section {
   }
 }
 
+.rf-page {
+  padding: 1.75rem 0 2.75rem;
+}
+
+.rf-page__icon {
+  display: block;
+  width: 88px;
+  height: 88px;
+  margin: 0 auto 0.75rem;
+  object-fit: contain;
+}
+
+.rf-page__lead,
+.rf-page__prose,
+.rf-page__note {
+  text-align: center;
+  max-width: 38rem;
+  margin: 0 auto 1.15rem;
+  color: var(--gc-ink-muted);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+.rf-page__note {
+  margin-top: 1.25rem;
+  font-size: 0.88rem;
+}
+
+.rf-page__video-wrap {
+  width: 100%;
+  max-width: min(360px, 86vw);
+  margin: 0.35rem auto 1.75rem;
+}
+
+.rf-page__video {
+  display: block;
+  width: 100%;
+  border-radius: var(--gc-radius);
+  border: 1px solid var(--gc-card-border);
+  box-shadow: var(--gc-shadow);
+  background: #120818;
+  aspect-ratio: 9 / 16;
+}
+
+.rf-page__heading {
+  text-align: center;
+  margin: 1.85rem 0 0.85rem;
+  font-size: 1.08rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--gc-ink);
+}
+
+.rf-page__grid {
+  list-style: none;
+  margin: 0 auto 0.35rem;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.85rem;
+  max-width: 44rem;
+}
+
+.rf-page__grid--steps {
+  max-width: 48rem;
+}
+
+@media (min-width: 640px) {
+  .rf-page__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .rf-page__grid--steps {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.rf-page__card {
+  margin: 0;
+  padding: 1.15rem 1rem 1.2rem;
+  text-align: center;
+  background: var(--gc-card-bg);
+  border: 1px solid var(--gc-card-border);
+  border-radius: var(--gc-radius);
+  box-shadow: var(--gc-shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100%;
+}
+
+.rf-page__emoji {
+  display: block;
+  font-size: 1.65rem;
+  line-height: 1;
+  margin-bottom: 0.55rem;
+}
+
+.rf-page__card h3 {
+  margin: 0 0 0.4rem;
+  font-size: 0.98rem;
+  font-weight: 800;
+  color: var(--gc-accent);
+}
+
+.rf-page__card p {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--gc-ink-muted);
+}
+
+.rf-page .gc-btn-stack {
+  margin: 1.5rem auto 0;
+}
+
 .product-card h3 {
   margin: 0;
   font-size: 1.15rem;
