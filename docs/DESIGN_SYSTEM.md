@@ -14,7 +14,7 @@ Canlı marka yüzeyi **tek CSS dosyası** üzerinden yönetilir: kökteki **`sty
 | **Hub** | `.hero`, `.about`, `.gc-highlights`, `.products`, `.product-card`, `.contact-block`. |
 | **İç sayfa** | `body.gc-inner`, `.gc-page-hero`, `.gc-crumb`, `.gc-doc` (kart zemini + ince doku `::before`). |
 | **Alt bilgi** | `.site-footer`, `.gc-footer-nav` — bağlantı + **satır içi SVG** (`gc-footer-nav__icon`, `--stroke` / `--brand`). |
-| **Butonlar** | `.btn-play`, `.btn-ghost`, `.gc-btn-stack`. |
+| **Butonlar** | `.btn-play`, `.btn-ghost`, `.gc-btn-stack`. ReFollow ürün sayfasında Play CTA videonun altında `.rf-page__cta`. |
 
 Yükleme: her sayfada `<link rel="stylesheet" href="…/style.css?v=…">` (sürüm parametresi önbellek için; `apply-shared-chrome.mjs` güncelleyebilir).
 
@@ -44,4 +44,4 @@ Metinler `tr/index.html` ve `en/index.html` içinde tutulur; yasal uzun metinler
 - Global görünüm değişikliği: önce **`style.css`**, ardından gerekirse `node tools/apply-shared-chrome.mjs` ile tüm sayfalarda kabuk tutarlılığı.  
 - Izgara / şema yoğunluğu: `.gc-tech-bg__layer--grid` ve şema SVG veri URL’sindeki opaklıklar.
 
-Son güncelleme: 2026-04-18
+Son güncelleme: 2026-09-15

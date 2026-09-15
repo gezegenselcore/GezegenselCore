@@ -35,5 +35,6 @@
 
 - Navbar veya footer metni değişince: **hub** (`tr/index.html`, `en/index.html`) güncellenir; ardından `apply-shared-chrome` diğer sayfalara yayılır.  
 - Yalnız şablondan üretilen içerik değişince: önce **master** + `build-locale-pages`, sonra gerekiyorsa **apply-shared-chrome**.
+- **Google Ads:** `apply-shared-chrome` her HTML `<head>` içine `gtag.js` (`AW-18302657879`) ve `gtag_report_conversion` ekler. ReFollow Play tıklaması `/tr/refollow/` ve `/en/refollow/` üzerinde dönüşüm gönderir. PMax final URL `/en/refollow/` (UK + Canada); kök `/refollow/` yalnızca dil yönlendirmesidir.
 
-Son güncelleme: 2026-04-18
+Son güncelleme: 2026-09-15

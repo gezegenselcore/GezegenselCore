@@ -956,7 +956,7 @@ section {
 .rf-page__video-wrap {
   width: 100%;
   max-width: min(360px, 86vw);
-  margin: 0.35rem auto 1.75rem;
+  margin: 0.35rem auto 0.65rem;
 }
 
 .rf-page__video {
@@ -967,6 +967,25 @@ section {
   box-shadow: var(--gc-shadow);
   background: #120818;
   aspect-ratio: 9 / 16;
+}
+
+.rf-page__cta {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: min(360px, 86vw);
+  margin: 0 auto 1.75rem;
+}
+
+.rf-page__cta .btn-play {
+  width: 100%;
+  margin-top: 0;
+}
+
+@media (max-width: 639px) {
+  .rf-page__cta {
+    max-width: min(360px, 86vw);
+  }
 }
 
 .rf-page__heading {

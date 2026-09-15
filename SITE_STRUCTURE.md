@@ -6,7 +6,7 @@
 
 **English:** `x-default` hreflang ve bilinmeyen dil fallback’i `en`’i işaret eder. Bkz. `assets/site-path.js`.
 
-**Tema (canlı):** kök **`style.css`** (lacivert kare ızgara, header, ikonlu footer, iç sayfa `gc-doc`). Betikler: **`assets/gc-home-parallax.js`**, `assets/lang-boot.js`, `assets/gezegensel.js`, **`assets/site-path.js`**, `assets/legacy-path-redirect.js`, `assets/root-locale-redirect.js`. Anima hukuk: `assets/anima-legal-pages.{js,css}`. **Kabuk senkronu:** `node tools/apply-shared-chrome.mjs`. Eski / yardımcı: `assets/gezegensel.css`, `assets/gc-design-system.css`, `assets/freelancer/`. Özet: **`docs/SITE_TEMPLATE_ARCHITECTURE.md`**, **`docs/DESIGN_SYSTEM.md`**.
+**Tema (canlı):** kök **`style.css`** (lacivert kare ızgara, header, ikonlu footer, iç sayfa `gc-doc`). Betikler: **`assets/gc-home-parallax.js`**, `assets/lang-boot.js`, `assets/gezegensel.js`, **`assets/site-path.js`**, `assets/legacy-path-redirect.js`, `assets/root-locale-redirect.js`. Anima hukuk: `assets/anima-legal-pages.{js,css}`. **Kabuk senkronu:** `node tools/apply-shared-chrome.mjs` (ortak header/footer + tüm HTML `<head>` içinde Google Ads `gtag` `AW-18302657879`). Eski / yardımcı: `assets/gezegensel.css`, `assets/gc-design-system.css`, `assets/freelancer/`. Özet: **`docs/SITE_TEMPLATE_ARCHITECTURE.md`**, **`docs/DESIGN_SYSTEM.md`**.
 
 ## Kök (`/`)
 
@@ -14,6 +14,7 @@
 |-----------------|----------|
 | `index.html` | **Yönlendirme** → `/tr/index.html` veya `/en/index.html` (`root-locale-redirect.js`). |
 | `privacy.html`, `support.html` | **Yönlendirme** → `/tr/…` veya `/en/…` (`legacy-path-redirect.js`). |
+| `refollow/` | **Yönlendirme** stub → `/tr/refollow/` veya `/en/refollow/`. PMax final URL asıl EN sayfası: `https://gezegenselcore.com/en/refollow/`. |
 | `404.html` | GitHub Pages 404; `site-path.js` ile eski dil önekli yollar `/en/…`’e. |
 | `assets/` | Ortak JS/CSS; yukarıdaki çözümleyiciler. |
 | `tools/build-locale-pages.mjs` | `tr` / `en` ağacını üretir; `tools/i18n/` çeviri paketini uygular. |
@@ -30,6 +31,7 @@
 | `…/anima/privacy-policy.html`, `…/anima/terms-of-use.html` | Anima hukuk (dil şeridi TR / EN; gövde TR + EN). |
 | `…/pages/anima/support.html` | Anima destek. |
 | `…/pages/refollow/policies/*.html` | ReFollow politikaları. |
+| `…/refollow/` (`index.html`) | ReFollow ürün tanıtım (video; Play CTA videonun hemen altında). Dil varyantı yalnızca **tr** ve **en**. |
 | `…/night-swarm/` (`index.html`) | Night Swarm ürün sayfası (ikon + özet grafik). |
 | `…/night-swarm/privacy-policy.html`, `terms-of-use.html`, `support.html` | Night Swarm hukuk / destek. |
 
@@ -57,4 +59,6 @@ Orijinal `pages/refollow/policies/*.html` **kaynak**; build çıktısı `/tr/pag
 
 **Policy senkronu (Anima mobil repo):** `legal-public/anima/*.html` + `legal-public/assets/` bu yapı ile uyumlu tutulur; uygulama tarafında dil `tr` → `/tr/…`, diğerleri → `/en/…` kuralı geçerlidir.
 
-Son güncelleme: 2026-08-31
+Kök `/refollow/` dil yönlendirmesidir: `legacy-path-redirect.js` kullanıcıyı `/tr/refollow/` veya `/en/refollow/` sayfasına alır. PMax final URL doğrudan [https://gezegenselcore.com/en/refollow/](https://gezegenselcore.com/en/refollow/) (UK + Canada). Play dönüşümü (`gtag_report_conversion`) locale ürün sayfalarındaki CTA’da tetiklenir.
+
+Son güncelleme: 2026-09-15

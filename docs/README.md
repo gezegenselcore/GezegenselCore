@@ -9,7 +9,7 @@ Bu klasör, marka statik sitesinin **URL mimarisi**, **yönlendirme**, **üretim
 | Konu | Açıklama |
 |------|-----------|
 | **Birincil stil** | Kök **`style.css`** — lacivert kare ızgara (`gc-tech-bg`), kurumsal header, **ikonlu footer** (`gc-footer-nav` + SVG). |
-| **Kabuk senkronu** | `node tools/apply-shared-chrome.mjs` — iç sayfalara tech-bg, aynı header yapısı, ikonlu footer, `style.css?v=…`, gerekirse Font Awesome CDN. |
+| **Kabuk senkronu** | `node tools/apply-shared-chrome.mjs` — iç sayfalara tech-bg, aynı header yapısı, ikonlu footer, `style.css?v=…`, gerekirse Font Awesome CDN, tüm sayfalarda Google Ads `gtag` (`AW-18302657879`). |
 | Dil segmentleri | Yalnızca **`tr`** ve **`en`** (URL’de küçük harf). |
 | Kanonik içerik | Örn. `/en/anima/privacy-policy.html`, `/tr/anima/privacy-policy.html`. |
 | Eski URL’ler | `assets/site-path.js`, `legacy-path-redirect.js`, `root-locale-redirect.js`, kök `404.html`. |
@@ -50,4 +50,4 @@ Bu klasör, marka statik sitesinin **URL mimarisi**, **yönlendirme**, **üretim
 - [ ] Anima hukuk metni değişince: `legal-public` + `node tools/sync-anima-policies.mjs`.  
 - [ ] ReFollow hukuk metni değişince: ReFollow i18n/links + `node tools/sync-refollow-policies.mjs`.
 
-Son güncelleme: 2026-08-17
+Son güncelleme: 2026-09-15

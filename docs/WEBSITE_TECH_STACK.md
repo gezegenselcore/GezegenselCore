@@ -16,7 +16,7 @@ Bu repository **statik bir marka sitesidir** (GitHub Pages). **React Native / Ex
 | Script | Rol |
 |--------|-----|
 | `tools/build-locale-pages.mjs` | Şablon + `tools/i18n/messages/*` ile `tr/` ve `en/` ağacını üretir / günceller. |
-| `tools/apply-shared-chrome.mjs` | `tr/index.html` / `en/index.html` dışındaki, `style.css` kullanan sayfalarda ortak **tech arka plan**, **header** (dil anahtarı + menü), **ikonlu footer**, gerekirse **Font Awesome** (yalnız `fa-*` sınıfı olan sayfalar) ve `style.css?v=…` sürüm parametresi. |
+| `tools/apply-shared-chrome.mjs` | `tr/index.html` / `en/index.html` dışındaki, `style.css` kullanan sayfalarda ortak **tech arka plan**, **header** (dil anahtarı + menü), **ikonlu footer**, gerekirse **Font Awesome** (yalnız `fa-*` sınıfı olan sayfalar) ve `style.css?v=…` sürüm parametresi. **Tüm HTML** `<head>` içine Google Ads `gtag` (`AW-18302657879`) basılır. |
 
 Çalıştırma örneği:
 
@@ -36,4 +36,10 @@ node tools\apply-shared-chrome.mjs
 
 Jekyll / Freelancer tabanlı **alternatif veya geçmiş** sayfa üretimi için repoda durabilir; **canlı hub ve çoğu locale sayfası** kök **`style.css`** ile hizalanmıştır. Yeni yüzeyler eklerken önce `style.css` ve `docs/DESIGN_SYSTEM.md` ile uyumu kontrol edin.
 
-Son güncelleme: 2026-04-18
+## Ölçüm
+
+- **Google tag:** `AW-18302657879` — `apply-shared-chrome.mjs` ile her sayfanın `<head>` öğesine. Mevcut GA4 / GTM yoktu; bu tek Ads hesabı. Consent Mode (AEA) yok; PMax hedefi UK + Canada.  
+- **ReFollow Play dönüşümü:** `AW-18302657879/RsCVCOjIhPkcENfKsZdE` — ürün sayfalarındaki Play CTA `onclick`. PMax final URL: [https://gezegenselcore.com/en/refollow/](https://gezegenselcore.com/en/refollow/) (kök `/refollow/` dil yönlendirmesi; Ads bu hop’u kullanmaz).  
+- **Takip:** gizlilik metnine kısa bir “Google Ads ile reklam performansı ölçülür” cümlesi — acil değil, yayın sonrası.
+
+Son güncelleme: 2026-09-15

@@ -13,7 +13,32 @@ const ROOT = path.join(__dirname, "..");
 const SKIP_FILES = new Set(["tr/index.html", "en/index.html"]);
 
 /** Tüm HTML’lerde style önbürücüsü (tek tip). */
-const STYLE_QUERY = "global8";
+const STYLE_QUERY = "global15";
+
+/** Google Ads (AW) site-wide tag + ReFollow Play dönüşüm yardımcısı. */
+const GTAG_SNIPPET = `  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18302657879"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-18302657879');
+  </script>
+  <script>
+    function gtag_report_conversion(url) {
+      var callback = function () {
+        if (typeof(url) != 'undefined') {
+          window.location = url;
+        }
+      };
+      gtag('event', 'conversion', {
+          'send_to': 'AW-18302657879/RsCVCOjIhPkcENfKsZdE',
+          'event_callback': callback
+      });
+      return false;
+    }
+  </script>
+`;
 
 const FONT_AWESOME_LINK = `  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
 `;
@@ -211,6 +236,19 @@ function ensureFontAwesomeLink(html) {
   );
   if (injected !== html) return injected;
   return html.replace(/<\/head>/i, `${FONT_AWESOME_LINK}</head>`);
+}
+
+/** Google Ads gtag — tüm sayfaların <head> içinde, charset’ten hemen sonra. */
+function ensureGtag(html) {
+  if (!html.includes("</head>")) return html;
+  if (html.includes("AW-18302657879")) return html;
+  const block = `${GTAG_SNIPPET}\n`;
+  const m = html.match(/<meta\s+charset="utf-8"[^>]*>\s*\n/i);
+  if (m && m.index !== undefined) {
+    const i = m.index + m[0].length;
+    return html.slice(0, i) + block + html.slice(i);
+  }
+  return html.replace(/<\/head>/i, `${block}</head>`);
 }
 
 /** Kök mutlak yollar; Google ve tüm derinliklerde aynı favicon. */
@@ -475,6 +513,7 @@ function patch(html, fromFile) {
     out = ensureAbsoluteAssetPaths(out);
     out = ensureFontAwesomeLink(out);
     out = ensureFaviconLinks(out);
+    out = ensureGtag(out);
     out = ensureSeoForLocalePages(out, posixFile);
     out = ensureSiteScripts(out, posixFile);
     out = ensureThemeSwitchInHeader(out, posixFile.startsWith("en/"));
@@ -525,6 +564,7 @@ function patch(html, fromFile) {
   out = ensureAbsoluteAssetPaths(out);
   out = ensureFontAwesomeLink(out);
   out = ensureFaviconLinks(out);
+  out = ensureGtag(out);
   out = ensureSiteScripts(out, posixFile);
   out = ensureThemeScript(out, posixFile);
   out = ensureSeoForLocalePages(out, posixFile);
@@ -547,6 +587,8 @@ function main() {
       minimal = fixBrokenInnerLinks(minimal, rel);
       if (minimal !== raw) next = minimal;
     }
+    if (!next) next = raw;
+    next = ensureGtag(next);
     if (next && next !== raw) {
       fs.writeFileSync(abs, next, "utf8");
       console.log("patched", rel);
