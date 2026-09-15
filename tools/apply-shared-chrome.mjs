@@ -26,15 +26,16 @@ const GTAG_SNIPPET = `  <!-- Google tag (gtag.js) -->
   </script>
   <script>
     function gtag_report_conversion(url) {
-      var callback = function () {
-        if (typeof(url) != 'undefined') {
-          window.location = url;
+      try {
+        if (typeof gtag === 'function') {
+          gtag('event', 'conversion', {
+            'send_to': 'AW-18302657879/RsCVCOjIhPkcENfKsZdE'
+          });
         }
-      };
-      gtag('event', 'conversion', {
-          'send_to': 'AW-18302657879/RsCVCOjIhPkcENfKsZdE',
-          'event_callback': callback
-      });
+      } catch (e) {}
+      if (typeof url !== 'undefined' && url) {
+        window.location.href = url;
+      }
       return false;
     }
   </script>
@@ -241,8 +242,13 @@ function ensureFontAwesomeLink(html) {
 /** Google Ads gtag — tüm sayfaların <head> içinde, charset’ten hemen sonra. */
 function ensureGtag(html) {
   if (!html.includes("</head>")) return html;
-  if (html.includes("AW-18302657879")) return html;
   const block = `${GTAG_SNIPPET}\n`;
+  const existing =
+    /[ \t]*<!-- Google tag \(gtag\.js\) -->[\s\S]*?function gtag_report_conversion\([\s\S]*?<\/script>\s*\n/;
+  if (existing.test(html)) {
+    return html.replace(existing, block);
+  }
+  if (html.includes("AW-18302657879")) return html;
   const m = html.match(/<meta\s+charset="utf-8"[^>]*>\s*\n/i);
   if (m && m.index !== undefined) {
     const i = m.index + m[0].length;

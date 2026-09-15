@@ -39,7 +39,7 @@ Jekyll / Freelancer tabanlı **alternatif veya geçmiş** sayfa üretimi için r
 ## Ölçüm
 
 - **Google tag:** `AW-18302657879` — `apply-shared-chrome.mjs` ile her sayfanın `<head>` öğesine. Mevcut GA4 / GTM yoktu; bu tek Ads hesabı. Consent Mode (AEA) yok; PMax hedefi UK + Canada.  
-- **ReFollow Play dönüşümü:** `AW-18302657879/RsCVCOjIhPkcENfKsZdE` — ürün sayfalarındaki Play CTA `onclick`. PMax final URL: [https://gezegenselcore.com/en/refollow/](https://gezegenselcore.com/en/refollow/) (kök `/refollow/` dil yönlendirmesi; Ads bu hop’u kullanmaz).  
+- **ReFollow Play dönüşümü:** `AW-18302657879/RsCVCOjIhPkcENfKsZdE` — ürün sayfalarındaki Play CTA `onclick`. Dönüşüm ping’i gönderilir, Play Store’a **hemen** gidilir (`event_callback` beklenmez; aksi halde gtag yüklenmezse buton hiçbir yere gitmez). PMax final URL: [https://gezegenselcore.com/en/refollow/](https://gezegenselcore.com/en/refollow/).  
 - **Takip:** gizlilik metnine kısa bir “Google Ads ile reklam performansı ölçülür” cümlesi — acil değil, yayın sonrası.
 
 Son güncelleme: 2026-09-15
