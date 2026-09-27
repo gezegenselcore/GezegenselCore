@@ -63,143 +63,292 @@
         </nav>
       <p id="anima-legal-fallback-banner" class="anima-legal-fallback-banner" hidden></p>
 <article id="anima-block-tr" lang="tr">
-    <h1>Gizlilik Politikası</h1>
-    <p class="muted">Son güncelleme: 12 Ağustos 2026<br />Veri sorumlusu: GezegenselCore · <a href="mailto:support@gezegenselcore.com">support@gezegenselcore.com</a></p>
-    <p>Anima olarak gizliliğinize önem veriyoruz. Bu politika, uygulamayı kullanırken hangi verilerin işlenebileceğini, neden işlendiğini ve haklarınızı açıklar.</p>
+    <h1>Gizlilik Politikası ve KVKK Aydınlatma Metni</h1>
+    <p class="muted"><strong>Son güncelleme:</strong> 27 Eylül 2026 · <strong>Sürüm:</strong> 2026-09-27.v3</p>
+    <p>Bu metin, Anima mobil uygulamasını ("Anima", "uygulama") kullanırken kişisel verilerinin nasıl işlendiğini anlatır. 6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) m.10 kapsamındaki aydınlatma metni ve AB Genel Veri Koruma Tüzüğü (GDPR) m.13 kapsamındaki bilgilendirme olarak da geçerlidir.</p>
 
-    <h2>1. Kapsam</h2>
-    <p>Bu politika Anima mobil uygulaması ve ilgili hizmetler için geçerlidir. Anima bir wellness ve kişisel farkındalık uygulamasıdır; tıbbi teşhis veya tedavi sunmaz. <strong>Herkese açık bir topluluk / sosyal feed bulunmaz</strong>; kullanıcılar birbirinin içeriğini görmez.</p>
-
-    <h2>2. İşlenebilecek veriler</h2>
+    <h2>Kısaca</h2>
     <ul>
-      <li>Hesap bilgileri (ad, e-posta, kullanıcı kimliği)</li>
-      <li>Profil ve tercih bilgileri (dil, tema, bildirim tercihleri vb.)</li>
-      <li>Uygulama kullanım verileri ve cihaz / hata günlükleri</li>
-      <li>Konum verileri (izin verirseniz)</li>
-      <li>Sağlık ve wellness verileri (izin verirseniz; Health Connect / HealthKit)</li>
-      <li>Uygulamada oluşturduğunuz içerikler (günlük, rüya, Anima AI sohbeti, ruh hali)</li>
-      <li><strong>Sesli dikte</strong> (Anima Pro, isteğe bağlı): konuşma tanıma <strong>cihaz üzerinde</strong>; ses dosyası sunucuya gönderilmez.</li>
-      <li><strong>Bildirimler:</strong> Günün Yorumu (sabah / akşam), Anima AI proaktif mesajları, ritüel / program hatırlatmaları, seri riski — tercihen yerel / cihaz bildirimi.</li>
-      <li>Abonelik durumu (mağaza + RevenueCat vb.)</li>
-      <li>Anonim kullanım örüntüleri (bireysel tanımlayıcı yok — §14)</li>
+      <li>Anima; uyku, odak ve sakinlik için bir ses uygulamasıdır. Yapay zekâ sohbeti, konum takibi veya reklam <strong>yoktur</strong>.</li>
+      <li>Verilerini <strong>satmayız</strong> ve reklam amacıyla paylaşmayız.</li>
+      <li>Health Connect izni verirsen yalnızca <strong>uyku oturumlarını okuruz</strong>. Uyku verisi cihazında kalır, sunucularımıza gönderilmez.</li>
+      <li>Karışımların, favorilerin, istatistiklerin ve notların <strong>cihazında</strong> saklanır.</li>
+      <li>Hesabını ve bulut verilerini uygulama içinden istediğin zaman silebilirsin.</li>
     </ul>
 
-    <h2>3. İşleme amaçları</h2>
+    <h2>1. Veri sorumlusu</h2>
+    <p><strong>Veri sorumlusu:</strong> [YAYINCI AD SOYAD] ("GezegenselCore" markasıyla)<br /><strong>Adres:</strong> [ADRES]<br /><strong>E-posta:</strong> <a href="mailto:support@gezegenselcore.com">support@gezegenselcore.com</a></p>
+    <p>GezegenselCore; Anima'yı Google Play'de yayımlayan geliştirici hesabının markasıdır. Bu metinde "biz" ifadesi veri sorumlusunu anlatır.</p>
+
+    <h2>2. Hangi verileri işliyoruz?</h2>
+    <h3>2.1 Hesap ve profil verileri</h3>
+    <div class="anima-table-wrap">
+      <table>
+        <thead><tr><th>Veri</th><th>Nereden gelir</th><th>Nerede saklanır</th></tr></thead>
+        <tbody>
+          <tr><td>Ad, soyad, e-posta adresi, Google profil fotoğrafı bağlantısı</td><td>Google ile giriş</td><td>Firebase Authentication ve Cloud Firestore</td></tr>
+          <tr><td>Firebase kullanıcı kimliği (UID)</td><td>Otomatik oluşturulur</td><td>Firebase</td></tr>
+          <tr><td>Doğum tarihi ve cinsiyet</td><td>Profil formunda sen girersin</td><td>Cloud Firestore</td></tr>
+          <tr><td>Gizlilik politikası ve kullanım koşulları onay kaydı (sürüm ve tarih)</td><td>Onay ekranı</td><td>Cloud Firestore</td></tr>
+          <tr><td>Uygulama ayarları (ör. titreşim tercihi)</td><td>Uygulama</td><td>Cihaz ve Cloud Firestore</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Doğum tarihi ve cinsiyet, profilini ve program önerilerini kişiselleştirmek için kullanılır.</p>
+    <h3>2.2 Uyku verisi (Health Connect, isteğe bağlı)</h3>
+    <p>Android'de izin verirsen Health Connect'ten <strong>yalnızca uyku oturumlarını</strong> (başlangıç, bitiş, süre ve varsa uyku evreleri) okuruz. Bu veriyi ana sayfadaki "Dün gece" kartında göstermek için kullanırız.</p>
     <ul>
-      <li>Hizmeti sunmak ve kişiselleştirmek</li>
-      <li>Anima AI sohbeti, Günün Yorumu, rüya yorumu ve ilgili içgörüler</li>
-      <li>Bildirimleri planlamak ve sunmak</li>
-      <li>Güvenlik, kota / adil kullanım ve performans</li>
-      <li>Destek, abonelik doğrulama, yasal yükümlülükler</li>
-      <li>Anonim toplu verilerle genel öneri kalitesi (§14)</li>
+      <li>Uyku verisi <strong>cihazında</strong> işlenir ve yalnızca cihazdaki önbellekte tutulur. Sunucularımıza, analitik araçlarına veya başka üçüncü taraflara <strong>gönderilmez</strong>.</li>
+      <li>Health Connect'e herhangi bir veri <strong>yazmayız</strong>. Adım, nabız, kalp atış hızı değişkenliği, kan basıncı gibi başka sağlık verilerini <strong>okumayız</strong>.</li>
+      <li>Uyku verisi reklam, profil çıkarma, kredi veya sigorta değerlendirmesi gibi amaçlarla <strong>kullanılmaz</strong>.</li>
+      <li>İzni Health Connect uygulamasından istediğin zaman geri alabilirsin. İzin vermezsen uygulamanın diğer tüm özellikleri çalışmaya devam eder.</li>
     </ul>
+    <p>Uyku verisi KVKK m.6 uyarınca <strong>özel nitelikli (sağlık) veri</strong> sayılabilir. Bu veriyi yalnızca uygulamadaki açıklama ekranında ve Android izin penceresinde verdiğin <strong>açık rızaya</strong> dayanarak işleriz.</p>
+    <h3>2.3 Cihazında kalan veriler</h3>
+    <p>Kaydettiğin karışımlar, favoriler, dinleme ve oturum istatistikleri, seriler, ruh hali takvimi kayıtları, ritüel notları, program ilerlemen ve dil/tema tercihlerin <strong>cihazında</strong> saklanır. Bu veriler sunucularımıza gönderilmez. Uygulamayı kaldırdığında veya verileri sildiğinde cihazdan silinir.</p>
+    <h3>2.4 Abonelik ve satın alma verileri</h3>
+    <p>Anima Pro satın alırsan ödemeyi <strong>Google Play</strong> alır; kart bilgilerin bize ulaşmaz. Abonelik durumunu doğrulamak için <strong>RevenueCat</strong> hizmetini kullanırız. RevenueCat'e Firebase kullanıcı kimliğin, satın alma kayıtların (ürün, tarih, deneme ve yenileme durumu) ve Firebase Analytics uygulama örneği kimliği iletilir. Abonelik durumunun bir kopyası (Pro mu, bitiş tarihi) Cloud Firestore'da tutulur.</p>
+    <h3>2.5 Kullanım, cihaz ve hata verileri</h3>
+    <ul>
+      <li><strong>Firebase Analytics:</strong> Hangi ekranların açıldığı, hangi özelliklerin kullanıldığı gibi uygulama içi olaylar; cihaz modeli, işletim sistemi sürümü, uygulama sürümü, dil, yaklaşık ülke ve uygulama örneği kimliği. Analitik kaydı Firebase kullanıcı kimliğinle ilişkilendirilebilir. Reklam kimliği (advertising ID) <strong>toplanmaz</strong>.</li>
+      <li><strong>Firebase Crashlytics:</strong> Uygulama çöktüğünde veya hata oluştuğunda hata kaydı, cihaz modeli, işletim sistemi, uygulama sürümü, dil ve kullanıcı kimliği.</li>
+      <li><strong>Firebase App Check:</strong> Uygulamanın gerçek ve değiştirilmemiş olduğunu doğrulamak için Google Play Integrity üzerinden cihaz doğrulama belirteci.</li>
+      <li><strong>Firebase Cloud Messaging:</strong> Bildirim göndermek için cihazına özgü bildirim belirteci (Cloud Firestore'da saklanır).</li>
+    </ul>
+    <h3>2.6 Destek yazışmaları</h3>
+    <p>Bize e-posta yazarsan e-posta adresini ve yazışma içeriğini, talebini yanıtlamak için işleriz.</p>
+    <h3>2.7 İşlemediğimiz veriler</h3>
+    <p>Konum, kişiler, fotoğraflar, mikrofon, kamera, takvim, SMS veya arama kayıtlarına erişmeyiz. Uygulamada reklam SDK'sı yoktur.</p>
 
-    <h2>4. Sağlık verileri</h2>
-    <p>Sağlık verileri yalnızca açık rızanızla işlenir; tıbbi teşhis veya tedavi için kullanılmaz. Varsayılan olarak cihazınızda işlenir. Anima bir sağlık hizmeti değildir.</p>
+    <h2>3. Verileri hangi amaçlarla ve hangi hukuki sebeplerle işliyoruz?</h2>
+    <div class="anima-table-wrap">
+      <table>
+        <thead><tr><th>Amaç</th><th>Veriler</th><th>KVKK hukuki sebebi</th><th>GDPR hukuki sebebi</th></tr></thead>
+        <tbody>
+          <tr><td>Hesap oluşturmak, giriş ve profil</td><td>Hesap ve profil verileri</td><td>Sözleşmenin kurulması ve ifası (m.5/2-c)</td><td>Sözleşmenin ifası (m.6/1-b)</td></tr>
+          <tr><td>Pro aboneliği sunmak ve doğrulamak</td><td>Abonelik verileri, kullanıcı kimliği</td><td>Sözleşmenin ifası (m.5/2-c)</td><td>Sözleşmenin ifası (m.6/1-b)</td></tr>
+          <tr><td>"Dün gece" uyku kartını göstermek</td><td>Uyku verisi (cihazda)</td><td>Açık rıza (m.6/2)</td><td>Açık rıza (m.9/2-a)</td></tr>
+          <tr><td>Onay kayıtlarını tutmak, hukuki taleplere yanıt vermek</td><td>Onay kaydı, yazışmalar</td><td>Hukuki yükümlülük (m.5/2-ç), hakkın tesisi ve korunması (m.5/2-e)</td><td>Hukuki yükümlülük (m.6/1-c), meşru menfaat (m.6/1-f)</td></tr>
+          <tr><td>Hataları bulmak, güvenliği sağlamak, kötüye kullanımı önlemek</td><td>Hata verileri, App Check belirteci</td><td>Meşru menfaat (m.5/2-f)</td><td>Meşru menfaat (m.6/1-f)</td></tr>
+          <tr><td>Uygulamanın nasıl kullanıldığını ölçmek ve geliştirmek</td><td>Kullanım verileri</td><td>Meşru menfaat (m.5/2-f)</td><td>Meşru menfaat (m.6/1-f)</td></tr>
+          <tr><td>Hatırlatma bildirimleri göndermek</td><td>Bildirim belirteci, bildirim tercihleri</td><td>Sözleşmenin ifası (m.5/2-c)</td><td>Sözleşmenin ifası (m.6/1-b)</td></tr>
+          <tr><td>Destek taleplerini yanıtlamak</td><td>İletişim verileri</td><td>Sözleşmenin ifası ve meşru menfaat</td><td>Sözleşmenin ifası ve meşru menfaat</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Verilerini; uygulama içinde girdiğin bilgiler, Google ile giriş, Health Connect izni, Google Play ve RevenueCat ile uygulamanın otomatik olarak oluşturduğu kayıtlar yoluyla, <strong>elektronik ortamda ve otomatik yollarla</strong> toplarız.</p>
+    <p>Bildirimler için Android bildirim iznin gerekir; izni cihaz ayarlarından, hangi bildirimleri alacağını uygulamadaki Bildirim Ayarları'ndan yönetebilirsin.</p>
 
-    <h2>5. Yapay zekâ</h2>
-    <p>AI çıktıları bilgilendirme amaçlıdır; profesyonel danışmanlığın yerine geçmez. İlgili özellikler açıkken gerekli sınırlı bağlam bulut AI altyapısına (ör. Gemini / Cloud Functions) iletilebilir. Ham sağlık örnekleri ve ses kayıtları bu amaçla gönderilmez. AI’yi ayarlardan kapatabilirsiniz.</p>
+    <h2>4. Verileri kimlerle paylaşıyoruz?</h2>
+    <p>Verilerini <strong>satmayız</strong>. Hizmeti sunmak için gerekli olduğu kadarıyla, bizim adımıza ve talimatımızla çalışan şu hizmet sağlayıcılara aktarırız:</p>
+    <div class="anima-table-wrap">
+      <table>
+        <thead><tr><th>Alıcı</th><th>Amaç</th><th>Aktarılan veriler</th></tr></thead>
+        <tbody>
+          <tr><td>Google LLC / Google Ireland Ltd. (Firebase: Authentication, Cloud Firestore, Analytics, Crashlytics, App Check, Cloud Messaging, Remote Config)</td><td>Barındırma, kimlik doğrulama, analitik, hata raporlama, güvenlik, bildirim</td><td>Hesap ve profil verileri, kullanım ve hata verileri, cihaz belirteçleri</td></tr>
+          <tr><td>Google Play (Google LLC / Google Ireland Ltd.)</td><td>Uygulama dağıtımı, ödeme ve abonelik yönetimi</td><td>Satın alma verileri (Google hesabınla Google'ın kendi politikası kapsamında)</td></tr>
+          <tr><td>RevenueCat, Inc. (ABD)</td><td>Abonelik doğrulama ve abonelik analitiği</td><td>Kullanıcı kimliği, satın alma kayıtları, Analytics uygulama örneği kimliği</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Bunların dışında verilerini yalnızca yasal bir zorunluluk olduğunda yetkili kamu kurum ve kuruluşlarıyla veya açık talebin üzerine paylaşırız. <strong>Uyku verisi hiçbir üçüncü tarafla paylaşılmaz.</strong></p>
 
-    <h2>6. Paylaşım</h2>
-    <p>Veriler <strong>satılmaz</strong>. Gerekli ölçüde teknik işleyicilerle paylaşılabilir: Firebase, RevenueCat / mağazalar, analitik / çökme (ayarlara bağlı), üretken AI (§5). <strong>Topluluk feed’i yoktur</strong> — içerikleriniz diğer kullanıcılara genel akışta gösterilmez.</p>
+    <h2>5. Yurt dışına aktarım</h2>
+    <p>Firebase ve RevenueCat sunucuları Türkiye dışında (ABD ve Avrupa Birliği dahil) bulunabilir. Bu nedenle hesap, abonelik, kullanım ve hata verilerin yurt dışına aktarılır. Bu aktarımları KVKK m.9 ve Kişisel Verilerin Yurt Dışına Aktarılmasına İlişkin Usul ve Esaslar Hakkında Yönetmelik kapsamında <strong>uygun güvencelere</strong> (Kurul'un yayımladığı standart sözleşmeler) dayanarak yaparız. AB/AEA'daki kullanıcılar için Avrupa Komisyonu'nun standart sözleşme maddeleri ve ilgili yeterlilik kararları uygulanır.</p>
+
+    <h2>6. Saklama süreleri</h2>
+    <div class="anima-table-wrap">
+      <table>
+        <thead><tr><th>Veri</th><th>Süre</th></tr></thead>
+        <tbody>
+          <tr><td>Hesap, profil, ayarlar, onay kayıtları, abonelik kopyası</td><td>Hesabın açık kaldığı sürece. Silme talebinden sonra en geç 30 gün içinde silinir.</td></tr>
+          <tr><td>Cihazındaki veriler (karışımlar, istatistikler, notlar, uyku önbelleği)</td><td>Sen silene veya uygulamayı kaldırana kadar</td></tr>
+          <tr><td>Firebase Analytics olayları</td><td>Firebase Analytics ayarlarında belirlenen süre boyunca (en fazla 14 ay)</td></tr>
+          <tr><td>Crashlytics hata kayıtları</td><td>Yaklaşık 90 gün</td></tr>
+          <tr><td>RevenueCat ve Google Play satın alma kayıtları</td><td>Muhasebe ve vergi mevzuatının gerektirdiği süre boyunca</td></tr>
+          <tr><td>Destek yazışmaları</td><td>Talep çözüldükten sonra en fazla 2 yıl</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Süre dolduğunda veriler silinir, yok edilir veya anonim hâle getirilir.</p>
 
     <h2>7. Güvenlik</h2>
-    <p>Makul teknik önlemler uygulanır; %100 güvenlik garanti edilemez.</p>
+    <p>Veriler aktarım sırasında TLS ile, depolamada sağlayıcının şifrelemesiyle korunur. Cloud Firestore güvenlik kuralları her kullanıcının yalnızca kendi verisine erişmesine izin verir. Firebase App Check, sunucularımıza yalnızca gerçek uygulamanın erişmesini sağlar. Verilere erişim, hizmeti yürütmek için gerekli kişilerle sınırlıdır. Hiçbir sistem %100 güvenli değildir; bir veri ihlali olursa kanunun öngördüğü şekilde Kurul'a ve sana bildirimde bulunuruz.</p>
 
-    <h2>8. Haklarınız</h2>
-    <p>Geçerli hukuka bağlı olarak erişim, düzeltme, silme ve izinleri geri çekme haklarınız olabilir.</p>
+    <h2>8. Hakların</h2>
+    <p>KVKK m.11 uyarınca veri sorumlusuna başvurarak şunları talep edebilirsin:</p>
+    <ul>
+      <li>Kişisel verilerinin işlenip işlenmediğini öğrenme ve işlenmişse bilgi isteme,</li>
+      <li>İşlenme amacını ve amaca uygun kullanılıp kullanılmadığını öğrenme,</li>
+      <li>Yurt içinde veya yurt dışında aktarıldığı üçüncü kişileri bilme,</li>
+      <li>Eksik veya yanlış işlenmişse düzeltilmesini isteme,</li>
+      <li>KVKK m.7 çerçevesinde silinmesini veya yok edilmesini isteme,</li>
+      <li>Düzeltme ve silme işlemlerinin aktarıldığı üçüncü kişilere bildirilmesini isteme,</li>
+      <li>Münhasıran otomatik sistemlerle analiz edilmesi sonucunda aleyhine bir sonuç çıkmasına itiraz etme,</li>
+      <li>Kanuna aykırı işleme nedeniyle zarara uğraman hâlinde zararın giderilmesini talep etme.</li>
+    </ul>
+    <p>AB/AEA veya Birleşik Krallık'ta yaşıyorsan GDPR kapsamında erişim, düzeltme, silme, işlemeyi kısıtlama, veri taşınabilirliği, meşru menfaate dayalı işlemeye itiraz ve rızanı geri çekme hakların vardır. Rızanı geri çekmen, geri çekmeden önceki işlemenin hukuka uygunluğunu etkilemez.</p>
+    <p><strong>Nasıl başvurursun:</strong> Talebini <a href="mailto:support@gezegenselcore.com">support@gezegenselcore.com</a> adresine, uygulamada kullandığın Google hesabının e-posta adresinden yaz. Kimliğini doğrulamamız için ek bilgi isteyebiliriz. Talebini en geç <strong>30 gün</strong> içinde ücretsiz yanıtlarız. Yanıtımızı yeterli bulmazsan Kişisel Verileri Koruma Kurulu'na, AB/AEA'daysan kendi ülkendeki veri koruma otoritesine şikâyette bulunabilirsin.</p>
 
-    <h2>9. Saklama</h2>
-    <p>Veriler yalnızca gerekli olduğu sürece tutulur.</p>
+    <h2 id="account-deletion">9. Hesap ve veri silme</h2>
+    <p><strong>Uygulama içinden:</strong> Profil → Hesap Ayarları → <strong>Verileri sil ve çıkış yap</strong>. Bu işlem cihazındaki verileri, Cloud Firestore'daki hesap, profil, ayar, onay ve abonelik kayıtlarını ve Firebase Authentication hesabını siler. Güvenlik gereği yakın zamanda giriş yapmış olman gerekebilir.</p>
+    <p><strong>Uygulamaya erişemiyorsan:</strong> Google hesabının e-posta adresinden <a href="mailto:support@gezegenselcore.com">support@gezegenselcore.com</a> adresine "Anima hesabımı sil" konulu bir e-posta gönder. Hesabını ve ilişkili kişisel verilerini en geç <strong>30 gün</strong> içinde sileriz.</p>
+    <p><strong>Silinmeyen veya bir süre saklanan veriler:</strong> Satın alma kayıtları, vergi ve muhasebe mevzuatının gerektirdiği süre boyunca Google Play ve RevenueCat'te tutulur. Analytics ve Crashlytics kayıtları yukarıdaki saklama sürelerinin sonunda kendiliğinden silinir.</p>
+    <p><strong>Aboneliği iptal etmeyi unutma:</strong> Hesabını silmek Google Play aboneliğini iptal etmez. İptal için Google Play → Profil → Ödemeler ve abonelikler → Abonelikler yolunu kullan.</p>
+    <p>Bağlantı: <code>https://gezegenselcore.com/tr/anima/privacy-policy.html#account-deletion</code></p>
 
-    <h2>10. Yaş</h2>
-    <p>Anima <strong>18 yaş ve üzeri</strong> kullanıcılar içindir.</p>
+    <h2>10. Yaş sınırı</h2>
+    <p>Anima 18 yaş ve üzeri kullanıcılar için tasarlanmıştır ve çocuklara yönelik değildir. 18 yaşından küçük birine ait veri işlediğimizi öğrenirsek bu verileri sileriz.</p>
 
-    <h2>11. Değişiklikler</h2>
-    <p>Bu politika zaman zaman güncellenebilir.</p>
+    <h2>11. Bu metindeki değişiklikler</h2>
+    <p>Bu metni güncelleyebiliriz. Güncel sürüm her zaman bu adreste yayımlanır ve en üstteki "Son güncelleme" tarihi değişir. Önemli değişikliklerde uygulama içinde yeniden onayını isteriz.</p>
 
-    <h2 id="account-deletion">12. Hesap silme</h2>
-    <p>Profil → Hesap Ayarları → Verileri sil / hesabı sil. Geçerli talepten sonra kişisel verileriniz yasal saklama saklı kalmak kaydıyla <strong>30 gün</strong> içinde silinir. Anonim toplu veriler etkilenmez.</p>
-    <p>Mağaza listesi: <code>https://gezegenselcore.com/tr/anima/privacy-policy.html#account-deletion</code></p>
-
-    <h2>13. Politika güncellemeleri</h2>
-    <p>Önemli değişiklikler uygulama içi bildirim veya “Son güncelleme” ile duyurulabilir. Sürüm değişikliği yeniden onay gerektirebilir.</p>
-
-    <h2>14. Anonim kullanım öğrenmesi</h2>
-    <p>Anonim kullanım örüntüleri (yaş grubu, aktivite tipi, stres bandı, kapasite farkı = günler arası kapasite skoru farkı aktivite tamamlanınca, hafta referansı) — bu bir sosyal “topluluk” özelliği değildir. Toplanmayanlar: ad, e-posta, uid, konum, sağlık kaydı, rüya/günlük metni, cihaz kimliği. Saklama en fazla <strong>12 ay</strong>. Kontrol: Ayarlar → <strong>Anonim Veri Paylaşımı</strong> (varsayılan <strong>açık</strong>, opt-out).</p>
-
-    <h2>15. İletişim</h2>
-    <p><strong>GezegenselCore — ANIMA</strong><br /><a href="mailto:support@gezegenselcore.com">support@gezegenselcore.com</a></p>
+    <h2>12. İletişim</h2>
+    <p><strong>GezegenselCore — ANIMA</strong><br />E-posta: <a href="mailto:support@gezegenselcore.com">support@gezegenselcore.com</a></p>
   </article>
 
   <article id="anima-block-en" lang="en" hidden>
     <h1>Privacy Policy</h1>
-    <p class="muted">Last updated: August 12, 2026<br />Data controller: GezegenselCore · <a href="mailto:support@gezegenselcore.com">support@gezegenselcore.com</a></p>
-    <p>At Anima, we take your privacy seriously. This policy explains what data may be processed when you use the app, why it is processed, and your rights.</p>
+    <p class="muted"><strong>Last updated:</strong> September 27, 2026 · <strong>Version:</strong> 2026-09-27.v3</p>
+    <p>This policy explains how your personal data is processed when you use the Anima mobile app ("Anima", "the app"). It also serves as the notice required under Article 13 of the EU General Data Protection Regulation (GDPR) and Article 10 of Turkey's Personal Data Protection Law No. 6698 (KVKK).</p>
 
-    <h2>1. Scope</h2>
-    <p>This policy applies to the Anima mobile application and related services. Anima is a wellness and personal-awareness app; it does not provide medical diagnosis or treatment. There is <strong>no public community / social feed</strong> — users do not see each other’s content.</p>
-
-    <h2>2. Data we may process</h2>
+    <h2>In short</h2>
     <ul>
-      <li>Account information (name, email, user ID)</li>
-      <li>Profile and preferences (language, theme, notification settings, etc.)</li>
-      <li>App usage data and device / error logs</li>
-      <li>Location data (if you grant permission)</li>
-      <li>Health and wellness data (if you grant permission; Health Connect / HealthKit)</li>
-      <li>Content you create (journal, dreams, Anima AI chat, mood)</li>
-      <li><strong>Voice dictation</strong> (Anima Pro, optional): recognition runs <strong>on-device</strong>; audio is not uploaded.</li>
-      <li><strong>Notifications:</strong> Daily Commentary (morning / evening), Anima AI proactive messages, ritual / program reminders, streak risk — preferably local / on-device.</li>
-      <li>Subscription status (stores + RevenueCat, etc.)</li>
-      <li>Anonymous usage patterns (no individual identifiers — §14)</li>
+      <li>Anima is a sound app for sleep, focus and calm. There is <strong>no</strong> AI chat, <strong>no</strong> location tracking and <strong>no</strong> advertising.</li>
+      <li>We <strong>do not sell</strong> your data or share it for advertising.</li>
+      <li>If you allow Health Connect, we <strong>only read sleep sessions</strong>. Sleep data stays on your device and is never sent to our servers.</li>
+      <li>Your mixes, favorites, stats and notes are stored <strong>on your device</strong>.</li>
+      <li>You can delete your account and cloud data from inside the app at any time.</li>
     </ul>
 
-    <h2>3. Purposes of processing</h2>
+    <h2>1. Data controller</h2>
+    <p><strong>Controller:</strong> [PUBLISHER FULL NAME], trading as "GezegenselCore"<br /><strong>Address:</strong> [ADDRESS]<br /><strong>Email:</strong> <a href="mailto:support@gezegenselcore.com">support@gezegenselcore.com</a></p>
+    <p>GezegenselCore is the brand of the developer account that publishes Anima on Google Play. "We" in this policy means the controller.</p>
+
+    <h2>2. Data we process</h2>
+    <h3>2.1 Account and profile data</h3>
+    <div class="anima-table-wrap">
+      <table>
+        <thead><tr><th>Data</th><th>Source</th><th>Where it is stored</th></tr></thead>
+        <tbody>
+          <tr><td>First and last name, email address, Google profile photo link</td><td>Sign in with Google</td><td>Firebase Authentication and Cloud Firestore</td></tr>
+          <tr><td>Firebase user ID (UID)</td><td>Created automatically</td><td>Firebase</td></tr>
+          <tr><td>Date of birth and gender</td><td>You enter them in the profile form</td><td>Cloud Firestore</td></tr>
+          <tr><td>Record of your acceptance of this policy and the Terms (version and date)</td><td>Consent screen</td><td>Cloud Firestore</td></tr>
+          <tr><td>App settings (e.g. haptics preference)</td><td>The app</td><td>Your device and Cloud Firestore</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>We use date of birth and gender to personalize your profile and program suggestions.</p>
+    <h3>2.2 Sleep data (Health Connect, optional)</h3>
+    <p>On Android, if you give permission, we read <strong>only sleep sessions</strong> (start, end, duration and, where available, sleep stages) from Health Connect. We use this to show the "Last night" card on the Home screen.</p>
     <ul>
-      <li>Provide and personalize the service</li>
-      <li>Anima AI chat, Daily Commentary, dream interpretation, and related insights</li>
-      <li>Schedule and deliver notifications</li>
-      <li>Security, quotas / fair use, and performance</li>
-      <li>Support, subscription verification, legal obligations</li>
-      <li>Improving general recommendation quality with anonymous aggregates (§14)</li>
+      <li>Sleep data is processed <strong>on your device</strong> and kept only in an on-device cache. It is <strong>never sent</strong> to our servers, analytics tools or any other third party.</li>
+      <li>We <strong>do not write</strong> anything to Health Connect. We <strong>do not read</strong> any other health data such as steps, heart rate, heart rate variability or blood pressure.</li>
+      <li>Sleep data is <strong>not used</strong> for advertising, profiling, credit, insurance or similar purposes.</li>
+      <li>You can revoke the permission at any time in the Health Connect app. Everything else in Anima keeps working without it.</li>
     </ul>
+    <p>Sleep data may be considered health data (a special category of personal data). We process it only on the basis of the <strong>explicit consent</strong> you give on the in-app explanation screen and in the Android permission dialog.</p>
+    <h3>2.3 Data that stays on your device</h3>
+    <p>Your saved mixes, favorites, listening and session stats, streaks, mood calendar entries, ritual notes, program progress and language/theme preferences are stored <strong>on your device</strong>. They are not sent to our servers and are deleted when you delete your data or uninstall the app.</p>
+    <h3>2.4 Subscription and purchase data</h3>
+    <p>If you buy Anima Pro, payment is handled by <strong>Google Play</strong>; we never receive your card details. We use <strong>RevenueCat</strong> to verify your subscription status. RevenueCat receives your Firebase user ID, your purchase records (product, date, trial and renewal status) and your Firebase Analytics app instance ID. A copy of your subscription status (whether Pro is active and its expiry date) is kept in Cloud Firestore.</p>
+    <h3>2.5 Usage, device and diagnostic data</h3>
+    <ul>
+      <li><strong>Firebase Analytics:</strong> in-app events such as screens opened and features used; device model, operating system version, app version, language, approximate country and app instance ID. Analytics records may be linked to your Firebase user ID. The advertising ID is <strong>not collected</strong>.</li>
+      <li><strong>Firebase Crashlytics:</strong> when the app crashes or hits an error, the error log, device model, operating system, app version, language and your user ID.</li>
+      <li><strong>Firebase App Check:</strong> a device attestation token from Google Play Integrity, used to confirm requests come from the genuine, unmodified app.</li>
+      <li><strong>Firebase Cloud Messaging:</strong> a device-specific notification token used to deliver notifications (stored in Cloud Firestore).</li>
+    </ul>
+    <h3>2.6 Support messages</h3>
+    <p>If you email us, we process your email address and the content of your message to answer your request.</p>
+    <h3>2.7 Data we do not collect</h3>
+    <p>We do not access your location, contacts, photos, microphone, camera, calendar, SMS or call logs. The app contains no advertising SDK.</p>
 
-    <h2>4. Health data</h2>
-    <p>Health data is processed only with your explicit consent and is not used for medical diagnosis or treatment. It is processed on your device by default. Anima is not a healthcare service.</p>
+    <h2>3. Purposes and legal bases</h2>
+    <div class="anima-table-wrap">
+      <table>
+        <thead><tr><th>Purpose</th><th>Data</th><th>GDPR legal basis</th><th>KVKK legal basis</th></tr></thead>
+        <tbody>
+          <tr><td>Creating your account, sign-in and profile</td><td>Account and profile data</td><td>Performance of a contract (Art. 6(1)(b))</td><td>Establishment and performance of a contract (Art. 5/2-c)</td></tr>
+          <tr><td>Providing and verifying Anima Pro</td><td>Subscription data, user ID</td><td>Performance of a contract (Art. 6(1)(b))</td><td>Performance of a contract (Art. 5/2-c)</td></tr>
+          <tr><td>Showing the "Last night" sleep card</td><td>Sleep data (on device)</td><td>Explicit consent (Art. 9(2)(a))</td><td>Explicit consent (Art. 6/2)</td></tr>
+          <tr><td>Keeping consent records and handling legal claims</td><td>Consent record, correspondence</td><td>Legal obligation (Art. 6(1)(c)), legitimate interests (Art. 6(1)(f))</td><td>Legal obligation (Art. 5/2-ç), establishing and protecting rights (Art. 5/2-e)</td></tr>
+          <tr><td>Fixing errors, keeping the service secure, preventing abuse</td><td>Diagnostic data, App Check token</td><td>Legitimate interests (Art. 6(1)(f))</td><td>Legitimate interests (Art. 5/2-f)</td></tr>
+          <tr><td>Understanding how the app is used and improving it</td><td>Usage data</td><td>Legitimate interests (Art. 6(1)(f))</td><td>Legitimate interests (Art. 5/2-f)</td></tr>
+          <tr><td>Sending reminder notifications</td><td>Notification token, notification preferences</td><td>Performance of a contract (Art. 6(1)(b))</td><td>Performance of a contract (Art. 5/2-c)</td></tr>
+          <tr><td>Answering support requests</td><td>Contact data</td><td>Performance of a contract and legitimate interests</td><td>Performance of a contract and legitimate interests</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>We collect data <strong>electronically and by automated means</strong>: from what you enter in the app, from Sign in with Google, from the Health Connect permission, from Google Play and RevenueCat, and from records the app generates automatically.</p>
+    <p>Notifications require the Android notification permission. You can manage it in your device settings, and choose which notifications you receive in the app's Notification Settings.</p>
 
-    <h2>5. Artificial intelligence</h2>
-    <p>AI outputs are informational only and do not replace professional advice. When related features are on, limited context may be sent to cloud AI infrastructure (e.g. Gemini / Cloud Functions). Raw health samples and audio recordings are not sent for this purpose. You can turn AI off in settings.</p>
+    <h2>4. Who we share data with</h2>
+    <p>We <strong>do not sell</strong> your data. We share it only as needed to run the service, with the following service providers acting on our behalf and under our instructions:</p>
+    <div class="anima-table-wrap">
+      <table>
+        <thead><tr><th>Recipient</th><th>Purpose</th><th>Data</th></tr></thead>
+        <tbody>
+          <tr><td>Google LLC / Google Ireland Ltd. (Firebase: Authentication, Cloud Firestore, Analytics, Crashlytics, App Check, Cloud Messaging, Remote Config)</td><td>Hosting, authentication, analytics, crash reporting, security, notifications</td><td>Account and profile data, usage and diagnostic data, device tokens</td></tr>
+          <tr><td>Google Play (Google LLC / Google Ireland Ltd.)</td><td>App distribution, payments and subscription management</td><td>Purchase data (handled by Google under its own policy through your Google account)</td></tr>
+          <tr><td>RevenueCat, Inc. (USA)</td><td>Subscription verification and subscription analytics</td><td>User ID, purchase records, Analytics app instance ID</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Apart from this, we share data only with competent authorities when legally required, or at your explicit request. <strong>Sleep data is never shared with any third party.</strong></p>
 
-    <h2>6. Sharing</h2>
-    <p>Data is <strong>not sold</strong>. Limited sharing with processors as needed: Firebase, RevenueCat / app stores, analytics / crash (depending on settings), generative AI (§5). <strong>No community feed</strong> — your content is not shown to other users in a public stream.</p>
+    <h2>5. International transfers</h2>
+    <p>Firebase and RevenueCat servers may be located outside your country, including in the United States and the European Union. Your account, subscription, usage and diagnostic data are therefore transferred internationally. For users in the EU/EEA and UK, these transfers rely on the European Commission's Standard Contractual Clauses and applicable adequacy decisions (such as the EU-U.S. Data Privacy Framework, where the recipient is certified). For users in Turkey, transfers rely on the appropriate safeguards under Article 9 of the KVKK (standard contracts published by the Personal Data Protection Board).</p>
+
+    <h2>6. Retention</h2>
+    <div class="anima-table-wrap">
+      <table>
+        <thead><tr><th>Data</th><th>Retention</th></tr></thead>
+        <tbody>
+          <tr><td>Account, profile, settings, consent records, subscription copy</td><td>For as long as your account exists; deleted within 30 days of a deletion request</td></tr>
+          <tr><td>Data on your device (mixes, stats, notes, sleep cache)</td><td>Until you delete it or uninstall the app</td></tr>
+          <tr><td>Firebase Analytics events</td><td>For the retention period set in Firebase Analytics (at most 14 months)</td></tr>
+          <tr><td>Crashlytics crash reports</td><td>About 90 days</td></tr>
+          <tr><td>RevenueCat and Google Play purchase records</td><td>For as long as tax and accounting laws require</td></tr>
+          <tr><td>Support correspondence</td><td>Up to 2 years after your request is resolved</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>When a retention period ends, the data is deleted, destroyed or anonymized.</p>
 
     <h2>7. Security</h2>
-    <p>We use reasonable technical measures; 100% security cannot be guaranteed.</p>
+    <p>Data is protected with TLS in transit and with the provider's encryption at rest. Cloud Firestore security rules only allow each user to access their own data. Firebase App Check ensures only the genuine app can reach our backend. Access to data is limited to what is needed to run the service. No system is 100% secure; if a data breach occurs, we will notify the competent authorities and you as required by law.</p>
 
     <h2>8. Your rights</h2>
-    <p>Depending on applicable law, you may access, correct, or delete data and withdraw permissions.</p>
+    <p>Depending on where you live, you have the right to:</p>
+    <ul>
+      <li>access your personal data and receive information about how it is processed,</li>
+      <li>have inaccurate or incomplete data corrected,</li>
+      <li>have your data deleted,</li>
+      <li>restrict processing,</li>
+      <li>receive your data in a portable format,</li>
+      <li>object to processing based on legitimate interests,</li>
+      <li>withdraw your consent at any time (this does not affect processing carried out before withdrawal),</li>
+      <li>know the third parties your data is transferred to, and object to decisions made solely by automated means that produce adverse results for you (KVKK Art. 11).</li>
+    </ul>
+    <p><strong>How to make a request:</strong> email <a href="mailto:support@gezegenselcore.com">support@gezegenselcore.com</a> from the address of the Google account you use in Anima. We may ask for additional information to verify your identity. We will answer free of charge within <strong>30 days</strong> (or within one month under the GDPR). If you are not satisfied with our answer, you can lodge a complaint with the data protection authority in your country (in Turkey, the Personal Data Protection Board).</p>
 
-    <h2>9. Retention</h2>
-    <p>Data is kept only as long as needed.</p>
+    <h2 id="account-deletion-en">9. Account and data deletion</h2>
+    <p><strong>In the app:</strong> Profile → Account Settings → <strong>Delete data and sign out</strong>. This deletes the data on your device, your account, profile, settings, consent and subscription records in Cloud Firestore, and your Firebase Authentication account. For security, you may need to have signed in recently.</p>
+    <p><strong>If you cannot access the app:</strong> email <a href="mailto:support@gezegenselcore.com">support@gezegenselcore.com</a> from your Google account address with the subject "Delete my Anima account". We will delete your account and associated personal data within <strong>30 days</strong>.</p>
+    <p><strong>Data that is not deleted or is kept for a period:</strong> purchase records are kept by Google Play and RevenueCat for as long as tax and accounting laws require. Analytics and Crashlytics records are deleted automatically at the end of the retention periods above.</p>
+    <p><strong>Remember to cancel your subscription:</strong> deleting your account does not cancel your Google Play subscription. To cancel, go to Google Play → Profile → Payments &amp; subscriptions → Subscriptions.</p>
+    <p>Link: <code>https://gezegenselcore.com/en/anima/privacy-policy.html#account-deletion</code></p>
 
-    <h2>10. Age</h2>
-    <p>Anima is intended for users <strong>aged 18 and over</strong>.</p>
+    <h2>10. Age requirement</h2>
+    <p>Anima is designed for users aged 18 and over and is not directed to children. If we learn that we have processed data of someone under 18, we will delete it.</p>
 
-    <h2>11. Changes</h2>
-    <p>This policy may be updated from time to time.</p>
+    <h2>11. Changes to this policy</h2>
+    <p>We may update this policy. The current version is always published at this address, and the "Last updated" date at the top changes. For significant changes we ask for your consent again in the app.</p>
 
-    <h2 id="account-deletion-en">12. Account deletion</h2>
-    <p>Profile → Account Settings → Delete data / account. After a valid request, personal data is deleted within <strong>30 days</strong>, subject to legal retention. Anonymous aggregates are not affected.</p>
-    <p>Store listing: <code>https://gezegenselcore.com/en/anima/privacy-policy.html#account-deletion</code></p>
-
-    <h2>13. Policy updates</h2>
-    <p>Material changes may be notified in-app or via the “Last updated” date. A version change may require renewed consent.</p>
-
-    <h2>14. Anonymous usage learning</h2>
-    <p>Anonymous usage patterns (age group, activity type, stress band, capacity delta = day-over-day capacity score at activity completion, week reference) — not a social “community” feature. Not collected: name, email, uid, location, health records, dream/journal text, device ID. Retention up to <strong>12 months</strong>. Control: Settings → <strong>Anonymous Data Sharing</strong> (<strong>on</strong> by default, opt-out).</p>
-
-    <h2>15. Contact</h2>
-    <p><strong>GezegenselCore — ANIMA</strong><br /><a href="mailto:support@gezegenselcore.com">support@gezegenselcore.com</a></p>
+    <h2>12. Contact</h2>
+    <p><strong>GezegenselCore — ANIMA</strong><br />Email: <a href="mailto:support@gezegenselcore.com">support@gezegenselcore.com</a></p>
   </article>
     </div>
   </main>
