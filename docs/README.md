@@ -10,7 +10,7 @@ Bu klasör, marka statik sitesinin **URL mimarisi**, **yönlendirme**, **üretim
 |------|-----------|
 | **Birincil stil** | Kök **`style.css`** — lacivert kare ızgara (`gc-tech-bg`), kurumsal header, **ikonlu footer** (`gc-footer-nav` + SVG). |
 | **Kabuk senkronu** | `node tools/apply-shared-chrome.mjs` — iç sayfalara tech-bg, aynı header yapısı, ikonlu footer, `style.css?v=…`, gerekirse Font Awesome CDN, tüm sayfalarda Google Ads `gtag` (`AW-18302657879`). |
-| Dil segmentleri | Yalnızca **`tr`** ve **`en`** (URL’de küçük harf). |
+| Dil segmentleri | Site geneli **`tr`** ve **`en`**; ReFollow sayfaları uygulamadaki 12 dilin hepsi (`REFOLLOW_MULTILANG.md`). |
 | Kanonik içerik | Örn. `/en/anima/privacy-policy.html`, `/tr/anima/privacy-policy.html`. |
 | Eski URL’ler | `assets/site-path.js`, `legacy-path-redirect.js`, `root-locale-redirect.js`, kök `404.html`. |
 | Üretim | `node tools/build-locale-pages.mjs` — şablonlar `tools/templates/*`, çeviriler `tools/i18n/messages/*`. |
@@ -26,6 +26,7 @@ Bu klasör, marka statik sitesinin **URL mimarisi**, **yönlendirme**, **üretim
 | **`DESIGN_SYSTEM.md`** | `style.css` jetonları, grid, footer, iç sayfa. |
 | **`SITE_TEMPLATE_ARCHITECTURE.md`** | Kabuk katmanları, build vs elle sayfalar. |
 | **`SITE_I18N_ARCHITECTURE.md`** | Build i18n, `tr`/`en`, hreflang. |
+| **`REFOLLOW_MULTILANG.md`** | ReFollow sayfaları — 12 dil, üretici, SSS/JSON-LD, `llms.txt` (2026-11). |
 | **`APP_WEB_ALIGNMENT.md`** | Anima ↔ web URL kuralları; ReFollow politika URL’leri ayrı sync. |
 
 ## Önemli dosya yolları (kök)
