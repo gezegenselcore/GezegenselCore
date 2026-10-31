@@ -1,5 +1,5 @@
-﻿/**
- * Dil önekli statik sayfalar: yalnızca /tr/… ve /en/…
+/**
+ * Dil önekli statik sayfalar: /tr/… ve /en/… (ReFollow sayfaları ayrı: tools/build-refollow-site.mjs)
  * node tools/build-locale-pages.mjs
  */
 import fs from "node:fs";
@@ -7,6 +7,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { MESSAGES } from "./i18n/messages/registry.mjs";
 import { expandI18n } from "./i18n/expand.mjs";
+import { REFOLLOW_LOCALES, REFOLLOW_LOGICAL_PATHS } from "./refollow-locales.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
@@ -204,112 +205,6 @@ function processAnimaLegal(html, locale, logicalPath) {
   return applyHtmlLocaleShell(h, locale);
 }
 
-function refollowForLocale(rawHtml) {
-  return rawHtml.replace(/\.\.\/\.\.\/\.\.\/assets\//g, "../../../../assets/");
-}
-
-/** ReFollow politika: yalnızca sayfa dilindeki gövde + yerelleştirilmiş başlık/breadcrumb. */
-function localizeRefollowPolicyPage(html, locale, logicalPath) {
-  const en = locale === "en";
-  const msg = (key) => {
-    const m = MESSAGES[key];
-    if (!m) return "";
-    return en ? m.en : m.tr;
-  };
-
-  let pageKey = "privacy";
-  if (logicalPath.includes("terms")) pageKey = "terms";
-  else if (logicalPath.includes("support")) pageKey = "support";
-
-  const titleKey = `refollow_${pageKey}.meta_title`;
-  const h1Key = `refollow.${pageKey}_h2`;
-
-  let h = html;
-
-  if (en) {
-    h = h.replace(
-      /<div class="policy-locale-tr(?:\s+lang-block)?">[\s\S]*?(?=<div class="policy-locale-en(?:\s+lang-block)?">)/,
-      ""
-    );
-  } else {
-    h = h.replace(
-      /<div class="policy-locale-en(?:\s+lang-block)?">[\s\S]*?(?=<p class="gc-updated">)/,
-      ""
-    );
-  }
-
-  h = h.replace(/<h2>Türkçe<\/h2>\s*/g, "");
-  h = h.replace(/<h2>English<\/h2>\s*/g, "");
-  h = h.replace(/\s*lang-block/g, "");
-
-  const title = msg(titleKey);
-  const h1 = msg(h1Key);
-  const home = msg("refollow.breadcrumb_home");
-  const skip = en ? "Skip to content" : "İçeriğe atla";
-  const play = msg("refollow.play_store");
-
-  if (title) {
-    h = h.replace(/<title>[^<]*<\/title>/i, `<title>${title}</title>`);
-  }
-  if (h1) {
-    h = h.replace(/<h1>[^<]*<\/h1>/i, `<h1>${h1}</h1>`);
-  }
-  h = h.replace(/(<a class="skip-link"[^>]*>)[^<]*(<\/a>)/i, `$1${skip}$2`);
-  h = h.replace(
-    /(<p class="gc-crumb"><a href="[^"]*">)[^<]*(<\/a>\s*·\s*ReFollow<\/p>)/i,
-    `$1${home}$2`
-  );
-  h = h.replace(
-    /(Google Play'de İndir|Get it on Google Play)/g,
-    play || (en ? "Get it on Google Play" : "Google Play'de İndir")
-  );
-
-  /* Güncelleme satırı: TR "Son güncelleme", EN "Last updated" + ay adları */
-  const TR_MONTHS = {
-    ocak: "January",
-    şubat: "February",
-    subat: "February",
-    mart: "March",
-    nisan: "April",
-    mayıs: "May",
-    mayis: "May",
-    haziran: "June",
-    temmuz: "July",
-    ağustos: "August",
-    agustos: "August",
-    eylül: "September",
-    eylul: "September",
-    ekim: "October",
-    kasım: "November",
-    kasim: "November",
-    aralık: "December",
-    aralik: "December",
-  };
-  h = h.replace(/<p class="gc-updated">([^<]*)<\/p>/i, (_, text) => {
-    let t = text.trim();
-    if (en) {
-      t = t.replace(/^Son güncelleme:\s*/i, "Last updated: ");
-      t = t.replace(/(\d+)\s+([A-Za-zÇĞİÖŞÜçğıöşü]+)\s+(\d{4})/i, (m, d, mon, y) => {
-        const key = mon
-          .toLocaleLowerCase("tr-TR")
-          .normalize("NFD")
-          .replace(/[\u0300-\u036f]/g, "")
-          .replace(/ı/g, "i");
-        const eng =
-          TR_MONTHS[mon.toLocaleLowerCase("tr-TR")] ||
-          TR_MONTHS[key] ||
-          TR_MONTHS[mon.toLowerCase()];
-        return eng ? `${eng} ${d}, ${y}` : m;
-      });
-    } else {
-      t = t.replace(/^Last updated:\s*/i, "Son güncelleme: ");
-    }
-    return `<p class="gc-updated">${t}</p>`;
-  });
-
-  return h;
-}
-
 function rootRedirectStub(title, logical) {
   return `<!DOCTYPE html>
 <html lang="en">
@@ -356,9 +251,6 @@ const SITEMAP_LOGICAL_PATHS = [
   "/anima/privacy-policy.html",
   "/anima/terms-of-use.html",
   "/pages/anima/support.html",
-  "/pages/refollow/policies/privacy.html",
-  "/pages/refollow/policies/terms.html",
-  "/pages/refollow/policies/support.html",
 ];
 
 function escapeXmlLoc(s) {
@@ -376,6 +268,11 @@ function writeSitemap() {
     for (const log of SITEMAP_LOGICAL_PATHS) {
       const pri = log.includes("/anima/") ? "0.95" : log.includes("refollow") ? "0.82" : "0.9";
       push(`${ORIGIN}/${loc}${log}`, "monthly", pri);
+    }
+  }
+  for (const rl of REFOLLOW_LOCALES) {
+    for (const log of REFOLLOW_LOGICAL_PATHS) {
+      push(`${ORIGIN}/${rl.seg}${log}`, "monthly", log === "/refollow/" ? "0.9" : "0.82");
     }
   }
   const seen = new Set();
@@ -402,9 +299,7 @@ function main() {
   const animaPrivacy = read(path.join(ROOT, "tools", "templates", "anima-privacy.master.html"));
   const animaTerms = read(path.join(ROOT, "tools", "templates", "anima-terms.master.html"));
   const animaSupport = read(path.join(ROOT, "tools", "templates", "anima-support.master.html"));
-  const rfPrivacy = read(path.join(ROOT, "pages", "refollow", "policies", "privacy.html"));
-  const rfTerms = read(path.join(ROOT, "pages", "refollow", "policies", "terms.html"));
-  const rfSupport = read(path.join(ROOT, "pages", "refollow", "policies", "support.html"));
+  /* ReFollow sayfaları (tüm uygulama dilleri): node tools/build-refollow-site.mjs */
 
   for (const loc of LOCALES) {
     /* Hub pages use style.css chrome — hand-maintained; do not overwrite from legacy Freelancer masters. */
@@ -414,39 +309,6 @@ function main() {
     write(path.join(ROOT, loc, "anima", "terms-of-use.html"), processAnimaLegal(animaTerms, loc, "/anima/terms-of-use.html"));
     write(path.join(ROOT, loc, "pages", "anima", "support.html"), processAnimaLegal(animaSupport, loc, "/pages/anima/support.html"));
 
-    const rfP = processInnerPage(
-      expandI18n(
-        localizeRefollowPolicyPage(refollowForLocale(rfPrivacy), loc, "/pages/refollow/policies/privacy.html"),
-        loc,
-        MESSAGES
-      ),
-      "pages/refollow/policies/privacy.html",
-      loc,
-      "/pages/refollow/policies/privacy.html"
-    );
-    const rfT = processInnerPage(
-      expandI18n(
-        localizeRefollowPolicyPage(refollowForLocale(rfTerms), loc, "/pages/refollow/policies/terms.html"),
-        loc,
-        MESSAGES
-      ),
-      "pages/refollow/policies/terms.html",
-      loc,
-      "/pages/refollow/policies/terms.html"
-    );
-    const rfS = processInnerPage(
-      expandI18n(
-        localizeRefollowPolicyPage(refollowForLocale(rfSupport), loc, "/pages/refollow/policies/support.html"),
-        loc,
-        MESSAGES
-      ),
-      "pages/refollow/policies/support.html",
-      loc,
-      "/pages/refollow/policies/support.html"
-    );
-    write(path.join(ROOT, loc, "pages", "refollow", "policies", "privacy.html"), rfP);
-    write(path.join(ROOT, loc, "pages", "refollow", "policies", "terms.html"), rfT);
-    write(path.join(ROOT, loc, "pages", "refollow", "policies", "support.html"), rfS);
   }
 
   write(path.join(ROOT, "index.html"), rootIndexRedirect());

@@ -1,0 +1,50 @@
+# GezegenselCore
+
+> GezegenselCore is an independent mobile app studio. Its apps are published on Google Play: ReFollow (Instagram follower analysis without a password), Anima (AI-assisted daily summaries) and Night Swarm (survivor-style action game).
+
+Contact: support@gezegenselcore.com
+
+## ReFollow — see who doesn't follow you back on Instagram, without your password
+
+ReFollow is an Android app that analyzes Instagram's official "Download Your Information" export (ZIP file in JSON format) on the user's own phone.
+
+- It never asks for an Instagram password, never shows an Instagram login page and never accesses the Instagram app or account.
+- Follower/following lists are processed on the device and are not uploaded to any server.
+- Shows: accounts that don't follow you back, fans (they follow you, you don't follow them), mutual follows, pending and received follow requests, follow dates, a watchlist, possible username changes and a follow-health summary.
+- ReFollow Pro (monthly or yearly subscription via Google Play): full not-following-back list (free shows the first 5), follower changes between analyses, snapshot history, multiple Instagram accounts, CSV export, encrypted backup, PDF report, no ads.
+- Requirement: in Instagram, export with Format = JSON and Date range = All time. HTML exports cannot be read.
+- Why it is safer than password-based "unfollower" apps: those apps show a fake Instagram login form and capture the password, which can get the account used as a bot, banned for suspicious login, or expose private messages.
+- Not affiliated with Instagram or Meta. Not intended for children under 13.
+- Available in: Turkish, English, Portuguese (Brazil), Spanish, German, French, Arabic, Hindi, Bengali, Persian, Nepali, Urdu.
+
+Google Play: https://play.google.com/store/apps/details?id=com.refollow.app
+
+- [ReFollow (English)](https://gezegenselcore.com/en/refollow/)
+- [ReFollow (Português do Brasil)](https://gezegenselcore.com/pt-br/refollow/)
+- [ReFollow (Español)](https://gezegenselcore.com/es/refollow/)
+- [ReFollow (Türkçe)](https://gezegenselcore.com/tr/refollow/)
+- [ReFollow (Deutsch)](https://gezegenselcore.com/de/refollow/)
+- [ReFollow (Français)](https://gezegenselcore.com/fr/refollow/)
+- [ReFollow (العربية)](https://gezegenselcore.com/ar/refollow/)
+- [ReFollow (हिन्दी)](https://gezegenselcore.com/hi/refollow/)
+- [ReFollow (বাংলা)](https://gezegenselcore.com/bn/refollow/)
+- [ReFollow (فارسی)](https://gezegenselcore.com/fa/refollow/)
+- [ReFollow (नेपाली)](https://gezegenselcore.com/ne/refollow/)
+- [ReFollow (اردو)](https://gezegenselcore.com/ur/refollow/)
+- [Privacy policy](https://gezegenselcore.com/en/pages/refollow/policies/privacy.html)
+- [Terms of use](https://gezegenselcore.com/en/pages/refollow/policies/terms.html)
+- [Support and export help](https://gezegenselcore.com/en/pages/refollow/policies/support.html)
+
+## Anima
+
+AI-assisted daily summaries and data-informed suggestions, with privacy on device.
+
+- [Anima](https://gezegenselcore.com/en/anima/)
+- [Google Play](https://play.google.com/store/apps/details?id=com.gezegenselcore.aura)
+
+## Night Swarm
+
+Survivor-style action game: you move through the dark while your weapons do the fighting. Nine maps, seventeen weapons.
+
+- [Night Swarm](https://gezegenselcore.com/en/night-swarm/)
+- [Google Play](https://play.google.com/store/apps/details?id=com.gezegenselcore.nightswarm)

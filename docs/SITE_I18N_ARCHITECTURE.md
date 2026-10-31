@@ -1,5 +1,13 @@
 # Site i18n mimarisi
 
+## ReFollow sayfaları — uygulamadaki tüm diller (2026-11)
+
+- Diller: `tools/refollow-locales.mjs` (tr, en, pt-br, es, de, fr, ar, hi, bn, fa, ne, ur). RTL: ar, fa, ur.
+- Üretici: `node tools/build-refollow-site.mjs` (veya `node tools/sync-refollow-policies.mjs`). Metinler ReFollow reposundaki locale JSON'larından; SSS + JSON-LD (`MobileApplication`, `FAQPage`) ürün sayfasında.
+- Dil seçimi: başlıkta `🌐 XX ▾` (yerel `<select>`); seçim `localStorage` ile hatırlanır. Dil öneki olmayan girişler (`/refollow/`, `/refollow-policies/*.html`, uygulama içi politika linkleri) tarayıcı diline yönlendirir. Dilli bir sayfa tarayıcı dilinden farklıysa yönlendirme yerine "bu sayfayı X dilinde görüntüle" önerisi (`assets/refollow-lang-hint.js`).
+- Hub sayfaları (anasayfa, Anima, Night Swarm, site gizlilik/destek) tr/en kalır; başka dil öneki istenirse EN'e düşer (`assets/site-path.js`).
+- Yapay zeka/arama için kökte `llms.txt`.
+
 ## Özet
 
 Statik site **build zamanında** yerelleştirilir: `node tools/build-locale-pages.mjs` yalnızca **`tr`** ve **`en`** için HTML üretir. Elle düzenlenen sayfaların ortak TR/EN kabuğu için ayrıca `node tools/apply-shared-chrome.mjs` kullanılır. Şablonlarda `{{i18n:key}}` (düz metin, kaçışlı) ve `{{i18nH:key}}` (güvenilir HTML parçaları) yer tutucuları kullanılır. Üretilen sayfalar şablon kabuğunu paylaşır (`docs/SITE_TEMPLATE_ARCHITECTURE.md`). Canlı hub ve çoğu locale sayfasında görsel sistem kök **`style.css`** ile hizalanır; üretim sonrası `apply-shared-chrome.mjs` ile header/footer/tech-bg eşitlenebilir.

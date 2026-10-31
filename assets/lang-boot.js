@@ -1,27 +1,26 @@
-/* Sync: <html lang> + data-boot-l10n (tr|en) before first paint — gezegensel.js tam seçimi uygular.
- * Dil URL öneki: yalnızca /tr/ … /en/ … */
+/* Sync: <html lang>, dir (RTL: ar, fa, ur) + data-boot-l10n (tr|en) before first paint.
+ * Dil URL'nin ilk segmentinden gelir (/tr/, /en/, /pt-br/, /ar/ …); yoksa kayıtlı tercih, yoksa tarayıcı dili. */
 (function () {
-  var LOCALE_SEGMENTS = ["tr", "en"];
+  var LOCALES = ["tr", "en", "pt-br", "es", "de", "fr", "ar", "hi", "bn", "fa", "ne", "ur"];
+  var RTL = ["ar", "fa", "ur"];
   var STORAGE_KEY = "gezegensel-lang";
 
   function normalize(v) {
     if (!v || typeof v !== "string") return null;
     var low = v.trim().toLowerCase().replace(/_/g, "-");
-    if (low === "tr" || low.indexOf("tr-") === 0) return "tr";
-    if (low === "en" || low.indexOf("en-") === 0) return "en";
-    return null;
+    if (!low) return null;
+    var primary = low.split("-")[0];
+    if (primary === "pt") return "pt-br";
+    return LOCALES.indexOf(primary) >= 0 ? primary : null;
   }
 
   function fromPath() {
     try {
-      var parts = (typeof location !== "undefined" ? location.pathname : "")
+      var first = (typeof location !== "undefined" ? location.pathname : "")
         .replace(/^\/+/, "")
-        .split("/")
-        .filter(Boolean);
-      for (var i = 0; i < parts.length; i++) {
-        var seg = (parts[i] || "").toLowerCase();
-        if (LOCALE_SEGMENTS.indexOf(seg) >= 0) return seg;
-      }
+        .split("/")[0]
+        .toLowerCase();
+      if (LOCALES.indexOf(first) >= 0) return first;
     } catch (e) {}
     return null;
   }
@@ -38,23 +37,18 @@
     return "en";
   }
 
-  function bootContentLang(ui) {
-    return ui === "tr" ? "tr" : "en";
+  var ui = fromPath();
+  if (!ui) {
+    try {
+      ui = normalize(localStorage.getItem(STORAGE_KEY));
+    } catch (e) {}
   }
-
-  function bcp47(ui) {
-    return ui === "tr" ? "tr" : "en";
-  }
-
-  var ui = null;
-  try {
-    ui = normalize(fromPath() || "") || normalize(localStorage.getItem(STORAGE_KEY));
-  } catch (e) {}
   if (!ui) ui = fromNavigator();
   if (!ui) ui = "en";
 
-  document.documentElement.lang = bcp47(ui);
-  document.documentElement.setAttribute("data-ui-locale", ui);
-  document.documentElement.setAttribute("data-boot-l10n", bootContentLang(ui));
-  document.documentElement.dir = "ltr";
+  var root = document.documentElement;
+  root.lang = ui === "pt-br" ? "pt-BR" : ui;
+  root.setAttribute("data-ui-locale", ui);
+  root.setAttribute("data-boot-l10n", ui === "tr" ? "tr" : "en");
+  root.dir = RTL.indexOf(ui) >= 0 ? "rtl" : "ltr";
 })();

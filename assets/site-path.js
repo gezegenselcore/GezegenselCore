@@ -1,6 +1,9 @@
-﻿/**
- * GezegenselCore — path tabanlı dil: yalnızca tr | en. Eski önekler (de, fr, …) EN’ye yönlendirilir.
- * Depolama: localStorage "gezegensel-lang" — yalnızca tr / en kalıcı; diğer değerler EN sayılır.
+/**
+ * GezegenselCore — path tabanlı dil.
+ *  - Site geneli (anasayfa, Anima, Night Swarm, site gizlilik/destek): tr | en
+ *  - ReFollow sayfaları (/{dil}/refollow/, /{dil}/pages/refollow/…): uygulamadaki tüm diller
+ * Bir dilde olmayan sayfa istenirse EN'e düşer (ör. /de/index.html → /en/index.html).
+ * Depolama: localStorage "gezegensel-lang" (son dil), "gezegensel-lang-explicit" (kullanıcı elle seçti).
  */
 (function (global) {
   function runtimeOrigin() {
@@ -16,56 +19,47 @@
     return "https://gezegenselcore.com";
   }
   var ORIGIN = runtimeOrigin();
-  var CANONICAL_LOCALES = ["tr", "en"];
-  /** Eski URL yolu ilk segmentleri — yalnızca yönlendirme eşlemesi; arayüzde dil düğmesi yok. */
-  var LEGACY_LOCALE_PREFIXES = ["de", "fr", "es", "it", "pt-br", "ar"];
-  var PATH_PREFIXES = CANONICAL_LOCALES.concat(LEGACY_LOCALE_PREFIXES);
+  var SITE_LOCALES = ["tr", "en"];
+  /* tools/refollow-locales.mjs ile aynı sıra */
+  var REFOLLOW_LOCALES = ["tr", "en", "pt-br", "es", "de", "fr", "ar", "hi", "bn", "fa", "ne", "ur"];
+  /** Artık yayınlanmayan eski önekler — yalnızca yönlendirme. */
+  var LEGACY_LOCALE_PREFIXES = ["it"];
   var STORAGE_KEY = "gezegensel-lang";
+  var EXPLICIT_KEY = "gezegensel-lang-explicit";
   var DEFAULT_SEGMENT = "en";
+  var BCP47 = { "pt-br": "pt-BR" };
 
-  function isCanonicalLocaleSegment(seg) {
-    return CANONICAL_LOCALES.indexOf(String(seg || "").toLowerCase()) >= 0;
+  function isRefollowLogicalPath(logical) {
+    return /^\/(?:refollow(?:\/|$)|pages\/refollow\/)/i.test(String(logical || ""));
   }
 
-  function isLegacyLocalePrefix(seg) {
-    return LEGACY_LOCALE_PREFIXES.indexOf(String(seg || "").toLowerCase()) >= 0;
+  function localesForLogicalPath(logical) {
+    return isRefollowLogicalPath(logical) ? REFOLLOW_LOCALES : SITE_LOCALES;
+  }
+
+  function isLocaleSegment(seg) {
+    return REFOLLOW_LOCALES.indexOf(String(seg || "").toLowerCase()) >= 0;
   }
 
   function isPathLocalePrefix(seg) {
     var s = String(seg || "").toLowerCase();
-    return PATH_PREFIXES.indexOf(s) >= 0;
+    return isLocaleSegment(s) || LEGACY_LOCALE_PREFIXES.indexOf(s) >= 0;
   }
 
-  /** Eski URL /de/… → /en/… (sonsuz döngü yok: yalnızca legacy önekte çalışır) */
-  function redirectLegacyPathPrefixIfNeeded() {
-    try {
-      var raw = pathnameNoQuery();
-      var path = String(raw || "").split("?")[0].replace(/\/+$/, "") || "/";
-      var parts = path.replace(/^\/+/, "").split("/").filter(Boolean);
-      if (!parts.length) return;
-      var first = parts[0].toLowerCase();
-      if (!isLegacyLocalePrefix(first)) return;
-      var logical = getLogicalPath(path);
-      var target = buildAbsoluteUrl("en", logical);
-      var cur = global.location ? global.location.href.split("#")[0] : "";
-      if (cur !== target.split("#")[0]) {
-        global.location.replace(target);
-      }
-    } catch (e) {}
-  }
-
+  /** "pt_BR", "pt-PT", "de-AT", "fa-IR" … → desteklenen segment ya da null. */
   function normalizeStorageToSegment(v) {
     if (!v || typeof v !== "string") return null;
-    var s = v.trim();
-    var low = s.toLowerCase().replace(/_/g, "-");
-    if (low === "tr" || low.indexOf("tr-") === 0) return "tr";
-    if (low === "en" || low.indexOf("en-") === 0) return "en";
-    if (isLegacyLocalePrefix(low.split("-")[0]) || low === "pt-br" || /^pt\b/i.test(low)) return "en";
-    return null;
+    var low = v.trim().toLowerCase().replace(/_/g, "-");
+    if (!low) return null;
+    if (low === "pt-br" || low.indexOf("pt") === 0) return "pt-br";
+    var primary = low.split("-")[0];
+    if (primary === "pt") return "pt-br";
+    return REFOLLOW_LOCALES.indexOf(primary) >= 0 ? primary : null;
   }
 
   function segmentToBcp47(seg) {
-    return seg === "tr" ? "tr" : "en";
+    var s = normalizeStorageToSegment(seg) || DEFAULT_SEGMENT;
+    return BCP47[s] || s;
   }
 
   function pathnameNoQuery() {
@@ -73,40 +67,38 @@
   }
 
   function getLocaleSegmentFromPathname(pathname) {
-    var parts = String(pathname || "")
-      .replace(/^\/+|\/+$/g, "")
-      .split("/")
-      .filter(Boolean);
-    for (var i = 0; i < parts.length; i++) {
-      var seg = parts[i].toLowerCase();
-      if (isCanonicalLocaleSegment(seg)) return seg;
-    }
-    return null;
+    var first = String(pathname || "")
+      .replace(/^\/+/, "")
+      .split("/")[0];
+    first = String(first || "").toLowerCase();
+    return isLocaleSegment(first) ? first : null;
   }
 
-  /**
-   * Örn. /de/anima/privacy-policy.html → /anima/privacy-policy.html
-   * Örn. /tr/index.html → /index.html
-   */
+  /** /de/refollow/ → /refollow/ ; /tr/index.html → /index.html */
   function getLogicalPath(pathname) {
     var raw = String(pathname || pathnameNoQuery()).split("?")[0];
+    var trailing = /\/$/.test(raw);
     var path = raw.replace(/\/+$/, "") || "/";
-    if (path === "" || path === "/") return "/index.html";
+    if (path === "/") return "/index.html";
     var parts = path.replace(/^\/+/, "").split("/").filter(Boolean);
     if (!parts.length) return "/index.html";
     if (isPathLocalePrefix(parts[0].toLowerCase())) {
       var rest = parts.slice(1);
       if (!rest.length) return "/index.html";
-      return "/" + rest.join("/");
+      return "/" + rest.join("/") + (trailing ? "/" : "");
     }
-    return path.charAt(0) === "/" ? path : "/" + path;
+    return "/" + parts.join("/") + (trailing ? "/" : "");
+  }
+
+  function supportedSegment(seg, logical) {
+    var s = normalizeStorageToSegment(seg) || DEFAULT_SEGMENT;
+    return localesForLogicalPath(logical).indexOf(s) >= 0 ? s : DEFAULT_SEGMENT;
   }
 
   function buildAbsoluteUrl(localeSeg, logicalPath) {
-    var seg = isCanonicalLocaleSegment(localeSeg) ? localeSeg.toLowerCase() : DEFAULT_SEGMENT;
     var log = logicalPath || "/index.html";
     if (log.charAt(0) !== "/") log = "/" + log;
-    return ORIGIN + "/" + seg + log;
+    return ORIGIN + "/" + supportedSegment(localeSeg, log) + log;
   }
 
   function persistSegment(seg) {
@@ -117,39 +109,65 @@
     return s;
   }
 
-  function preferredSegmentFromStorageOrNavigator() {
+  function storedSegment() {
     try {
-      var raw = global.localStorage.getItem(STORAGE_KEY);
-      var n = normalizeStorageToSegment(raw);
-      if (n) return n;
-    } catch (e) {}
-    if (typeof navigator !== "undefined") {
-      var list = navigator.languages || [navigator.language || "en"];
-      for (var i = 0; i < list.length; i++) {
-        var full = normalizeStorageToSegment(String(list[i]));
-        if (full) return full;
-      }
+      return normalizeStorageToSegment(global.localStorage.getItem(STORAGE_KEY));
+    } catch (e) {
+      return null;
     }
-    return DEFAULT_SEGMENT;
+  }
+
+  function navigatorSegment() {
+    if (typeof navigator === "undefined") return null;
+    var list = navigator.languages || [navigator.language || navigator.userLanguage || ""];
+    for (var i = 0; i < list.length; i++) {
+      var s = normalizeStorageToSegment(String(list[i]));
+      if (s) return s;
+    }
+    return null;
+  }
+
+  function preferredSegmentFromStorageOrNavigator() {
+    return storedSegment() || navigatorSegment() || DEFAULT_SEGMENT;
   }
 
   function navigateToLocaleSegment(newSeg) {
-    var seg = normalizeStorageToSegment(newSeg) || DEFAULT_SEGMENT;
-    persistSegment(seg);
-    var logical = getLogicalPath(pathnameNoQuery());
-    var url = buildAbsoluteUrl(seg, logical);
+    var seg = persistSegment(newSeg);
+    try {
+      global.localStorage.setItem(EXPLICIT_KEY, "1");
+    } catch (e) {}
+    var url = buildAbsoluteUrl(seg, getLogicalPath(pathnameNoQuery()));
     var cur = global.location ? global.location.href.split("#")[0] : "";
     if (global.location && cur !== url.split("#")[0]) {
       global.location.href = url;
     }
   }
 
-  function redirectIfStoredLocaleDiffers() {
+  /** /it/… veya /de/index.html gibi o dilde olmayan sayfalar → desteklenen dile. */
+  function redirectUnsupportedLocalePathIfNeeded() {
+    try {
+      var path = pathnameNoQuery();
+      var first = String(path.replace(/^\/+/, "").split("/")[0] || "").toLowerCase();
+      if (!isPathLocalePrefix(first)) return;
+      var logical = getLogicalPath(path);
+      if (localesForLogicalPath(logical).indexOf(first) >= 0) return;
+      var target = buildAbsoluteUrl(first, logical);
+      if (global.location.href.split("#")[0] !== target.split("#")[0]) {
+        global.location.replace(target);
+      }
+    } catch (e) {}
+  }
+
+  /** URL dili kaynak. Yalnızca-ReFollow dili seçmiş kullanıcı TR/EN hub sayfasına girince tercihi silinmez. */
+  function rememberPathLocale() {
     try {
       var pathSeg = getLocaleSegmentFromPathname(pathnameNoQuery());
       if (!pathSeg) return;
-      /* URL yolu kaynak: /en/… açıldıysa EN kalır; storage yolu takip eder (tersine yönlendirme yok). */
-      persistSegment(pathSeg);
+      var stored = storedSegment();
+      var logical = getLogicalPath(pathnameNoQuery());
+      if (!stored || localesForLogicalPath(logical).indexOf(stored) >= 0) {
+        persistSegment(pathSeg);
+      }
     } catch (e) {}
   }
 
@@ -162,49 +180,58 @@
     }
   }
 
-  function wireGcLangSwitch() {
+  function wireLanguageControls() {
     if (typeof document === "undefined") return;
     document.querySelectorAll(".gc-lang-switch a[href]").forEach(function (a) {
       if (a.dataset.gcLangWired === "1") return;
       a.dataset.gcLangWired = "1";
       a.addEventListener("click", function (ev) {
         var seg = localeFromHref(a.getAttribute("href") || "");
-        if (!seg) {
-          var t = (a.textContent || "").trim().toLowerCase();
-          if (t === "tr" || t === "en") seg = t;
-        }
+        if (!seg) seg = normalizeStorageToSegment((a.textContent || "").trim());
         if (seg) {
           ev.preventDefault();
           navigateToLocaleSegment(seg);
         }
       });
     });
+    document.querySelectorAll("select[data-gc-lang-select]").forEach(function (sel) {
+      if (sel.dataset.gcLangWired === "1") return;
+      sel.dataset.gcLangWired = "1";
+      sel.addEventListener("change", function () {
+        if (sel.value) navigateToLocaleSegment(sel.value);
+      });
+    });
   }
 
-  redirectLegacyPathPrefixIfNeeded();
-  redirectIfStoredLocaleDiffers();
+  redirectUnsupportedLocalePathIfNeeded();
+  rememberPathLocale();
 
   if (typeof document !== "undefined") {
     if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", wireGcLangSwitch);
+      document.addEventListener("DOMContentLoaded", wireLanguageControls);
     } else {
-      wireGcLangSwitch();
+      wireLanguageControls();
     }
   }
 
   global.GezegenselSitePath = {
     ORIGIN: ORIGIN,
-    /** @deprecated Eski kod uyumu — yalnızca tr, en */
-    LOCALE_SEGMENTS: CANONICAL_LOCALES.slice(),
+    /** @deprecated Eski kod uyumu — site geneli diller */
+    LOCALE_SEGMENTS: SITE_LOCALES.slice(),
+    SITE_LOCALES: SITE_LOCALES.slice(),
+    REFOLLOW_LOCALES: REFOLLOW_LOCALES.slice(),
     DEFAULT_SEGMENT: DEFAULT_SEGMENT,
     STORAGE_KEY: STORAGE_KEY,
-    isLocaleSegment: isCanonicalLocaleSegment,
+    isLocaleSegment: isLocaleSegment,
+    isRefollowLogicalPath: isRefollowLogicalPath,
+    localesForLogicalPath: localesForLogicalPath,
     normalizeStorageToSegment: normalizeStorageToSegment,
     segmentToBcp47: segmentToBcp47,
     getLocaleSegmentFromPathname: getLocaleSegmentFromPathname,
     getLogicalPath: getLogicalPath,
     buildAbsoluteUrl: buildAbsoluteUrl,
     persistSegment: persistSegment,
+    navigatorSegment: navigatorSegment,
     preferredSegmentFromStorageOrNavigator: preferredSegmentFromStorageOrNavigator,
     navigateToLocaleSegment: navigateToLocaleSegment,
   };

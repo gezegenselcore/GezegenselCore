@@ -2322,3 +2322,218 @@ html[data-theme="dark"] body.anima-launch .scroll-top {
   font-weight: 700;
   color: #e8eef5;
 }
+
+/* ——— ReFollow çok dilli sayfalar (tools/build-refollow-site.mjs) ——— */
+.gc-visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.gc-lang-switch--menu,
+.gc-lang-select-wrap {
+  flex-shrink: 0;
+}
+
+.gc-lang-select-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 8px;
+  border: 1px solid var(--gc-border-medium);
+  background: var(--gc-accent-bg-current);
+  color: var(--gc-ink);
+  cursor: pointer;
+}
+
+.gc-lang-select-wrap:hover {
+  background: var(--gc-accent-bg-nav);
+}
+
+.gc-lang-select-wrap:focus-within {
+  outline: 2px solid var(--gc-accent);
+  outline-offset: 2px;
+}
+
+.gc-lang-select-face {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.35rem 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.gc-lang-select-face::after {
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid currentColor;
+  opacity: 0.75;
+}
+
+/* Gerçek <select> görünmez ama tıklanabilir: dokununca cihazın kendi dil listesi açılır. */
+.gc-lang-select {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  font-size: 16px;
+  border: 0;
+}
+
+.gc-lang-select option {
+  color: #111;
+  background: #fff;
+}
+
+.gc-lang-fallback {
+  margin: 0.25rem 0 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+@media (max-width: 520px) {
+  .gc-lang-select-face {
+    padding: 0.3rem 0.4rem;
+    font-size: 0.72rem;
+  }
+}
+
+.rf-page .section-inner {
+  padding-inline: 1rem;
+}
+
+/* RTL (ar, fa, ur): ekran dışı skip-link sol tarafa taşıp yatay kaydırma oluşturmasın */
+[dir="rtl"] .skip-link {
+  left: auto;
+  right: -9999px;
+}
+
+[dir="rtl"] .skip-link:focus {
+  left: auto;
+  right: 0.75rem;
+}
+
+.rf-page__grid--steps .rf-page__card p {
+  text-align: start;
+}
+
+.rf-lang-hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 0 auto 1.25rem;
+  max-width: 40rem;
+  padding: 0.55rem 0.9rem;
+  border-radius: var(--gc-radius);
+  border: 1px solid var(--gc-border-medium);
+  background: var(--gc-accent-bg-current);
+  font-weight: 700;
+}
+
+.rf-lang-hint[hidden] {
+  display: none;
+}
+
+.rf-lang-hint a {
+  color: var(--gc-ink);
+}
+
+.rf-lang-hint button {
+  background: none;
+  border: 0;
+  color: var(--gc-ink-muted);
+  font-size: 1.25rem;
+  line-height: 1;
+  padding: 0.1rem 0.35rem;
+  cursor: pointer;
+}
+
+.rf-page__list {
+  list-style: none;
+  margin: 0 auto 0.5rem;
+  padding: 0;
+  max-width: 44rem;
+  display: grid;
+  gap: 0.5rem;
+  text-align: start;
+}
+
+.rf-page__list li {
+  position: relative;
+  padding: 0.6rem 0.85rem;
+  padding-inline-start: 2.1rem;
+  background: var(--gc-card-bg);
+  border: 1px solid var(--gc-card-border);
+  border-radius: var(--gc-radius);
+  line-height: 1.5;
+  font-size: 0.92rem;
+}
+
+.rf-page__list li::before {
+  content: "✓";
+  position: absolute;
+  inset-inline-start: 0.8rem;
+  top: 0.6rem;
+  font-weight: 800;
+  color: var(--gc-accent);
+}
+
+.rf-page__card ul {
+  margin: 0;
+  padding-inline-start: 1.1rem;
+  text-align: start;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--gc-ink-muted);
+}
+
+.rf-faq {
+  max-width: 44rem;
+  margin: 0 auto 0.5rem;
+  display: grid;
+  gap: 0.6rem;
+  text-align: start;
+}
+
+.rf-faq__item {
+  background: var(--gc-card-bg);
+  border: 1px solid var(--gc-card-border);
+  border-radius: var(--gc-radius);
+  padding: 0 1rem;
+}
+
+.rf-faq__item summary {
+  cursor: pointer;
+  font-weight: 800;
+  padding: 0.75rem 0;
+  color: var(--gc-ink);
+}
+
+.rf-faq__item[open] summary {
+  color: var(--gc-accent);
+}
+
+.rf-faq__item > div {
+  padding: 0 0 0.9rem;
+  line-height: 1.6;
+  color: var(--gc-ink-muted);
+}
+
+.gc-doc .rf-page__cta {
+  margin-top: 1.5rem;
+}

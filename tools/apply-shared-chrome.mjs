@@ -13,7 +13,7 @@ const ROOT = path.join(__dirname, "..");
 const SKIP_FILES = new Set(["tr/index.html", "en/index.html"]);
 
 /** Tüm HTML’lerde style önbürücüsü (tek tip). */
-const STYLE_QUERY = "global15";
+const STYLE_QUERY = "global16";
 
 /** Google Ads (AW) site-wide tag + ReFollow Play dönüşüm yardımcısı. */
 const GTAG_SNIPPET = `  <!-- Google tag (gtag.js) -->
@@ -497,6 +497,11 @@ function fixBrokenInnerLinks(html, posixFile) {
   return html;
 }
 
+/** 404.html GitHub Pages'te her eksik URL'de (ör. /de/x/y) sunulur — göreli yollar kırılır; hepsi köke sabitlenir. */
+function absolutize404(html) {
+  return html.replace(/\b(href|src)="(?!\/|#|[a-z][a-z0-9+.-]*:)(?:\.\/)?([^"]*)"/gi, (_, attr, p) => `${attr}="/${p}"`);
+}
+
 function walkHtml(dir, out = []) {
   for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
     if (ent.name.startsWith(".")) continue;
@@ -545,7 +550,7 @@ function patch(html, fromFile) {
   }
 
   const headerNew = buildHeader(posixFile, { en, is404, skipHref: "#icerik" });
-  out = out.replace(/<header class="site-header">[\s\S]*?<\/header>/i, headerNew);
+  out = out.replace(/[ \t]*<header class="site-header">[\s\S]*?<\/header>/i, headerNew);
 
   out = out.replace(
     /(<a class="skip-link"[^>]*>)[^<]*(<\/a>)/i,
@@ -553,7 +558,7 @@ function patch(html, fromFile) {
   );
 
   const footerNew = buildFooter(posixFile, en);
-  out = out.replace(/<footer class="site-footer">[\s\S]*?<\/footer>/i, footerNew);
+  out = out.replace(/[ \t]*<footer class="site-footer">[\s\S]*?<\/footer>/i, footerNew);
 
   const ps = parallaxSrc(posixFile);
   if (!out.includes("gc-home-parallax.js")) {
@@ -576,6 +581,7 @@ function patch(html, fromFile) {
   out = ensureSeoForLocalePages(out, posixFile);
   out = ensureNoindexForNonLocale(out, posixFile);
   out = fixBrokenInnerLinks(out, posixFile);
+  if (is404) out = absolutize404(out);
 
   return out;
 }
@@ -586,6 +592,8 @@ function main() {
   for (const abs of files) {
     const rel = posix(path.relative(ROOT, abs));
     const raw = fs.readFileSync(abs, "utf8");
+    /* ReFollow çok dilli sayfaları kendi üreticisine ait (tools/build-refollow-site.mjs). */
+    if (raw.includes('data-gc-generated="refollow"')) continue;
     let next = patch(raw, abs);
     if (!next && raw.includes("style.css")) {
       let minimal = ensureStylesheetVersion(raw);

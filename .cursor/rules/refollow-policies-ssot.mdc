@@ -33,9 +33,11 @@ Politika metni **ReFollow reposunda** (diğer Cursor ekranı) inşa edilir ve g�
 node tools/sync-refollow-policies.mjs
 ```
 
-Akış: ReFollow i18n/links → `pages/refollow/policies/{privacy,terms,support}.html` → `tr/` + `en/` sayfaları → `apply-shared-chrome`.
+Akış: `build-locale-pages` (tr/en hub + sitemap) → `build-refollow-site` (ReFollow ürün + gizlilik/şartlar/destek sayfaları, uygulamadaki **tüm diller**: `tools/refollow-locales.mjs`) → `apply-shared-chrome` (ReFollow sayfalarını atlar; `data-gc-generated="refollow"`).
 
-3. **Çıktı sayfalarına dokunma:** `pages/refollow/policies/*`, `tr|en/pages/refollow/policies/*` her sync'te üzerine yazılır.
+Ürün sayfası ve politika metinleri doğrudan uygulamanın `src/i18n/locales/*.json` dosyalarından okunur. Uygulamada karşılığı olmayan birkaç arayüz metni (menü, SSS soruları, meta başlık): `tools/i18n/messages/refollow-site-ui.mjs`. Uygulamaya yeni dil eklenirse: `refollow-locales.mjs` + `refollow-site-ui.mjs` + `assets/site-path.js` / `assets/lang-boot.js` dil listeleri.
+
+3. **Çıktı sayfalarına dokunma:** `{dil}/refollow/index.html`, `{dil}/pages/refollow/policies/*`, kök `refollow/index.html` ve `pages/refollow/policies/*` (yönlendirme) her sync'te üzerine yazılır.
 4. **İkinci kopya oluşturma:** `pages/refollow/policies-temp/` altında kalıcı hukuk metni tutma.
 5. Kanonik URL'ler sabit:
    - `/{locale}/pages/refollow/policies/privacy.html`
