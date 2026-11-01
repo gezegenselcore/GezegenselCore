@@ -6,6 +6,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { dirname as posixDirname, relative as posixRelative } from "node:path/posix";
+import { langSelectHtml, logicalPathOf, siteUi } from "./site-locales.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
@@ -441,22 +442,11 @@ function buildHeader(fromFile, opts) {
           <span class="gc-lang-switch__sep" aria-hidden="true">|</span>
           <a href="en/index.html#ust">EN</a>
         </div>`;
-  } else if (en) {
-    const trLink = otherLocaleFile(fromFile);
-    const trHref = trLink ? relHref(fromFile, trLink) : "../tr/index.html";
-    langBlock = `        <div class="gc-lang-switch" aria-label="${L.langAria}">
-          <a href="${trHref}">TR</a>
-          <span class="gc-lang-switch__sep" aria-hidden="true">|</span>
-          <span class="gc-lang-switch__current" aria-current="true">EN</span>
-        </div>`;
   } else {
-    const enLink = otherLocaleFile(fromFile);
-    const enHref = enLink ? relHref(fromFile, enLink) : "en/index.html";
-    langBlock = `        <div class="gc-lang-switch" aria-label="${L.langAria}">
-          <span class="gc-lang-switch__current" aria-current="true">TR</span>
-          <span class="gc-lang-switch__sep" aria-hidden="true">|</span>
-          <a href="${enHref}">EN</a>
-        </div>`;
+    /* tr/ ve en/ sayfaları: 12 dilli seçici (tools/site-locales.mjs). */
+    const seg = en ? "en" : "tr";
+    const rel = fromFile.replace(/^(tr|en)\//, "");
+    langBlock = langSelectHtml(seg, logicalPathOf(rel), siteUi(seg).lang);
   }
 
   const skipTarget = is404 ? "#icerik" : opts.skipHref || "#icerik";
@@ -594,6 +584,8 @@ function main() {
     const raw = fs.readFileSync(abs, "utf8");
     /* ReFollow çok dilli sayfaları kendi üreticisine ait (tools/build-refollow-site.mjs). */
     if (raw.includes('data-gc-generated="refollow"')) continue;
+    /* Diğer dillerdeki hub/Anima/Night Swarm sayfaları: tools/build-site-locales.mjs üretir. */
+    if (raw.includes('data-gc-generated="site-locale"')) continue;
     let next = patch(raw, abs);
     if (!next && raw.includes("style.css")) {
       let minimal = ensureStylesheetVersion(raw);

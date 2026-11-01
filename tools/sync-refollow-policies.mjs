@@ -25,4 +25,5 @@ function run(label, script, extra = "") {
 run("Rebuild tr/ and en/ site pages + sitemap", "build-locale-pages.mjs");
 run("Build ReFollow pages in all app languages (read-only SSOT)", "build-refollow-site.mjs", refollowArg);
 run("Apply shared header/footer/theme chrome", "apply-shared-chrome.mjs");
+run("Hub/Anima/Night Swarm pages in all 12 site languages", "build-site-locales.mjs", refollowArg);
 console.log("\nReFollow pages synced from D:\\GezegenselCore\\ReFollow");

@@ -23,4 +23,5 @@ function run(label, script, extra = "") {
 run("Import from Anima/legal-public (read-only SSOT)", "import-anima-legal-content.mjs", animaArg);
 run("Rebuild tr/ and en/ locale pages", "build-locale-pages.mjs");
 run("Apply shared header/footer/theme chrome", "apply-shared-chrome.mjs");
+run("Hub/Anima/Night Swarm pages in all 12 site languages", "build-site-locales.mjs");
 console.log("\nAnima policies synced from D:\\GezegenselCore\\Anima\\legal-public");

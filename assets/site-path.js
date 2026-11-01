@@ -1,8 +1,8 @@
 /**
  * GezegenselCore — path tabanlı dil.
- *  - Site geneli (anasayfa, Anima, Night Swarm, site gizlilik/destek): tr | en
- *  - ReFollow sayfaları (/{dil}/refollow/, /{dil}/pages/refollow/…): uygulamadaki tüm diller
- * Bir dilde olmayan sayfa istenirse EN'e düşer (ör. /de/index.html → /en/index.html).
+ *  - Tüm sayfalar 12 dilde yayında (tools/site-locales.mjs):
+ *    ReFollow sayfaları her dilde gerçek çeviri; hub/Anima/Night Swarm tr/en dışında gövde İngilizce.
+ * Listede olmayan dil öneki (eski /it/ gibi) EN'e düşer.
  * Depolama: localStorage "gezegensel-lang" (son dil), "gezegensel-lang-explicit" (kullanıcı elle seçti).
  */
 (function (global) {
@@ -19,9 +19,10 @@
     return "https://gezegenselcore.com";
   }
   var ORIGIN = runtimeOrigin();
-  var SITE_LOCALES = ["tr", "en"];
   /* tools/refollow-locales.mjs ile aynı sıra */
   var REFOLLOW_LOCALES = ["tr", "en", "pt-br", "es", "de", "fr", "ar", "hi", "bn", "fa", "ne", "ur"];
+  /* Hub, Anima, Night Swarm, site gizlilik/destek: aynı 12 dil (tools/build-site-locales.mjs) */
+  var SITE_LOCALES = REFOLLOW_LOCALES.slice();
   /** Artık yayınlanmayan eski önekler — yalnızca yönlendirme. */
   var LEGACY_LOCALE_PREFIXES = ["it"];
   var STORAGE_KEY = "gezegensel-lang";
@@ -158,7 +159,7 @@
     } catch (e) {}
   }
 
-  /** URL dili kaynak. Yalnızca-ReFollow dili seçmiş kullanıcı TR/EN hub sayfasına girince tercihi silinmez. */
+  /** URL dili kaynak; kayıtlı tercih o sayfanın dillerinden biriyse güncellenir. */
   function rememberPathLocale() {
     try {
       var pathSeg = getLocaleSegmentFromPathname(pathnameNoQuery());

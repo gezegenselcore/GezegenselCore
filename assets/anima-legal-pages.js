@@ -1,22 +1,29 @@
 /**
  * ANIMA kanonik hukuk / destek HTML sayfaları — Anima uygulamasıyla aynı dil kodları.
- * Tam metin yalnızca TR ve EN; diğer seçimlerde içerik EN + yerelleştirilmiş kısa uyarı.
+ * Tam metin yalnızca TR ve EN; diğer 10 site dilinde içerik EN + kısa uyarı (varsa yerel, yoksa İngilizce).
  * /{locale}/… URL'lerinde dil düğmesi aynı sayfanın başka dil yoluna gider (site-path).
  */
 (function () {
   var STORAGE_KEY = "gezegensel-lang";
-  var LOCALES = ["tr", "en", "de", "fr", "es", "it", "pt-br", "ar"];
-  var PICKER_LABELS = { tr: "Dil", en: "Language", de: "Sprache", fr: "Langue", es: "Idioma", it: "Lingua", "pt-br": "Idioma", ar: "اللغة" };
-  var BTN_SHORT = { tr: "TR", en: "EN", de: "DE", fr: "FR", es: "ES", it: "IT", "pt-br": "PT", ar: "AR" };
+  /* tools/refollow-locales.mjs ile aynı 12 dil */
+  var LOCALES = ["tr", "en", "pt-br", "es", "de", "fr", "ar", "hi", "bn", "fa", "ne", "ur"];
+  var RTL = ["ar", "fa", "ur"];
+  var PICKER_LABELS = { tr: "Dil", en: "Language", de: "Sprache", fr: "Langue", es: "Idioma", "pt-br": "Idioma", ar: "اللغة" };
+  var BTN_SHORT = { tr: "TR", en: "EN", de: "DE", fr: "FR", es: "ES", "pt-br": "PT", ar: "AR", hi: "HI", bn: "BN", fa: "FA", ne: "NE", ur: "UR" };
+  var EN_ONLY = "The full legal text is shown in English.";
   var FALLBACK_BANNER = {
     tr: "",
     en: "",
     de: "Der vollständige Rechtstext erscheint auf Englisch.",
     fr: "Le texte juridique complet est en anglais.",
     es: "El texto legal completo está en inglés.",
-    it: "Il testo legale completo è in inglese.",
     "pt-br": "O texto legal completo está em inglês.",
     ar: "النص القانوني الكامل معروض بالإنجليزية.",
+    hi: EN_ONLY,
+    bn: EN_ONLY,
+    fa: EN_ONLY,
+    ne: EN_ONLY,
+    ur: EN_ONLY,
   };
 
   function normalize(v) {
@@ -70,9 +77,9 @@
     return ui;
   }
 
-  /** Arapça sayfa kabuğu RTL; hukuk gövdesi (TR/EN) satır içi okunabilirlik için LTR. */
+  /** RTL dillerde (ar, fa, ur) sayfa kabuğu RTL; hukuk gövdesi (TR/EN) okunabilirlik için LTR. */
   function setDir(ui) {
-    var rtl = ui === "ar";
+    var rtl = RTL.indexOf(ui) >= 0;
     document.documentElement.dir = rtl ? "rtl" : "ltr";
     ["anima-block-tr", "anima-block-en"].forEach(function (id) {
       var el = document.getElementById(id);

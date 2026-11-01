@@ -1,6 +1,7 @@
 /**
- * ReFollow web sayfalarının dilleri — uygulamadaki dillerle birebir (ReFollow/src/i18n/locales/*.json).
- * Site hub'ı (anasayfa, Anima, Night Swarm) yalnızca tr/en; ReFollow sayfaları bu listenin tamamı.
+ * Sitenin dilleri — uygulamadaki dillerle birebir (ReFollow/src/i18n/locales/*.json).
+ * ReFollow sayfaları bu listenin tamamında gerçek çeviriyle; hub/Anima/Night Swarm sayfaları da
+ * bu 12 dilde yayında (tr/en dışında gövde İngilizce — tools/site-locales.mjs).
  *
  * seg      → URL ilk segmenti (küçük harf)
  * app      → uygulama locale dosyası
@@ -21,7 +22,8 @@ export const REFOLLOW_LOCALES = [
   { seg: "ur", app: "ur", hreflang: "ur", name: "اردو", dir: "rtl" },
 ];
 
-export const SITE_LOCALES = ["tr", "en"];
+/** Site sayfalarının yayınlandığı tüm URL dilleri (hub, Anima, Night Swarm dahil). */
+export const SITE_LOCALES = REFOLLOW_LOCALES.map((l) => l.seg);
 
 /** ReFollow mantıksal yolları (dil öneki olmadan). */
 export const REFOLLOW_LOGICAL_PATHS = [
