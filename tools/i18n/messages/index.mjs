@@ -7,8 +7,8 @@ export const INDEX = {
     "GezegenselCore — Anima & ReFollow"
   ),
   "index.meta_description": L(
-    "GezegenselCore — Anima (yapay zekâ wellness) ve ReFollow (Instagram içgörüleri). Bağımsız stüdyo.",
-    "GezegenselCore — Anima (AI wellness) and ReFollow (Instagram insights). Independent studio."
+    "GezegenselCore — Anima (uyku sesleri, beyaz gürültü ve odak) ve ReFollow (Instagram içgörüleri). Bağımsız stüdyo.",
+    "GezegenselCore — Anima (sleep sounds, white noise & focus) and ReFollow (Instagram insights). Independent studio."
   ),
   "index.nav_about": L(
     "Hakkında",
@@ -103,8 +103,8 @@ export const INDEX = {
     "Featured product"
   ),
   "index.apps_aura_desc": L(
-    "Gününüzü tek ekranda toparlar: günlük özet, isteğe bağlı sağlık verisi ve yapay zekâ rehberi — tıbbi teşhis yerine geçmez.",
-    "One place to make sense of your day: daily summaries, optional health context, and an AI guide—not a substitute for medical care."
+    "Doğa ve ev sesleri, 8 gürültü rengi, müzik ve beyin dalgası modlarını 5 katmanlı karıştırıcı, uyku zamanlayıcı ve programlarla birleştirir — tıbbi teşhis yerine geçmez.",
+    "Blends nature and home sounds, 8 colored noises, music, and brainwave modes in a 5-layer mixer with a sleep timer and guided programs—not a substitute for medical care."
   ),
   "index.apps_play": L(
     "Google Play'den indir",
@@ -167,8 +167,8 @@ export const INDEX = {
     "Download"
   ),
   "index.aura_tagline": L(
-    "Günlük wellness ve yapay zekâ rehberliği",
-    "Daily wellness & AI-guided coaching"
+    "Uyku sesleri, beyaz gürültü ve odak",
+    "Sleep sounds, white noise & focus"
   ),
   "index.policies_email_label": L(
     "E-posta:",

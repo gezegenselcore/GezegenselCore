@@ -1,6 +1,6 @@
 # GezegenselCore
 
-> GezegenselCore is an independent mobile app studio. Its apps are published on Google Play: ReFollow (Instagram follower analysis without a password), Anima (AI-assisted daily summaries) and Night Swarm (survivor-style action game).
+> GezegenselCore is an independent mobile app studio. Its apps are published on Google Play: ReFollow (Instagram follower analysis without a password), Anima (sleep sounds, white noise, brainwave tones & focus) and Night Swarm (survivor-style action game).
 
 Contact: support@gezegenselcore.com
 
@@ -35,11 +35,12 @@ Google Play: https://play.google.com/store/apps/details?id=com.refollow.app
 - [Terms of use](https://gezegenselcore.com/en/pages/refollow/policies/terms.html)
 - [Support and export help](https://gezegenselcore.com/en/pages/refollow/policies/support.html)
 
-## Anima
+## Anima — sleep sounds, white noise & focus
 
-AI-assisted daily summaries and data-informed suggestions, with privacy on device.
+Anima is a sound and sleep app that blends 37 nature, water, home, baby, and instrument sounds, 8 calibrated noise colors (white, pink, brown, deep brown, green, blue, violet, grey), 25 music tracks, and 7 brainwave modes (binaural beats and headphone-free isochronic tones) up to 5 layers in a single mixer. Includes a sleep timer with 60-second fade-out, Gentle Alarm, 7- and 14-day guided programs, breathing exercises, morning/evening routines, Anima Academy, and optional on-device read-only Health Connect sleep duration. Offline audio playback, no ads, privacy-first on device.
 
-- [Anima](https://gezegenselcore.com/en/anima/)
+- [Anima (English)](https://gezegenselcore.com/en/anima/)
+- [Anima (Türkçe)](https://gezegenselcore.com/tr/anima/)
 - [Google Play](https://play.google.com/store/apps/details?id=com.gezegenselcore.aura)
 
 ## Night Swarm

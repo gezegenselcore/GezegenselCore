@@ -74,8 +74,8 @@ export const SUPPORT = {
     "Anima"
   ),
   "support.aura_p1": L(
-    "<strong>Anima</strong>, kişisel içgörü ve wellness odaklı bir dijital asistandır. Tıbbi teşhis veya tedavi sunmaz; içerikler bilgilendirme ve destek amaçlıdır. Acil durumlarda yerel acil servislerle iletişime geçin. Hesap, gizlilik veya destek için yalnızca aşağıdaki <strong>kanonik</strong> adresler kullanılır (uygulama ve mağazalar bu URL’leri referans alır):",
-    "<strong>Anima</strong> is a personal insight and wellness-focused digital assistant. It does not provide medical diagnosis or treatment; content is for information and support only. In an emergency, contact your local emergency services. For account, privacy, or support, use only these <strong>canonical</strong> URLs (the app and stores reference the same links):"
+    "<strong>Anima</strong>, uyku, odak ve sakinlik için sesler, gürültü renkleri, beyin dalgası modları ve rehberli programlar sunan bir ses uygulamasıdır. Tıbbi teşhis veya tedavi sunmaz; içerikler bilgilendirme ve destek amaçlıdır. Acil durumlarda yerel acil servislerle iletişime geçin. Hesap, gizlilik veya destek için yalnızca aşağıdaki <strong>kanonik</strong> adresler kullanılır (uygulama ve mağazalar bu URL’leri referans alır):",
+    "<strong>Anima</strong> is a sound app offering nature and home sounds, colored noise, brainwave modes, and guided journeys for sleep, focus, and calm. It does not provide medical diagnosis or treatment; content is for information and support only. In an emergency, contact your local emergency services. For account, privacy, or support, use only these <strong>canonical</strong> URLs (the app and stores reference the same links):"
   ),
   "support.link_aura_support": L(
     "Anima — Destek",
