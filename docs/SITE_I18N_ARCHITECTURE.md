@@ -1,11 +1,13 @@
 # Site i18n mimarisi
 
+> **2026-11-01 güncel durum:** Tüm site 12 dilde — bkz. `docs/SITE_MULTILANG.md`. Aşağıdaki "Özet" ve sonrası tr/en kaynak sayfaların nasıl üretildiğini anlatır; tr/en dışındaki diller bu sayfalardan `build-site-locales.mjs` ile türetilir. Dil seçici artık her sayfada 12 dilli `🌐 XX ▾` (eski TR | EN düğmeleri kaldırıldı).
+
 ## ReFollow sayfaları — uygulamadaki tüm diller (2026-11)
 
 - Diller: `tools/refollow-locales.mjs` (tr, en, pt-br, es, de, fr, ar, hi, bn, fa, ne, ur). RTL: ar, fa, ur.
 - Üretici: `node tools/build-refollow-site.mjs` (veya `node tools/sync-refollow-policies.mjs`). Metinler ReFollow reposundaki locale JSON'larından; SSS + JSON-LD (`MobileApplication`, `FAQPage`) ürün sayfasında.
 - Dil seçimi: başlıkta `🌐 XX ▾` (yerel `<select>`); seçim `localStorage` ile hatırlanır. Dil öneki olmayan girişler (`/refollow/`, `/refollow-policies/*.html`, uygulama içi politika linkleri) tarayıcı diline yönlendirir. Dilli bir sayfa tarayıcı dilinden farklıysa yönlendirme yerine "bu sayfayı X dilinde görüntüle" önerisi (`assets/refollow-lang-hint.js`).
-- Hub sayfaları (anasayfa, Anima, Night Swarm, site gizlilik/destek) tr/en kalır; başka dil öneki istenirse EN'e düşer (`assets/site-path.js`).
+- Hub sayfaları (anasayfa, Anima, Night Swarm, site gizlilik/destek) de 12 dilde yayında: tr/en gerçek çeviri, diğer dillerde çerçeve yerel + gövde İngilizce (`tools/build-site-locales.mjs`). Ayrıntı: `docs/SITE_MULTILANG.md`.
 - Yapay zeka/arama için kökte `llms.txt`.
 
 ## Özet

@@ -1,6 +1,6 @@
 # ReFollow web sayfaları — çok dilli yapı (2026-11-01)
 
-ReFollow'un web sayfaları (ürün sayfası, gizlilik, kullanım şartları, destek) uygulamadaki **12 dilin hepsinde** yayında. Sitenin geri kalanı (anasayfa, Anima, Night Swarm, site gizlilik/destek) **tr/en** olarak kalıyor.
+ReFollow'un web sayfaları (ürün sayfası, gizlilik, kullanım şartları, destek) uygulamadaki **12 dilin hepsinde** yayında. Sitenin geri kalanı da 2026-11-01'den beri 12 dilde (tr/en dışında gövde İngilizce) — bkz. `docs/SITE_MULTILANG.md`.
 
 ## Neden
 
