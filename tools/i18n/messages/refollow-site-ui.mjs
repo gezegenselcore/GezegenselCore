@@ -19,6 +19,7 @@ export const REFOLLOW_SITE_UI = {
     metaDesc:
       "ReFollow, Instagram'ın resmi veri dışa aktarma dosyasını (JSON/ZIP) telefonunda analiz eder. Giriş yok, şifre yok. Seni takip etmeyenleri, hayranlarını, karşılıklı takipleri ve değişiklikleri gör.",
     faqTitle: "Sık sorulan sorular",
+    risksTitle: "Şifre isteyen uygulamaların riskleri",
     q1: "Instagram'da beni takip etmeyenleri şifremi vermeden nasıl görebilirim?",
     q2: "ReFollow güvenli mi?",
     q3: "Instagram verilerimi nasıl indiririm?",
@@ -43,6 +44,7 @@ export const REFOLLOW_SITE_UI = {
     metaDesc:
       "ReFollow analyzes Instagram's official data export (JSON/ZIP) on your phone. No login, no password. See who doesn't follow you back, fans, mutual follows and changes.",
     faqTitle: "Frequently asked questions",
+    risksTitle: "Risks of apps that ask for your password",
     q1: "How can I see who doesn't follow me back on Instagram without giving my password?",
     q2: "Is ReFollow safe?",
     q3: "How do I download my Instagram data?",
@@ -67,6 +69,7 @@ export const REFOLLOW_SITE_UI = {
     metaDesc:
       "O ReFollow analisa no seu celular o arquivo oficial de exportação de dados do Instagram (JSON/ZIP). Sem login, sem senha. Veja quem não te segue de volta, fãs, seguidores mútuos e mudanças.",
     faqTitle: "Perguntas frequentes",
+    risksTitle: "Riscos dos apps que pedem sua senha",
     q1: "Como ver quem não me segue de volta no Instagram sem informar minha senha?",
     q2: "O ReFollow é seguro?",
     q3: "Como baixo meus dados do Instagram?",
@@ -91,6 +94,7 @@ export const REFOLLOW_SITE_UI = {
     metaDesc:
       "ReFollow analiza en tu teléfono el archivo oficial de exportación de datos de Instagram (JSON/ZIP). Sin inicio de sesión ni contraseña. Descubre quién no te sigue, tus fans, seguidores mutuos y cambios.",
     faqTitle: "Preguntas frecuentes",
+    risksTitle: "Riesgos de las apps que piden tu contraseña",
     q1: "¿Cómo puedo ver quién no me sigue en Instagram sin dar mi contraseña?",
     q2: "¿Es seguro ReFollow?",
     q3: "¿Cómo descargo mis datos de Instagram?",
@@ -115,6 +119,7 @@ export const REFOLLOW_SITE_UI = {
     metaDesc:
       "ReFollow analysiert den offiziellen Instagram-Datenexport (JSON/ZIP) direkt auf Ihrem Smartphone. Kein Login, kein Passwort. Sehen Sie, wer Ihnen nicht zurückfolgt, Fans, gegenseitige Follows und Änderungen.",
     faqTitle: "Häufige Fragen",
+    risksTitle: "Risiken von Apps, die dein Passwort verlangen",
     q1: "Wie sehe ich, wer mir auf Instagram nicht zurückfolgt, ohne mein Passwort anzugeben?",
     q2: "Ist ReFollow sicher?",
     q3: "Wie lade ich meine Instagram-Daten herunter?",
@@ -139,6 +144,7 @@ export const REFOLLOW_SITE_UI = {
     metaDesc:
       "ReFollow analyse sur votre téléphone l'export officiel de vos données Instagram (JSON/ZIP). Sans connexion ni mot de passe. Voyez qui ne vous suit pas en retour, vos fans, les abonnements mutuels et les changements.",
     faqTitle: "Questions fréquentes",
+    risksTitle: "Les risques des applis qui demandent ton mot de passe",
     q1: "Comment voir qui ne me suit pas en retour sur Instagram sans donner mon mot de passe ?",
     q2: "ReFollow est-il sûr ?",
     q3: "Comment télécharger mes données Instagram ?",
@@ -163,6 +169,7 @@ export const REFOLLOW_SITE_UI = {
     metaDesc:
       "يحلّل ReFollow ملف تصدير بيانات إنستغرام الرسمي (JSON/ZIP) على هاتفك. لا تسجيل دخول ولا كلمة مرور. اعرف من لا يتابعك، والمعجبين، والمتابعات المتبادلة والتغييرات.",
     faqTitle: "الأسئلة الشائعة",
+    risksTitle: "مخاطر التطبيقات التي تطلب كلمة المرور",
     q1: "كيف أعرف من لا يتابعني على إنستغرام دون إعطاء كلمة المرور؟",
     q2: "هل ReFollow آمن؟",
     q3: "كيف أنزّل بياناتي من إنستغرام؟",
@@ -187,6 +194,7 @@ export const REFOLLOW_SITE_UI = {
     metaDesc:
       "ReFollow आपके फ़ोन पर Instagram के आधिकारिक डेटा एक्सपोर्ट (JSON/ZIP) का विश्लेषण करता है। न लॉगिन, न पासवर्ड। देखें कौन आपको फ़ॉलो बैक नहीं करता, फ़ैन, आपसी फ़ॉलो और बदलाव।",
     faqTitle: "अक्सर पूछे जाने वाले सवाल",
+    risksTitle: "पासवर्ड माँगने वाले ऐप्स के खतरे",
     q1: "पासवर्ड दिए बिना Instagram पर कौन मुझे फ़ॉलो बैक नहीं करता, यह कैसे देखें?",
     q2: "क्या ReFollow सुरक्षित है?",
     q3: "मैं अपना Instagram डेटा कैसे डाउनलोड करूँ?",
@@ -211,6 +219,7 @@ export const REFOLLOW_SITE_UI = {
     metaDesc:
       "ReFollow আপনার ফোনেই Instagram-এর অফিসিয়াল ডেটা এক্সপোর্ট (JSON/ZIP) বিশ্লেষণ করে। লগইন নেই, পাসওয়ার্ড নেই। দেখুন কে আপনাকে ফলো ব্যাক করে না, ফ্যান, পারস্পরিক ফলো এবং পরিবর্তন।",
     faqTitle: "সাধারণ প্রশ্ন",
+    risksTitle: "পাসওয়ার্ড চাওয়া অ্যাপের ঝুঁকি",
     q1: "পাসওয়ার্ড না দিয়ে Instagram-এ কে আমাকে ফলো ব্যাক করে না তা কীভাবে দেখব?",
     q2: "ReFollow কি নিরাপদ?",
     q3: "আমার Instagram ডেটা কীভাবে ডাউনলোড করব?",
@@ -235,6 +244,7 @@ export const REFOLLOW_SITE_UI = {
     metaDesc:
       "ReFollow فایل رسمی خروجی داده‌های اینستاگرام (JSON/ZIP) را روی گوشی شما تحلیل می‌کند. بدون ورود، بدون رمز عبور. ببینید چه کسی شما را فالو بک نمی‌کند، طرفداران، فالوهای متقابل و تغییرات.",
     faqTitle: "پرسش‌های متداول",
+    risksTitle: "خطرات اپ‌هایی که رمز عبور می‌خواهند",
     q1: "چطور بدون دادن رمز عبور ببینم چه کسی در اینستاگرام مرا فالو بک نمی‌کند؟",
     q2: "آیا ReFollow امن است؟",
     q3: "چطور داده‌های اینستاگرامم را دانلود کنم؟",
@@ -259,6 +269,7 @@ export const REFOLLOW_SITE_UI = {
     metaDesc:
       "ReFollow ले तपाईंको फोनमै Instagram को आधिकारिक डेटा निर्यात (JSON/ZIP) विश्लेषण गर्छ। लगइन छैन, पासवर्ड छैन। कसले फलो ब्याक गर्दैन, फ्यानहरू, आपसी फलो र परिवर्तनहरू हेर्नुहोस्।",
     faqTitle: "बारम्बार सोधिने प्रश्नहरू",
+    risksTitle: "पासवर्ड माग्ने एपहरूका जोखिम",
     q1: "पासवर्ड नदिई Instagram मा कसले मलाई फलो ब्याक गर्दैन भनेर कसरी हेर्ने?",
     q2: "के ReFollow सुरक्षित छ?",
     q3: "मेरो Instagram डेटा कसरी डाउनलोड गर्ने?",
@@ -283,6 +294,7 @@ export const REFOLLOW_SITE_UI = {
     metaDesc:
       "ReFollow آپ کے فون پر Instagram کی آفیشل ڈیٹا ایکسپورٹ فائل (JSON/ZIP) کا تجزیہ کرتا ہے۔ نہ لاگ ان، نہ پاس ورڈ۔ دیکھیں کون فالو بیک نہیں کرتا، فینز، باہمی فالوز اور تبدیلیاں۔",
     faqTitle: "اکثر پوچھے جانے والے سوالات",
+    risksTitle: "پاس ورڈ مانگنے والی ایپس کے خطرات",
     q1: "پاس ورڈ دیے بغیر Instagram پر کون مجھے فالو بیک نہیں کرتا، یہ کیسے دیکھوں؟",
     q2: "کیا ReFollow محفوظ ہے؟",
     q3: "میں اپنا Instagram ڈیٹا کیسے ڈاؤن لوڈ کروں؟",

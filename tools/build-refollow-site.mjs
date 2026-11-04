@@ -451,7 +451,7 @@ ${card("✨", t("home.analyze"), `<p>${rich(t("about.howToUseFooter"))}</p>`)}
 ${card("⚠️", t("launchInfo.passwordAppsTitle"), `<p>${rich(t("launchInfo.passwordAppsBody"))}</p>`)}
 ${card(
   "🚨",
-  t("launchInfo.risksTitle"),
+  ui.risksTitle, // uygulamadaki "Riskler" başlığı sitede ReFollow'un riski gibi okunuyordu
   `<ul>\n${["launchInfo.risk1", "launchInfo.risk2", "launchInfo.risk3"]
     .map((k) => `              <li>${rich(t(k))}</li>`)
     .join("\n")}\n            </ul>`
