@@ -316,9 +316,16 @@ function playButton(ui, play) {
 
 /* ---------- SSS ---------- */
 
+/** Play mağaza metni v5 (2026-11-04) — sitede yalnızca bununla çelişen satırları düzeltmek için. */
+function storeListing(loc) {
+  const sl = REFOLLOW_STORE_LISTING[loc.seg];
+  if (!sl) throw new Error(`REFOLLOW_STORE_LISTING missing for ${loc.seg}`);
+  return sl;
+}
+
 function faqItems(app, ui, sl) {
   return [
-    { q: ui.q1, a: sl.intro },
+    { q: ui.q1, a: get(app, "about.whatIsText") },
     {
       q: ui.q2,
       a: `${get(app, "launchInfo.differenceBody")}\n\n${get(app, "welcome.welcomeTrustLine1")} ${get(app, "welcome.welcomeNoteLocal")}`,
@@ -328,6 +335,7 @@ function faqItems(app, ui, sl) {
       a: `${get(app, "home.zipCreateSteps")}\n${get(app, "home.zipDownloadSteps")}\n\n${get(app, "home.uploadFileHintHowToBold")}`,
     },
     { q: ui.q4, a: `${get(app, "import.htmlHelpBody")}\n\n${get(app, "import.htmlHelpStep2")}` },
+    // Uygulamadaki eski metin ("bazı bölümler için ödüllü reklam") güncel değil → mağaza metni v5
     { q: ui.q5, a: `${sl.freeNote}\n\n${sl.proNote}` },
   ];
 }
@@ -345,12 +353,34 @@ ${indent}</details>`
 
 /* ---------- ürün sayfası ---------- */
 
-/** Play mağaza metni v5 (Ücretsiz / Pro listeleri, giriş, gizlilik) — uygulamadaki eski "Hakkında" listesi yerine. */
-function storeListing(loc) {
-  const sl = REFOLLOW_STORE_LISTING[loc.seg];
-  if (!sl) throw new Error(`REFOLLOW_STORE_LISTING missing for ${loc.seg}`);
-  return sl;
+const FEATURE_KEYS = Array.from({ length: 16 }, (_, i) => `about.featuresItem${i + 1}`);
+/**
+ * Uygulamanın "Hakkında" listesi + mağaza metni v5 ile çelişen maddelerin düzeltmesi:
+ *  2 Fans ve 3 Karşılıklı ücretsizde kilitli → (Pro)
+ *  15 ücretsiz/reklam açıklaması → v5 ücretsiz notu
+ *  16 takip istekleri → gelenler ücretsiz, gönderilen/bekleyenler Pro
+ */
+function featureList(app, sl, lang) {
+  const items = FEATURE_KEYS.map((k) => get(app, k));
+  const pro = (x) => (/\bPro\b/.test(x) ? x : /\)$/.test(x) ? x.replace(/\)$/, `${["ar", "fa", "ur"].includes(lang) ? "،" : ","} Pro)`) : `${x} (Pro)`);
+  const lower1 = (x) => x.charAt(0).toLocaleLowerCase(lang) + x.slice(1);
+  items[1] = pro(items[1]);
+  items[2] = pro(items[2]);
+  items[14] = sl.freeNote;
+  items[15] = `${sl.free[1]}; ${lower1(sl.pro[4])} (Pro)`;
+  return items;
 }
+
+const PRO_FEATURES = [
+  ["fullNfbList", "👤"],
+  ["changes", "📈"],
+  ["history", "🗂️"],
+  ["multiAccount", "👥"],
+  ["csvExport", "📄"],
+  ["encryptedBackup", "🔐"],
+  ["pdfReport", "🧾"],
+  ["noAds", "✨"],
+];
 
 function productPage(loc, app, ui, ctx) {
   const logical = "/refollow/";
@@ -358,7 +388,7 @@ function productPage(loc, app, ui, ctx) {
   const policy = (name) => `/${loc.seg}/pages/refollow/policies/${name}.html`;
   const sl = storeListing(loc);
   const faq = faqItems(app, ui, sl);
-  const features = [...sl.free, ...sl.pro];
+  const features = featureList(app, sl, loc.hreflang);
   const canonical = pageUrl(loc.seg, logical);
 
   const video =
@@ -386,8 +416,7 @@ function productPage(loc, app, ui, ctx) {
         <div class="rf-page__cta">
           ${playButton(ui, ctx.play)}
         </div>
-        <p class="rf-page__prose"><strong>${esc(sl.tagline)}</strong></p>
-        <p class="rf-page__prose">${rich(sl.intro)}</p>
+        <p class="rf-page__prose">${rich(t("about.whatIsText"))}</p>
         <ul class="rf-page__grid">
 ${card("🔑", "", `<p>${rich(t("welcome.welcomeTrustLine1"))}</p>`)}
 ${card("📦", "", `<p>${rich(t("welcome.welcomeTrustLine2"))}</p>`)}
@@ -395,17 +424,18 @@ ${card("📱", "", `<p>${rich(t("welcome.welcomeTrustLine3"))}</p>`)}
 ${card("🚫", "", `<p>${rich(t("welcome.welcomeNoteLocal"))}</p>`)}
         </ul>
 
-        <h2 class="rf-page__heading">${esc(sl.freeTitle)}</h2>
+        <h2 class="rf-page__heading">${esc(t("about.featuresTitle"))}</h2>
         <ul class="rf-page__list">
-${sl.free.map((f) => `          <li>${esc(f)}</li>`).join("\n")}
+${features.map((f) => `          <li>${rich(f)}</li>`).join("\n")}
         </ul>
-        <p class="rf-page__note">${esc(sl.freeNote)}</p>
 
-        <h2 class="rf-page__heading">${esc(sl.proTitle)}</h2>
-        <ul class="rf-page__list">
-${sl.pro.map((f) => `          <li>${esc(f)}</li>`).join("\n")}
+        <h2 class="rf-page__heading">${esc(t("premium.proCardTitle"))}</h2>
+        <p class="rf-page__prose">${rich(t("premium.upgradeSubtitle"))}</p>
+        <ul class="rf-page__grid">
+${PRO_FEATURES.map(([k, e]) =>
+  card(e, t(`premium.proFeatures.${k}.title`), `<p>${rich(t(`premium.proFeatures.${k}.desc`))}</p>`)
+).join("\n")}
         </ul>
-        <p class="rf-page__note">${esc(sl.proNote)}</p>
 
         <h2 class="rf-page__heading">${esc(t("about.howToUseTitle"))}</h2>
         <ol class="rf-page__grid rf-page__grid--steps">
@@ -431,7 +461,7 @@ ${card("⏱️", "", `<p>${rich(t("launchInfo.footer"))}</p>`)}
         </ul>
 
         <h2 class="rf-page__heading">${esc(t("about.privacyTitle"))}</h2>
-        <p class="rf-page__prose">${esc(sl.privacy)}</p>
+        <p class="rf-page__prose">${rich(t("about.privacyText"))}</p>
 
         <h2 class="rf-page__heading" id="faq">${esc(ui.faqTitle)}</h2>
         <div class="rf-faq">
@@ -463,7 +493,7 @@ ${faqHtml(faq, "          ")}
         alternateName: "ReFollow Unfollowers",
         operatingSystem: "Android",
         applicationCategory: "UtilitiesApplication",
-        description: sl.intro,
+        description: t("about.whatIsText"),
         url: canonical,
         installUrl: ctx.play,
         downloadUrl: ctx.play,
@@ -479,7 +509,7 @@ ${faqHtml(faq, "          ")}
         "@id": `${canonical}#webpage`,
         url: canonical,
         name: ui.metaTitle,
-        description: sl.tagline,
+        description: ui.metaDesc,
         inLanguage: loc.hreflang,
         about: { "@id": `${ORIGIN}/#refollow-app` },
       },
@@ -505,7 +535,7 @@ ${faqHtml(faq, "          ")}
     loc,
     logical,
     title: ui.metaTitle,
-    description: sl.tagline,
+    description: ui.metaDesc,
     styleQuery: ctx.styleQuery,
     jsonLd,
     ui,
@@ -550,7 +580,7 @@ ${others}
     loc,
     logical,
     title: `ReFollow — ${pageTitle} | GezegenselCore`,
-    description: `ReFollow — ${pageTitle}. ${storeListing(loc).tagline}`,
+    description: `ReFollow — ${pageTitle}. ${ui.metaDesc}`,
     styleQuery: ctx.styleQuery,
     jsonLd: null,
     ui,
