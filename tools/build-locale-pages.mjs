@@ -246,6 +246,8 @@ function rootIndexRedirect() {
 
 const SITEMAP_LOGICAL_PATHS = [
   "/index.html",
+  "/anima/",
+  "/night-swarm/",
   "/privacy.html",
   "/support.html",
   "/anima/privacy-policy.html",
