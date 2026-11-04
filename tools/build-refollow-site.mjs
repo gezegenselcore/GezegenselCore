@@ -21,6 +21,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { REFOLLOW_LOCALES, SITE_LOCALES } from "./refollow-locales.mjs";
 import { REFOLLOW_SITE_UI } from "./i18n/messages/refollow-site-ui.mjs";
+import { REFOLLOW_STORE_LISTING } from "./i18n/messages/refollow-store-listing.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
@@ -315,9 +316,9 @@ function playButton(ui, play) {
 
 /* ---------- SSS ---------- */
 
-function faqItems(app, ui) {
+function faqItems(app, ui, sl) {
   return [
-    { q: ui.q1, a: get(app, "about.whatIsText") },
+    { q: ui.q1, a: sl.intro },
     {
       q: ui.q2,
       a: `${get(app, "launchInfo.differenceBody")}\n\n${get(app, "welcome.welcomeTrustLine1")} ${get(app, "welcome.welcomeNoteLocal")}`,
@@ -327,7 +328,7 @@ function faqItems(app, ui) {
       a: `${get(app, "home.zipCreateSteps")}\n${get(app, "home.zipDownloadSteps")}\n\n${get(app, "home.uploadFileHintHowToBold")}`,
     },
     { q: ui.q4, a: `${get(app, "import.htmlHelpBody")}\n\n${get(app, "import.htmlHelpStep2")}` },
-    { q: ui.q5, a: get(app, "about.featuresItem15") },
+    { q: ui.q5, a: `${sl.freeNote}\n\n${sl.proNote}` },
   ];
 }
 
@@ -344,24 +345,20 @@ ${indent}</details>`
 
 /* ---------- ürün sayfası ---------- */
 
-const FEATURE_KEYS = Array.from({ length: 16 }, (_, i) => `about.featuresItem${i + 1}`);
-const PRO_FEATURES = [
-  ["fullNfbList", "👤"],
-  ["changes", "📈"],
-  ["history", "🗂️"],
-  ["multiAccount", "👥"],
-  ["csvExport", "📄"],
-  ["encryptedBackup", "🔐"],
-  ["pdfReport", "🧾"],
-  ["noAds", "✨"],
-];
+/** Play mağaza metni v5 (Ücretsiz / Pro listeleri, giriş, gizlilik) — uygulamadaki eski "Hakkında" listesi yerine. */
+function storeListing(loc) {
+  const sl = REFOLLOW_STORE_LISTING[loc.seg];
+  if (!sl) throw new Error(`REFOLLOW_STORE_LISTING missing for ${loc.seg}`);
+  return sl;
+}
 
 function productPage(loc, app, ui, ctx) {
   const logical = "/refollow/";
   const t = (k) => get(app, k);
   const policy = (name) => `/${loc.seg}/pages/refollow/policies/${name}.html`;
-  const faq = faqItems(app, ui);
-  const features = FEATURE_KEYS.map(t);
+  const sl = storeListing(loc);
+  const faq = faqItems(app, ui, sl);
+  const features = [...sl.free, ...sl.pro];
   const canonical = pageUrl(loc.seg, logical);
 
   const video =
@@ -389,7 +386,8 @@ function productPage(loc, app, ui, ctx) {
         <div class="rf-page__cta">
           ${playButton(ui, ctx.play)}
         </div>
-        <p class="rf-page__prose">${rich(t("about.whatIsText"))}</p>
+        <p class="rf-page__prose"><strong>${esc(sl.tagline)}</strong></p>
+        <p class="rf-page__prose">${rich(sl.intro)}</p>
         <ul class="rf-page__grid">
 ${card("🔑", "", `<p>${rich(t("welcome.welcomeTrustLine1"))}</p>`)}
 ${card("📦", "", `<p>${rich(t("welcome.welcomeTrustLine2"))}</p>`)}
@@ -397,18 +395,17 @@ ${card("📱", "", `<p>${rich(t("welcome.welcomeTrustLine3"))}</p>`)}
 ${card("🚫", "", `<p>${rich(t("welcome.welcomeNoteLocal"))}</p>`)}
         </ul>
 
-        <h2 class="rf-page__heading">${esc(t("about.featuresTitle"))}</h2>
+        <h2 class="rf-page__heading">${esc(sl.freeTitle)}</h2>
         <ul class="rf-page__list">
-${features.map((f) => `          <li>${rich(f)}</li>`).join("\n")}
+${sl.free.map((f) => `          <li>${esc(f)}</li>`).join("\n")}
         </ul>
+        <p class="rf-page__note">${esc(sl.freeNote)}</p>
 
-        <h2 class="rf-page__heading">${esc(t("premium.proCardTitle"))}</h2>
-        <p class="rf-page__prose">${rich(t("premium.upgradeSubtitle"))}</p>
-        <ul class="rf-page__grid">
-${PRO_FEATURES.map(([k, e]) =>
-  card(e, t(`premium.proFeatures.${k}.title`), `<p>${rich(t(`premium.proFeatures.${k}.desc`))}</p>`)
-).join("\n")}
+        <h2 class="rf-page__heading">${esc(sl.proTitle)}</h2>
+        <ul class="rf-page__list">
+${sl.pro.map((f) => `          <li>${esc(f)}</li>`).join("\n")}
         </ul>
+        <p class="rf-page__note">${esc(sl.proNote)}</p>
 
         <h2 class="rf-page__heading">${esc(t("about.howToUseTitle"))}</h2>
         <ol class="rf-page__grid rf-page__grid--steps">
@@ -434,7 +431,7 @@ ${card("⏱️", "", `<p>${rich(t("launchInfo.footer"))}</p>`)}
         </ul>
 
         <h2 class="rf-page__heading">${esc(t("about.privacyTitle"))}</h2>
-        <p class="rf-page__prose">${rich(t("about.privacyText"))}</p>
+        <p class="rf-page__prose">${esc(sl.privacy)}</p>
 
         <h2 class="rf-page__heading" id="faq">${esc(ui.faqTitle)}</h2>
         <div class="rf-faq">
@@ -466,7 +463,7 @@ ${faqHtml(faq, "          ")}
         alternateName: "ReFollow Unfollowers",
         operatingSystem: "Android",
         applicationCategory: "UtilitiesApplication",
-        description: t("about.whatIsText"),
+        description: sl.intro,
         url: canonical,
         installUrl: ctx.play,
         downloadUrl: ctx.play,
@@ -482,7 +479,7 @@ ${faqHtml(faq, "          ")}
         "@id": `${canonical}#webpage`,
         url: canonical,
         name: ui.metaTitle,
-        description: ui.metaDesc,
+        description: sl.tagline,
         inLanguage: loc.hreflang,
         about: { "@id": `${ORIGIN}/#refollow-app` },
       },
@@ -508,7 +505,7 @@ ${faqHtml(faq, "          ")}
     loc,
     logical,
     title: ui.metaTitle,
-    description: ui.metaDesc,
+    description: sl.tagline,
     styleQuery: ctx.styleQuery,
     jsonLd,
     ui,
@@ -553,7 +550,7 @@ ${others}
     loc,
     logical,
     title: `ReFollow — ${pageTitle} | GezegenselCore`,
-    description: `ReFollow — ${pageTitle}. ${ui.metaDesc}`,
+    description: `ReFollow — ${pageTitle}. ${storeListing(loc).tagline}`,
     styleQuery: ctx.styleQuery,
     jsonLd: null,
     ui,
@@ -562,9 +559,9 @@ ${others}
   });
 }
 
-function supportBody(app, ui, ctx) {
+function supportBody(loc, app, ui, ctx) {
   const t = (k) => get(app, k);
-  const faq = faqItems(app, ui).slice(1); // güvenlik, JSON, ücret… (ilk soru ürün açıklaması)
+  const faq = faqItems(app, ui, storeListing(loc)).slice(1); // güvenlik, JSON, ücret… (ilk soru ürün açıklaması)
   return `      <h2>${esc(t("home.zipInstructionCardTitle"))}</h2>
       <h3>${esc(t("home.zipCreateSectionTitle"))}</h3>
       <p>${rich(t("home.zipCreateSteps"))}</p>
@@ -691,7 +688,7 @@ function main() {
     );
     write(
       `${loc.seg}/pages/refollow/policies/support.html`,
-      policyShell(loc, app, ui, ctx, "support", "support.title", supportBody(app, ui, ctx))
+      policyShell(loc, app, ui, ctx, "support", "support.title", supportBody(loc, app, ui, ctx))
     );
   }
 

@@ -6,12 +6,12 @@ Contact: support@gezegenselcore.com
 
 ## ReFollow — see who doesn't follow you back on Instagram, without your password
 
-ReFollow is an Android app that analyzes Instagram's official "Download Your Information" export (ZIP file in JSON format) on the user's own phone.
+ReFollow shows who unfollowed you and who doesn't follow you back on Instagram, without your password and without logging in to Instagram. It reads the file from Instagram's own "Export your information" feature (ZIP file in JSON format) and runs the whole analysis on the user's phone.
 
-- It never asks for an Instagram password, never shows an Instagram login page and never accesses the Instagram app or account.
-- Follower/following lists are processed on the device and are not uploaded to any server.
-- Shows: accounts that don't follow you back, fans (they follow you, you don't follow them), mutual follows, pending and received follow requests, follow dates, a watchlist, possible username changes and a follow-health summary.
-- ReFollow Pro (monthly or yearly subscription via Google Play): full not-following-back list (free shows the first 5), follower changes between analyses, snapshot history, multiple Instagram accounts, CSV export, encrypted backup, PDF report, no ads.
+- It never asks for an Instagram password and never logs in to the account. Password-based follower apps can make Instagram detect a suspicious login and lock or even shut down the account.
+- Follower/following lists are processed on the device and are not uploaded to any server. Users can delete all their data from the app at any time.
+- Free version (contains ads; the first analysis is ad free, later analyses unlock with a short ad): the first 5 people who don't follow you back, follow requests you've received, a summary of follower/following counts and follow balance, a shareable summary card with no usernames, analysis reminders and fingerprint lock.
+- ReFollow Pro (monthly or yearly subscription via Google Play, cancel anytime): the full list of people who don't follow you back, accounts that follow you but you don't follow back, mutual followers, changes (new followers and who unfollowed you), sent follow requests that are still pending, analysis history and charts, multiple Instagram accounts, CSV export and PDF report, encrypted backup, no ads.
 - Requirement: in Instagram, export with Format = JSON and Date range = All time. HTML exports cannot be read.
 - Why it is safer than password-based "unfollower" apps: those apps show a fake Instagram login form and capture the password, which can get the account used as a bot, banned for suspicious login, or expose private messages.
 - Not affiliated with Instagram or Meta. Not intended for children under 13.
