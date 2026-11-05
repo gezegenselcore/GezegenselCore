@@ -707,7 +707,15 @@ function main() {
     const withEmail = (txt) =>
       String(txt).replace(/gezegenselcore@gmail\.com|support@gezegenselcore\.com/g, ctx.email);
 
-    write(`${loc.seg}/refollow/index.html`, productPage(loc, app, ui, ctx));
+    // Türkçe metinde uzun tire / kısa tire kullanılmaz (Play listing v5 kuralı).
+    const noDash = (html) =>
+      loc.seg !== "tr"
+        ? html
+        : html
+            .replace(/ReFollow — /g, "ReFollow: ")
+            .replace(/(\d)–(\d)/g, "$1 ile $2")
+            .replace(/ — /g, ", ");
+    write(`${loc.seg}/refollow/index.html`, noDash(productPage(loc, app, ui, ctx)));
     write(
       `${loc.seg}/pages/refollow/policies/privacy.html`,
       policyShell(loc, app, ui, ctx, "privacy", "settings.privacyPolicy", renderPolicy(withEmail(s.privacyPolicyContent)))
