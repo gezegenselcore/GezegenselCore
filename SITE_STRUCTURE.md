@@ -34,6 +34,8 @@
 | `…/refollow/` (`index.html`) | ReFollow ürün tanıtım (video; Play CTA videonun hemen altında). Dil varyantı yalnızca **tr** ve **en**. |
 | `…/night-swarm/` (`index.html`) | Night Swarm ürün sayfası (ikon + özet grafik). |
 | `…/night-swarm/privacy-policy.html`, `terms-of-use.html`, `support.html` | Night Swarm hukuk / destek. |
+| `…/iron-brothers/` (`index.html`) | IRON BROTHERS ürün sayfası (kahramanlar, boss'lar, ekipman, günlük ödüller). Metin Play mağaza girişiyle aynı. |
+| `…/iron-brothers/privacy-policy.html` | IRON BROTHERS gizlilik politikası (Play Console'daki gizlilik URL'si). |
 
 Varlık yolları: bir seviye `../assets/` (`en/index.html`); iç içe sayfalar için çoklu `../`.
 
